@@ -3,7 +3,9 @@
 namespace app\store\model;
 
 use app\common\model\StoreUser as StoreUserModel;
+use app\common\model\Member;
 use think\Session;
+use think\Db;
 
 /**
  * 商家用户模型
@@ -27,20 +29,36 @@ class StoreUser extends StoreUserModel
             'user_name' => $data['user_name'],
             'password' => yoshop_hash($data['password'])
         ])->find()) {
-            $this->error = '登录失败, 用户名或密码错误';
-            return false;
+            //             
+            $model = new Member;
+            if ($member = $model->where([
+                'phone' => $data['user_name'],
+                'password' => yoshop_hash($data['password'])
+            ])->with(['wxapp', 'role'])->find()) {
+                $type = 1; //员工
+            } else {
+                $this->error = '登录失败, 用户名或密码错误';
+                return false;
+            }
+        } else {
+            $type = 0; //admin
         }
-        if (empty($user['wxapp'])) {
+        if ($type == 0 && empty($user['wxapp'])) {
             $this->error = '登录失败, 未找到小程序信息';
             return false;
         }
+        
+        
         // 保存登录状态
         Session::set('yoshop_store', [
             'user' => [
-                'store_user_id' => $user['store_user_id'],
-                'user_name' => $user['user_name'],
+                'store_user_id' => $type == 0 ? $user['store_user_id'] : $member['phone'],
+                'member_id' => $type == 0 ? 0 : Db::name('store_member')->where('phone', $member['phone'])->value('id'),
+                'user_name' => $type == 0 ? $user['user_name'] : $member['name'],
+                'type' => $type,
+                'role' => $type == 0 ? [] : $member['role']
             ],
-            'wxapp' => $user['wxapp']->toArray(),
+            'wxapp' => $type == 0 ? $user['wxapp']->toArray() : $member['wxapp'],
             'is_login' => true,
         ]);
         return true;
@@ -70,9 +88,9 @@ class StoreUser extends StoreUserModel
         }
         // 更新管理员信息
         if ($this->save([
-                'user_name' => $data['user_name'],
-                'password' => yoshop_hash($data['password']),
-            ]) === false) {
+            'user_name' => $data['user_name'],
+            'password' => yoshop_hash($data['password']),
+        ]) === false) {
             return false;
         }
         // 更新session
