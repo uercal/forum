@@ -15,6 +15,24 @@ use function Qiniu\json_decode;
  */
 class Index extends Controller
 {
+
+    /**
+     * 判断是否子网站
+     */
+    public function checkChildSite(){
+        
+        
+        // 验证规则
+        // return $this->redirect('index/index');
+    }
+
+    public function _empty(){
+        $code = $this->request->action();
+        return $this->fetch('404');
+        return $this->redirect('index');
+    }
+
+
     public function index()
     {
         $index_data = $this->getIndexData();

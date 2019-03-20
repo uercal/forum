@@ -8,7 +8,7 @@ use app\common\model\Article;
 use app\common\model\WxappPage;
 use app\store\model\Setting;
 use think\Request;
-
+use think\Route;
 /**
  * 后台控制器基类
  * Class BaseController
@@ -48,20 +48,22 @@ class Controller extends \think\Controller
      */
     public function _initialize()
     {
+
         \think\Url::root('index.php?s=');
-        
+
         // \think\Url::root('/');
         //         
         // 当前路由信息
         $this->getRouteinfo();
         // 全局layout
         $this->layout();
+
     }
 
     /**
      * 全局layout模板输出
      */
-    private function layout()
+    public function layout()
     {
         $this->assign([
             'base_url' => base_url(),                      // 当前域名
@@ -79,7 +81,7 @@ class Controller extends \think\Controller
     /**
      * 解析当前路由参数 （分组名称、控制器名称、方法名）
      */
-    protected function getRouteinfo()
+    public function getRouteinfo()
     {
         // 控制器名称
         $this->controller = toUnderScore($this->request->controller());

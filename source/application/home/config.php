@@ -1,10 +1,15 @@
 <?php
 
-\think\Url::root('index.php?s=');
+// \think\Url::root('index.php?s=');
 
 return [
     // 
     'lang_switch_on' => true,
+
+    // 是否开启路由
+    'url_route_on'           => true,
+    // 路由使用完整匹配
+    'route_complete_match'   => false,
     //     
     // 默认输出类型
     'default_return_type'    => 'html',
@@ -29,5 +34,5 @@ return [
         'taglib_begin' => '{{',
         // 标签库标签结束标记
         'taglib_end'   => '}}',
-    ],
+        ],
 ];
