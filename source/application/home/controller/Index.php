@@ -35,7 +35,7 @@ class Index extends Controller
 
     public function index()
     {
-        $index_data = $this->getIndexData();
+        $index_data = $this->getIndexData();        
         return $this->fetch('index/index', compact('index_data'));
     }
 

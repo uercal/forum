@@ -3,7 +3,9 @@
 namespace app\store\model;
 
 use app\common\model\Category as CategoryModel;
+use app\store\model\Detail;
 use think\Cache;
+use think\Db;
 
 /**
  * 商品分类模型
@@ -20,9 +22,9 @@ class Category extends CategoryModel
     public function add($data)
     {
         $data['wxapp_id'] = self::$wxapp_id;
-//        if (!empty($data['image'])) {
-//            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
-//        }
+        //        if (!empty($data['image'])) {
+        //            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
+        //        }
         $this->deleteCache();
         return $this->allowField(true)->save($data);
     }
@@ -34,8 +36,28 @@ class Category extends CategoryModel
      */
     public function edit($data)
     {
-        $this->deleteCache();
-        return $this->allowField(true)->save($data);
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->deleteCache();
+            //             
+            $this->allowField(true)->save($data);
+            //                  
+            if ($data['mode'] == 'detail') {
+                $detail = new Detail;
+                $detail->category_id = $this->category_id;
+                $detail->detail_mode_id = $data['detail_mode_id'];
+                $detail->content = $data['detail']['content'];
+                $detail->save();
+            }
+
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
     }
 
     /**
@@ -67,5 +89,4 @@ class Category extends CategoryModel
     {
         return Cache::rm('category_' . self::$wxapp_id);
     }
-
 }

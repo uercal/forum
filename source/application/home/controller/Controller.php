@@ -9,6 +9,7 @@ use app\common\model\WxappPage;
 use app\store\model\Setting;
 use think\Request;
 use think\Route;
+use app\common\model\Category;
 /**
  * 后台控制器基类
  * Class BaseController
@@ -99,9 +100,8 @@ class Controller extends \think\Controller
      * @return array
      */
     private function menus()
-    {
-        $model = new Article;
-        $list = $model->getMenuList()->toArray();
+    {        
+        $list = Category::getCacheTree();        
         return $list;
     }
 

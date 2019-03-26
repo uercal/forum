@@ -22,6 +22,22 @@ class Category extends BaseModel
         return $this->hasOne('uploadFile', 'file_id', 'image_id');
     }
 
+
+    // 
+    public function detail()
+    {
+        return $this->hasOne('Detail', 'category_id', 'category_id');
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * 所有分类
      * @return mixed
@@ -41,7 +57,7 @@ class Category extends BaseModel
                     $threeTree = [];
                     foreach ($all as $three)
                         $three['parent_id'] === $two['category_id']
-                        && $threeTree[$three['category_id']] = $three;
+                            && $threeTree[$three['category_id']] = $three;
                     !empty($threeTree) && $two['child'] = $threeTree;
                     $twoTree[$two['category_id']] = $two;
                 }
@@ -73,5 +89,4 @@ class Category extends BaseModel
     {
         return self::getALL()['tree'];
     }
-
 }

@@ -12,11 +12,11 @@
                         <?php foreach ($menus as $k => $item) : ?>
                         <div class="am-u-md-3">
                             <div class="footer_main--column">
-                                <strong class="footer_main--column_title" <?php if ($item['is_child'] == 0) : ?> onclick="article(<?= $item['id'] ?>)" <?php endif; ?>>
+                                <strong class="footer_main--column_title" <?php if ($item['is_show'] == 0) : ?> onclick="article(<?= $item['category_id'] ?>)" <?php endif; ?>>
                                     <?= $item['name'] ?></strong>
                                 <ul class="footer_navigation">
                                     <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : ?>
-                                    <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="article(<?= $child['id'] ?>)">
+                                    <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="article(<?= $child['category_id'] ?>)">
                                             <?= $child['name'] ?></a></li>
                                     <?php endforeach;
                             endif; ?>
@@ -27,7 +27,7 @@
                         <!--  -->
                         <div class="am-u-md-6 foot-company">
                             <div class="footer_main--column">
-                                <strong class="footer_main--column_title">子公司链接</strong>
+                                <strong class="footer_main--column_title">联盟公司链接</strong>
                                 <ul class="footer_contact_info">
                                     <?php foreach ($foot_company as $company) : ?>
                                     <li class="footer_contact_info--item">
@@ -56,12 +56,12 @@
                             <ul class="am-menu-nav am-avg-sm-1">
                                 <?php foreach ($menus as $k => $item) : ?>
                                 <li class="am-parent">
-                                    <a href="##" class="" onclick="article(<?= $item['is_child'] == 1 ? '0' : $item['id'] ?>)"><?= $item['name'] ?></a>
-                                    <?php if ($item['is_child'] == 1) : ?>
+                                    <a href="##" class="" onclick="article(<?= $item['is_show'] == 1 ? '0' : $item['category_id'] ?>)"><?= $item['name'] ?></a>
+                                    <?php if ($item['is_show'] == 1) : ?>
                                     <ul class="am-menu-sub am-collapse  am-avg-sm-1 ">
                                         <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : ?>
                                         <li class="">
-                                            <a href="##" class="" style="color:#fff;" onclick="article(<?= $child['id'] ?>)"><?= $child['name'] ?></a>
+                                            <a href="##" class="" style="color:#fff;" onclick="article(<?= $child['category_id'] ?>)"><?= $child['name'] ?></a>
                                         </li>
                                         <?php endforeach;
                                 endif; ?>
@@ -71,7 +71,7 @@
                                 </li>
                                 <?php endforeach; ?>
                                 <li class="am-parent">
-                                    <a href="##" class="">子公司链接</a>
+                                    <a href="##" class="">联盟公司链接</a>
                                     <ul class="am-menu-sub am-collapse  am-avg-sm-1 ">
                                         <?php foreach ($foot_company as $company) : ?>
                                         <li class="">
@@ -93,9 +93,11 @@
     </div>
     <div class="footer-foot">Copyright © 2013-2019 备案号：闽ICP备15012807号-1</div>
 </div>
-<script src="assets/home/js/jquery-2.1.0.js" charset="utf-8"></script>
-<script src="assets/home/js/amazeui.js" charset="utf-8"></script>
-<script src="assets/home/js/common.js" charset="utf-8"></script>
+<script src="assets/home/js/jquery-1.8.2.min.js"></script>
+<script src="assets/home/js/banner_move.js"></script>
+<script src="assets/home/js/jq_scroll.js"></script>
+<script src="assets/home/js/amazeui.js"></script>
+
 </body>
 <script>
     function article(id) {
@@ -139,8 +141,8 @@
         window.location.href = src;
     })
 
-    $('.news-container img').parent('p').css('text-align','center');
-    $('.news-container img').parent('div').css('text-align','center');
+    $('.news-container img').parent('p').css('text-align', 'center');
+    $('.news-container img').parent('div').css('text-align', 'center');
 
 
 

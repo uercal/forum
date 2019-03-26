@@ -1,3 +1,3 @@
 {{include file="layouts/header" /}}
-{__CONTENT__}
+<!-- {__CONTENT__} -->
 {{include file="layouts/footer" /}}

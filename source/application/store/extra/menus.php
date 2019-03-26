@@ -12,15 +12,15 @@ return [
         'name' => '首页',
         'icon' => 'icon-home',
         'index' => 'index/index',
-    ],
+    ],    
     'article' => [
         'name' => '文章管理',
         'icon' => 'icon-order',
-        'index' => 'article/parent',
+        'index' => 'article/category',
         'submenu' => [
             [
                 'name' => '分类管理',
-                'index' => 'article/parent',
+                'index' => 'article/category',
             ],
             [
                 'name' => '文章管理',
