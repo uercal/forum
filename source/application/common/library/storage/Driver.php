@@ -32,8 +32,16 @@ class Driver
      */
     public function upload()
     {
-        return $this->engine->upload();
+        return $this->engine->upload('image');
     }
+
+
+    public function uploadAttachment()
+    {
+        return $this->engine->upload('attachment');
+    }
+
+
 
     /**
      * 获取错误信息
@@ -77,5 +85,4 @@ class Driver
         $config = isset($this->config['engine'][$engineName]) ? $this->config['engine'][$engineName] : [];
         return new $classSpace($config);
     }
-
 }

@@ -150,7 +150,31 @@
 
 
 
-
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <div class="am-form-file">
+                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                <i class="am-icon-cloud-upload"></i> 选择
+                                            </button>
+                                            <div class="uploader-list am-cf">
+                                                <?php if (!empty($model['detail']['attachment'])) : foreach ($model['detail']['attachment'] as $item) : ?>
+                                                <div>
+                                                    <input type="hidden" name="category[detail][attachment][]" value="<?= $item['file_id'] ?>">
+                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                        <?= $item['origin_name'] ?>
+                                                    </a>
+                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                </div>
+                                                <?php endforeach;
+                                        endif; ?>
+                                            </div>
+                                        </div>
+                                        <div class="help-block am-margin-top-sm">
+                                            <small>大小2M以下</small>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
@@ -216,6 +240,10 @@
             name: 'category[image_id]'
         });
 
+        $('.upload-attachment').selectAttachment({
+            name: 'category[detail][attachment]',
+            multiple: true
+        });
 
         // 富文本编辑器
         UM.getEditor('container');

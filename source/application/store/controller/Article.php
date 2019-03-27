@@ -66,6 +66,7 @@ class Article extends Controller
     {
         // 模板详情
         $model = CategoryModel::get($category_id, ['image', 'detail']);
+        // halt($model['detail']['attachment']);
         if (!$this->request->isAjax()) {
             // 获取所有地区
             $list = $model->getCacheTree();

@@ -29,6 +29,14 @@ class Detail extends BaseModel
         return $this->hasOne('DetailMode', 'id', 'detail_mode_id');
     }
 
+    public function getAttachmentAttr($value, $data)
+    {
+        if (empty($data['attachment_ids'])) {
+            return [];
+        } else {
+            return UploadFile::whereIn('file_id', $data['attachment_ids'])->select()->toArray();
+        }
+    }
 
     public static function detail($id)
     {

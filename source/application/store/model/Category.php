@@ -41,13 +41,26 @@ class Category extends CategoryModel
         try {
             $this->deleteCache();
             //             
+            $data['image_id'] = !empty($data['image_id']) ? implode(',', $data['image_id']) : 0;
             $this->allowField(true)->save($data);
             //                  
             if ($data['mode'] == 'detail') {
-                $detail = new Detail;
+                $detail = Detail::get($this->category_id);
+                if (!$detail) {
+                    $detail = new Detail;
+                }
                 $detail->category_id = $this->category_id;
                 $detail->detail_mode_id = $data['detail_mode_id'];
                 $detail->content = $data['detail']['content'];
+                if (!empty($data['detail']['attachment'])) {
+                    $attachment_ids = $data['detail']['attachment'];
+                    $upload_ids = [];
+                    foreach ($attachment_ids as $key => $value) {
+                        $upload_ids[] = $value;
+                    }
+                    $detail->attachment_ids = implode(',', $upload_ids);
+                }
+                // halt($detail);
                 $detail->save();
             }
 

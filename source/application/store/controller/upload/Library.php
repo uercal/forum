@@ -18,7 +18,7 @@ class Library extends Controller
      * @throws \think\exception\DbException
      */
     public function fileList($type = 'image', $group_id = -1)
-    {
+    {        
         // 分组列表
         $group_list = (new UploadGroupModel)->getList($type);
         // 文件列表

@@ -18,13 +18,28 @@ class Local extends Server
      * 上传图片文件
      * @return array|bool
      */
-    public function upload()
+    public function upload($file_type = null)
     {
         // 上传目录
         $uplodDir = WEB_PATH . 'uploads';
-        // 验证文件并上传
-        $info = $this->file->validate(['size' => 4 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'])
-            ->move($uplodDir, $this->fileName);
+        switch ($file_type) {
+            case 'attachment':
+                // 验证文件并上传
+                $info = $this->file->validate([
+                    'size' => 4 * 1024 * 1024
+                ])
+                    ->move($uplodDir, $this->fileName);
+                break;                
+
+            default:
+                // 验证文件并上传
+                $info = $this->file->validate([
+                    'size' => 4 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'
+                ])
+                    ->move($uplodDir, $this->fileName);
+                break;
+        }
+
         if (empty($info)) {
             $this->error = $this->file->getError();
             return false;
@@ -40,5 +55,4 @@ class Local extends Server
     {
         return $this->fileName;
     }
-
 }

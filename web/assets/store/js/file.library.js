@@ -1,4 +1,5 @@
-;(function ($, window, document, undefined) {
+;
+(function ($, window, document, undefined) {
 
     /**
      * 文件库模块
@@ -10,8 +11,8 @@
         // 配置项
         var defaults = {
             type: 'image',
-            layerId: 'file-library'
-            , layerSkin: 'file-library'
+            layerId: 'file-library',
+            layerSkin: 'file-library'
         };
         this.options = $.extend({}, defaults, options);
         // 触发对象
@@ -51,26 +52,28 @@
          */
         showLibraryModal: function () {
             var _this = this;
-            _this.getJsonData({group_id: -1}, function (data) {
+            _this.getJsonData({
+                group_id: -1
+            }, function (data) {
                 data.is_default = true;
                 // 捕获页
                 layer.open({
-                    type: 1
-                    , id: _this.options.layerId
-                    , title: '图片库'
-                    , skin: _this.options.layerSkin
-                    , area: '840px'
-                    , offset: 'auto'
-                    , anim: 1
-                    , closeBtn: 1
-                    , shade: 0.3
-                    , btn: ['确定', '取消']
-                    , content: template('tpl-file-library', data)
-                    , success: function (layero) {
+                    type: 1,
+                    id: _this.options.layerId,
+                    title: _this.options.type == 'image' ? '图片库' : '所有上传文件',
+                    skin: _this.options.layerSkin,
+                    area: '840px',
+                    offset: 'auto',
+                    anim: 1,
+                    closeBtn: 1,
+                    shade: 0.3,
+                    btn: ['确定', '取消'],
+                    content: _this.options.type == 'image' ? template('tpl-file-library', data) : template('tpl-file-attachment', data),
+                    success: function (layero) {
                         // 初始化文件库弹窗
                         _this.initModal(layero);
-                    }
-                    , yes: function (index) {
+                    },
+                    yes: function (index) {
                         // 确认回调
                         _this.done();
                         layer.close(index);
@@ -122,22 +125,27 @@
          * 文件移动事件
          */
         moveFilesEvent: function () {
-            var _this = this
-                , $groupSelect = _this.$element.find('.group-select');
+            var _this = this,
+                $groupSelect = _this.$element.find('.group-select');
             // 绑定文件选中事件
             $groupSelect.on('click', '.move-file-group', function () {
                 $groupSelect.dropdown('close');
-                var groupId = $(this).data('group-id')
-                    , fileIds = _this.getSelectedFileIds();
+                var groupId = $(this).data('group-id'),
+                    fileIds = _this.getSelectedFileIds();
                 if (fileIds.length === 0) {
-                    layer.msg('您还没有选择任何文件~', {offset: 't', anim: 6});
+                    layer.msg('您还没有选择任何文件~', {
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
-                layer.confirm('确定移动选中的文件吗？', {title: '友情提示'}, function (index) {
+                layer.confirm('确定移动选中的文件吗？', {
+                    title: '友情提示'
+                }, function (index) {
                     var load = layer.load();
                     $.post(STORE_URL + '/upload.library/moveFiles', {
-                        group_id: groupId
-                        , fileIds: fileIds
+                        group_id: groupId,
+                        fileIds: fileIds
                     }, function (result) {
                         layer.msg(result.msg);
                         if (result.code === 1) {
@@ -158,10 +166,15 @@
             _this.$element.on('click', '.file-delete', function () {
                 var fileIds = _this.getSelectedFileIds();
                 if (fileIds.length === 0) {
-                    layer.msg('您还没有选择任何文件~', {offset: 't', anim: 6});
+                    layer.msg('您还没有选择任何文件~', {
+                        offset: 't',
+                        anim: 6
+                    });
                     return;
                 }
-                layer.confirm('确定删除选中的文件吗？', {title: '友情提示'}, function (index) {
+                layer.confirm('确定删除选中的文件吗？', {
+                    title: '友情提示'
+                }, function (index) {
                     var load = layer.load();
                     $.post(STORE_URL + '/upload.library/deleteFiles', {
                         fileIds: fileIds
@@ -189,7 +202,7 @@
                 // 选完文件后，是否自动上传。
                 auto: true,
                 // 文件接收服务端。
-                server: STORE_URL + '/upload/image',
+                server: _this.options.type == 'image' ? STORE_URL + '/upload/file&upload_type=image' : STORE_URL + '/upload/file&upload_type=attachment',
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: {
@@ -207,11 +220,11 @@
                 // 文件大小2m => 2097152
                 fileSingleSizeLimit: maxSize * 1024 * 1024,
                 // 只允许选择图片文件。
-                accept: {
-                    title: 'Images',
-                    extensions: 'gif,jpg,jpeg,bmp,png',
-                    mimeTypes: 'image/*'
-                },
+                // accept: {
+                //     title: 'Images',
+                //     extensions: 'gif,jpg,jpeg,bmp,png',
+                //     mimeTypes: 'image/*'
+                // },
                 // 文件上传header扩展
                 headers: {
                     'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -234,7 +247,7 @@
             uploader.on('uploadSuccess', function (file, response) {
                 if (response.code === 1) {
                     var $list = _this.$element.find('ul.file-list-item');
-                    $list.prepend(template('tpl-file-list-item', [response.data]));
+                    _this.options.type == 'image' ? $list.prepend(template('tpl-file-list-item', [response.data])) : $list.prepend(template('tpl-file-list-item-attachment', [response.data]));;
                 } else {
                     uploader.uploadError(file, response);
                 }
@@ -245,7 +258,9 @@
             });
             // 文件上传失败回调函数
             uploader.uploadError = function (file, reason) {
-                layer.msg(reason.msg, {anim: 6});
+                layer.msg(reason.msg, {
+                    anim: 6
+                });
             };
             // 文件开始上传
             uploader.on('startUpload', function () {
@@ -256,15 +271,16 @@
                 layer.close(loadIndex);
             });
         },
-
         /**
          * 新增分组事件
          */
         addGroupEvent: function () {
-            var _this = this
-                , $groupList = _this.$element.find('.file-group > ul');
+            var _this = this,
+                $groupList = _this.$element.find('.file-group > ul');
             _this.$element.on('click', '.group-add', function () {
-                layer.prompt({title: '请输入新分组名称'}, function (value, index) {
+                layer.prompt({
+                    title: '请输入新分组名称'
+                }, function (value, index) {
                     var load = layer.load();
                     $.post(STORE_URL + '/upload.library/addGroup', {
                         group_name: value,
@@ -294,13 +310,16 @@
         editGroupEvent: function () {
             var _this = this;
             _this.$element.find('.file-group').on('click', '.group-edit', function () {
-                var $li = $(this).parent()
-                    , group_id = $li.data('group-id');
-                layer.prompt({title: '修改分组名称', value: $li.attr('title')}, function (value, index) {
+                var $li = $(this).parent(),
+                    group_id = $li.data('group-id');
+                layer.prompt({
+                    title: '修改分组名称',
+                    value: $li.attr('title')
+                }, function (value, index) {
                     var load = layer.load();
                     $.post(STORE_URL + '/upload.library/editGroup', {
-                        group_id: group_id
-                        , group_name: value
+                        group_id: group_id,
+                        group_name: value
                     }, function (result) {
                         layer.msg(result.msg);
                         if (result.code === 1) {
@@ -322,9 +341,11 @@
         deleteGroupEvent: function () {
             var _this = this;
             _this.$element.find('.file-group').on('click', '.group-delete', function () {
-                var $li = $(this).parent()
-                    , group_id = $li.data('group-id');
-                layer.confirm('确定删除该分组吗？', {title: '友情提示'}, function (index) {
+                var $li = $(this).parent(),
+                    group_id = $li.data('group-id');
+                layer.confirm('确定删除该分组吗？', {
+                    title: '友情提示'
+                }, function (index) {
                     var load = layer.load();
                     $.post(STORE_URL + '/upload.library/deleteGroup', {
                         group_id: group_id
@@ -383,13 +404,16 @@
         getJsonData: function (params, success) {
             var loadIndex = layer.load();
             typeof params === 'function' && (success = params);
+            params.type = this.options.type == 'image' ? 'image' : 'attachment';
             // 获取文件库列表
             $.getJSON(STORE_URL + '/upload.library/fileList', params, function (result) {
                 layer.close(loadIndex);
                 if (result.code === 1) {
                     typeof success === 'function' && success(result.data);
                 } else {
-                    layer.msg(result.msg, {anim: 6});
+                    layer.msg(result.msg, {
+                        anim: 6
+                    });
                 }
             });
         },
@@ -399,11 +423,14 @@
          * @param page
          */
         renderFileList: function (page) {
-            var _this = this
-                , groupId = this.getCurrentGroupId();
+            var _this = this,
+                groupId = this.getCurrentGroupId();
             // 重新渲染文件列表
-            _this.getJsonData({group_id: groupId, page: page || 1}, function (data) {
-                _this.$element.find('#file-list-body').html(template('tpl-file-list', data.file_list));
+            _this.getJsonData({
+                group_id: groupId,
+                page: page || 1
+            }, function (data) {
+                _this.$element.find('#file-list-body').html(_this.options.type == 'image' ? template('tpl-file-list', data.file_list) : template('tpl-file-attachment-list', data.file_list));
             });
         },
 
@@ -416,8 +443,9 @@
             this.$element.find('.file-list-item > li.active').each(function (index) {
                 var $this = $(this);
                 selectedList[index] = {
-                    file_id: $this.data('file-id')
-                    , file_path: $this.data('file-path')
+                    file_id: $this.data('file-id'),
+                    file_path: $this.data('file-path'),
+                    origin_name: $this.data('origin-name')
                 };
             });
             return selectedList;
@@ -449,8 +477,8 @@
          */
         done: function () {
             var selectedList = this.getSelectedFiles();
-            selectedList.length > 0 && typeof this.options.done === 'function'
-            && this.options.done(selectedList, this.$touch);
+            selectedList.length > 0 && typeof this.options.done === 'function' &&
+                this.options.done(selectedList, this.$touch);
         }
 
     };

@@ -118,6 +118,46 @@
                     options.multiple ? $imagesList.append($html) : $imagesList.html($html);
                 }
             });
+        },
+
+        /**
+         * 选择附件
+         * @param option
+         */
+        selectAttachment: function (option) {
+            var $this = this
+                // 配置项
+                , defaults = {
+                    name: ''            // input name
+                    , imagesList: '.uploader-list'    // 图片列表容器
+                    , imageDelete: '.file-item-delete'   // 删除按钮元素
+                    , multiple: false    // 是否多选
+                    , done: null  // 选择完成后的回调函数
+                }
+                , options = $.extend({}, defaults, option);
+            // 显示文件库 选择文件
+            $this.fileLibrary({
+                type: 'file',
+                layerId: 'file-library',
+                layerSkin: 'file-library',
+                done: function (data, $touch) {
+                    var list = options.multiple ? data : [data[0]];
+                    // 判断回调参数是否存在, 否则执行默认
+                    if (typeof options.done === 'function') {
+                        return options.done(data, $touch);
+                    }
+                    console.log(data);
+                    // 新增图片列表
+                    var $html = $(template('tpl-file-item-attachment', {list: list, name: options.name}))
+                        , $imagesList = $this.next(options.imagesList);
+                    // 注册删除事件
+                    $html.find(options.imageDelete).click(function () {
+                        $(this).parent().remove();
+                    });
+                    // 渲染html
+                    options.multiple ? $imagesList.append($html) : $imagesList.html($html);
+                }
+            });
         }
 
     });
@@ -314,7 +354,7 @@ $(function () {
     // 删除图片 (数据库已有的)
     $('.file-item-delete').click(function () {
         var _this = this;
-        layer.confirm('您确定要删除该图片吗？', {
+        layer.confirm('您确定要删除该项吗？', {
             title: '友情提示'
         }, function (index) {
             $(_this).parent().remove();
