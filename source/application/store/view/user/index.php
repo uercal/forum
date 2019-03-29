@@ -10,38 +10,46 @@
                         <table width="100%" class="am-table am-table-compact am-table-striped
                          tpl-table-black am-text-nowrap">
                             <thead>
-                            <tr>
-                                <th>用户ID</th>
-                                <th>微信头像</th>
-                                <th>微信昵称</th>
-                                <th>性别</th>
-                                <th>国家</th>
-                                <th>省份</th>
-                                <th>城市</th>
-                                <th>注册时间</th>
-                            </tr>
+                                <tr>
+                                    <th>会员ID</th>
+                                    <th>会员姓名</th>
+                                    <th>会员头像</th>
+                                    <th>性别</th>
+                                    <th>手机号码</th>
+                                    <th>注册时间</th>
+                                    <th>操作</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
+                                <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $item['user_id'] ?></td>
+                                    <td class="am-text-middle"><?= $item['name'] ?></td>
                                     <td class="am-text-middle">
-                                        <a href="<?= $item['avatarUrl'] ?>" title="点击查看大图" target="_blank">
-                                            <img src="<?= $item['avatarUrl'] ?>" width="72" height="72" alt="">
+                                        <a href="<?= $item['avatar']['file_path'] ?>" title="点击查看大图" target="_blank">
+                                            <img src="<?= $item['avatar']['file_path'] ?>" width="72" height="72" alt="">
                                         </a>
                                     </td>
-                                    <td class="am-text-middle"><?= $item['nickName'] ?></td>
                                     <td class="am-text-middle"><?= $item['gender'] ?></td>
-                                    <td class="am-text-middle"><?= $item['country'] ?: '--' ?></td>
-                                    <td class="am-text-middle"><?= $item['province'] ?: '--' ?></td>
-                                    <td class="am-text-middle"><?= $item['city'] ?: '--' ?></td>
+                                    <td class="am-text-middle"><?= $item['phone'] ?: '--' ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
+                                    <td>
+                                        <div class="tpl-table-black-operation">
+                                            <a href="<?= url(
+                                                            'user/show',
+                                                            ['user_id' => $item['user_id']]
+                                                        ) ?>">
+                                                <i class="am-icon-pencil"></i> 查看
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
-                            <?php endforeach; else: ?>
+                                <?php endforeach;
+                        else : ?>
                                 <tr>
-                                    <td colspan="8" class="am-text-center">暂无记录</td>
+                                    <td colspan="5" class="am-text-center">暂无记录</td>
                                 </tr>
-                            <?php endif; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -57,8 +65,7 @@
     </div>
 </div>
 <script>
-    $(function () {
+    $(function() {
 
     });
-</script>
-
+</script> 

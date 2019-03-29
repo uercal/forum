@@ -1,6 +1,6 @@
 <style>
     .child {
-        display: none;
+        display: table-row;
     }
 
     .disabled {
@@ -60,7 +60,7 @@
                                     <td class="am-text-middle"><?= $first['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation item-switch">
-                                            <a href="javascript:;" class="tpl-table-black-operation-danger am-icon-toggle-off <?= !isset($first['child']) ? 'disabled' : '' ?> " data-index="<?= $key ?>" id="toggle-<?= $key ?>">
+                                            <a href="javascript:;" class="tpl-table-black-operation-danger am-icon-toggle-on <?= !isset($first['child']) ? 'disabled' : '' ?> " data-index="<?= $key ?>" id="toggle-<?= $key ?>">
                                                 switch
                                             </a>
                                         </div>

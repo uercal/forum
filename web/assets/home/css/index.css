@@ -180,18 +180,24 @@ nav ul li {
 
 nav ul>li>a {
     font-size: 16px;
-    color: #fff;
+    color: #999999;
     line-height: 48px;
     text-align: center;
     padding: 0 25px;
 }
 
-nav ul>li:hover>a,
-nav ul>li>a.current {
+nav ul>li:hover>a {
     display: block;
-    color: #1e7fc2;
-    background: url(../images/nav_03.png);
+    color: #fff;
+    background: rgba(127, 186, 255, 0.6);
 }
+
+nav ul>li>a.current {
+    color: #3792FD;
+    font-size: 18px;
+}
+
+
 
 nav ul>li>ol {
     display: none;
@@ -231,7 +237,17 @@ nav ul>li>ol>li {
     margin-bottom: 1px;
     text-align: center;
     line-height: 50px;
-    background: rgba(255, 255, 255, 0.6);
+    /* background: rgba(0, 0, 0, 0.1); */
+    background: rgba(127, 186, 255, 0.6);
+}
+
+nav ul>li>ol>li:hover {
+    background: rgba(127, 186, 255);
+}
+
+
+nav ul>li>ol>li>ol>li:hover {
+    background: rgba(127, 186, 255);
 }
 
 nav ul>li>ol>li>ol>li {
@@ -239,21 +255,25 @@ nav ul>li>ol>li>ol>li {
     margin-bottom: 1px;
     text-align: center;
     line-height: 50px;
-    background: rgba(255, 255, 255, 0.6);
+    /* background: rgba(0, 0, 0, 0.1); */
+    background: rgba(127, 186, 255, 0.6);
+
 }
 
 nav ul>li>ol>li:hover {}
 
 nav ul>li>ol>li>a,
 nav ul>li>ol>li>ol>li>a {
-    color: #333;
+    /* color: #333; */
+    color: #fff;
     display: block;
 }
 
 nav ul>li>ol>li>a:hover,
 nav ul>li>ol>li>ol>li>a:hover {
-    color: #fff;
-    background: #196da5;
+    /* color: #fff; */
+    /* color: #3792FD; */
+    /* background: #196da5; */
 }
 
 

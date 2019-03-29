@@ -11,28 +11,18 @@ use think\Request;
  */
 class User extends BaseModel
 {
-    protected $name = 'user';
+    protected $name = 'users';
 
     // 性别
     private $gender = ['未知', '男', '女'];
 
-    /**
-     * 关联收货地址表
-     * @return \think\model\relation\HasMany
-     */
-    public function address()
+
+    public function avatar()
     {
-        return $this->hasMany('UserAddress');
+        return $this->hasOne('UploadApiFile', 'file_id', 'avatar_id');
     }
 
-    /**
-     * 关联收货地址表 (默认地址)
-     * @return \think\model\relation\BelongsTo
-     */
-    public function addressDefault()
-    {
-        return $this->belongsTo('UserAddress', 'address_id');
-    }
+
 
     /**
      * 显示性别
@@ -64,7 +54,6 @@ class User extends BaseModel
      */
     public static function detail($where)
     {
-        return self::get($where, ['address', 'addressDefault']);
+        return self::get($where);
     }
-
 }

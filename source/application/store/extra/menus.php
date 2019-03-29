@@ -12,7 +12,7 @@ return [
         'name' => '首页',
         'icon' => 'icon-home',
         'index' => 'index/index',
-    ],    
+    ],
     'article' => [
         'name' => '文章管理',
         'icon' => 'icon-order',
@@ -29,11 +29,16 @@ return [
         ]
     ],
     'news' => [
-        'name' => '新闻管理',
+        'name' => '数据管理',
         'icon' => 'icon-order',
-        'index' => 'news/index',
+        'index' => 'data/index',
     ],
-    
+    'user' => [
+        'name' => '会员管理',
+        'icon' => 'icon-user',
+        'index' => 'user/index',
+    ],
+
     'wxapp' => [
         'name' => '首页',
         'icon' => 'icon-wxapp',

@@ -2,7 +2,7 @@
 <!--===========layout-footer================-->
 <div class="layout-footer">
     <div class="footer">
-        <div style="background-color:#AB1312;" class="footer--bg"></div>
+        <div style="background-color:#1D7EC0;" class="footer--bg"></div>
         <?php if (!$is_moblie) : ?>
         <div class="footer--inner">
             <div class="container foot-container">
@@ -10,7 +10,7 @@
                     <div class="am-g">
                         <!--  -->
                         <?php foreach ($menus as $k => $item) : ?>
-                        <div class="am-u-md-3">
+                        <div class="" style="width:15%;">
                             <div class="footer_main--column">
                                 <strong class="footer_main--column_title" <?php if ($item['is_show'] == 0) : ?> onclick="article(<?= $item['category_id'] ?>)" <?php endif; ?>>
                                     <?= $item['name'] ?></strong>
@@ -25,7 +25,7 @@
                         </div>
                         <?php endforeach; ?>
                         <!--  -->
-                        <div class="am-u-md-6 foot-company">
+                        <!-- <div class="am-u-md-6 foot-company">
                             <div class="footer_main--column">
                                 <strong class="footer_main--column_title">联盟公司链接</strong>
                                 <ul class="footer_contact_info">
@@ -38,7 +38,7 @@
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

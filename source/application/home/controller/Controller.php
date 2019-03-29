@@ -10,6 +10,7 @@ use app\store\model\Setting;
 use think\Request;
 use think\Route;
 use app\common\model\Category;
+
 /**
  * 后台控制器基类
  * Class BaseController
@@ -58,7 +59,6 @@ class Controller extends \think\Controller
         $this->getRouteinfo();
         // 全局layout
         $this->layout();
-
     }
 
     /**
@@ -73,7 +73,8 @@ class Controller extends \think\Controller
             'menus' => $this->menus(),                     // 后台菜单
             'background' => $this->background(),
             'foot_company' => $this->foot_company(),
-            'is_moblie' => Request::instance()->isMobile()
+            'is_moblie' => Request::instance()->isMobile(),
+            'index_data' => $this->getIndexData()
             // 'store' => $this->store,                       // 商家登录信息
             // 'setting' => Setting::getAll() ?: null,        // 当前商城设置
         ]);
@@ -100,8 +101,8 @@ class Controller extends \think\Controller
      * @return array
      */
     private function menus()
-    {        
-        $list = Category::getCacheTree();        
+    {
+        $list = Category::getCacheTree();
         return $list;
     }
 

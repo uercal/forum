@@ -51,7 +51,7 @@ class Article extends Controller
             // 获取列表模式列表            
             $list_mode_list = ListMode::getList();
             // 获取详情模式列表            
-            $detail_type_list = DetailMode::getList();            
+            $detail_type_list = DetailMode::getList();
             return $this->fetch('category_add', compact('list', 'list_mode_list', 'detail_type_list'));
         }
         // 新增记录
@@ -83,6 +83,17 @@ class Article extends Controller
         }
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
+    }
+
+
+    public function category_delete($category_id)
+    {
+        $model = CategoryModel::get($category_id);
+        if (!$model->remove($category_id)) {
+            $error = $model->getError() ?: '删除失败';
+            return $this->renderError($error);
+        }
+        return $this->renderSuccess('删除成功');
     }
 
     /**
