@@ -2,47 +2,66 @@
 <!--===========layout-footer================-->
 <div class="layout-footer">
     <div class="footer">
-        <div style="background-color:#1D7EC0;" class="footer--bg"></div>
         <?php if (!$is_moblie) : ?>
         <div class="footer--inner">
             <div class="container foot-container">
                 <div class="footer_main">
+
                     <div class="am-g">
-                        <!--  -->
-                        <?php foreach ($menus as $k => $item) : ?>
-                        <div class="" style="width:15%;">
-                            <div class="footer_main--column">
-                                <strong class="footer_main--column_title" <?php if ($item['is_show'] == 0) : ?> onclick="article(<?= $item['category_id'] ?>)" <?php endif; ?>>
-                                    <?= $item['name'] ?></strong>
-                                <ul class="footer_navigation">
-                                    <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : ?>
-                                    <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="article(<?= $child['category_id'] ?>)">
-                                            <?= $child['name'] ?></a></li>
-                                    <?php endforeach;
-                            endif; ?>
-                                </ul>
+                        <div class="am-g-nav">
+                            <!--  -->
+                            <?php foreach ($menus as $k => $item) : ?>
+                            <div style="width:15%;">
+                                <div class="footer_main--column">
+                                    <strong class="footer_main--column_title" <?php if ($item['is_show'] == 0) : ?> onclick="article(<?= $item['category_id'] ?>)" <?php endif; ?>>
+                                        <?= $item['name'] ?></strong>
+                                    <ul class="footer_navigation">
+                                        <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : ?>
+                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="article(<?= $child['category_id'] ?>)">
+                                                <?= $child['name'] ?></a></li>
+                                        <?php endforeach;
+                                endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="footer-friend">
+                            <div class="friend-div">
+                                <strong class="friend-title">友情链接</strong>
+                                <div class="friend-info">
+                                    <?php foreach ($index_data['company']['data'] as $f) : ?>
+                                    <a href="<?= $f['jumpUrl'] ?>"><?= $f['name'] ?></a>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                         </div>
-                        <?php endforeach; ?>
-                        <!--  -->
-                        <!-- <div class="am-u-md-6 foot-company">
-                            <div class="footer_main--column">
-                                <strong class="footer_main--column_title">联盟公司链接</strong>
-                                <ul class="footer_contact_info">
-                                    <?php foreach ($foot_company as $company) : ?>
-                                    <li class="footer_contact_info--item">
-                                        <a href="<?= $company['jumpUrl'] ?>" style="color:#fff;">
-                                            <?= $company['name'] ?>
-                                        </a>
-                                    </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </div> -->
+                    </div>
+                    <div class="f-contact">
+                        <strong class="f-contact-title">联系我们</strong>
+
+                        <div class="concat-info">
+                            <?php foreach ($index_data['concat']['data'] as $concat) : ?>
+                            <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="f-logo">
+                            <img src="assets/home/images/logo.png" alt="">
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
+        <!-- 回到top -->
+        <div class="goTop" onclick="goTop()">
+            <p>回到顶部</p>
+        </div>
+
+
+
         <?php else : ?>
         <div class="footer--inner">
             <div class="container foot-container">
@@ -85,6 +104,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
                 </div>
             </div>
@@ -127,7 +147,11 @@
     }
 
 
-
+    function goTop() {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 500);
+    }
 
     <?php if ((isset($detail) && $detail['type'] == 1) || isset($news)) : ?>
     $('.art1-container img').click(function() {

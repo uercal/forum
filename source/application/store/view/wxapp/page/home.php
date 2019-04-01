@@ -21,7 +21,7 @@
                     </div>
                     <!-- 工具栏 -->
                     <div id="diy-menu" class="diy-menu">
-                        <!-- <div class="navs">
+                        <div class="navs">
                             <div id="">
                                 <div class="title">组件</div>
                                 <div id="components">
@@ -30,9 +30,10 @@
                                     <nav class="special" data-type="news"> 新闻组件</nav>
                                     <nav class="special" data-type="banner"> 图片轮播</nav>
                                     <nav class="special" data-type="company"> 友情链接</nav>
+                                    <nav class="special" data-type="concat"> 联系我们</nav>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="action">
                             <a id="back-top" class="am-fl am-btn am-btn-xs am-btn-default" href="javascript:;">
                                 <span class="am-icon-angle-double-up"></span> 返回顶部

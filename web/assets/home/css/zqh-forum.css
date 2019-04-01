@@ -1,36 +1,4 @@
-.nav-forum .am-nav li a {
-    color: #fff;
-}
 
-.nav-contain .nav-inner .am-nav li {}
-
-.ul-forum {
-    display: flex;
-    height: 100%;
-    align-items: center;
-
-}
-
-.menu-forum {
-    width: 300px !important;
-    height: 100%;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-forum:hover {
-    background-color: #fff;
-}
-
-.menu-forum:hover a {
-    color: #59bcdb;
-}
-
-.menu-forum:hover .sub-menu a{
-    color: #000 !important;
-}
-
-.menu-forum a:hover {
-    background-color: unset !important;
+.section{
+    background: #FAFAFA;
 }

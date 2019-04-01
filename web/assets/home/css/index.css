@@ -189,11 +189,13 @@ nav ul>li>a {
 nav ul>li:hover>a {
     display: block;
     color: #fff;
-    background: rgba(127, 186, 255, 0.6);
+    /* background: rgba(127, 186, 255, 0.6); */
+    background: rgba(27, 53, 29, 0.6);
 }
 
 nav ul>li>a.current {
-    color: #3792FD;
+    /* color: #3792FD; */
+    color: #005008;
     font-size: 18px;
 }
 
@@ -238,16 +240,19 @@ nav ul>li>ol>li {
     text-align: center;
     line-height: 50px;
     /* background: rgba(0, 0, 0, 0.1); */
-    background: rgba(127, 186, 255, 0.6);
+    /* background: rgba(127, 186, 255, 0.6); */
+    background: rgba(27, 53, 29, 0.6);
 }
 
 nav ul>li>ol>li:hover {
-    background: rgba(127, 186, 255);
+    /* background: rgba(127, 186, 255); */
+    background: rgba(27, 53, 29);
 }
 
 
 nav ul>li>ol>li>ol>li:hover {
-    background: rgba(127, 186, 255);
+    /* background: rgba(127, 186, 255); */
+    background: rgba(27, 53, 29);
 }
 
 nav ul>li>ol>li>ol>li {
@@ -256,7 +261,8 @@ nav ul>li>ol>li>ol>li {
     text-align: center;
     line-height: 50px;
     /* background: rgba(0, 0, 0, 0.1); */
-    background: rgba(127, 186, 255, 0.6);
+    /* background: rgba(127, 186, 255, 0.6); */
+    background: rgba(27, 53, 29, 0.6);
 
 }
 

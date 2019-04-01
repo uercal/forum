@@ -34,9 +34,8 @@ class Index extends Controller
 
 
     public function index()
-    {
-               
-        return $this->fetch('index/index', compact('index_data'));
+    {               
+        return $this->fetch('index/index');
     }
 
     public function article()

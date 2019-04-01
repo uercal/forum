@@ -39,6 +39,24 @@
                     }
                 ]
             },
+            concat: {
+                data: [{
+                        title: '电话',
+                        value: ''
+                    }, {
+                        title: '地址',
+                        value: ''
+                    },
+                    {
+                        title: '邮箱',
+                        value: ''
+                    },
+                    {
+                        title: '传真',
+                        value: ''
+                    }
+                ]
+            },
             nav: {
                 data: [{
                         imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',

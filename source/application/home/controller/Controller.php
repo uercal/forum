@@ -141,6 +141,7 @@ class Controller extends \think\Controller
         $items = $model::detail()['page_data']['array']['items'];
         $items = array_column($items, null, 'type');
         // halt($items['nav']['data']);
+        // halt($items);
         return $items;
     }
 

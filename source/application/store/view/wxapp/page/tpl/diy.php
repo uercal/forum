@@ -90,9 +90,21 @@
 <!-- diy元素:company -->
 <script id="tpl_diy_company" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
-        <div class="diy-company" style="display:flex;align-items:flex-end;flex-direction:column;">
+        <div class="diy-company" style="display:flex;align-items:center;justify-content: center;">
             {{each data}}                
-                <span style="padding-right:10px;font-size:10px;">{{ $value.name }}</span>                                
+                <span style="padding-right:10px;font-size:10px;">网站</span>                                
+            {{/each}}            
+        </div>      
+    </div>
+</script>
+
+
+<!-- diy元素：concat -->
+<script id="tpl_diy_concat" type="text/template">
+    <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
+        <div class="diy-concat" style="display:flex;align-items:flex-end;flex-direction:column;">
+            {{each data}}                
+                <span style="padding-right:10px;font-size:10px;">{{ $value.title }}:{{ $value.value }}</span>                                
             {{/each}}            
         </div>      
     </div>

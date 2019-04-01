@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>企业网站模板</title>
     <link rel="stylesheet" href="assets/home/css/index.css" />
+    <!-- <link rel="stylesheet" href="assets/home/css/amazeui.css" /> -->
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
     <link rel="stylesheet" href="assets/home/css/zqh.css" />

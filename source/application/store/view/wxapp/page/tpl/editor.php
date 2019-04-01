@@ -272,4 +272,30 @@
             <i class="fa fa-plus"></i> 添加一个
         </div>    
     </form>
+</script>
+
+
+
+<!-- concat -->
+<script id="tpl_editor_concat" type="text/template">
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">联系我们</div>     
+        <div class="form-items">
+            {{each data}}
+            <div class="item" data-key="{{ $index }}">
+                <div class="container">                    
+                    <div class="item-form">
+                        <div class="input-group">
+                        <label class="am-u-sm-3 am-form-label am-text-xs">{{ $value.title }}</label>
+                            <div class="am-u-sm-9 am-u-end">
+                                <input class="" type="text" name="value"
+                                    data-bind="data.{{ $index }}.value" value="{{ $value.value }}">
+                            </div>                                                        
+                        </div>                                                
+                    </div>
+                </div>                
+            </div>
+            {{/each}}
+        </div>        
+    </form>
 </script> 

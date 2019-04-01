@@ -3,17 +3,19 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-cf">用户列表</div>
+                    <div class="widget-title am-cf"><?= $name ?>列表</div>
                 </div>
                 <div class="widget-body am-fr">
                     <div class="am-scrollable-horizontal am-u-sm-12">
+
+                        <?php if ($role==0) : ?>
                         <table width="100%" class="am-table am-table-compact am-table-striped
                          tpl-table-black am-text-nowrap">
                             <thead>
                                 <tr>
                                     <th>会员ID</th>
                                     <th>用户名</th>
-                                    <th>角色</th>                                    
+                                    <th>角色</th>
                                     <th>注册时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -23,7 +25,7 @@
                                 <tr>
                                     <td class="am-text-middle"><?= $item['user_id'] ?></td>
                                     <td class="am-text-middle"><?= $item['user_name'] ?></td>
-                                    <td class="am-text-middle"><?= $item['role'] ?></td>                                                                        
+                                    <td class="am-text-middle"><?= $item['role'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td>
                                         <div class="tpl-table-black-operation">
@@ -44,6 +46,30 @@
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        <?php elseif ($role==1) : ?>
+                        <?php elseif ($role==2) : ?>
+                        <?php elseif ($role==3) : ?>                        
+
+                        <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                     <div class="am-u-lg-12 am-cf">
                         <div class="am-fr"><?= $list->render() ?> </div>

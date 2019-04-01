@@ -13,25 +13,10 @@ class User extends BaseModel
 {
     protected $name = 'users';
 
-    // 性别
-    private $gender = ['未知', '男', '女'];
 
-
-    public function avatar()
+    public function getRoleAttr($valu, $data)
     {
-        return $this->hasOne('UploadApiFile', 'file_id', 'avatar_id');
-    }
-
-
-
-    /**
-     * 显示性别
-     * @param $value
-     * @return mixed
-     */
-    public function getGenderAttr($value)
-    {
-        return $this->gender[$value];
+        return [0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员'][$data['role']];
     }
 
     /**
@@ -43,6 +28,17 @@ class User extends BaseModel
     {
         $request = Request::instance();
         return $this->order(['create_time' => 'desc'])
+            ->paginate(15, false, ['query' => $request->request()]);
+    }
+
+
+
+    public function getListByRole($role)
+    {
+        $request = Request::instance();
+        return $this->where([
+            'role' => $role
+        ])->order(['create_time' => 'desc'])
             ->paginate(15, false, ['query' => $request->request()]);
     }
 

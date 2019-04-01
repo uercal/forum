@@ -37,6 +37,34 @@ return [
         'name' => '会员管理',
         'icon' => 'icon-user',
         'index' => 'user/index',
+        'submenu' => [
+            [
+                'name' => '用户列表',
+                'icon' => 'icon-user',
+                'index' => 'user/index'
+            ],
+            [
+                'name' => '普通会员',
+                'icon' => 'icon-user',
+                'index' => 'user/role&role=0'
+            ],
+            [
+                'name' => '个人会员',
+                'icon' => 'icon-user',
+                'index' => 'user/role&role=1'
+            ],
+            [
+                'name' => '专家会员',
+                'icon' => 'icon-user',
+                'index' => 'user/role&role=2'
+            ],
+            [
+                'name' => '单位会员',
+                'icon' => 'icon-user',
+                'index' => 'user/role&role=3'
+            ],
+
+        ]
     ],
 
     'wxapp' => [
