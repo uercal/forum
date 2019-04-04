@@ -6,6 +6,7 @@ use app\store\model\ListMode;
 use app\common\model\DetailMode;
 use app\store\model\ListDetail;
 use app\store\model\ListModel;
+use app\common\model\JobSort;
 
 
 
@@ -64,6 +65,22 @@ class ListData extends Controller
     }
 
 
+    //职务列表模式的职位排序
+    public function job_sort($list_id)
+    {
+        $model = ListModel::get($list_id);
+        $jobModel = new JobSort;
+        if (!$this->request->isAjax()) {
+            $data = $jobModel->getInfo($list_id);
+            return $this->fetch('job_sort', compact('data', 'model'));
+        }
+        // 更新记录
+        if ($jobModel->updateData($list_id, $this->postData('data'))) {
+            return $this->renderSuccess('更新成功', url('list_data/list_detail', ['id' => $list_id]));
+        }
+        $error = $jobModel->getError() ?: '更新失败';
+        return $this->renderError($error);
+    }
 
 
 

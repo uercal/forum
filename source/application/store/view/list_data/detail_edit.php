@@ -184,14 +184,7 @@
                                     </div>
                                 </div> -->
                             </div>
-
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职位排序 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="detail[job_sort]" value="<?= $model['job_sort'] ?>" required>
-                                    <small>数字越小越靠前</small>
-                                </div>
-                            </div>
+                           
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">个人排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
