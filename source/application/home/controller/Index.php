@@ -19,14 +19,16 @@ class Index extends Controller
     /**
      * 判断是否子网站
      */
-    public function checkChildSite(){
-        
-        
+    public function checkChildSite()
+    {
+
+
         // 验证规则
         // return $this->redirect('index/index');
     }
 
-    public function _empty(){
+    public function _empty()
+    {
         $code = $this->request->action();
         return $this->fetch('404');
         return $this->redirect('index');
@@ -34,7 +36,8 @@ class Index extends Controller
 
 
     public function index()
-    {               
+    {
+        // 新闻列表        
         return $this->fetch('index/index');
     }
 
@@ -75,6 +78,4 @@ class Index extends Controller
         !empty($project) ? $project->incRead() : '';
         return $this->fetch('project', compact('project'));
     }
-
-    
 }

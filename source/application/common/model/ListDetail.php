@@ -14,38 +14,38 @@ use think\Request;
  * Class Article
  * @package app\common\model
  */
-class News extends BaseModel
+class ListDetail extends BaseModel
 {
-    protected $name = 'news';
-    // protected $insert = ['wxapp_id' => 10001];
-
-
-    public function parent()
-    {
-        return $this->hasOne('Article', 'id', 'pid');
-    }
-
+    protected $name = 'list_detail';
 
     public function cover()
     {
         return $this->hasOne('UploadFile', 'file_id', 'cover_id');
     }
 
+    public function list()
+    {
+        return $this->hasOne('ListModel', 'id', 'list_id');
+    }
+
+    public function getAttachmentAttr($value, $data)
+    {
+        if (!empty($data['attachment_ids'])) {
+            return UploadFile::whereIn('file_id', $data['attachment_ids'])->select()->toArray();
+        } else {
+            return [];
+        }
+    }
 
     public static function detail($id)
     {
-        return self::get($id, ['parent' => ['parent' => ['child']]]);
+        return self::get($id, ['list' => ['mode']]);
     }
 
 
     public function getList($map = [])
     {
         return self::where($map)->order('sort desc')->select();
-    }
-
-    public static function getPTree()
-    {
-        return Article::where(['type' => 3])->select();
     }
 
     // 
@@ -55,9 +55,9 @@ class News extends BaseModel
         Db::startTrans();
         try {
             $this->setInc('read_count', 1);
-            Db::commit();            
+            Db::commit();
         } catch (\Exception $e) {
             Db::rollback();
-        }        
+        }
     }
 }

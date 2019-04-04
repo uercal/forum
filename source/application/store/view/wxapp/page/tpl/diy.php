@@ -73,15 +73,16 @@
 <!-- diy元素：news -->
 <script id="tpl_diy_news" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
-        <div class="diy-news" style="display:flex;padding:20px;height:120px;justify-content:space-between;">
-            {{each data}}
+        <div class="diy-news" style="display:flex;align-items:center;padding:20px;height:120px;justify-content:center;">
+            <!-- {{each data}}
                 <img src="{{ $value.imgUrl }}" style="width:20%;height:100%;object-fit:cover;">                                                
-            {{/each}}            
+            {{/each}}             -->
+            <strong>新闻模块</strong>            
         </div>
-        <!-- <div class="btn-edit-del">
+        <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
             <div class="btn-del">删除</div>
-        </div> -->
+        </div>
     </div>
 </script>
 

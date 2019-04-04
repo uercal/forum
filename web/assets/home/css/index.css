@@ -266,7 +266,6 @@ nav ul>li>ol>li>ol>li {
 
 }
 
-nav ul>li>ol>li:hover {}
 
 nav ul>li>ol>li>a,
 nav ul>li>ol>li>ol>li>a {
@@ -277,7 +276,7 @@ nav ul>li>ol>li>ol>li>a {
 
 nav ul>li>ol>li>a:hover,
 nav ul>li>ol>li>ol>li>a:hover {
-    /* color: #fff; */
+    color: #fff;
     /* color: #3792FD; */
     /* background: #196da5; */
 }

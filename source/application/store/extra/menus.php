@@ -28,10 +28,37 @@ return [
             ]
         ]
     ],
-    'news' => [
-        'name' => '数据管理',
+    // 'data' => [
+    //     'name' => '数据管理',
+    //     'icon' => 'icon-order',
+    //     'index' => 'data/index',
+    // ],
+    'list_data' => [
+        'name' => '列表管理',
         'icon' => 'icon-order',
-        'index' => 'data/index',
+        'index' => 'list_data/index&mode=news',
+        'submenu' => [            
+            [
+                'name' => '新闻列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/index&mode=news',                
+            ],
+            [
+                'name' => '头像列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/index&mode=avatar',
+            ],
+            [
+                'name' => '期刊列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/index&mode=mag',
+            ],
+            [
+                'name' => '职务列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/index&mode=job',
+            ],
+        ]
     ],
     'user' => [
         'name' => '会员管理',

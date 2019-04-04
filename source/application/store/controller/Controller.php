@@ -46,6 +46,7 @@ class Controller extends \think\Controller
      */
     public function _initialize()
     {
+
         // 商家登录信息
         $this->store = Session::get('yoshop_store');
         // 当前路由信息
@@ -63,14 +64,14 @@ class Controller extends \think\Controller
     {
         // 验证当前请求是否在白名单
         if (!in_array($this->routeUri, $this->notLayoutAction)) {
-            // 输出到view
+            // 输出到view            
             $this->assign([
                 'base_url' => base_url(),                      // 当前域名
                 'store_url' => url('/store'),              // 后台模块url
                 'group' => $this->group,
                 'menus' => $this->menus(),                     // 后台菜单
                 'store' => $this->store,                       // 商家登录信息
-                'setting' => Setting::getAll() ? : null,        // 当前商城设置
+                'setting' => Setting::getAll() ?: null,        // 当前商城设置
             ]);
         }
     }
@@ -96,7 +97,7 @@ class Controller extends \think\Controller
      * @return array
      */
     public function menus()
-    {        
+    {
         foreach ($data = Config::get('menus') as $group => $first) {
             $data[$group]['active'] = $group === $this->group;
             // 遍历：二级菜单
@@ -123,17 +124,28 @@ class Controller extends \think\Controller
                         else
                             $secondUris[] = $second['index'];
                     }
+
                     // 二级菜单：active
+                    $_url = '';
+                    if ($this->request->isGet()) {
+                        foreach (input() as $key => $value) {
+                            $_url .= "&$key=$value";
+                        }
+                        $_url = $this->routeUri . $_url;
+                    } else {
+                        $_url = $this->routeUri;
+                    }                    
+                    // 
                     !isset($data[$group]['submenu'][$secondKey]['active'])
-                        && $data[$group]['submenu'][$secondKey]['active'] = in_array($this->routeUri, $secondUris);
+                        && $data[$group]['submenu'][$secondKey]['active'] = in_array($_url, $secondUris);
                 }
             }
         }
-        
+
         $session = Session::get('yoshop_store');
         $type = $session['user']['type'];
-        
-        if ($type == 1) {            
+
+        if ($type == 1) {
             $role = $session['user']['role']->toArray();
             // halt($role);
             $api_menu = $role['api_menu'];
@@ -141,7 +153,7 @@ class Controller extends \think\Controller
                 $api_menu[$key] = json_decode($value, true);
             }
             $data = $this->filterMenu($data, $api_menu);
-        }        
+        }
         return $data;
     }
 
@@ -160,31 +172,31 @@ class Controller extends \think\Controller
         foreach ($menu as $key => $value) {
             $all_empty = true;
             if (!isset($value['submenu'])) {
-                if (in_array($value['index'], $api)){
+                if (in_array($value['index'], $api)) {
                     $all_empty = false;
-                } 
+                }
             } else {
                 foreach ($value['submenu'] as $k => $sub) {
                     if (isset($sub['index'])) {
-                        if(!in_array($sub['index'], $api)){
+                        if (!in_array($sub['index'], $api)) {
                             unset($menu[$key]['submenu'][$k]);
-                        }else{
+                        } else {
                             $all_empty = false;
                         }
                     } else {
                         foreach ($sub['submenu'] as $_k => $c) {
-                            if(!in_array($c['index'], $api)){
+                            if (!in_array($c['index'], $api)) {
                                 unset($menu[$key]['submenu'][$k]['submenu'][$_k]);
-                            }else{
+                            } else {
                                 $all_empty = false;
                             }
                         }
                     }
                 }
             }
-            if($all_empty){
+            if ($all_empty) {
                 unset($menu[$key]);
-            } 
+            }
         }
 
         return $menu;
@@ -211,10 +223,12 @@ class Controller extends \think\Controller
             return true;
         }
         // 验证登录状态
-        if (empty($this->store)
+        if (
+            empty($this->store)
             || (int)$this->store['is_login'] !== 1
             || !isset($this->store['wxapp'])
-            || empty($this->store['wxapp'])) {
+            || empty($this->store['wxapp'])
+        ) {
             $this->error('您还没有登录', 'passport/login');
             return false;
         }
@@ -275,5 +289,4 @@ class Controller extends \think\Controller
     {
         return $this->request->post($key . '/a');
     }
-
 }

@@ -18,13 +18,17 @@ class Page extends Controller
      * @throws \think\exception\DbException
      */
     public function home()
-    {
+    {                
+
         $model = WxappPageModel::detail();
         if (!$this->request->isAjax()) {
+            // $model->insertDefault(10001);
             $jsonData = $model['page_data']['json'];            
             return $this->fetch('home', compact('jsonData'));
         }
-        $data = $this->postData('data');        
+        
+        
+        $data = $this->postData('data');            
         if (!$model->edit($data)) {
             return $this->renderError('更新失败');
         }

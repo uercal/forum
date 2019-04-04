@@ -153,107 +153,17 @@
         }, 500);
     }
 
-    <?php if ((isset($detail) && $detail['type'] == 1) || isset($news)) : ?>
-    $('.art1-container img').click(function() {
-        var src = $(this).attr('src');
-        window.location.href = src;
-    })
 
-
-    $('.news-container p img').click(function() {
-        var src = $(this).attr('src');
-        window.location.href = src;
-    })
-
-    $('.news-container img').parent('p').css('text-align', 'center');
-    $('.news-container img').parent('div').css('text-align', 'center');
-
-
-
-    <?php endif; ?>
 
 
 
 
     // 
 
-
-
-
-    <?php if (isset($detail) && $detail['type'] == 3) : ?>
-    $('.new3-item').mouseover(function() {
-        $(this).find(".news3-cover").css('height', '100%');
-        $(this).find(".news3-coverp").css('display', 'flex');
-    })
-
-    $('.new3-item').mouseout(function() {
-        $(this).find(".news3-cover").css('height', '0');
-        $(this).find(".news3-coverp").css('display', 'none');
-    })
-
-    <?php endif; ?>
-
-
-
-
-
-
-    //Index
-    <?php if (isset($index_data)) : ?>
-    $('.news-pic-item').mouseover(function() {
-        $(this).find('.news-pic-title').css('color', '#AB1312');
-        $(this).find('.news-pic-title').css('text-decoration', 'underline');
-        // 
-        $(this).find('.new-pic-con').css('color', '#AB1312');
-        $(this).find('.new-pic-con').css('text-decoration', 'underline');
-
-    })
-    $('.news-pic-item').mouseout(function() {
-        $(this).find('.news-pic-title').css('color', '#000');
-        $(this).find('.news-pic-title').css('text-decoration', 'none');
-        // 
-        $(this).find('.new-pic-con').css('color', '#000');
-        $(this).find('.new-pic-con').css('text-decoration', 'none');
-    })
-
-    <?php endif; ?>
 
 
 
     // footer
-
-
-
-
-    // 
-    $(function() {
-        $('.img9-div img').hover(function() {
-            $(this).next().hide();
-        })
-        $('.img9-div img').mouseleave(function() {
-            $(this).next().show();
-        })
-    })
-
-
-
-    // 
-    <?php if (isset($news) || isset($project)) : ?>
-    var shareXLWeiBo = function() {
-        var _shareUrl = 'http://v.t.sina.com.cn/share/share.php?&appkey=895033136'; //真实的appkey ，必选参数
-        _shareUrl += '&url=' + encodeURIComponent(document.location); //参数url设置分享的内容链接|默认当前页location，可选参数
-        _shareUrl += '&title=' + encodeURIComponent('<?= isset($news) ? $news['title'] : (isset($project) ? $project['title'] : '') ?>'); //参数title设置分享的标题|默认当前页标题，可选参数
-        _shareUrl += '&source=' + encodeURIComponent('官网');
-        _shareUrl += '&sourceUrl=' + encodeURIComponent(document.location);
-        _shareUrl += '&content=' + 'utf-8'; //参数content设置页面编码gb2312|utf-8，可选参数
-        _shareUrl += '&pic=' + encodeURIComponent(''); //参数pic设置图片链接|默认为空，可选参数
-
-        var _width = $(window).width() / 2;
-        var _height = $(window).height() / 1.5;
-
-        window.open(_shareUrl, '_blank', 'toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0,' + 'width=' + _width + ',height=' + _height + ',top=' + (screen.height - _height) / 2 + ',left=' + (screen.width - _width) / 2);
-    };
-    <?php endif; ?>
 </script>
 
 </html> 

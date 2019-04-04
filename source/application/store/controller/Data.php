@@ -19,4 +19,5 @@ class Data extends Controller
         $list = $model->getList();
         return $this->fetch('index', compact('list'));
     }
+
 }

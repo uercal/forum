@@ -70,11 +70,11 @@ class Controller extends \think\Controller
             'base_url' => base_url(),                      // 当前域名
             'store_url' => url('/home'),              // 后台模块url
             'group' => $this->group,
-            'menus' => $this->menus(),                     // 后台菜单
+            'menus' => $this->menus(),                     // 菜单
             'background' => $this->background(),
             'foot_company' => $this->foot_company(),
             'is_moblie' => Request::instance()->isMobile(),
-            'index_data' => $this->getIndexData()
+            'index_data' => $this->getIndexData()            
             // 'store' => $this->store,                       // 商家登录信息
             // 'setting' => Setting::getAll() ?: null,        // 当前商城设置
         ]);
@@ -101,8 +101,8 @@ class Controller extends \think\Controller
      * @return array
      */
     private function menus()
-    {
-        $list = Category::getCacheTree();
+    {        
+        $list = Category::getCacheTree();        
         return $list;
     }
 
@@ -113,12 +113,12 @@ class Controller extends \think\Controller
     private function background()
     {
         $model = new WxappPage;
-        $items = $model::detail()['page_data']['array']['items'];
+        $items = $model::detail()['page_data']['array']['items'];        
         $items = array_values($items);
         $banner = array_filter($items, function ($a) {
             return $a['type'] == 'banner';
-        });
-        $banner = array_values($banner)[0]['data'];
+        });        
+        $banner = array_values($banner)[0]['data'];        
         return $banner;
     }
 
@@ -130,18 +130,18 @@ class Controller extends \think\Controller
         $company = array_filter($items, function ($a) {
             return $a['type'] == 'company';
         });
-        $company = array_values($company)[0]['data'];
+        $company = array_values($company)[0]['data'];        
         return $company;
     }
 
     // 
     public function getIndexData()
     {
-        $model = new WxappPage;
+        $model = new WxappPage;        
         $items = $model::detail()['page_data']['array']['items'];
         $items = array_column($items, null, 'type');
         // halt($items['nav']['data']);
-        // halt($items);
+        // halt($items);      
         return $items;
     }
 

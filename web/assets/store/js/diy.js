@@ -113,30 +113,33 @@
                 }]
             },
             news: {
+                list: {
+                    list_id: 0
+                },
                 data: [{
                     imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
                     imgName: 'banner-1.jpg',
                     newId: 0,
                     title: '',
-                    content: ''
+                    content: '',
                 }, {
                     imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
                     imgName: 'banner-1.jpg',
                     newId: 0,
                     title: '',
-                    content: ''
+                    content: '',
                 }, {
                     imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
                     imgName: 'banner-1.jpg',
                     newId: 0,
                     title: '',
-                    content: ''
+                    content: '',
                 }, {
                     imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
                     imgName: 'banner-1.jpg',
                     newId: 0,
                     title: '',
-                    content: ''
+                    content: '',
                 }]
             },
             company: {
@@ -252,6 +255,7 @@
                             val = $this.val(),
                             itemIndex = $this.data('bind').split('.'),
                             itemId = $this.parents('form').data('itemid');
+                        console.log($this);
                         // 数据绑定 (最多支持3级)
                         method.diyData.setData(itemId, itemIndex, val);
                         // 重新渲染diy元素
@@ -313,9 +317,11 @@
                                 });
                                 return false;
                             }
+                            console.log(diyData);
                             $.post('', {
                                 data: diyData
                             }, function (result) {
+                                console.log(result);
                                 result.code === 1 ? $.show_success(result.msg, result.url) :
                                     $.show_error(result.msg);
                             });

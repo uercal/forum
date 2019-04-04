@@ -195,14 +195,21 @@
 <script id="tpl_editor_news" type="text/template">
     <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
         <div class="form-items">新闻组件</div>   
-        <div class="form-items">
+        <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label am-text-xs">列表ID </label>
+            <div class="am-u-sm-9 am-u-end">
+                <input class="" type="text" name="list_id"
+                       data-bind="list.list_id" value="{{ list.list_id }}">
+            </div>
+        </div>
+        <div class="form-items">           
             {{each data}}
             <div class="item" data-key="{{ $index }}">
                 <div class="container">
                     <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
                     <div class="item-form am-form-file">                       
                         <div class="input-group">
-                        <label class="am-u-sm-3 am-form-label am-text-xs">新闻ID </label>
+                        <label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="newId"
                                     data-bind="data.{{ $index }}.newId" value="{{ $value.newId }}">
