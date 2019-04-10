@@ -31,9 +31,15 @@ class Category extends BaseModel
 
 
 
+    public function parent()
+    {
+        return $this->hasOne('Category', 'category_id', 'parent_id');
+    }
 
 
-
+    public function list(){
+        return $this->hasOne('ListModel','id','list_id');
+    }
 
 
 

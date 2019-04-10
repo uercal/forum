@@ -102,7 +102,8 @@ class Controller extends \think\Controller
      */
     private function menus()
     {        
-        $list = Category::getCacheTree();        
+        $list = Category::getCacheTree();   
+        // halt($list)     ;
         return $list;
     }
 

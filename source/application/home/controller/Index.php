@@ -4,9 +4,10 @@ namespace app\home\controller;
 use app\common\model\Article;
 use app\common\model\News;
 use app\common\model\Project;
+use app\store\model\Category;
 use think\Request;
 use function Qiniu\json_decode;
-
+use app\home\model\ListDetail;
 
 /**
  * 后台首页
@@ -40,6 +41,46 @@ class Index extends Controller
         // 新闻列表        
         return $this->fetch('index/index');
     }
+
+
+
+    // 页面跳转
+    public function category($category_id)
+    {
+        $model = Category::get($category_id, [
+            'parent',
+            'list' => ['list_detail' => ['cover']]
+        ]);
+        $mode = $model['mode'];
+        switch ($mode) {
+            case 'list':
+                $list_detail_model = new ListDetail;
+                $key_word = $model['list']['mode']['key_word'];
+                $data = $list_detail_model->getListDetail($model['list']['id'],$key_word);
+                
+                break;
+
+            case 'mode':
+
+
+
+
+                break;
+
+            default:
+
+
+
+
+                break;
+        }
+
+        // halt([$data->toArray()['data'][0]['data'], $key_word]);
+
+        return $this->fetch($mode, compact('model', 'data', 'key_word'));
+    }
+
+
 
     public function article()
     {

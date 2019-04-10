@@ -8806,7 +8806,7 @@ ul.am-dropdown-content > .am-disabled > a:focus {
   * Slider Theme: Default
   */
 .am-slider-default {
-  margin: 0 0 20px;
+  margin: 0;
   background-color: #fff;
   border-radius: 2px;
   -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);

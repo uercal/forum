@@ -23,6 +23,15 @@ class ListModel extends BaseModel
         return $this->hasOne('ListMode', 'id', 'list_mode_id');
     }
 
+
+    public function listDetail()
+    {
+        return $this->hasMany('ListDetail', 'list_id', 'id');
+    }
+
+
+
+
     public static function getList($type)
     {
         $id = ListMode::where(['key_word' => $type])->value('id');

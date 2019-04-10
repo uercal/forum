@@ -11,8 +11,12 @@
     <!-- <link rel="stylesheet" href="assets/home/css/amazeui.css" /> -->
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
+    <link rel="stylesheet" href="assets/home/css/forum-list.css" />
     <link rel="stylesheet" href="assets/home/css/zqh.css" />
     <link rel="stylesheet" href="assets/home/css/zqh-m.css" />
+    <link rel="stylesheet" href="assets/home/css/amazeui.css" />
+    <!-- 引入样式 -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
 </head>
 
 <body>
@@ -40,27 +44,27 @@
                 <img src="assets/home/images/logo.png" alt="">
             </div>
             <ul class="header-ul" style="text-align:center;">
-                <li><a href="/" class="current">首页</a></li>
+                <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
                 <?php foreach ($menus as $item) : ?>
-                <li>
-                    <a href="/index.php?c=content&a=list&catid=1"><?= $item['name'] ?></a>
-                    <?php if (!empty($item['child'])) : ?>
-                    <ol>
-                        <?php foreach ($item['child'] as $child) : ?>
-                        <li>
-                            <a href="/index.php?c=content&a=list&catid=20"><?= $child['name'] ?></a>
-                            <?php if (!empty($child['child'])) : ?>
+                    <li>
+                        <a href="javascript:void(0); " class="<?= (isset($model) && $model['parent']['category_id'] == $item['category_id']) ? 'current' : '' ?>" onclick="category(<?= $item['is_show'] == 0 ? '0' : $item['category_id'] ?>)"><?= $item['name'] ?></a>
+                        <?php if (!empty($item['child'])) : ?>
                             <ol>
-                                <?php foreach ($child['child'] as $two) : ?>
-                                <li><a href="/index.php?c=content&a=list&catid=23"><?= $two['name'] ?></a></li>
+                                <?php foreach ($item['child'] as $child) : ?>
+                                    <li>
+                                        <a href="javascript:void(0); " onclick="category(<?= $child['is_show'] == 0 ? '0' : $child['category_id'] ?>)"><?= $child['name'] ?></a>
+                                        <?php if (!empty($child['child'])) : ?>
+                                            <ol>
+                                                <?php foreach ($child['child'] as $two) : ?>
+                                                    <li><a href="javascript:void(0);" onclick="category(<?= $two['is_show'] == 0 ? '0' : $two['category_id'] ?>)"><?= $two['name'] ?></a></li>
+                                                <?php endforeach; ?>
+                                            </ol>
+                                        <?php endif; ?>
+                                    </li>
                                 <?php endforeach; ?>
                             </ol>
-                            <?php endif; ?>
-                        </li>
-                        <?php endforeach; ?>
-                    </ol>
-                    <?php endif; ?>
-                </li>
+                        <?php endif; ?>
+                    </li>
                 <?php endforeach; ?>
             </ul>
             <div class="member-info">
@@ -76,13 +80,13 @@
         </nav>
     </header>
     <!--  -->
-    <section class="slider">        
+    <section class="slider" style="display:<?= isset($model) ? 'none;' : 'block;' ?>">
         <div class="am-slider am-slider-default" data-am-flexslider="{animation: 'slider',slideshowSpeed: 2000,controlNav: false,directionNav: false}" id="demo-slider-0">
             <ul class="am-slides">
                 <?php foreach ($index_data['banner']['data'] as $banner) : ?>
-                <li><img src="<?= $banner['imgUrl'] ?>" /></li>
+                    <li><img src="<?= $banner['imgUrl'] ?>" /></li>
                 <?php endforeach; ?>
             </ul>
-        </div>        
+        </div>
         <div class="slider-cover"></div>
-    </section> 
+    </section>

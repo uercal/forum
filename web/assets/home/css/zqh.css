@@ -448,8 +448,8 @@ body {
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #ab1312;
-    border-color: #ab1312;
+    background-color: #44874b;
+    border-color: #44874b;
 }
 
 .theme-black .pagination>.active>a,
@@ -461,8 +461,8 @@ body {
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #ab1312;
-    border-color: #ab1312;
+    background-color: #44874b;
+    border-color: #44874b;
 }
 
 .pagination>.disabled>span,

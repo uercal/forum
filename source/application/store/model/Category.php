@@ -65,11 +65,11 @@ class Category extends CategoryModel
                     $detail->save();
                 }
                 if ($data['mode'] == 'list') { }
-            } else {
-                
-             }
+            } else { }
 
-
+            // 
+            Cache::clear();
+            // 
             Db::commit();
             return true;
         } catch (\Exception $e) {

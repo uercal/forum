@@ -21,9 +21,9 @@ class ListModel extends ListModelModel
      * @return false|int
      */
     public function add($data)
-    {        
+    {
         Db::startTrans();
-        try {                        
+        try {
             $this->allowField(true)->save($data);
             Db::commit();
             return true;
@@ -40,9 +40,9 @@ class ListModel extends ListModelModel
      * @return bool|int
      */
     public function edit($data)
-    {        
+    {
         Db::startTrans();
-        try {                                        
+        try {
             $this->allowField(true)->save($data);
             Db::commit();
             return true;
@@ -59,5 +59,9 @@ class ListModel extends ListModelModel
     //     return $this->delete();
     // }
 
-   
+
+    public function getListByModeId($mode_id)
+    {
+        return $this->where(['list_mode_id' => $mode_id])->select()->toArray();
+    }
 }

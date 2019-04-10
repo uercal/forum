@@ -5,6 +5,7 @@ namespace app\store\controller;
 use app\store\model\Article as ArticleModel;
 use app\store\model\Category as CategoryModel;
 use app\common\model\ListMode;
+use app\store\model\ListModel;
 use app\common\model\DetailMode;
 
 /**
@@ -72,6 +73,11 @@ class Article extends Controller
             $list = $model->getCacheTree();
             // 获取列表模式列表            
             $list_mode_list = ListMode::getList();
+            // 如果列表模式 获取该列表模式下所有列表
+            if ($model['mode'] == 'list') {
+                $list_mode_child = ListModel::where(['list_mode_id' => $model['list_mode_id']])->select()->toArray();
+                $model['list_mode_child'] = $list_mode_child;
+            }
             // 获取详情模式列表            
             $detail_type_list = DetailMode::getList();
 
@@ -84,7 +90,7 @@ class Article extends Controller
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
     }
-
+    
 
     public function category_delete($category_id)
     {
@@ -95,6 +101,20 @@ class Article extends Controller
         }
         return $this->renderSuccess('删除成功');
     }
+
+
+
+    public function get_list_ajax($list_mode_id){
+        $model = new ListModel;
+        $list = $model->getListByModeId($list_mode_id);
+        return $list;
+    }
+
+
+
+
+
+
 
     /**
      * 添加商品

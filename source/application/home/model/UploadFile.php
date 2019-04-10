@@ -1,6 +1,6 @@
 <?php
 
-namespace app\store\model;
+namespace app\home\model;
 
 use app\common\model\UploadFile as UploadFileModel;
 

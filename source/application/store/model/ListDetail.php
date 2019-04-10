@@ -50,6 +50,10 @@ class ListDetail extends ListDetailModel
                     break;
 
                     // 
+                case 'mag':
+                    $data['data'] = json_encode(['jumpUrl' => $data['data']]);
+                    $this->allowField(true)->save($data);
+                    break;
             }
 
             Db::commit();
@@ -96,6 +100,10 @@ class ListDetail extends ListDetailModel
                     break;
 
                     // 
+                case 'mag':
+                    $data['data'] = json_encode(['jumpUrl' => $data['data']]);
+                    $this->allowField(true)->save($data);
+                    break;
             }
 
             Db::commit();

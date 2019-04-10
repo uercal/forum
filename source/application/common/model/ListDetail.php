@@ -37,6 +37,15 @@ class ListDetail extends BaseModel
         }
     }
 
+    public function getDataAttr($value,$data){
+        $arr = json_decode($data['data'],true);
+        if(!empty($arr)){
+            return $arr;
+        }else{
+            return [];
+        }
+    }
+
     public static function detail($id)
     {
         return self::get($id, ['list' => ['mode']]);

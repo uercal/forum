@@ -22,15 +22,15 @@
                                     <select name="category[parent_id]" data-am-selected="{searchBox: 1, btnSize: 'sm',maxHeight: 300}">
                                         <option value="0">顶级分类</option>
                                         <?php if (isset($list)) : foreach ($list as $first) : ?>
-                                        <option value="<?= $first['category_id'] ?>" <?= $model['parent_id'] === $first['category_id'] ? 'selected' : '' ?>>
-                                            <?= $first['name'] ?></option>
-                                        <?php if (isset($first['child'])) : foreach ($first['child'] as $child) : ?>
-                                        <option value="<?= $child['category_id'] ?>" <?= $model['parent_id'] === $child['category_id'] ? 'selected' : '' ?>>
-                                            ---<?= $child['name'] ?></option>
-                                        <?php endforeach;
-                                endif; ?>
-                                        <?php endforeach;
-                                endif; ?>
+                                                <option value="<?= $first['category_id'] ?>" <?= $model['parent_id'] === $first['category_id'] ? 'selected' : '' ?>>
+                                                    <?= $first['name'] ?></option>
+                                                <?php if (isset($first['child'])) : foreach ($first['child'] as $child) : ?>
+                                                        <option value="<?= $child['category_id'] ?>" <?= $model['parent_id'] === $child['category_id'] ? 'selected' : '' ?>>
+                                                            ---<?= $child['name'] ?></option>
+                                                    <?php endforeach;
+                                            endif; ?>
+                                            <?php endforeach;
+                                    endif; ?>
                                     </select>
                                 </div>
                             </div>
@@ -63,11 +63,11 @@
                                             </button>
                                             <div class="uploader-list am-cf">
                                                 <?php if ($model['image']) : ?>
-                                                <div class="file-item">
-                                                    <img src="<?= $model['image']['file_path'] ?>">
-                                                    <input type="hidden" name="category[image_id]" value="<?= $model['image_id'] ?>">
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                </div>
+                                                    <div class="file-item">
+                                                        <img src="<?= $model['image']['file_path'] ?>">
+                                                        <input type="hidden" name="category[image_id]" value="<?= $model['image_id'] ?>">
+                                                        <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                    </div>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -99,21 +99,28 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
                                     <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
-                                        <select name="category[list_mode_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
+                                        <select name="category[list_mode_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
                                             <option value=""></option>
                                             <?php if (isset($list_mode_list)) : foreach ($list_mode_list as $first) : ?>
-                                            <option value="<?= $first['id'] ?>" <?= $model['list_mode_id'] == $first['id'] ? 'selected' : '' ?>>
-                                                <?= $first['name'] ?></option>
-                                            <?php endforeach;
-                                    endif; ?>
+                                                    <option value="<?= $first['id'] ?>" <?= $model['list_mode_id'] == $first['id'] ? 'selected' : '' ?>>
+                                                        <?= $first['alias_name'] ?></option>
+                                                <?php endforeach;
+                                        endif; ?>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表关键字 </label>
-                                    <div class="am-u-sm-9 am-u-end">
-                                        <input type="text" class="tpl-form-input" name="category[mode_data]" value="<?= $model['mode_data'] ?>">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> </label>
+                                    <div class="am-u-sm-9 am-u-end" id="list_option">
+                                        <select name="category[list_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
+                                            <option value=""></option>
+                                            <?php if (isset($model['list_mode_child'])) : foreach ($model['list_mode_child'] as $first) : ?>
+                                                    <option value="<?= $first['id'] ?>" <?= $model['list_id'] == $first['id'] ? 'selected' : '' ?>>
+                                                        <?= $first['name'] ?></option>
+                                                <?php endforeach;
+                                        endif; ?>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -129,10 +136,10 @@
                                         <select name="category[detail_mode_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
                                             <option value=""></option>
                                             <?php if (isset($detail_type_list)) : foreach ($detail_type_list as $key => $first) : ?>
-                                            <option value="<?= $first['id'] ?>" <?= $model['detail_mode_id'] == $first['id'] ? 'selected' : '' ?>>
-                                                <?= $first['name'] ?></option>
-                                            <?php endforeach;
-                                    endif; ?>
+                                                    <option value="<?= $first['id'] ?>" <?= $model['detail_mode_id'] == $first['id'] ? 'selected' : '' ?>>
+                                                        <?= $first['name'] ?></option>
+                                                <?php endforeach;
+                                        endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -159,15 +166,15 @@
                                             </button>
                                             <div class="uploader-list am-cf">
                                                 <?php if (!empty($model['detail']['attachment'])) : foreach ($model['detail']['attachment'] as $item) : ?>
-                                                <div>
-                                                    <input type="hidden" name="category[detail][attachment][]" value="<?= $item['file_id'] ?>">
-                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                        <?= $item['origin_name'] ?>
-                                                    </a>
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                </div>
-                                                <?php endforeach;
-                                        endif; ?>
+                                                        <div>
+                                                            <input type="hidden" name="category[detail][attachment][]" value="<?= $item['file_id'] ?>">
+                                                            <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                <?= $item['origin_name'] ?>
+                                                            </a>
+                                                            <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                        </div>
+                                                    <?php endforeach;
+                                            endif; ?>
                                             </div>
                                         </div>
                                         <div class="help-block am-margin-top-sm">
@@ -255,7 +262,35 @@
          */
         $('#my-form').superForm();
 
+        // 
+        var $list_select = $('#list_select');
 
+        $list_select.on('change', function() {
+            var list_mode_id = $(this).val();
+            // 
+            var url = "<?= url('get_list_ajax') ?>&list_mode_id=" + list_mode_id;
+            $.get(url, function(res) {
+                var html = '';
+                if (res.length > 0) {
+                    html += '<select name="category[list_id]">';
+                    html += '<option value=""></option>';
+                    for (var i = 0; i < res.length; i++) {
+                        html += '<option value="' + res[i]['id'] + '">';
+                        html += res[i]['name'] + '</option>';
+                    }
+                    html += '</select>';
+                }
+                $('#list_option').html(html);
+                // 
+                $('#list_option select').selected({
+                    btnWidth: '200px',
+                    btnSize: 'sm',                    
+                });
+            })
+        });
+
+
+        // 
 
         var is_show = "<?= $model['is_show'] ?>";
         var mode = "<?= $model['mode'] ?>";
@@ -355,4 +390,4 @@
 
 
     });
-</script> 
+</script>

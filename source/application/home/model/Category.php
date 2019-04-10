@@ -33,8 +33,8 @@ class Category extends CategoryModel
      * @return bool|int
      */
     public function edit($data)
-    {
-        $this->deleteCache();
+    {        
+        $this->deleteCache();        
         return $this->allowField(true)->save($data);
     }
 

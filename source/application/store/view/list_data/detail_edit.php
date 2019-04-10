@@ -202,6 +202,50 @@
                     </div>
 
 
+                    <?php elseif ($model['list']['mode']['key_word'] == 'mag') : ?>
+                    <div class="widget-body">
+                        <fieldset>
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">编辑</div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">标题 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">期数 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" class="tpl-form-input" name="detail[mag_num]" value="<?= $model['mag_num'] ?>" required>
+                                </div>
+                            </div>                                
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="text" class="tpl-form-input" name="detail[data]" value="<?= $model['data']['jumpUrl'] ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">排序 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
+                                    <small>数字越小越靠前</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                    <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
 
                     <?php endif; ?>
 
