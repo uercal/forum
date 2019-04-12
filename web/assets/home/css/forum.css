@@ -233,17 +233,18 @@
 
 
 .goTop {
-    position: absolute;
+    position: fixed;
     height: 140px;
     width: 140px;
     border-radius: 50%;
     background: #7FBAFF;
-    top: -130px;
+    bottom: 130px;
     right: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    z-index: 9999999999;
 }
 
 .goTop>p {

@@ -20,6 +20,7 @@
                                 </div>
                             </div>
                             <?php endforeach;?>
+                            
 
                             <small>当前职位顺序: <?=  implode(' >> ',array_column($data,'name','value'))  ?> </small>
                             <div class="am-form-group">

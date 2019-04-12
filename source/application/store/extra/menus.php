@@ -37,16 +37,11 @@ return [
         'name' => '列表管理',
         'icon' => 'icon-order',
         'index' => 'list_data/index&mode=news',
-        'submenu' => [            
+        'submenu' => [
             [
                 'name' => '新闻列表',
                 'icon' => 'icon-order',
-                'index' => 'list_data/index&mode=news',                
-            ],
-            [
-                'name' => '头像列表',
-                'icon' => 'icon-order',
-                'index' => 'list_data/index&mode=avatar',
+                'index' => 'list_data/index&mode=news',
             ],
             [
                 'name' => '期刊列表',
@@ -57,6 +52,16 @@ return [
                 'name' => '职务列表',
                 'icon' => 'icon-order',
                 'index' => 'list_data/index&mode=job',
+            ],
+            [
+                'name' => '会员文章列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/index&mode=user_news',
+            ],
+            [
+                'name' => '会员项目列表',
+                'icon' => 'icon-order',
+                'index' => 'list_data/user_project',
             ],
         ]
     ],

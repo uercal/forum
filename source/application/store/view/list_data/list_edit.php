@@ -9,14 +9,32 @@
                         <fieldset>
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">列表类型（<?= $model['mode']['name'] ?>）</div>
-                            </div>                            
-                            
+                            </div>
+
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="list[name]" value="" required>
+                                    <input type="text" class="tpl-form-input" name="list[name]" value="<?= $model['name'] ?>" required>
                                 </div>
                             </div>
+
+                            <?php if ($model['mode']['key_word'] == 'user_news') : ?>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表是否含类别 </label>
+                                    <div class="am-u-sm-9 am-u-end" id="radio_show">
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="list[cate_exist]" value="0" data-am-ucheck <?= $model['cate_exist'] == 0 ? 'checked' : '' ?>>
+                                            否
+                                        </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="list[cate_exist]" value="1" data-am-ucheck <?= $model['cate_exist'] == 1 ? 'checked' : '' ?>>
+                                            是
+                                        </label>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                     <button type="submit" class="j-submit am-btn am-btn-secondary">提交
@@ -40,4 +58,4 @@
         $('#my-form').superForm();
 
     });
-</script> 
+</script>

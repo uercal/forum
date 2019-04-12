@@ -143,21 +143,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                            <div class="am-u-sm-9 am-u-end">
-                                                <div class="am-form-file">
-                                                    <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                        <i class="am-icon-cloud-upload"></i> 选择
-                                                    </button>
-                                                    <div class="uploader-list am-cf">
+                                                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                        <div class="am-u-sm-9 am-u-end">
+                                                                            <div class="am-form-file">
+                                                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                    <i class="am-icon-cloud-upload"></i> 选择
+                                                                                </button>
+                                                                                <div class="uploader-list am-cf">
 
-                                                    </div>
-                                                </div>
-                                                <div class="help-block am-margin-top-sm">
-                                                    <small>大小2M以下</small>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="help-block am-margin-top-sm">
+                                                                                <small>大小2M以下</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -198,7 +198,7 @@
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" class="tpl-form-input" name="detail[mag_num]" value="" required>
                                     </div>
-                                </div>                                
+                                </div>
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>
@@ -222,8 +222,83 @@
                                 </div>
                             </fieldset>
                         </div>
+                    <?php elseif ($list['mode']['key_word'] == 'user_news') : ?>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">编辑</div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">标题 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="detail[title]" value="" required>
+                                    </div>
+                                </div>
+
+                                <?php if ($list['cate_exist'] == 1) : ?>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别 </label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <select name="detail[option_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
+                                                <option value></option>
+                                                <?php foreach ($option as $first) : ?>
+                                                    <option value="<?= $first['id'] ?>">
+                                                        <?= $first['name'] ?></option>
+                                                <?php endforeach;
+                                            ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
 
 
+
+
+                                <div class="detail_mode">
+                                    <!-- 详情列表 -->
+                                    <div class="am-form-group" id="richText">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">内容</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <!-- 加载编辑器的容器 -->
+                                            <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="am-form-group">
+                                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                        <div class="am-u-sm-9 am-u-end">
+                                                            <div class="am-form-file">
+                                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                    <i class="am-icon-cloud-upload"></i> 选择
+                                                                </button>
+                                                                <div class="uploader-list am-cf">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="help-block am-margin-top-sm">
+                                                                <small>大小2M以下</small>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类排序 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[sort]" value="" required>
+                                        <small>数字越小越靠前</small>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                        <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
                     <?php endif; ?>
                 </form>
             </div>
