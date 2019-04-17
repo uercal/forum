@@ -8,7 +8,7 @@ use app\store\model\ListDetail;
 use app\store\model\ListModel;
 use app\common\model\JobSort;
 use app\store\model\UserNewsOption;
-
+use app\store\model\Projects;
 
 /**
  * 列表数据控制器
@@ -65,8 +65,15 @@ class ListData extends Controller
     }
 
 
-    public function user_project(){
-        
+    public function user_project()
+    {
+        $project = new Projects;
+        $data = $project->getList();
+        $list = $data['list'];
+        $map = $data['map'];
+        $cates = $project->getCates();
+        // halt(compact('list', 'cates', 'map'));
+        return $this->fetch('projects', compact('list', 'cates', 'map'));
     }
 
 
@@ -119,7 +126,7 @@ class ListData extends Controller
         $list = ListModel::get($list_id, ['mode']);
         if (!$this->request->isAjax()) {
             if ($list['mode']['key_word'] == 'user_news' && $list['cate_exist'] == 1) {
-                $option = UserNewsOption::select();
+                $option = UserNewsOption::where('list_id', $list_id)->select();
                 return $this->fetch('detail_add', compact('list', 'option'));
             } else {
                 return $this->fetch('detail_add', compact('list'));
@@ -158,5 +165,4 @@ class ListData extends Controller
         }
         return $this->renderSuccess('删除成功');
     }
-
 }

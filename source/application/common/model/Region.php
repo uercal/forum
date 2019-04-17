@@ -26,6 +26,12 @@ class Region extends BaseModel
         return $region[$id]['name'];
     }
 
+    public static function getMergeNameById($id)
+    {
+        $region = self::getCacheAll();
+        return $region[$id]['merger_name'];
+    }
+
     /**
      * 根据名称获取地区id
      * @param $name
@@ -79,7 +85,7 @@ class Region extends BaseModel
     {
         if (!Cache::get('region')) {
             // 所有地区
-            $all = $allData = self::useGlobalScope(false)->column('id, pid, name, level', 'id');
+            $all = $allData = self::useGlobalScope(false)->column('id, pid, name, level, merger_name', 'id');
             // 格式化
             $tree = [];
             foreach ($allData as $pKey => $province) {
@@ -104,5 +110,4 @@ class Region extends BaseModel
         }
         return Cache::get('region');
     }
-
 }

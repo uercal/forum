@@ -36,12 +36,17 @@ class ListDetail extends ListDetailModel
             case 'mag':
                 $pageNum = 10;
                 break;
+            case 'user_news':
+                $pageNum = 10;
+                input('option_id') ? $map['option_id'] = ['like', '%' . input('option_id') . '%'] : '';
+                break;
             default:
                 $pageNum = 10;
                 break;
-        }
+        }        
 
-
+        // $r = $this->with(['cover'])->where($map)->order($order)->fetchSql(true)->select();
+        // halt($r);
         // 
         return $this->with(['cover'])->where($map)->order($order)->paginate($pageNum, false, [
             'query' => Request::instance()->request()

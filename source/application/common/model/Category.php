@@ -37,11 +37,16 @@ class Category extends BaseModel
     }
 
 
-    public function list(){
-        return $this->hasOne('ListModel','id','list_id');
+    public function list()
+    {
+        return $this->hasOne('ListModel', 'id', 'list_id');
     }
 
 
+    public function listMode()
+    {
+        return $this->hasOne('ListMode', 'id', 'list_mode_id');
+    }
 
 
     /**

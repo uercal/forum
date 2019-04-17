@@ -50,7 +50,7 @@ class Article extends Controller
             // 获取所有地区
             $list = $model->getCacheTree();
             // 获取列表模式列表            
-            $list_mode_list = ListMode::getList();
+            $list_mode_list = ListMode::getList();            
             // 获取详情模式列表            
             $detail_type_list = DetailMode::getList();
             return $this->fetch('category_add', compact('list', 'list_mode_list', 'detail_type_list'));

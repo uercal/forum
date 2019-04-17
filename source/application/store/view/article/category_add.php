@@ -76,6 +76,10 @@
                                             <input type="radio" name="category[mode]" value="detail" data-am-ucheck>
                                             详情模式
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="users" data-am-ucheck>
+                                            会员列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +106,7 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> </label>
                                     <div class="am-u-sm-9 am-u-end" id="list_option">
-                                        
+
                                     </div>
                                 </div>
 
@@ -141,7 +145,27 @@
 
                             </div>
 
+                            <div class="users_mode" style="display:none;">
 
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
+                                    <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
+                                        <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
+                                            <option value=""></option>
+                                            <?php foreach ([
+                                                'normal' => '普通会员',
+                                                'person' => '个人会员',
+                                                'expert' => '专家会员',
+                                                'company' => '单位会员',
+                                                'supplier' => '供应商'
+                                            ] as $key => $first) : ?>
+                                                <option value="<?= $key ?>">
+                                                    <?= $first ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>                             
+                            </div>
 
 
 
@@ -230,6 +254,7 @@
             if (value == 0) {
                 $('#is_show').hide();
                 $('.list_mode').hide();
+                $('.users_mode').hide();
                 $('.detail_mode').hide();
             } else {
                 $('#is_show').show();
@@ -243,11 +268,17 @@
             if (value == 'list') {
                 $('.list_mode').show();
                 $('.detail_mode').hide();
+                $('.users_mode').hide();
                 console.log(value);
             } else if (value == 'detail') {
                 $('.list_mode').hide();
                 $('.detail_mode').show();
+                $('.users_mode').hide();
                 console.log(value);
+            } else if (value == 'users') {
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                $('.users_mode').show();
             }
         });
 

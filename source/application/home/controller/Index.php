@@ -8,6 +8,8 @@ use app\store\model\Category;
 use think\Request;
 use function Qiniu\json_decode;
 use app\home\model\ListDetail;
+use app\home\model\Projects;
+use app\common\model\UserNewsOption;
 
 /**
  * 后台首页
@@ -49,6 +51,7 @@ class Index extends Controller
     {
         $model = Category::get($category_id, [
             'parent',
+            'listMode',
             'list' => ['list_detail' => ['cover']]
         ]);
         $mode = $model['mode'];
@@ -56,13 +59,25 @@ class Index extends Controller
             case 'list':
                 $list_detail_model = new ListDetail;
                 $key_word = $model['list']['mode']['key_word'];
-                $data = $list_detail_model->getListDetail($model['list']['id'],$key_word);
-                
+                $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];
+                if ($key_word == 'user_project') {
+                    $project = new Projects;
+                    $data = $project->getListData();
+                } else {
+                    $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
+                    if($key_word=='user_news'){
+                        $options = UserNewsOption::where('list_id',$model['list']['id'])->select()->toArray();
+                        $_data = [];
+                        $_data['list'] = $data;
+                        $_data['options'] = $options;
+                        $data = $_data;
+                    }
+                }
                 break;
 
-            case 'mode':
-
-
+            case 'users':
+                
+                halt($model);
 
 
                 break;
@@ -75,8 +90,8 @@ class Index extends Controller
                 break;
         }
 
-        // halt([$data->toArray()['data'][0]['data'], $key_word]);
 
+        // halt($data['list'][0]['option']);
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 

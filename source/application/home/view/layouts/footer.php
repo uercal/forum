@@ -56,7 +56,7 @@
             </div>
 
             <!-- 回到top -->
-            <div class="goTop" onclick="goTop()">
+            <div class="goTop" onclick="goTop()" style="display:none;">
                 <p>回到顶部</p>
             </div>
 
@@ -127,25 +127,31 @@
     }
 
     <?php if (isset($model)) : ?>
-
-        $('#search').on('click', function() {
-            var html = "<?= url('/category', [
-                            'category_id' => $model['category_id']
-                        ]) . (input('sort') ? '&sort=' . input('sort') : '') ?>";
+        
+        function search() {
             var title = $('input[name="title"]').val();
+            console.log(title);
             if (!title) return false;
-            html += '&title=' + title;
-            window.location.href = html;
-        })
+            $form = $('#pro_list').serialize();
+            filter_jump($form);
+        }
 
         function list_sort(sort) {
             sort = sort == 'asc' ? 'desc' : 'asc';
-            var html = "<?= url('/category', [
-                            'category_id' => $model['category_id']
-                        ]) . (input('title') ? '&title=' . input('title') : '') ?>";
+            $('input[name="sort"]').val(sort);
+            $form = $('#pro_list').serialize();
+            filter_jump($form);
+        }
 
-            html += '&sort=' + sort;
-            window.location.href = html;
+        function pro_filter() {
+            if ($('.list-filter-order span').hasClass('am-icon-chevron-down')) {
+                $('.list-filter-order span').removeClass('am-icon-chevron-down');
+                $('.list-filter-order span').addClass('am-icon-chevron-up');
+            } else {
+                $('.list-filter-order span').removeClass('am-icon-chevron-up');
+                $('.list-filter-order span').addClass('am-icon-chevron-down');
+            }
+            $('.pro-filter-container').toggle(700);
         }
 
         function mag_detail(url) {
@@ -153,6 +159,61 @@
                 url = "http://" + url;
             }
             window.location.href = url;
+        }
+
+        // 
+        function server_cate(val) {
+            $('input[name="server_cate"]').val(val);
+            $form = $('#pro_list').serialize();
+            // 
+            filter_jump($form);
+        }
+
+        function eng_cate(val) {
+            $('input[name="eng_cate"]').val(val);
+            $form = $('#pro_list').serialize();
+            // 
+            filter_jump($form);
+        }
+
+
+        function assignment_money(val) {
+            $('input[name="assignment_money"]').val(val);
+            $form = $('#pro_list').serialize();
+            filter_jump($form);
+        }
+
+        function total_invest(val) {
+            $('input[name="total_invest"]').val(val);
+            $form = $('#pro_list').serialize();
+            filter_jump($form);
+        }
+
+        function assignment_date(val) {
+            $('input[name="assignment_date"]').val(val);
+            $form = $('#pro_list').serialize();
+            filter_jump($form);
+        }
+
+
+        // 
+        function pro_filter_rm(val) {
+            console.log(val);
+            $('input[name=' + val + ']').val(0);
+            $form = $('#pro_list').serialize();
+            //             
+            filter_jump($form);
+        }
+
+
+
+        function filter_jump($form) {
+            var html = "<?= url('/category', [
+                            'category_id' => $model['category_id']
+                        ]) ?>";
+
+            html = html + '&' + $form;
+            window.location.href = html;
         }
 
     <?php endif; ?>
@@ -190,7 +251,7 @@
 
     $(document).ready(function() {
         //首先将#back-to-top隐藏
-        $(".goTop").hide();
+        // $(".goTop").hide();
         //当滚动条的位置处于距顶部600像素以下时，跳转链接出现，否则消失
         $(function() {
             $(window).scroll(function() {
@@ -199,7 +260,7 @@
                 } else {
                     $(".goTop").fadeOut(500);
                 }
-            });            
+            });
         });
     });
 

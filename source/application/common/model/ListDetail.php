@@ -7,7 +7,7 @@ use app\common\model\Article;
 use app\common\model\UploadFile;
 use think\Cache;
 use think\Request;
-
+use app\common\model\UserNewsOption;
 
 /**
  * 新闻模型
@@ -37,11 +37,24 @@ class ListDetail extends BaseModel
         }
     }
 
-    public function getDataAttr($value,$data){
-        $arr = json_decode($data['data'],true);
-        if(!empty($arr)){
+
+    public function getOptionAttr($value, $data)
+    {
+        if (!empty($data['option_id'])) {
+            $arr = UserNewsOption::whereIn('id', $data['option_id'])->select()->toArray();
+            return array_column($arr, 'name', null);
+        } else {
+            return [];
+        }
+    }
+
+
+    public function getDataAttr($value, $data)
+    {
+        $arr = json_decode($data['data'], true);
+        if (!empty($arr)) {
             return $arr;
-        }else{
+        } else {
             return [];
         }
     }
@@ -56,6 +69,7 @@ class ListDetail extends BaseModel
     {
         return self::where($map)->order('sort desc')->select();
     }
+
 
     // 
     public function incRead()

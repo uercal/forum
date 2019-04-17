@@ -88,6 +88,10 @@
                                             <input type="radio" name="category[mode]" value="detail" data-am-ucheck <?= $model['mode'] == 'detail' ? 'checked' : '' ?>>
                                             详情模式
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="users" data-am-ucheck <?= $model['mode'] == 'users' ? 'checked' : '' ?>>
+                                            会员列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +210,27 @@
                             </div>
 
 
+                            <div class="users_mode" style="display:none;">
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
+                                    <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
+                                        <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
+                                            <option value=""></option>
+                                            <?php foreach ([
+                                                'normal' => '普通会员',
+                                                'person' => '个人会员',
+                                                'expert' => '专家会员',
+                                                'company' => '单位会员',
+                                                'supplier' => '供应商'
+                                            ] as $key => $first) : ?>
+                                                <option value="<?= $key ?>" <?= $model['mode_data'] == $key ? 'selected' : '' ?>>
+                                                    <?= $first ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -284,7 +309,7 @@
                 // 
                 $('#list_option select').selected({
                     btnWidth: '200px',
-                    btnSize: 'sm',                    
+                    btnSize: 'sm',
                 });
             })
         });
@@ -296,6 +321,7 @@
         var mode = "<?= $model['mode'] ?>";
         var list_mode_id = "<?= $model['list_mode_id'] ?>";
         var detail_mode_id = "<?= $model['detail_mode_id'] ?>";
+        var mode_data = "<?= $model['mode_data'] ?>";
 
 
 
@@ -304,16 +330,23 @@
             $('#is_show').hide();
             $('.list_mode').hide();
             $('.detail_mode').hide();
+            $('.users_mode').hide();
         } else {
             $('#is_show').show();
             // 模式
             if (mode == 'list') {
                 $('.list_mode').show();
                 $('.detail_mode').hide();
+                $('.users_mode').hide();
                 // 
-
+            } else if (mode == 'users') {
+                $('.users_mode').show();
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                // 
             } else if (mode == 'detail') {
                 $('.list_mode').hide();
+                $('.users_mode').hide();
                 $('.detail_mode').show();
                 // 
                 if (detail_mode_id == 1) {
@@ -344,6 +377,7 @@
             if (value == 0) {
                 $('#is_show').hide();
                 $('.list_mode').hide();
+                $('.users_mode').hide();
                 $('.detail_mode').hide();
             } else {
                 $('#is_show').show();
@@ -357,10 +391,16 @@
             var value = e.currentTarget.value;
             if (value == 'list') {
                 $('.list_mode').show();
+                $('.users_mode').hide();
                 $('.detail_mode').hide();
                 console.log(value);
+            } else if (value == 'users') {
+                $('.list_mode').hide();
+                $('.users_mode').show();
+                $('.detail_mode').hide();
             } else if (value == 'detail') {
                 $('.list_mode').hide();
+                $('.users_mode').hide();
                 $('.detail_mode').show();
                 console.log(value);
             }
