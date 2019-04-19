@@ -242,6 +242,30 @@
 </script>
 
 
+<!-- 编辑器：act -->
+<script id="tpl_editor_activity" type="text/template">
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
+        <div class="form-items">社团活动</div>           
+        <div class="form-items">           
+            {{each data}}
+            <div class="item" data-key="{{ $index }}">
+                <div class="container">                    
+                    <div class="item-form am-form-file">                       
+                        <div class="input-group">
+                        <label class="am-u-sm-3 am-form-label am-text-xs">活动ID </label>
+                            <div class="am-u-sm-9 am-u-end">
+                                <input class="" type="text" name="id"
+                                    data-bind="data.{{ $index }}.id" value="{{ $value.id }}">
+                            </div>                                                        
+                        </div>                                                          
+                    </div>
+                </div>                
+            </div>
+            {{/each}}
+        </div>       
+    </form>
+</script>
+
 
 
 <!-- 编辑器：news -->
@@ -305,4 +329,4 @@
             {{/each}}
         </div>        
     </form>
-</script> 
+</script>

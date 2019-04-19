@@ -14,6 +14,15 @@ class User extends BaseModel
     protected $name = 'users';
 
 
+
+    public function avatar()
+    {
+        return $this->hasOne('UploadApiFile', 'file_id', 'avatar');
+    }
+
+
+
+
     public function getRoleAttr($valu, $data)
     {
         return [0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员'][$data['role']];
@@ -50,6 +59,6 @@ class User extends BaseModel
      */
     public static function detail($where)
     {
-        return self::get($where);
+        return self::get($where, ['avatar']);
     }
 }

@@ -127,7 +127,7 @@
     }
 
     <?php if (isset($model)) : ?>
-        
+
         function search() {
             var title = $('input[name="title"]').val();
             console.log(title);
@@ -225,10 +225,38 @@
         window.location.href = url;
     }
 
+    // detail
+    function activity(id) {
+        window.location.href = "<?= url('/activity') ?>/id/" + id;
+    }
+
+    function userProject(id, category_id) {
+        window.location.href = "<?= url('/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
+    }
+
+    function userDetail(id, category_id) {
+        window.location.href = "<?= url('/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
+    }
+
+
+
+    // more
+    function newsMore(list_id) {
+        window.location.href = "<?= url('/listJumpCate') ?>/list_id/" + list_id;
+    }
+
+    function activityMore() {
+        window.location.href = "<?= url('/activityMore') ?>";
+    }
+
+
+
     function news(id) {
         var url = "<?= url('/news') ?>/id/" + id;
         window.location.href = url;
     }
+
+
 
     function project(id) {
         var url = "<?= url('/project') ?>/id/" + id;

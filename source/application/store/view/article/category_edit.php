@@ -92,6 +92,10 @@
                                             <input type="radio" name="category[mode]" value="users" data-am-ucheck <?= $model['mode'] == 'users' ? 'checked' : '' ?>>
                                             会员列表
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="activity" data-am-ucheck <?= $model['mode'] == 'activity' ? 'checked' : '' ?>>
+                                            活动列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -344,6 +348,11 @@
                 $('.list_mode').hide();
                 $('.detail_mode').hide();
                 // 
+            } else if (mode == 'activity') {
+                $('.users_mode').hide();
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                // 
             } else if (mode == 'detail') {
                 $('.list_mode').hide();
                 $('.users_mode').hide();
@@ -394,6 +403,10 @@
                 $('.users_mode').hide();
                 $('.detail_mode').hide();
                 console.log(value);
+            } else if (value == 'activity') {
+                $('.list_mode').hide();
+                $('.users_mode').hide();
+                $('.detail_mode').hide();
             } else if (value == 'users') {
                 $('.list_mode').hide();
                 $('.users_mode').show();

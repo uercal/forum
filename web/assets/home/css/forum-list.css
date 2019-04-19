@@ -51,7 +51,7 @@
     width: 100%;
     align-items: center;
     /*  */
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .list-head {
@@ -311,4 +311,188 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+/*  */
+.users-list {
+    width: 62.5%;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.users-list-item {
+    width: 49%;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.users-list-item>img {
+    position: absolute;
+    left: 0;
+    width: 33.33333%;
+    height: 60%;
+    bottom: 40px;
+    border-radius: 5px;
+    z-index: 9;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-repeat: no-repeat;
+    /*  */
+    top: 45%;
+    transform: translate(0, -50%);
+}
+
+.users-list-item>div {
+    height: 100%;
+    width: 90%;
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 10px 10px 100px rgba(229, 229, 229, 0.3);
+    transition: all 0.3s;
+}
+
+.users-level {
+    position: absolute;
+    height: 32px;
+    width: 84px;
+    bottom: 15px;
+    left: 0;
+    background: #7FBAFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 5px 15px;
+}
+
+.users-level>p {
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    margin: 0;
+    padding-right: 5px;
+}
+
+
+.users-item-info {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 50px 25px 20px;
+    position: relative;
+}
+
+.users-item-info>strong {
+    font-family: PingFangSC-Medium;
+    font-size: 24px;
+    color: #333333;
+    letter-spacing: 0;
+    /*  */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.users-item-info>div>div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+}
+
+
+.users-item-info>div>div>p {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0;
+    /*  */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 6px;
+}
+
+.users-item-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    width: 40px;
+    height: 80px;
+    opacity: 0.4;
+    background: #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.users-item-arrow::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-top: 1px solid #999999;
+    border-right: 1px solid #999999;
+    transform: rotate(45deg);
+}
+
+.users-list-item:hover .users-item-arrow {
+    background: #5BA864;
+}
+
+.users-list-item:hover .users-item-arrow::after {
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.users-list-item:hover>div {
+    box-shadow: 10px 10px 10px rgba(180, 180, 180, 0.3);
+}
+
+
+
+.act-list {
+    display: flex;
+    width: 62.5%;
+    padding: 10px;
+}
+
+.act-list>.activity-body {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    justify-content: flex-start;
+}
+
+.act-list>.activity-body>.act-item {
+    margin-bottom: 30px;
+    margin-left: 3%;
+}
+
+.act-list .act-float-time>p {
+    font-size: 10px;
+    padding-left: 4px;
+    white-space: nowrap;
 }

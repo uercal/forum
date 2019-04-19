@@ -6,7 +6,7 @@
                 <div class="index-title">
                     <strong>本会要闻</strong>
                 </div>
-                <p class="item-more">查看更多 》</p>
+                <p class="item-more" onclick="newsMore(<?= $index_data['news']['list']['list_id'] ?>)">查看更多 》</p>
             </div>
             <div class="news-body">
                 <div class="news-slider">
@@ -45,83 +45,36 @@
                 <div class="index-title">
                     <strong>社团活动</strong>
                 </div>
-                <p class="item-more">查看更多 》</p>
+                <p class="item-more" onclick="activityMore()">查看更多 》</p>
             </div>
             <div class="activity-body">
-
-                <div class="act-item">
-                    <div class="act-cover">
-                        <img class="act-img" src="/assets/home/images/index/f01.jpg" alt="">
-                        <div class="act-float-time">
-                            <p>活动日期：2019/3/21-2019/3/31</p>
-                        </div>
-                    </div>
-                    <div class="act-info">
-                        <strong class="info-title">
-                            <strong>工程建设行业协会工程建设行工程建设行业协会工程建设行工程建设行业协会工程建设行</strong>
-                        </strong>
-                        <p class="info-name">现代工作体系建研讨会第5次现在工作体现代工作体系建研讨会第5次现在工作体</p>
-                        <div class="act-reg">
-                            <div class="reg-detail">
-                                <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：2019/3/19</p>
-                                <p class="reg-address am-icon-location-arrow">&nbsp;&nbsp;海口</p>
-                            </div>
-                            <div class="reg-button">
-                                <p>查看详情</p>
+                <?php foreach ($index_data['activity']['data'] as $item) : ?>
+                    <div class="act-item">
+                        <div class="act-cover">
+                            <img class="act-img" src="<?= $item['cover']['file_path'] ?>" alt="">
+                            <div class="act-float-time">
+                                <p>活动日期：<?= date('Y/m/d', $item['active_begin']) . '-' . date('Y/m/d', $item['active_end']) ?></p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="act-item">
-                    <div class="act-cover">
-                        <img class="act-img" src="/assets/home/images/index/f01.jpg" alt="">
-                        <div class="act-float-time">
-                            <p>活动日期：2019/3/21-2019/3/31</p>
-                        </div>
-                    </div>
-                    <div class="act-info">
-                        <strong class="info-title">
-                            <strong>工程建设行业协会工程建设行工程建设行业协会工程建设行工程建设行业协会工程建设行</strong>
-                        </strong>
-                        <p class="info-name">现代工作体系建研讨会第5次现在工作体现代工作体系建研讨会第5次现在工作体</p>
-                        <div class="act-reg">
-                            <div class="reg-detail">
-                                <p class="reg-time am-icon-clock-o time-doing">&nbsp;&nbsp;报名截止日期：2019/3/19</p>
-                                <p class="reg-address am-icon-location-arrow">&nbsp;&nbsp;海口</p>
+                        <div class="act-info">
+                            <strong class="info-title">
+                                <strong><?= $item['title'] ?></strong>
+                            </strong>
+                            <div class="info-name">
+                                <?= html_entity_decode($item['content']) ?>
                             </div>
-                            <div class="reg-button">
-                                <p>查看详情</p>
+                            <div class="act-reg">
+                                <div class="reg-detail">
+                                    <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?= date('Y/m/d', $item['sign_end']) ?></p>
+                                    <p class="reg-address am-icon-location-arrow">&nbsp;&nbsp;<?= $item['address'] ?></p>
+                                </div>
+                                <div class="reg-button" onclick="activity(<?= $item['id'] ?>)">
+                                    <p>查看详情</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="act-item">
-                    <div class="act-cover">
-                        <img class="act-img" src="/assets/home/images/index/f01.jpg" alt="">
-                        <div class="act-float-time">
-                            <p>活动日期：2019/3/21-2019/3/31</p>
-                        </div>
-                    </div>
-                    <div class="act-info">
-                        <strong class="info-title">
-                            <strong>工程建设行业协会工程建设行工程建设行业协会工程建设行工程建设行业协会工程建设行</strong>
-                        </strong>
-                        <p class="info-name">现代工作体系建研讨会第5次现在工作体现代工作体系建研讨会第5次现在工作体</p>
-                        <div class="act-reg">
-                            <div class="reg-detail">
-                                <p class="reg-time am-icon-clock-o time-done">&nbsp;&nbsp;报名截止日期：2019/3/19</p>
-                                <p class="reg-address am-icon-location-arrow">&nbsp;&nbsp;海口</p>
-                            </div>
-                            <div class="reg-button">
-                                <p>查看详情</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -212,7 +165,7 @@
                                 <p>2019/03/29</p>
                                 <p>总投资</p>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
                     <div class="eright-item">
@@ -230,7 +183,7 @@
                                 <p>2019/03/29</p>
                                 <p>总投资</p>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
                     <div class="eright-item">
@@ -248,7 +201,7 @@
                                 <p>2019/03/29</p>
                                 <p>总投资</p>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
                 </div>

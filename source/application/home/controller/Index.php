@@ -10,6 +10,8 @@ use function Qiniu\json_decode;
 use app\home\model\ListDetail;
 use app\home\model\Projects;
 use app\common\model\UserNewsOption;
+use app\home\model\User;
+use app\home\model\Activity;
 
 /**
  * 后台首页
@@ -65,8 +67,8 @@ class Index extends Controller
                     $data = $project->getListData();
                 } else {
                     $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
-                    if($key_word=='user_news'){
-                        $options = UserNewsOption::where('list_id',$model['list']['id'])->select()->toArray();
+                    if ($key_word == 'user_news') {
+                        $options = UserNewsOption::where('list_id', $model['list']['id'])->select()->toArray();
                         $_data = [];
                         $_data['list'] = $data;
                         $_data['options'] = $options;
@@ -76,9 +78,19 @@ class Index extends Controller
                 break;
 
             case 'users':
-                
-                halt($model);
 
+                $user = new User;
+                $data = $user->getUsersList($model['mode_data']);
+                break;
+
+            case 'activity':
+
+                $activity = new Activity;
+                $data = $activity->getDataList();
+
+                break;
+
+            case 'detail':
 
                 break;
 
@@ -91,10 +103,8 @@ class Index extends Controller
         }
 
 
-        // halt($data['list'][0]['option']);
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
-
 
 
     public function article()
@@ -115,23 +125,57 @@ class Index extends Controller
     }
 
 
-    public function news()
+
+    public function activity($id)
     {
-        $id = input('id');
-        $news = News::detail($id);
-        // increase        
-        !empty($news) ? $news->incRead() : '';
-        // halt($detail->toArray());
-        return $this->fetch('news', compact('news'));
+        $Category = new Category;
+        $model = $Category->where('mode', 'activity')->find();
+        $detail = Activity::detail($id);
+        return $this->fetch('activity_detail', compact('detail', 'model'));
     }
 
 
-    public function project()
+
+
+
+    public function listJumpCate($list_id)
     {
-        $id = input('id');
-        $project = Project::detail($id);
-        // 
-        !empty($project) ? $project->incRead() : '';
-        return $this->fetch('project', compact('project'));
+        $category_id = Category::get(['list_id' => $list_id])['category_id'];
+        return $this->redirect('/category', ['category_id' => $category_id]);
+    }
+
+    public function activityMore()
+    {
+        $category_id = Category::get(['mode' => 'activity'])['category_id'];
+        return $this->redirect('/category', ['category_id' => $category_id]);
+    }
+
+
+    // public function news()
+    // {
+    //     $id = input('id');
+    //     $news = News::detail($id);
+    //     // increase        
+    //     !empty($news) ? $news->incRead() : '';
+    //     // halt($detail->toArray());
+    //     return $this->fetch('news', compact('news'));
+    // }
+
+
+    public function projectDetail($id, $category_id)
+    {
+        $model = Category::get($category_id);
+        $detail = Projects::detail($id);
+        //         
+        return $this->fetch('project', compact('detail', 'model'));
+    }
+
+    public function userDetail($user_id, $category_id)
+    {
+        $model = Category::get($category_id);
+        $detail = User::detail($user_id)->toArray();
+        // halt($detail['avatar']);
+        //         
+        return $this->fetch('user_detail', compact('detail', 'model'));
     }
 }

@@ -87,6 +87,20 @@
 </script>
 
 
+<!-- act -->
+<script id="tpl_diy_activity" type="text/template">
+    <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
+        <div class="diy-news" style="display:flex;align-items:center;padding:20px;height:120px;justify-content:center;">           
+            <strong>活动模块</strong>            
+        </div>
+        <div class="btn-edit-del">
+            <div class="btn-edit">编辑</div>
+            <div class="btn-del">删除</div>
+        </div>
+    </div>
+</script>
+
+
 
 <!-- diy元素:company -->
 <script id="tpl_diy_company" type="text/template">

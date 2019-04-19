@@ -80,6 +80,10 @@
                                             <input type="radio" name="category[mode]" value="users" data-am-ucheck>
                                             会员列表
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="activity" data-am-ucheck>
+                                            活动列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +168,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                </div>                             
+                                </div>
                             </div>
 
 
@@ -267,6 +271,11 @@
             var value = e.currentTarget.value;
             if (value == 'list') {
                 $('.list_mode').show();
+                $('.detail_mode').hide();
+                $('.users_mode').hide();
+                console.log(value);
+            } else if (value == 'activity') {
+                $('.list_mode').hide();
                 $('.detail_mode').hide();
                 $('.users_mode').hide();
                 console.log(value);

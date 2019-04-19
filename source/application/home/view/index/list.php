@@ -432,7 +432,7 @@
             <!-- project_item -->
             <div class="pro-item-body">
                 <?php foreach ($data['list'] as $item) : ?>
-                    <div class="pro-item">
+                    <div class="pro-item" onclick="userProject(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
                         <div class="pro-item-head">
                             <p>项目所在地：<?= implode('', $item['region_span']) ?></p>
                             <p><?= date('Y/m/d', $item['assignment_date']) ?></p>
@@ -488,6 +488,7 @@
                 color: #999999;
                 height: 100%;
                 text-align: center;
+                border-radius: 6px;
             }
 
             .el-input__inner::-webkit-input-placeholder {

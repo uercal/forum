@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
     <link rel="stylesheet" href="assets/home/css/forum-list.css" />
+    <link rel="stylesheet" href="assets/home/css/forum-detail.css" />
     <link rel="stylesheet" href="assets/home/css/zqh.css" />
     <link rel="stylesheet" href="assets/home/css/zqh-m.css" />
     <link rel="stylesheet" href="assets/home/css/amazeui.css" />

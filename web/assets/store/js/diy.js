@@ -88,7 +88,13 @@
                     }
                 ]
             },
-
+            activity:{
+                data:[
+                    {id:0},
+                    {id:0},
+                    {id:0}
+                ]
+            },
             projects: {
                 data: [{
                     imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',

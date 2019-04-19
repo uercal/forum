@@ -10,6 +10,7 @@ use app\store\model\Setting;
 use think\Request;
 use think\Route;
 use app\common\model\Category;
+use app\home\model\Activity;
 
 /**
  * 后台控制器基类
@@ -74,7 +75,8 @@ class Controller extends \think\Controller
             'background' => $this->background(),
             'foot_company' => $this->foot_company(),
             'is_moblie' => Request::instance()->isMobile(),
-            'index_data' => $this->getIndexData()            
+            'index_data' => $this->getIndexData(),
+            // 'index_jump' => $this->getIndexJump(),
             // 'store' => $this->store,                       // 商家登录信息
             // 'setting' => Setting::getAll() ?: null,        // 当前商城设置
         ]);
@@ -101,8 +103,8 @@ class Controller extends \think\Controller
      * @return array
      */
     private function menus()
-    {        
-        $list = Category::getCacheTree();   
+    {
+        $list = Category::getCacheTree();
         // halt($list)     ;
         return $list;
     }
@@ -114,12 +116,12 @@ class Controller extends \think\Controller
     private function background()
     {
         $model = new WxappPage;
-        $items = $model::detail()['page_data']['array']['items'];        
+        $items = $model::detail()['page_data']['array']['items'];
         $items = array_values($items);
         $banner = array_filter($items, function ($a) {
             return $a['type'] == 'banner';
-        });        
-        $banner = array_values($banner)[0]['data'];        
+        });
+        $banner = array_values($banner)[0]['data'];
         return $banner;
     }
 
@@ -131,20 +133,38 @@ class Controller extends \think\Controller
         $company = array_filter($items, function ($a) {
             return $a['type'] == 'company';
         });
-        $company = array_values($company)[0]['data'];        
+        $company = array_values($company)[0]['data'];
         return $company;
     }
 
     // 
     public function getIndexData()
     {
-        $model = new WxappPage;        
+        $model = new WxappPage;
         $items = $model::detail()['page_data']['array']['items'];
         $items = array_column($items, null, 'type');
-        // halt($items['nav']['data']);
-        // halt($items);      
+        // halt($items['news']);
+        if (isset($items['activity'])) {
+            $activity = $items['activity']['data'];
+            $activity_ids = array_column($activity, 'id', null);
+            $act_model = new Activity;
+            $_data = $act_model->with(['cover'])->whereIn('id', $activity_ids)->select()->toArray();
+            $items['activity']['data'] = $_data;
+        }
         return $items;
     }
+
+
+    // 获取首页所有模块 category_id
+   
+
+
+
+
+
+
+
+
 
 
 

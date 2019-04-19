@@ -65,6 +65,11 @@ return [
             ],
         ]
     ],
+    'activity'=>[
+        'name' => '活动管理',
+        'icon' => 'icon-order',
+        'index' => 'activity/index',
+    ],
     'user' => [
         'name' => '会员管理',
         'icon' => 'icon-user',
@@ -172,48 +177,5 @@ return [
                 ]
             ]
         ],
-    ],
-    // 'article_en' => [
-    //     'name' => 'ArticleManage',
-    //     'icon' => 'icon-order',
-    //     'index' => 'article_en/parent',
-    //     'submenu' => [
-    //         [
-    //             'name' => '分类管理',
-    //             'index' => 'article_en/parent',
-    //         ],
-    //         [
-    //             'name' => '文章管理',
-    //             'index' => 'article_en/index',
-    //         ]
-    //     ]
-    // ],
-    // 'news_en' => [
-    //     'name' => 'NewsManage',
-    //     'icon' => 'icon-order',
-    //     'index' => 'news_en/index',
-    // ],
-    // 'project_en' => [
-    //     'name' => 'ProjectManage',
-    //     'icon' => 'icon-order',
-    //     'index' => 'project_en/index',
-    // ],
-    // 'wxapp_en' => [
-    //     'name' => 'IndexPage',
-    //     'icon' => 'icon-wxapp',
-    //     'color' => '#36b313',
-    //     'index' => 'wxapp_en.page/home',
-    //     'submenu' => [
-    //         [
-    //             'name' => 'Index',
-    //             'active' => true,
-    //             'submenu' => [
-    //                 [
-    //                     'name' => 'Design',
-    //                     'index' => 'wxapp_en.page/home'
-    //                 ],
-    //             ]
-    //         ],
-    //     ],
-    // ],
+    ],    
 ];

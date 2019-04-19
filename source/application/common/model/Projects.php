@@ -17,6 +17,11 @@ class Projects extends BaseModel
         return compact('server_cate', 'eng_cate');
     }
 
+    public function cover()
+    {
+        return $this->hasOne('UploadFile', 'file_id', 'cover_id');
+    }
+
     protected static $server_cate = [
         '1' => '投资咨询',
         '2' => '招标代理',
@@ -85,5 +90,10 @@ class Projects extends BaseModel
             $_arr[] = self::$eng_cate[$value];
         }
         return $_arr;
+    }
+
+    public static function detail($id)
+    {
+        return self::get($id);
     }
 }

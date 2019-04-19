@@ -31,6 +31,7 @@
                                     <nav class="special" data-type="banner"> 图片轮播</nav>
                                     <nav class="special" data-type="company"> 友情链接</nav>
                                     <nav class="special" data-type="concat"> 联系我们</nav>
+                                    <nav class="special" data-type="activity"> 活动模块</nav>
                                 </div>
                             </div>
                         </div>
