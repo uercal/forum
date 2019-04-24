@@ -13,14 +13,31 @@ class User extends BaseModel
 {
     protected $name = 'users';
 
-
+    protected $append = ['show_name', 'avatar'];
 
     public function avatar()
     {
         return $this->hasOne('UploadApiFile', 'file_id', 'avatar');
     }
 
+    public function getShowNameAttr($value, $data)
+    {
+        $name = $data['user_name'];
+        switch ($data['role']) {
+            case 1:
+                # code...
+                break;
 
+            case 2:
+                # code...
+                break;
+
+            case 3:
+                # code...
+                break;
+        }
+        return $name;
+    }
 
 
     public function getRoleAttr($valu, $data)

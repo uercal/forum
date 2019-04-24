@@ -69,6 +69,59 @@
         </div>
 
 
+
+
+    <?php elseif ($key_word == 'job') : ?>
+        <div class="list-body">
+            <div class="list-head">
+                <div class="list-head-title">
+                    <div class="list-head-before"></div>
+                    <strong><?= $model['list']['name'] ?></strong>
+                </div>
+            </div>
+
+            <?php foreach ($data as $cate) : ?>
+                <div class="job-list-item">
+                    <div class="job-list-head">
+                        <p><?= $cate['name'] ?></p>
+                        <?php if (!empty($cate['content'])) : ?>
+                            <small onclick="job_sort('<?= $cate['content'] ?>')">(点击查看职位详情))</small>
+                        <?php endif; ?>
+                    </div>
+                    <div class="job-list-info">
+                        <?php foreach ($cate['data'] as $member) : ?>
+                            <div class="job-list-info-item" onclick="job_sort('<?= $member['content'] ?>')">
+                                <img src="<?= $member['cover']['file_path'] ?>" alt="">
+                                <a><?= $member['title'] ?></a>
+                            </div>                            
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+
+
+        </div>
+        <style>
+        .yourclass>.layui-layer-content{
+            padding: 30px;
+        }
+        </style>
+        <script>
+            function job_sort(content) {
+                //页面层-自定义
+                layer.open({
+                    type: 1,
+                    title: '详情',
+                    area: ['55%', '70%'],
+                    closeBtn: 0,
+                    shadeClose: true,
+                    skin: 'yourclass',
+                    content: content
+                });
+
+            }
+        </script>
     <?php elseif ($key_word == 'mag') : ?>
 
         <div class="list-body">

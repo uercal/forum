@@ -11,7 +11,7 @@ use think\Request;
  */
 class Activity extends ActivityModel
 {
-    public function getDataList()
+    public function getDataList($number = null)
     {
         // 
         $request = Request::instance();
@@ -26,8 +26,9 @@ class Activity extends ActivityModel
         if (input('title')) {
             $map['title'] = ['like', '%' . input('title') . '%'];
         }
-        $list = $this->where($map)->order($order)
-            ->paginate(9, false, ['query' => $request->request()]);
+        $_number = $number ? $number : 9;
+        $list = $this->with(['cover'])->where($map)->order($order)
+            ->paginate($_number, false, ['query' => $request->request()]);
 
 
         return compact('list');

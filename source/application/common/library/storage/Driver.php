@@ -30,9 +30,10 @@ class Driver
     /**
      * 执行文件上传
      */
-    public function upload()
+    public function upload($api = null)
     {
-        return $this->engine->upload('image');
+        if ($api) return $this->engine->upload($api);
+        return $this->engine->upload();
     }
 
 

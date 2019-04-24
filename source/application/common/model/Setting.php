@@ -40,9 +40,9 @@ class Setting extends BaseModel
      * @param $wxapp_id
      * @return array
      */
-    public static function getItem($key, $wxapp_id = null)
-    {
-        $data = self::getAll($wxapp_id);
+    public static function getItem($key, $wxapp_id = '10001')
+    {                
+        $data = self::getAll($wxapp_id);        
         return isset($data[$key]) ? $data[$key]['values'] : [];
     }
 
@@ -133,5 +133,4 @@ class Setting extends BaseModel
             ],
         ];
     }
-
 }

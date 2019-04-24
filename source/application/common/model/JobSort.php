@@ -22,28 +22,30 @@ class JobSort extends BaseModel
         $model = new ListDetail;
         $data = $model->field(['job'])->where(['list_id' => $list_id])->select()->toArray();
         $data = array_column($data, null, 'job');
-        foreach ($data as $key => $value) {
-            $data[$key]['value'] = 100;
-        }
-        $origin = self::where('list_id', $list_id)->value('data');
-
-        if (!$origin) { } else {
-            $origin = json_decode($origin, true);
-            foreach ($data as $key => $value) {
-                $data[$key]['value'] = $origin[$key];
-            }
-        }
-
-        // rebuild        
         $_data = [];
         foreach ($data as $key => $value) {
             $_data[] = [
                 'name' => $key,
-                'value' => $value['value']
+                'value' => 100,
+                'content' => ''
             ];
         }
+        $_data = array_column($_data, null, 'name');
 
-        usort($data, function ($a, $b) {
+        $origin = self::where('list_id', $list_id)->value('data');
+
+        if (!$origin) { } else {
+            $origin = json_decode($origin, true);
+            $origin = array_column($origin, null, 'name');
+            foreach ($_data as $key => $value) {
+                if (isset($origin[$key])) {
+                    $_data[$key]['value'] = $origin[$key]['value'];
+                    $_data[$key]['content'] = $origin[$key]['content'];
+                }
+            }
+        }
+        
+        usort($_data, function ($a, $b) {
             return $a['value'] > $b['value'];
         });
 
@@ -55,7 +57,7 @@ class JobSort extends BaseModel
     {
         Db::startTrans();
         try {
-            $data = json_encode(array_column($data, 'value', 'name'));
+            $data = json_encode($data);
             $_this = $this->get($list_id);
             if ($_this) {
                 $_this->save(['data' => $data]);

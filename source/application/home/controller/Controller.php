@@ -76,6 +76,7 @@ class Controller extends \think\Controller
             'foot_company' => $this->foot_company(),
             'is_moblie' => Request::instance()->isMobile(),
             'index_data' => $this->getIndexData(),
+            'login_user' => session('forum_user') ? session('forum_user')['user'] : null
             // 'index_jump' => $this->getIndexJump(),
             // 'store' => $this->store,                       // 商家登录信息
             // 'setting' => Setting::getAll() ?: null,        // 当前商城设置
@@ -156,7 +157,7 @@ class Controller extends \think\Controller
 
 
     // 获取首页所有模块 category_id
-   
+
 
 
 

@@ -6,18 +6,19 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <title>企业网站模板</title>
+    <title>个人中心</title>
     <link rel="stylesheet" href="assets/home/css/index.css" />
     <!-- <link rel="stylesheet" href="assets/home/css/amazeui.css" /> -->
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
     <link rel="stylesheet" href="assets/home/css/forum-list.css" />
     <link rel="stylesheet" href="assets/home/css/forum-detail.css" />
-    <link rel="stylesheet" href="assets/home/css/zqh.css" />
-    <link rel="stylesheet" href="assets/home/css/zqh-m.css" />
+    <link rel="stylesheet" href="assets/home/css/forum-person.css" />
     <link rel="stylesheet" href="assets/home/css/amazeui.css" />
     <!-- 引入样式 -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/head/cropper.min.css">
+    <link rel="stylesheet" href="assets/head/main.css">
 </head>
 
 <body>
@@ -81,14 +82,75 @@
             </div>
         </nav>
     </header>
-    <!--  -->
-    <section class="slider" style="display:<?= isset($model) ? 'none;' : 'block;' ?>">
-        <div class="am-slider am-slider-default" data-am-flexslider="{animation: 'slider',slideshowSpeed: 2000,controlNav: false,directionNav: false}" id="demo-slider-0">
-            <ul class="am-slides">
-                <?php foreach ($index_data['banner']['data'] as $banner) : ?>
-                    <li><img src="<?= $banner['imgUrl'] ?>" /></li>
-                <?php endforeach; ?>
-            </ul>
+
+    <section style="display:flex;align-items:center;justify-content:center;flex-direction:column;background:#FAFAFA;">
+        <div class="common-nav">
+            <div class="nav-info">
+                <a href="/"><span class="am-icon-home"></span></a>
+                <p class="arrow"></p>
+                <p class="arrow">个人中心</p>
+                <p class="current"><?= $login_user['role'] ?></p>
+            </div>
         </div>
-        <div class="slider-cover"></div>
-    </section>
+
+
+        <!--  -->
+        <div class="person-body">
+            <div class="person-left">
+                <div class="person-user-info">
+                    <div class="userinfo">
+                        <div class="userinfo-img" style="cursor:pointer;">
+                            <img id="person" src="<?= $login_user['avatar'] ? $login_user['avatar'] : 'assets/home/images/about/003.jpg' ?>" alt="">
+                        </div>
+                    </div>
+
+                    <p style="font-size:20px;font-weight:600;margin-top:8px;"><?= $login_user['show_name'] ?></p>
+                    <p style="color:#666666;font-size:12px;padding-bottom:16px;"><?= $login_user['role'] ?></p>
+                    <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
+
+                    <div class="update-user">
+                        <p>升级会员</p>
+                    </div>
+                    <div class="last-login">
+                        <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?= $login_user['last_login'] ?></p>
+                        <p style="font-size:14px;color:#9b9b9b;">退出</p>
+                    </div>
+                </div>
+
+
+                <div class="person-user-actions">
+                    <div class="active">
+                        <p style="position:relative;">活动报名<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i></p>
+                    </div>
+                    <div>
+                        <p>系统设置</p>
+                    </div>
+                </div>
+
+                <div class="person-helpCenter">
+                    <div class="p-help-head">
+                        <div>
+                            <p>帮助中心</p>
+                        </div>
+                        <p>查看更多 <i class="am-icon-angle-double-right"></i> </p>
+                    </div>
+                    <div class="p-help-body">
+                        <li>
+                            <a href="">什么是单位会员什么是单位会员什么是单位什么是单位会员什么是单位会员什么是单位</a>
+                        </li>
+                        <li>
+                            <a href="">什么是单位会员什么是单位会员什么是单位什么是单位会员什么是单位会员什么是单位</a>
+                        </li>
+                        <li>
+                            <a href="">什么是单位会员什么是单位会员什么是单位什么是单位会员什么是单位会员什么是单位</a>
+                        </li>
+                        <li>
+                            <a href="">什么是单位会员什么是单位会员什么是单位什么是单位会员什么是单位会员什么是单位</a>
+                        </li>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="person-right">

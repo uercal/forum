@@ -1,4 +1,8 @@
 </div>
+</div>
+
+
+</section>
 <!--===========layout-footer================-->
 <div class="layout-footer">
     <div class="footer">
@@ -113,10 +117,69 @@
     </div>
     <div class="footer-foot">Copyright © 2013-2019 备案号：闽ICP备15012807号-1</div>
 </div>
-<script src="assets/home/js/jquery-1.8.2.min.js"></script>
-<script src="assets/home/js/banner_move.js"></script>
-<script src="assets/home/js/jq_scroll.js"></script>
+
+<!--  -->
+<div class="container" id="crop-avatar">   
+    <!-- Cropping modal -->
+    <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="avatar-form" action="<?= url('/changeHead') ?>" enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="avatar-body">
+
+                            <!-- Upload image and data -->
+                            <div class="avatar-upload">
+                                <input type="hidden" class="avatar-src" name="avatar_src">
+                                <input type="hidden" class="avatar-data" name="avatar_data">
+                                <label for="avatarInput">Local upload</label>
+                                <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
+                            </div>
+
+                            <!-- Crop and preview -->
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="avatar-wrapper"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="avatar-preview preview-lg"></div>
+                                    <div class="avatar-preview preview-md"></div>
+                                    <div class="avatar-preview preview-sm"></div>
+                                </div>
+                            </div>
+
+                            <div class="row avatar-btns">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary btn-block avatar-save">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div> -->
+                </form>
+            </div>
+        </div>
+    </div><!-- /.modal -->
+
+    <!-- Loading state -->
+    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+</div>
+
+
+
+<!--  -->
+<!-- <script src="assets/home/js/jquery-1.8.2.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="assets/home/js/amazeui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="assets/head/cropper.min.js"></script>
+<script src="assets/head/main.js"></script>
 </body>
 <script>
     function quit() {
@@ -329,7 +392,7 @@
                 maxmin: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
-                area: ['500px','400px'],
+                area: ['500px', '400px'],
                 content: 'login_index', //弹框显示的url
                 success: function(layero, index) {
 
@@ -352,7 +415,7 @@
                 maxmin: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
-                area: ['500px','450px'],
+                area: ['500px', '450px'],
                 content: 'register_index', //弹框显示的url
                 success: function(layero, index) {
 
@@ -365,7 +428,7 @@
                 }
             });
         });
-    
+
         function login_success(msg) {
             layer.msg(msg);
             setTimeout(function() {

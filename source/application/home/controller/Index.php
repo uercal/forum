@@ -12,6 +12,7 @@ use app\home\model\Projects;
 use app\common\model\UserNewsOption;
 use app\home\model\User;
 use app\home\model\Activity;
+use app\home\model\Crop;
 
 /**
  * 后台首页
@@ -42,10 +43,62 @@ class Index extends Controller
 
     public function index()
     {
-        // 新闻列表        
+        // session('forum_user') ? halt(session('forum_user')) : '';
+        //         
         return $this->fetch('index/index');
     }
 
+
+    public function login_index()
+    {
+        if (!$this->request->isAjax()) {
+
+            // 取消模板
+            $this->view->engine->layout(false);
+            // 
+            return $this->fetch();
+        } else {
+            if (!captcha_check(input('code'))) {
+                return $this->renderJson(0, '验证码输入错误');
+            };
+            $data = input()['user'];
+            $user = new User;
+            if ($user->login($data)) {
+                return $this->renderJson(1, '登录成功');
+            } else {
+                return $this->renderJson(0, $user->error);
+            }
+        }
+    }
+
+
+    public function register_index()
+    {
+        if (!$this->request->isAjax()) {
+            // 取消模板
+            $this->view->engine->layout(false);
+            // 
+            return $this->fetch();
+        } else {
+            if (!captcha_check(input('code'))) {
+                return $this->renderJson(0, '验证码输入错误');
+            };
+            $data = input()['user'];
+            $user = new User;
+            if ($user->register($data)) {
+                $user->accessLogin($data);
+                return $this->renderJson(1, '注册成功');
+            } else {
+                return $this->renderJson(0, $user->error);
+            }
+        }
+    }
+
+
+    public function quitUser()
+    {
+        session('forum_user', null);
+    }
 
 
     // 页面跳转
@@ -151,15 +204,6 @@ class Index extends Controller
     }
 
 
-    // public function news()
-    // {
-    //     $id = input('id');
-    //     $news = News::detail($id);
-    //     // increase        
-    //     !empty($news) ? $news->incRead() : '';
-    //     // halt($detail->toArray());
-    //     return $this->fetch('news', compact('news'));
-    // }
 
 
     public function projectDetail($id, $category_id)
@@ -177,5 +221,38 @@ class Index extends Controller
         // halt($detail['avatar']);
         //         
         return $this->fetch('user_detail', compact('detail', 'model'));
+    }
+
+
+
+
+
+    /**
+     * 
+     */
+    public function personCenter()
+    {
+        if (session('forum_user')) {
+            $this->view->engine->layout('p_layouts/layout');
+            // 活动推荐
+            $activity = new Activity;
+            $act_list = $activity->getDataList(4)['list'];
+            // 
+            return $this->fetch('/person/index', compact('act_list'));
+        } else {
+            return $this->redirect('/index');
+        }
+    }
+
+
+    public function changeHead()
+    {
+        $crop = new Crop;
+        $res = $crop->changeHead();
+        if ($res['state'] == 200) {
+            // 刷新session
+            User::freshUserSession();
+        }
+        return $res;
     }
 }

@@ -25,7 +25,7 @@ class UploadApiFile extends BaseModel
      */
     public function getFilePathAttr($value, $data)
     {
-        return self::$base_url . 'uploads/' . $data['file_name'];
+        return self::$base_url . 'uploads/api/' . $data['file_name'];
     }
 
     /**
