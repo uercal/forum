@@ -96,6 +96,10 @@
                                             <input type="radio" name="category[mode]" value="activity" data-am-ucheck <?= $model['mode'] == 'activity' ? 'checked' : '' ?>>
                                             活动列表
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="recruit" data-am-ucheck <?= $model['mode'] == 'recruit' ? 'checked' : '' ?>>
+                                            招聘列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +111,7 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
                                     <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
-                                        <select name="category[list_mode_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
+                                        <select name="category[list_mode_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="_list_select">
                                             <option value=""></option>
                                             <?php if (isset($list_mode_list)) : foreach ($list_mode_list as $first) : ?>
                                                     <option value="<?= $first['id'] ?>" <?= $model['list_mode_id'] == $first['id'] ? 'selected' : '' ?>>
@@ -213,6 +217,24 @@
 
                             </div>
 
+
+                            <div class="recruit_mode" style="display:none;">
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
+                                    <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
+                                        <select name="category[_mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
+                                            <option value=""></option>
+                                            <?php foreach ([
+                                                'admin' => '协会招聘',
+                                                'user' => '单位招聘'
+                                            ] as $key => $first) : ?>
+                                                <option value="<?= $key ?>" <?= $model['mode_data'] == $key ? 'selected' : '' ?>>
+                                                    <?= $first ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="users_mode" style="display:none;">
 
@@ -335,6 +357,7 @@
             $('.list_mode').hide();
             $('.detail_mode').hide();
             $('.users_mode').hide();
+            $('.recruit_mode').hide();
         } else {
             $('#is_show').show();
             // 模式
@@ -342,20 +365,29 @@
                 $('.list_mode').show();
                 $('.detail_mode').hide();
                 $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 // 
             } else if (mode == 'users') {
                 $('.users_mode').show();
                 $('.list_mode').hide();
                 $('.detail_mode').hide();
+                $('.recruit_mode').hide();
                 // 
             } else if (mode == 'activity') {
                 $('.users_mode').hide();
                 $('.list_mode').hide();
                 $('.detail_mode').hide();
+                $('.recruit_mode').hide();
                 // 
+            } else if (mode == 'recruit') {
+                $('.list_mode').hide();
+                $('.users_mode').hide();
+                $('.recruit_mode').show();
+                $('.detail_mode').hide();
             } else if (mode == 'detail') {
                 $('.list_mode').hide();
                 $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 $('.detail_mode').show();
                 // 
                 if (detail_mode_id == 1) {
@@ -388,6 +420,7 @@
                 $('.list_mode').hide();
                 $('.users_mode').hide();
                 $('.detail_mode').hide();
+                $('.recruit_mode').hide();
             } else {
                 $('#is_show').show();
             }
@@ -400,22 +433,32 @@
             var value = e.currentTarget.value;
             if (value == 'list') {
                 $('.list_mode').show();
-                $('.users_mode').hide();
                 $('.detail_mode').hide();
+                $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 console.log(value);
             } else if (value == 'activity') {
                 $('.list_mode').hide();
+                $('.detail_mode').hide();
                 $('.users_mode').hide();
-                $('.detail_mode').hide();
-            } else if (value == 'users') {
-                $('.list_mode').hide();
-                $('.users_mode').show();
-                $('.detail_mode').hide();
+                $('.recruit_mode').hide();
+                console.log(value);
             } else if (value == 'detail') {
                 $('.list_mode').hide();
-                $('.users_mode').hide();
                 $('.detail_mode').show();
+                $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 console.log(value);
+            } else if (value == 'users') {
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                $('.users_mode').show();
+                $('.recruit_mode').hide();
+            } else if (value == 'recruit') {
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                $('.users_mode').hide();
+                $('.recruit_mode').show();
             }
         });
 

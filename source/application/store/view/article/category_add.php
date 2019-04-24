@@ -84,6 +84,10 @@
                                             <input type="radio" name="category[mode]" value="activity" data-am-ucheck>
                                             活动列表
                                         </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="category[mode]" value="recruit" data-am-ucheck>
+                                            招聘列表
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +118,25 @@
                                     </div>
                                 </div>
 
+
+                            </div>
+
+                            <div class="recruit_mode" style="display:none;">
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
+                                    <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
+                                        <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
+                                            <?php foreach ([
+                                                'admin' => '协会招聘',
+                                                'user' => '单位招聘'
+                                            ] as $key => $first) : ?>
+                                                <option value="<?= $key ?>">
+                                                    <?= $first ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -154,7 +177,7 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表选择 </label>
                                     <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
-                                        <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="list_select">
+                                        <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="_list_select">
                                             <option value=""></option>
                                             <?php foreach ([
                                                 'normal' => '普通会员',
@@ -260,6 +283,7 @@
                 $('.list_mode').hide();
                 $('.users_mode').hide();
                 $('.detail_mode').hide();
+                $('.recruit_mode').hide();
             } else {
                 $('#is_show').show();
             }
@@ -273,21 +297,30 @@
                 $('.list_mode').show();
                 $('.detail_mode').hide();
                 $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 console.log(value);
             } else if (value == 'activity') {
                 $('.list_mode').hide();
                 $('.detail_mode').hide();
                 $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 console.log(value);
             } else if (value == 'detail') {
                 $('.list_mode').hide();
                 $('.detail_mode').show();
                 $('.users_mode').hide();
+                $('.recruit_mode').hide();
                 console.log(value);
             } else if (value == 'users') {
                 $('.list_mode').hide();
                 $('.detail_mode').hide();
                 $('.users_mode').show();
+                $('.recruit_mode').hide();
+            } else if (value == 'recruit') {
+                $('.list_mode').hide();
+                $('.detail_mode').hide();
+                $('.users_mode').hide();
+                $('.recruit_mode').show();
             }
         });
 

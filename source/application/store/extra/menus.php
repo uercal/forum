@@ -65,10 +65,15 @@ return [
             ],
         ]
     ],
-    'activity'=>[
+    'activity' => [
         'name' => '活动管理',
         'icon' => 'icon-order',
         'index' => 'activity/index',
+    ],
+    'recruit' => [
+        'name' => '招聘管理',
+        'icon' => 'icon-order',
+        'index' => 'recruit/index',
     ],
     'user' => [
         'name' => '会员管理',
@@ -177,5 +182,5 @@ return [
                 ]
             ]
         ],
-    ],    
+    ],
 ];

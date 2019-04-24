@@ -45,7 +45,7 @@ class Article extends Controller
 
     public function category_add()
     {
-        $model = new CategoryModel;
+        $model = new CategoryModel;        
         if (!$this->request->isAjax()) {
             // 获取所有地区
             $list = $model->getCacheTree();
@@ -55,7 +55,7 @@ class Article extends Controller
             $detail_type_list = DetailMode::getList();
             return $this->fetch('category_add', compact('list', 'list_mode_list', 'detail_type_list'));
         }
-        // 新增记录
+        // 新增记录        
         if ($model->add($this->postData('category'))) {
             return $this->renderSuccess('添加成功', url('article/category'));
         }
@@ -82,7 +82,7 @@ class Article extends Controller
             $detail_type_list = DetailMode::getList();
 
             return $this->fetch('category_edit', compact('model', 'list', 'list_mode_list', 'detail_type_list'));
-        }
+        }        
         // 更新记录
         if ($model->edit($this->postData('category'))) {
             return $this->renderSuccess('更新成功', url('article/category'));

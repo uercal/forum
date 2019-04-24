@@ -535,7 +535,7 @@
 }
 
 
-.job-list-head>small:hover{
+.job-list-head>small:hover {
     color: #44874B;
     cursor: pointer;
 }
@@ -578,4 +578,44 @@
 .job-list-info-item>a {
     margin-top: 10px;
     font-size: 16px;
+}
+
+/*  */
+.recruit-item {
+    width: 62.5%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #DEE0DC;
+}
+
+.recruit-item:hover {
+    background: #E5EBE0;
+    cursor: pointer;
+}
+
+
+.recruit-r {
+    width: 200px;
+    height: 40px;
+    border-radius: 6px;
+    background: #44874B;
+    color: #fff;
+    font-size: 16px;
+}
+
+.flex-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-c>p {
+    margin: 5px;
+}
+
+.flex-col {
+    flex-direction: column;
 }

@@ -21,6 +21,7 @@ class Category extends CategoryModel
      */
     public function add($data)
     {
+        !empty($data['_mode_data']) ? $data['mode_data'] = $data['_mode_data'] : '';
         $data['wxapp_id'] = self::$wxapp_id;
         //        if (!empty($data['image'])) {
         //            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
@@ -36,6 +37,8 @@ class Category extends CategoryModel
      */
     public function edit($data)
     {
+        // 
+        !empty($data['_mode_data']) ? $data['mode_data'] = $data['_mode_data'] : '';
         // 开启事务
         Db::startTrans();
         try {

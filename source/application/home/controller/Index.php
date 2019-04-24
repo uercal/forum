@@ -13,6 +13,7 @@ use app\common\model\UserNewsOption;
 use app\home\model\User;
 use app\home\model\Activity;
 use app\home\model\Crop;
+use app\home\model\Recruit;
 
 /**
  * 后台首页
@@ -141,6 +142,11 @@ class Index extends Controller
                 $activity = new Activity;
                 $data = $activity->getDataList();
 
+                break;
+
+            case 'recruit':
+                $recruit_model = new Recruit;
+                $data = $recruit_model->getDataList($model['mode_data']);                
                 break;
 
             case 'detail':
