@@ -68,7 +68,7 @@
                             <div>
                                 <p>用户名：<?= $login_user['user_name'] ?></p>
 
-                                <p>角色：<?= $login_user['role'] ?></p>
+                                <p>角色：<?= $login_user['role_name'] ?></p>
                             </div>
                         </div>
                         <div class="u-action">
@@ -89,7 +89,7 @@
                 <a href="/"><span class="am-icon-home"></span></a>
                 <p class="arrow"></p>
                 <p class="arrow">个人中心</p>
-                <p class="current"><?= $login_user['role'] ?></p>
+                <p class="current"><?= $login_user['role_name'] ?></p>
             </div>
         </div>
 
@@ -105,7 +105,7 @@
                     </div>
 
                     <p style="font-size:20px;font-weight:600;margin-top:8px;"><?= $login_user['show_name'] ?></p>
-                    <p style="color:#666666;font-size:12px;padding-bottom:16px;"><?= $login_user['role'] ?></p>
+                    <p style="color:#666666;font-size:12px;padding-bottom:16px;"><?= $login_user['role_name'] ?></p>
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
                     <div class="update-user">

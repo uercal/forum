@@ -2,32 +2,31 @@
 <div class="person-my-act">
     <div class="person-my-act-head">
         <div>
-            <p>我的活动</p>
+            <p>我的报名活动</p>
         </div>
-        <p>查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <p style="cursor:pointer;">查看更多 <i class="am-icon-angle-double-right"></i> </p>
     </div>
 
     <div class="person-my-act-body">
-        <div class="my-act-item">
-            <img src="assets/home/images/about/001.jpg" alt="">
-            <div>
-                <strong>工程建设行业协会工程第五次研讨会第五次研讨会第五次研会工程建设行业协会工程第五次研讨会第五次研讨会第五次研会</strong>
-                <p>活动时间：</p>
-                <p>活动地点：</p>
-                <p>活动人数：</p>
-                <p>活动地址：</p>
+        <?php if (!empty($data['my_act'])) : foreach ($data['my_act'] as $item) : ?>
+                <div class="my-act-item">
+                    <img src="<?= $item['activity']['cover']['file_path'] ?>" alt="">
+                    <div>
+                        <strong><?= $item['activity']['title'] ?></strong>
+                        <p>报名时间：<?= date('Y-m-d H:i:s', $item['activity']['sign_begin']) . '-' . date('Y-m-d H:i:s', $item['activity']['sign_end']) ?></p>
+                        <p>活动时间：<?= date('Y-m-d H:i:s', $item['activity']['active_begin']) . '-' . date('Y-m-d H:i:s', $item['activity']['active_end']) ?></p>
+                        <p>活动地点：<?= $item['activity']['address'] ?></p>
+                        <p>活动人数：<?= $item['activity']['member_count'] . '人' ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <div class="my-act-item" style="background-color:#fff;">                
+                <div style="width:100%;display:flex;align-items:center;jusity-content:center;">
+                    <strong style="font-size:48px;color:#e8e8e8;">暂无报名活动</strong>                    
+                </div>
             </div>
-        </div>
-        <div class="my-act-item">
-            <img src="assets/home/images/about/001.jpg" alt="">
-            <div>
-                <strong>工程建设行业协会工程第五次研讨会第五次研讨会第五次研会工程建设行业协会工程第五次研讨会第五次研讨会第五次研会</strong>
-                <p>活动时间：</p>
-                <p>活动地点：</p>
-                <p>活动人数：</p>
-                <p>活动地址：</p>
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
 
 </div>
@@ -38,7 +37,7 @@
         <div>
             <p>活动推荐</p>
         </div>
-        <p>查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <p style="cursor:pointer;">查看更多 <i class="am-icon-angle-double-right"></i> </p>
     </div>
 
     <div class="person-re-act">

@@ -146,7 +146,7 @@ class Index extends Controller
 
             case 'recruit':
                 $recruit_model = new Recruit;
-                $data = $recruit_model->getDataList($model['mode_data']);                
+                $data = $recruit_model->getDataList($model['mode_data']);
                 break;
 
             case 'detail':
@@ -193,7 +193,13 @@ class Index extends Controller
         return $this->fetch('activity_detail', compact('detail', 'model'));
     }
 
-
+    public function recruit($id, $category_id)
+    {
+        $Category = new Category;
+        $model = $Category->where('category_id', $category_id)->find();
+        $detail =  Recruit::detail($id);
+        return $this->fetch('recruit_detail', compact('detail', 'model'));
+    }
 
 
 
@@ -240,11 +246,14 @@ class Index extends Controller
     {
         if (session('forum_user')) {
             $this->view->engine->layout('p_layouts/layout');
+            // 获取角色首页显示的内容
+            $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);            
+            $data = $user->getActLog();
             // 活动推荐
             $activity = new Activity;
             $act_list = $activity->getDataList(4)['list'];
             // 
-            return $this->fetch('/person/index', compact('act_list'));
+            return $this->fetch('/person/index', compact('act_list', 'data'));
         } else {
             return $this->redirect('/index');
         }

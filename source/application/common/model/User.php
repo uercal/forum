@@ -13,7 +13,21 @@ class User extends BaseModel
 {
     protected $name = 'users';
 
-    protected $append = ['show_name', 'avatar'];
+    protected $append = ['show_name', 'avatar', 'role_name'];
+    protected $role_attr = [
+        0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员', 4 => '供应商'
+    ];
+
+    // 个人关联
+    public function person(){
+
+    }
+
+
+    // 单位关联
+    public function company(){
+        
+    }
 
     public function avatar()
     {
@@ -40,9 +54,15 @@ class User extends BaseModel
     }
 
 
-    public function getRoleAttr($valu, $data)
+    public function getRoleNameAttr($valu, $data)
     {
-        return [0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员'][$data['role']];
+        $role = explode(',', $data['role']);
+        $role_name = '';
+        foreach ($role as $key => $value) {
+            $role[$key] = $this->role_attr[$value];
+        }
+        $role = implode(',', $role);
+        return $role;
     }
 
     /**

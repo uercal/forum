@@ -67,7 +67,7 @@
                             <div>
                                 <p>用户名：<?= $login_user['user_name'] ?></p>
 
-                                <p>角色：<?= $login_user['role'] ?></p>
+                                <p>角色：<?= $login_user['role_name'] ?></p>
                             </div>
                         </div>
                         <div class="u-action">

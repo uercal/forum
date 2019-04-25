@@ -5,6 +5,7 @@ namespace app\home\model;
 use app\common\model\User as UserModel;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
+use app\home\model\ActivityUserLog;
 use think\Session;
 use think\Request;
 use think\Db;
@@ -90,7 +91,7 @@ class User extends UserModel
             'user' => [
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
-                'role' => $user['role'],
+                'role_name' => $user['role_name'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -156,7 +157,7 @@ class User extends UserModel
             'user' => [
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
-                'role' => $user['role'],
+                'role_name' => $user['role_name'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -175,7 +176,7 @@ class User extends UserModel
             'user' => [
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
-                'role' => $user['role'],
+                'role_name' => $user['role_name'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -191,5 +192,27 @@ class User extends UserModel
         $this->where('user_id', $user_id)->update([
             'last_login' => time()
         ]);
+    }
+
+
+
+
+
+
+
+    // 
+    public function getActLog()
+    {
+        $role = $this->role;
+        $role = explode(',', $role);
+        // 
+        $act_log = new ActivityUserLog;
+        $my_act = $act_log->getListByUser($this->user_id);
+
+
+
+
+
+        return compact('my_act');
     }
 }

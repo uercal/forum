@@ -271,7 +271,10 @@
         window.location.href = url;
     }
 
-
+    function recruit(id, category_id) {
+        var url = "<?= url('/recruit') ?>&id=" + id + "&category_id=" + category_id;
+        window.location.href = url;
+    }
 
     function project(id) {
         var url = "<?= url('/project') ?>/id/" + id;
@@ -329,7 +332,7 @@
                 maxmin: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
-                area: ['500px','400px'],
+                area: ['500px', '400px'],
                 content: 'login_index', //弹框显示的url
                 success: function(layero, index) {
 
@@ -352,7 +355,7 @@
                 maxmin: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
-                area: ['500px','450px'],
+                area: ['500px', '450px'],
                 content: 'register_index', //弹框显示的url
                 success: function(layero, index) {
 
@@ -365,7 +368,7 @@
                 }
             });
         });
-    
+
         function login_success(msg) {
             layer.msg(msg);
             setTimeout(function() {

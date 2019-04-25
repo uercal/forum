@@ -42,7 +42,7 @@
 
         <?php foreach ($data['list'] as $item) : ?>
 
-            <div class="recruit-item" onclick="recruit('<?= $item['id'] ?>')">
+            <div class="recruit-item" onclick="recruit('<?= $item['id'] ?>','<?= $model['category_id'] ?>')">
                 <div class="recruit-l flex-c flex-col">
                     <strong><?= $item['job_address'] . ' | ' . $item['job_name'] ?></strong>
                     <p><?= explode(',', $item['job_price'])[0] . '-' . explode(',', $item['job_price'])[1] . '元/月' ?></p>

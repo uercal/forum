@@ -23,7 +23,7 @@
                                 <tr>
                                     <td class="am-text-middle"><?= $item['user_id'] ?></td>
                                     <td class="am-text-middle"><?= $item['user_name'] ?></td>
-                                    <td class="am-text-middle"><?= $item['role'] ?></td>                                                                        
+                                    <td class="am-text-middle"><?= $item['role_name'] ?></td>                                                                        
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td>
                                         <div class="tpl-table-black-operation">
