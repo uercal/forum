@@ -204,98 +204,7 @@
         window.location.href = url;
     }
 
-    <?php if (isset($model)) : ?>
-
-        function search() {
-            var title = $('input[name="title"]').val();
-            console.log(title);
-            if (!title) return false;
-            $form = $('#pro_list').serialize();
-            filter_jump($form);
-        }
-
-        function list_sort(sort) {
-            sort = sort == 'asc' ? 'desc' : 'asc';
-            $('input[name="sort"]').val(sort);
-            $form = $('#pro_list').serialize();
-            filter_jump($form);
-        }
-
-        function pro_filter() {
-            if ($('.list-filter-order span').hasClass('am-icon-chevron-down')) {
-                $('.list-filter-order span').removeClass('am-icon-chevron-down');
-                $('.list-filter-order span').addClass('am-icon-chevron-up');
-            } else {
-                $('.list-filter-order span').removeClass('am-icon-chevron-up');
-                $('.list-filter-order span').addClass('am-icon-chevron-down');
-            }
-            $('.pro-filter-container').toggle(700);
-        }
-
-        function mag_detail(url) {
-            if ((url.indexOf("http://") == -1) && (url.indexOf("https://") == -1)) {
-                url = "http://" + url;
-            }
-            window.location.href = url;
-        }
-
-        // 
-        function server_cate(val) {
-            $('input[name="server_cate"]').val(val);
-            $form = $('#pro_list').serialize();
-            // 
-            filter_jump($form);
-        }
-
-        function eng_cate(val) {
-            $('input[name="eng_cate"]').val(val);
-            $form = $('#pro_list').serialize();
-            // 
-            filter_jump($form);
-        }
-
-
-        function assignment_money(val) {
-            $('input[name="assignment_money"]').val(val);
-            $form = $('#pro_list').serialize();
-            filter_jump($form);
-        }
-
-        function total_invest(val) {
-            $('input[name="total_invest"]').val(val);
-            $form = $('#pro_list').serialize();
-            filter_jump($form);
-        }
-
-        function assignment_date(val) {
-            $('input[name="assignment_date"]').val(val);
-            $form = $('#pro_list').serialize();
-            filter_jump($form);
-        }
-
-
-        // 
-        function pro_filter_rm(val) {
-            console.log(val);
-            $('input[name=' + val + ']').val(0);
-            $form = $('#pro_list').serialize();
-            //             
-            filter_jump($form);
-        }
-
-
-
-        function filter_jump($form) {
-            var html = "<?= url('/category', [
-                            'category_id' => $model['category_id']
-                        ]) ?>";
-
-            html = html + '&' + $form;
-            window.location.href = html;
-        }
-
-    <?php endif; ?>
-
+    
 
 
     function home() {
@@ -303,43 +212,6 @@
         window.location.href = url;
     }
 
-    // detail
-    function activity(id) {
-        window.location.href = "<?= url('/activity') ?>/id/" + id;
-    }
-
-    function userProject(id, category_id) {
-        window.location.href = "<?= url('/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
-    }
-
-    function userDetail(id, category_id) {
-        window.location.href = "<?= url('/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
-    }
-
-
-
-    // more
-    function newsMore(list_id) {
-        window.location.href = "<?= url('/listJumpCate') ?>/list_id/" + list_id;
-    }
-
-    function activityMore() {
-        window.location.href = "<?= url('/activityMore') ?>";
-    }
-
-
-
-    function news(id) {
-        var url = "<?= url('/news') ?>/id/" + id;
-        window.location.href = url;
-    }
-
-
-
-    function project(id) {
-        var url = "<?= url('/project') ?>/id/" + id;
-        window.location.href = url;
-    }
 
     function headerQuit() {
         var $nav = $('#menu-offcanvas');

@@ -19,15 +19,32 @@ class User extends BaseModel
     ];
 
     // 个人关联
-    public function person(){
-
+    public function person()
+    {
+        return $this->hasOne('UserPerson', 'user_id', 'user_id');
     }
 
 
     // 单位关联
-    public function company(){
-        
+    public function company()
+    {
+        return $this->hasOne('UserCompany', 'user_id', 'user_id');
     }
+
+
+    // 专家关联
+    public function expert()
+    { }
+
+
+    // 供应商关联
+
+
+
+
+
+
+
 
     public function avatar()
     {

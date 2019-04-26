@@ -119,11 +119,31 @@
 
 
                 <div class="person-user-actions">
-                    <div class="active">
+                    <div class="<?= request()->action() == 'personcenter' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personCenter') ?>';">
                         <p style="position:relative;">活动报名<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i></p>
                     </div>
-                    <div>
-                        <p>系统设置</p>
+                    <?php if (in_array(1, explode(',', $login_user['role']))) : ?>
+                        <!-- 个人会员 -->
+                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personPaper') ?>';">
+                            <p>论文管理</p>
+                        </div>
+                    <?php elseif (in_array(3, explode(',', $login_user['role']))) : ?>
+                        <!-- 单位会员 -->
+                        <div class="<?= request()->action() == 'personsupport' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personSupport') ?>';">
+                            <p>活动赞助</p>
+                        </div>
+                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personPaper') ?>';">
+                            <p>论文管理</p>
+                        </div>
+                        <div class="<?= request()->action() == 'personrecruit' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personRecruit') ?>';">
+                            <p>招聘发布</p>
+                        </div>
+                        <div class="<?= request()->action() == 'personsite' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personSite') ?>';">
+                            <p>子站管理</p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="<?= request()->action() == 'personconfig' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personConfig') ?>';">
+                        <p>账户设置</p>
                     </div>
                 </div>
 

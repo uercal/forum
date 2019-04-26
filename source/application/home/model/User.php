@@ -92,6 +92,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
+                'role'=>$user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -158,6 +159,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
+                'role'=>$user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -177,6 +179,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
+                'role'=>$user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])

@@ -240,24 +240,41 @@ class Index extends Controller
 
 
     /**
-     * 
+     *  个人中心
      */
-    public function personCenter()
+
+    public function personCheck()
     {
+        if (session('forum_user')) { 
+
+        } else {
+            return $this->redirect('/index');
+        }
+    }
+
+
+
+    public function personCenter()
+    {        
         if (session('forum_user')) {
             $this->view->engine->layout('p_layouts/layout');
             // 获取角色首页显示的内容
-            $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);            
+            $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
             $data = $user->getActLog();
             // 活动推荐
             $activity = new Activity;
             $act_list = $activity->getDataList(4)['list'];
             // 
             return $this->fetch('/person/index', compact('act_list', 'data'));
-        } else {
-            return $this->redirect('/index');
-        }
+        } else { }
     }
+
+
+    /**
+     * 活动赞助
+     */
+    public function personSupport()
+    { }
 
 
     public function changeHead()

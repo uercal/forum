@@ -116,10 +116,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-bottom: 1px solid #DEE0DC;
 }
 
-.person-user-actions>div:nth-child(1) {
-    border-bottom: 1px solid #DEE0DC;
+.person-user-actions>div:nth-last-child(1) {
+    border-bottom: none;
 }
 
 
@@ -133,7 +134,7 @@
 
 
 .person-user-actions>.active>p {
-    font-family: PingFangSC-Regular;    
+    font-family: PingFangSC-Regular;
     color: #44874B;
     letter-spacing: 1px;
 }
@@ -264,7 +265,7 @@
 }
 
 
-.person-my-act-body{
+.person-my-act-body {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -309,14 +310,14 @@
 }
 
 /*  */
-.person-re-act{
+.person-re-act {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.person-re-act>.act-item{
-    width: 49%;    
+.person-re-act>.act-item {
+    width: 49%;
     height: 420px;
     margin-top: 25px;
 }
