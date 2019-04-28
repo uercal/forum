@@ -202,6 +202,13 @@ class Controller extends \think\Controller
         return $this->renderJson(1, $msg, $url, $data);
     }
 
+
+    protected function renderJsonSuccess($msg = 'success', $url = '', $data = [])
+    {
+        return json_encode($this->renderJson(1, $msg, $url, $data));
+    }
+
+
     /**
      * 返回操作失败json
      * @param string $msg
@@ -213,6 +220,13 @@ class Controller extends \think\Controller
     {
         return $this->renderJson(0, $msg, $url, $data);
     }
+
+
+    protected function renderJsonError($msg = 'error', $url = '', $data = [])
+    {
+        return json_encode($this->renderJson(0, $msg, $url, $data));
+    }
+
 
     /**
      * 获取post数据 (数组)

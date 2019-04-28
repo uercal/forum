@@ -54,7 +54,11 @@
                             <strong class="info-title">
                                 <strong><?= $item['title'] ?></strong>
                             </strong>
-                            <div class="info-name"><?= htmlspecialchars_decode($item['content']) ?></div>
+                            <div class="info-name">
+                                <p>
+                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                </p>
+                            </div>
                             <div class="act-reg">
                                 <div class="reg-detail">
                                     <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?= date('Y/m/d', $item['sign_end']) ?></p>

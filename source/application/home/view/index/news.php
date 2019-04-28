@@ -19,7 +19,7 @@
     <div class="breadcrumb-box-media">
         <div class="am-container">
             <ol class="am-breadcrumb">
-                <li><a href="<?= url('/index') ?>" style="color:#000;">首页</a></li>
+                <li><a href="<?= url('index') ?>" style="color:#000;">首页</a></li>
                 <li class="am-active" onclick="article(<?= $news['parent']['id'] ?>)">
                     <?= $news['parent']['name'] ?>
                 </li>

@@ -4,7 +4,9 @@
         <div>
             <p>我的报名活动</p>
         </div>
-        <p style="cursor:pointer;">查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <?php if (!empty($data['my_act'])) : ?>
+            <p style="cursor:pointer;" onclick='window.location.href = "<?= url("personCenter&sign_more=1") ?>";'>查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <?php endif; ?>
     </div>
 
     <div class="person-my-act-body">
@@ -13,17 +15,17 @@
                     <img src="<?= $item['activity']['cover']['file_path'] ?>" alt="">
                     <div>
                         <strong><?= $item['activity']['title'] ?></strong>
-                        <p>报名时间：<?= date('Y-m-d H:i:s', $item['activity']['sign_begin']) . '-' . date('Y-m-d H:i:s', $item['activity']['sign_end']) ?></p>
-                        <p>活动时间：<?= date('Y-m-d H:i:s', $item['activity']['active_begin']) . '-' . date('Y-m-d H:i:s', $item['activity']['active_end']) ?></p>
+                        <p style="font-weight:600;">报名时间：<?= date('Y/m/d H:i', $item['activity']['sign_begin']) . '-' . date('Y/m/d H:i', $item['activity']['sign_end']) ?></p>
+                        <p style="color:#f35437;font-weight:600;">活动时间：<?= date('Y/m/d H:i', $item['activity']['active_begin']) . '-' . date('Y/m/d H:i', $item['activity']['active_end']) ?></p>
                         <p>活动地点：<?= $item['activity']['address'] ?></p>
                         <p>活动人数：<?= $item['activity']['member_count'] . '人' ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <div class="my-act-item" style="background-color:#fff;">                
+            <div class="my-act-item" style="background-color:#fff;">
                 <div style="width:100%;display:flex;align-items:center;jusity-content:center;">
-                    <strong style="font-size:48px;color:#e8e8e8;">暂无报名活动</strong>                    
+                    <strong style="font-size:48px;color:#e8e8e8;">暂无报名活动</strong>
                 </div>
             </div>
         <?php endif; ?>
@@ -37,7 +39,7 @@
         <div>
             <p>活动推荐</p>
         </div>
-        <p style="cursor:pointer;">查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <p style="cursor:pointer;" onclick='window.location.href = "<?= url("/index/activityMore") ?>";'>查看更多 <i class="am-icon-angle-double-right"></i> </p>
     </div>
 
     <div class="person-re-act">
@@ -54,7 +56,9 @@
                         <strong><?= $item['title'] ?></strong>
                     </strong>
                     <div class="info-name">
-                        <?= html_entity_decode($item['content']) ?>
+                        <p>
+                            <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                        </p>
                     </div>
                     <div class="act-reg">
                         <div class="reg-detail">

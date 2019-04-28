@@ -1,3 +1,16 @@
+<style>
+    .layui-layer-title {
+        background-color: rgba(215, 225, 205, 0.2) !important;
+        color: #3C5E40 !important;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        letter-spacing: 0;
+    }
+</style>
+
+
+
+
 <section style="display:flex;align-items:center;justify-content:center;flex-direction:column;background:#FAFAFA;">
     <div class="common-nav">
         <div class="nav-info">
@@ -74,14 +87,18 @@
 
 
             <!--  -->
-            <div class="act-users-button">
-                <div style="background: #BFA46F;">
-                    <p>赞助</p>
+            <?php if ($login_user) : ?>
+                <div class="act-users-button">
+                    <?php if (in_array(3, explode(',', $login_user['role']))) : ?>
+                        <div style="background: #BFA46F;" onclick="supportAct(<?= $detail['id'] ?>)">
+                            <p>赞助</p>
+                        </div>
+                    <?php endif; ?>
+                    <div style="background: #44874B;" onclick="<?php if (time() > $detail['sign_begin'] && time() < $detail['sign_end']) : ?>signAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
+                        <p>报名</p>
+                    </div>
                 </div>
-                <div style="background: #44874B;">
-                    <p>报名</p>
-                </div>
-            </div>
+            <?php endif; ?>
 
 
 
@@ -91,3 +108,6 @@
 
 
 </section>
+
+
+<!--  -->

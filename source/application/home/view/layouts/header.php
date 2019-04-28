@@ -72,7 +72,7 @@
                         </div>
                         <div class="u-action">
                             <p onclick="quit()">退出登录</p>
-                            <div onclick="window.location.href='<?= url('/personCenter') ?>';">
+                            <div onclick="window.location.href='<?= url('/person/personCenter') ?>';">
                                 <p>进入个人中心</p>
                             </div>
                         </div>

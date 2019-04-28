@@ -11,6 +11,17 @@ use think\Request;
  */
 class Activity extends ActivityModel
 {
+
+    protected $append = ['active_time', 'status_name', 'status'];
+
+
+    public function getActiveTimeAttr($value, $data)
+    {
+        return date('Y/m/d', $data['active_begin']) . '~' . date('Y/m/d', $data['active_end']);
+    }
+
+
+
     public function getDataList($number = null)
     {
         // 
@@ -20,7 +31,7 @@ class Activity extends ActivityModel
         if (input('sort')) {
             $order = 'create_time ' . input('sort');
         } else {
-            $order = 'create_time asc';
+            $order = 'sort asc';
         }
         // 
         if (input('title')) {
@@ -29,7 +40,6 @@ class Activity extends ActivityModel
         $_number = $number ? $number : 9;
         $list = $this->with(['cover'])->where($map)->order($order)
             ->paginate($_number, false, ['query' => $request->request()]);
-
 
         return compact('list');
     }

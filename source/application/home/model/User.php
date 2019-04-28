@@ -92,7 +92,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
-                'role'=>$user['role'],
+                'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -159,7 +159,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
-                'role'=>$user['role'],
+                'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -179,7 +179,7 @@ class User extends UserModel
                 'user_id' => $user['user_id'],
                 'user_name' => $user['user_name'],
                 'role_name' => $user['role_name'],
-                'role'=>$user['role'],
+                'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
                 'last_login' => date('Y/m/d H:i:s', $user['last_login'])
@@ -204,17 +204,15 @@ class User extends UserModel
 
 
     // 
-    public function getActLog()
+    public function getActLog($num = null)
     {
-        $role = $this->role;
-        $role = explode(',', $role);
         // 
         $act_log = new ActivityUserLog;
-        $my_act = $act_log->getListByUser($this->user_id);
-
-
-
-
+        if ($num) {
+            $my_act = $act_log->getAllListByUser($this->user_id, $num);
+        } else {
+            $my_act = $act_log->getListByUser($this->user_id);
+        }
 
         return compact('my_act');
     }

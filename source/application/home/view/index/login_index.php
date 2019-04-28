@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <title></title>
-    <link rel="icon" type="image/png" href="assets/admin/i/favicon.ico" />
-    <link rel="stylesheet" href="assets/home/css/amazeui.css" />
+    <link rel="icon" type="image/png" href="/assets/admin/i/favicon.ico" />
+    <link rel="stylesheet" href="/assets/home/css/amazeui.css" />
 </head>
 <style>
     /* Write your styles */
@@ -154,12 +154,12 @@
 
     </div>
 </body>
-<script src="assets/home/js/jquery-1.8.2.min.js"></script>
+<script src="/assets/home/js/jquery-1.8.2.min.js"></script>
 <script>
     $(function() {
         $('#btn-submit').on('click', function() {
             var data = $('#loginForm').serializeArray();
-            var url = "<?= url("/login_index") ?>";
+            var url = "<?= url("login_index") ?>";
             $.post(url, data, function(res) {
                 console.log(res);
                 if (res.code == 1) {

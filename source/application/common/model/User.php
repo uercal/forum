@@ -113,6 +113,6 @@ class User extends BaseModel
      */
     public static function detail($where)
     {
-        return self::get($where, ['avatar']);
+        return self::get($where, ['avatar', 'company', 'person']);
     }
 }

@@ -14,6 +14,8 @@ use app\home\model\User;
 use app\home\model\Activity;
 use app\home\model\Crop;
 use app\home\model\Recruit;
+use app\common\model\ActivitySupport;
+use app\home\model\ActivityUserLog;
 
 /**
  * 后台首页
@@ -190,7 +192,9 @@ class Index extends Controller
         $Category = new Category;
         $model = $Category->where('mode', 'activity')->find();
         $detail = Activity::detail($id);
-        return $this->fetch('activity_detail', compact('detail', 'model'));
+        $is_support = ActivitySupport::isExist(session('forum_user')['user']['user_id'], $id);
+        $is_sign = ActivityUserLog::isExist(session('forum_user')['user']['user_id'], $id);
+        return $this->fetch('activity_detail', compact('detail', 'model', 'is_support', 'is_sign'));
     }
 
     public function recruit($id, $category_id)
@@ -206,13 +210,13 @@ class Index extends Controller
     public function listJumpCate($list_id)
     {
         $category_id = Category::get(['list_id' => $list_id])['category_id'];
-        return $this->redirect('/category', ['category_id' => $category_id]);
+        return $this->redirect('category', ['category_id' => $category_id]);
     }
 
     public function activityMore()
     {
         $category_id = Category::get(['mode' => 'activity'])['category_id'];
-        return $this->redirect('/category', ['category_id' => $category_id]);
+        return $this->redirect('category', ['category_id' => $category_id]);
     }
 
 
@@ -233,58 +237,5 @@ class Index extends Controller
         // halt($detail['avatar']);
         //         
         return $this->fetch('user_detail', compact('detail', 'model'));
-    }
-
-
-
-
-
-    /**
-     *  个人中心
-     */
-
-    public function personCheck()
-    {
-        if (session('forum_user')) { 
-
-        } else {
-            return $this->redirect('/index');
-        }
-    }
-
-
-
-    public function personCenter()
-    {        
-        if (session('forum_user')) {
-            $this->view->engine->layout('p_layouts/layout');
-            // 获取角色首页显示的内容
-            $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
-            $data = $user->getActLog();
-            // 活动推荐
-            $activity = new Activity;
-            $act_list = $activity->getDataList(4)['list'];
-            // 
-            return $this->fetch('/person/index', compact('act_list', 'data'));
-        } else { }
-    }
-
-
-    /**
-     * 活动赞助
-     */
-    public function personSupport()
-    { }
-
-
-    public function changeHead()
-    {
-        $crop = new Crop;
-        $res = $crop->changeHead();
-        if ($res['state'] == 200) {
-            // 刷新session
-            User::freshUserSession();
-        }
-        return $res;
     }
 }

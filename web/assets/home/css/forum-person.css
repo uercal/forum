@@ -130,6 +130,7 @@
     color: #999999;
     letter-spacing: 1px;
     margin: 0;
+    position: relative;
 }
 
 
@@ -253,6 +254,7 @@
     font-size: 24px;
     color: #333333;
     letter-spacing: 0;
+    font-weight: 500;
     margin: 0;
 }
 
@@ -283,13 +285,15 @@
 }
 
 .my-act-item>img {
-    width: 25%;
-    height: 100%;
+    /* width: 25%;
+    height: 100%; */
+    width: 180px;
+    height: 180px;
     object-fit: cover;
 }
 
 .my-act-item>div {
-    width: 70%;
+    width: 72%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -299,6 +303,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0px 5px;
 }
 
 .my-act-item>div>p {
@@ -320,4 +325,29 @@
     width: 49%;
     height: 420px;
     margin-top: 25px;
+}
+
+/* support */
+
+
+.el-input-group__append {
+    background: #44874B !important;
+    color: #fff !important;
+    border: none !important;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+.el-input-group__append>button {
+    /* border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important; */
+}
+
+.el-input>input:hover,
+.el-input>input:focus {
+    border-color: #44874B;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: #F4F6F2 !important;
 }

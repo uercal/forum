@@ -124,7 +124,7 @@
             title: '确认',
             btn: ['确定', '取消'] //按钮
         }, function() {
-            $.get('<?= url('/quitUser') ?>', function(res) {
+            $.get('<?= url('/index/quitUser') ?>', function(res) {
                 window.location.reload();
             })
         }, function() {
@@ -137,7 +137,7 @@
     function category(id) {
         console.log(id);
         if (id == 0) return false;
-        var url = "<?= url('/category') ?>/category_id/" + id;
+        var url = "<?= url('/index/category') ?>/category_id/" + id;
         window.location.href = url;
     }
 
@@ -223,7 +223,7 @@
 
 
         function filter_jump($form) {
-            var html = "<?= url('/category', [
+            var html = "<?= url('/index/category', [
                             'category_id' => $model['category_id']
                         ]) ?>";
 
@@ -231,53 +231,114 @@
             window.location.href = html;
         }
 
+        // act
+        function invalidTime() {
+            layer.msg('未在有效时间内');
+        }
+
+        function supportAct(act_id) {
+            <?php if (isset($is_support)) : if (!$is_support) : ?>
+                    layer.open({
+                        id: 'support',
+                        type: 2,
+                        title: '赞助活动',
+                        maxmin: false,
+                        scrollbar: false,
+                        resize: false,
+                        shadeClose: true, //点击遮罩关闭层
+                        area: ['600px', '480px'],
+                        content: '/person/support_act?act_id=' + act_id, //弹框显示的url
+                        success: function(layero, index) {
+
+                        },
+                        cancel: function(index) {
+                            layer.close(index);
+                        },
+                        end: function() {
+
+                        }
+                    });
+                <?php else : ?>
+                    layer.msg('你已赞助过该活动');
+                <?php endif;
+        endif; ?>
+        }
+
+        function signAct(act_id) {
+            <?php if (isset($is_sign)) : if (!$is_sign) : ?>
+                    layer.open({
+                        id: 'sign',
+                        type: 2,
+                        title: '报名活动',
+                        maxmin: false,
+                        resize: false,
+                        scrollbar: false,
+                        shadeClose: true, //点击遮罩关闭层
+                        area: ['600px', '520px'],
+                        content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
+                        success: function(layero, index) {
+
+                        },
+                        cancel: function(index) {
+                            layer.close(index);
+                        },
+                        end: function() {
+
+                        }
+                    });
+                <?php else : ?>
+                    layer.msg('你已报名过该活动');
+                <?php endif;
+        endif; ?>
+        }
+
     <?php endif; ?>
 
 
 
     function home() {
-        var url = "<?= url('/index') ?>";
+        var url = "<?= url('/index/index') ?>";
         window.location.href = url;
     }
 
     // detail
     function activity(id) {
-        window.location.href = "<?= url('/activity') ?>/id/" + id;
+        window.location.href = "<?= url('/index/activity') ?>/id/" + id;
     }
 
     function userProject(id, category_id) {
-        window.location.href = "<?= url('/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
+        window.location.href = "<?= url('/index/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
     }
 
     function userDetail(id, category_id) {
-        window.location.href = "<?= url('/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
+        window.location.href = "<?= url('/index/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
     }
 
 
 
     // more
     function newsMore(list_id) {
-        window.location.href = "<?= url('/listJumpCate') ?>/list_id/" + list_id;
+        window.location.href = "<?= url('/index/listJumpCate') ?>/list_id/" + list_id;
     }
 
     function activityMore() {
-        window.location.href = "<?= url('/activityMore') ?>";
+        window.location.href = "<?= url('/index/activityMore') ?>";
     }
 
 
 
     function news(id) {
-        var url = "<?= url('/news') ?>/id/" + id;
+        var url = "<?= url('/index/news') ?>/id/" + id;
         window.location.href = url;
     }
 
     function recruit(id, category_id) {
-        var url = "<?= url('/recruit') ?>&id=" + id + "&category_id=" + category_id;
+        var url = "<?= url('/index/recruit') ?>&id=" + id + "&category_id=" + category_id;
         window.location.href = url;
     }
 
     function project(id) {
-        var url = "<?= url('/project') ?>/id/" + id;
+        var url = "<?= url('/index/project') ?>/id/" + id;
         window.location.href = url;
     }
 
@@ -324,48 +385,44 @@
     $(function() {
         // 
         $('#u_login').on('click', function() {
-            $('body').css('overflow', 'hidden');
             layer.open({
                 id: 'login',
                 type: 2,
                 title: '用户登录',
                 maxmin: false,
                 resize: false,
+                scrollbar: false,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['500px', '400px'],
-                content: 'login_index', //弹框显示的url
+                content: 'index/login_index', //弹框显示的url
                 success: function(layero, index) {
 
                 },
                 cancel: function(index) {
                     layer.close(index);
                 },
-                end: function() {
-                    $('body').css('overflow', 'auto');
-                }
+                end: function() {}
             });
         });
 
         $('#u_register').on('click', function() {
-            $('body').css('overflow', 'hidden');
             layer.open({
                 id: 'login',
                 type: 2,
                 title: '用户注册',
                 maxmin: false,
+                scrollbar: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['500px', '450px'],
-                content: 'register_index', //弹框显示的url
+                content: 'index/register_index', //弹框显示的url
                 success: function(layero, index) {
 
                 },
                 cancel: function(index) {
                     layer.close(index);
                 },
-                end: function() {
-                    $('body').css('overflow', 'auto');
-                }
+                end: function() {}
             });
         });
 

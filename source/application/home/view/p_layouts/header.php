@@ -16,9 +16,16 @@
     <link rel="stylesheet" href="assets/home/css/forum-person.css" />
     <link rel="stylesheet" href="assets/home/css/amazeui.css" />
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/home/css/bootstrap.css">
     <link rel="stylesheet" href="assets/head/cropper.min.css">
     <link rel="stylesheet" href="assets/head/main.css">
+    <!--  -->
+    <script>
+        BASE_URL = '<?= isset($base_url) ? $base_url : '
+        ' ?>';
+        STORE_URL = '<?= isset($store_url) ? $store_url : '
+        ' ?>';
+    </script>
 </head>
 
 <body>
@@ -73,7 +80,7 @@
                         </div>
                         <div class="u-action">
                             <p onclick="quit()">退出登录</p>
-                            <div onclick="window.location.href='<?= url('/personCenter') ?>';">
+                            <div onclick="window.location.href='<?= url('/person/personCenter') ?>';">
                                 <p>进入个人中心</p>
                             </div>
                         </div>
@@ -108,7 +115,7 @@
                     <p style="color:#666666;font-size:12px;padding-bottom:16px;"><?= $login_user['role_name'] ?></p>
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
-                    <div class="update-user">
+                    <div class="update-user" onclick="window.location.href='<?= url('updateGrade') ?>';">
                         <p>升级会员</p>
                     </div>
                     <div class="last-login">
@@ -119,31 +126,52 @@
 
 
                 <div class="person-user-actions">
-                    <div class="<?= request()->action() == 'personcenter' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personCenter') ?>';">
-                        <p style="position:relative;">活动报名<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i></p>
+                    <div class="<?= request()->action() == 'personcenter' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personCenter') ?>';">
+                        <p>
+                            活动报名<?= request()->action() == 'personcenter' ?
+                                    '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                        </p>
                     </div>
                     <?php if (in_array(1, explode(',', $login_user['role']))) : ?>
                         <!-- 个人会员 -->
-                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personPaper') ?>';">
-                            <p>论文管理</p>
+                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personPaper') ?>';">
+                            <p>
+                                论文管理<?= request()->action() == 'personpaper' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
                         </div>
                     <?php elseif (in_array(3, explode(',', $login_user['role']))) : ?>
                         <!-- 单位会员 -->
-                        <div class="<?= request()->action() == 'personsupport' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personSupport') ?>';">
-                            <p>活动赞助</p>
+                        <div class="<?= request()->action() == 'personsupport' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personSupport') ?>';">
+                            <p>
+                                活动赞助<?= request()->action() == 'personsupport' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
                         </div>
-                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personPaper') ?>';">
-                            <p>论文管理</p>
+                        <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personPaper') ?>';">
+                            <p>
+                                论文管理<?= request()->action() == 'personpaper' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
                         </div>
-                        <div class="<?= request()->action() == 'personrecruit' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personRecruit') ?>';">
-                            <p>招聘发布</p>
+                        <div class="<?= request()->action() == 'personrecruit' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personRecruit') ?>';">
+                            <p>
+                                招聘发布<?= request()->action() == 'personrecruit' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
                         </div>
-                        <div class="<?= request()->action() == 'personsite' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personSite') ?>';">
-                            <p>子站管理</p>
+                        <div class="<?= request()->action() == 'personsite' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personSite') ?>';">
+                            <p>
+                                子站管理<?= request()->action() == 'personsite' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
                         </div>
                     <?php endif; ?>
-                    <div class="<?= request()->action() == 'personconfig' ? 'active' : '' ?>" onclick="window.location.href='<?= url('/personConfig') ?>';">
-                        <p>账户设置</p>
+                    <div class="<?= request()->action() == 'personconfig' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personConfig') ?>';">
+                        <p>
+                            账户设置<?= request()->action() == 'personconfig' ?
+                                    '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                        </p>
                     </div>
                 </div>
 

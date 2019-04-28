@@ -13,9 +13,9 @@ use think\Request;
  * Class 
  * @package app\common\model
  */
-class ActivityUserLog extends BaseModel
+class ActivitySupport extends BaseModel
 {
-    protected $name = 'activity_user_log';
+    protected $name = 'activity_support';
     protected $insert = ['wxapp_id' => 10001];
 
 
@@ -29,6 +29,10 @@ class ActivityUserLog extends BaseModel
         return $this->belongsTo('Activity', 'act_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->hasOne('User', 'user_id', 'user_id');
+    }
 
     public static function isExist($user_id, $act_id)
     {

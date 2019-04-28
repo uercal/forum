@@ -61,7 +61,9 @@
                                 <strong><?= $item['title'] ?></strong>
                             </strong>
                             <div class="info-name">
-                                <?= html_entity_decode($item['content']) ?>
+                                <p>
+                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                </p>
                             </div>
                             <div class="act-reg">
                                 <div class="reg-detail">
@@ -218,4 +220,3 @@
 
     </div>
 </section>
-

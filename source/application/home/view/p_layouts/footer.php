@@ -119,12 +119,12 @@
 </div>
 
 <!--  -->
-<div class="container" id="crop-avatar">   
+<div class="container" id="crop-avatar">
     <!-- Cropping modal -->
     <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form class="avatar-form" action="<?= url('/changeHead') ?>" enctype="multipart/form-data" method="post">
+                <form class="avatar-form" action="<?= url('changeHead') ?>" enctype="multipart/form-data" method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
@@ -187,7 +187,7 @@
             title: '确认',
             btn: ['确定', '取消'] //按钮
         }, function() {
-            $.get('<?= url('/quitUser') ?>', function(res) {
+            $.get('<?= url('quitUser') ?>', function(res) {
                 window.location.reload();
             })
         }, function() {
@@ -197,14 +197,18 @@
     //  
 
 
+
     function category(id) {
         console.log(id);
         if (id == 0) return false;
-        var url = "<?= url('/category') ?>/category_id/" + id;
+        var url = "<?= url('/index/category') ?>/category_id/" + id;
         window.location.href = url;
     }
 
-    
+    // detail
+    function activity(id) {
+        window.location.href = "<?= url('/index/activity') ?>/id/" + id;
+    }
 
 
     function home() {
@@ -255,57 +259,8 @@
 <script>
     $(function() {
         // 
-        $('#u_login').on('click', function() {
-            $('body').css('overflow', 'hidden');
-            layer.open({
-                id: 'login',
-                type: 2,
-                title: '用户登录',
-                maxmin: false,
-                resize: false,
-                shadeClose: true, //点击遮罩关闭层
-                area: ['500px', '400px'],
-                content: 'login_index', //弹框显示的url
-                success: function(layero, index) {
-
-                },
-                cancel: function(index) {
-                    layer.close(index);
-                },
-                end: function() {
-                    $('body').css('overflow', 'auto');
-                }
-            });
-        });
-
-        $('#u_register').on('click', function() {
-            $('body').css('overflow', 'hidden');
-            layer.open({
-                id: 'login',
-                type: 2,
-                title: '用户注册',
-                maxmin: false,
-                resize: false,
-                shadeClose: true, //点击遮罩关闭层
-                area: ['500px', '450px'],
-                content: 'register_index', //弹框显示的url
-                success: function(layero, index) {
-
-                },
-                cancel: function(index) {
-                    layer.close(index);
-                },
-                end: function() {
-                    $('body').css('overflow', 'auto');
-                }
-            });
-        });
-
-        function login_success(msg) {
-            layer.msg(msg);
-            setTimeout(function() {
-                window.location.reload();
-            }, 1000);
+        function activity(id) {
+            window.location.href = "<?= url('/index/activity') ?>/id/" + id;
         }
 
     });
