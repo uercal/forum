@@ -17,7 +17,7 @@ class Exam extends Controller
         $model = new ExamModel;
         $res = $model->getList();
         $list = $res['data'];
-        $map = $res['map'];        
+        $map = $res['map'];
         return $this->fetch('list', compact('list', 'map'));
     }
 
@@ -25,8 +25,11 @@ class Exam extends Controller
     // 审核
     public function detail($id)
     {
-        $info = ExamModel::with(['quota', 'user' => ['accountMoney']])->find($id);        
+        $info = ExamModel::with(['user' => ['company', 'person']])->find($id);        
         $map = ExamModel::attrTextMap();
+        $imgMap = ExamModel::attrImgMap();
+        $fileMap = ExamModel::attrFileMap();
+        // 
         $type = $info['type'];
         $status = $info['status'];
         $id = $info['id'];
@@ -36,30 +39,18 @@ class Exam extends Controller
         $data = [];
         $data['input'] = [];
         $data['image'] = [];
+        $data['file'] = [];
         foreach ($data_arr as $key => $value) {
-            if (strpos($key, 'id') !== false) {
-                // 员工派送审批
-                if ($key == 'order_id') {
-                    $data['image'][$key] = $value;
-                    continue;
-                }
-
-                // id是否是集合
-                if (strpos($value, ',') !== false) {
-                    $data['image'][$key] = UploadApiFile::getFilesPath($value);
-                } else {
-                    if (!empty($value)) {
-                        $data['image'][$key] = UploadApiFile::getFilePath($value);
-                    }
-                }
+            if (in_array($key, $imgMap)) {
+                $data['image'][$key] = UploadApiFile::getFilePath($value);
+            } elseif (in_array($key, $fileMap)) {
+                $data['file'][$key] = UploadApiFile::getFilePath($value);
             } else {
                 $data['input'][$key] = $value;
             }
-        }                  
+        }
         //         
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
-
-
     }
 
     // 审核 ajax
@@ -72,10 +63,4 @@ class Exam extends Controller
         }
         return $this->renderSuccess('审批成功');
     }
-
-
-
-
-
-
 }

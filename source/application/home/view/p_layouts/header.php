@@ -120,7 +120,7 @@
                     </div>
                     <div class="last-login">
                         <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?= $login_user['last_login'] ?></p>
-                        <p style="font-size:14px;color:#9b9b9b;">退出</p>
+                        <p style="font-size:14px;color:#9b9b9b;cursor:pointer;" onclick="quit()">退出</p>
                     </div>
                 </div>
 

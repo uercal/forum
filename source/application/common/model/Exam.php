@@ -15,34 +15,10 @@ class Exam extends BaseModel
     protected $name = 'exam';
     protected $insert = ['wxapp_id' => 10001];
 
-
-    protected $append = ['order'];
-
-
-    public function getOrderAttr($value, $data)
-    {
-        if ($data['type'] == 20) {
-            $content_arr = json_decode($data['content'], true);
-            return Db::name('order')->where('order_id', $content_arr['order_id'])->find();
-        }
-        return [];
-    }
-
-    public function member()
-    {
-        return $this->hasOne('Member', 'id', 'member_id');
-    }
-
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');
     }
-
-    public function quota()
-    {
-        return $this->hasOne('Quota', 'exam_id', 'id');
-    }
-
 
 
     public function getStatusTextAttr($value, $data)
@@ -53,9 +29,32 @@ class Exam extends BaseModel
 
     public function getTypeTextAttr($value, $data)
     {
-        $type = [10 => '用户认证', 20 => '员工送达审批', 30 => '线下提现'];
+        $type = [10 => '会员升级', 20 => '员工送达审批', 30 => '线下提现'];
         return $type[$data['type']];
     }
+
+    public function getTypeBonusTextAttr($value, $data)
+    {
+        $type = [
+            'person' => '升级个人会员',
+            'company' => '升级单位会员',
+            'expert' => '升级专家会员',
+            'supplier' => '升级供应商'
+        ];
+        return $type[$data['type_bonus']];
+    }
+
+    public function getLevelOptionAttr($value, $data)
+    {
+        $type = [
+            '1' => '普通会员',
+            '2' => '个人会员',
+            '3' => '单位会员'
+        ];
+        return $type[$data['level_option']];
+    }
+
+
 
     public function getList()
     {
@@ -82,10 +81,6 @@ class Exam extends BaseModel
                 ->paginate(15, false, ['query' => $request->request()]);
         }
 
-
         return ['data' => $data, 'map' => $map];
     }
-
-
-
 }

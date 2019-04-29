@@ -17,6 +17,7 @@ use app\home\model\Recruit;
 use app\home\model\ActivitySupport;
 use app\home\model\ActivityUserLog;
 use app\home\model\UploadApiFile;
+use app\home\model\Exam;
 
 /**
  * 个人中心
@@ -31,7 +32,7 @@ class Person extends Controller
     {
         parent::_initialize();
         if (!session('forum_user')) {
-            return $this->redirect('/index/index');
+            return $this->redirect(url('/index/index'));
         } else {
             // 
             $this->user = User::detail(session('forum_user')['user']['user_id']);
@@ -193,7 +194,7 @@ class Person extends Controller
         return $this->fetch('update', compact('levelOption'));
     }
 
-  
+
 
 
 
@@ -225,6 +226,23 @@ class Person extends Controller
         }
     }
 
+
+    /**
+     * 提交申请 升级
+     */
+    public function updateAjax()
+    {
+        $form = $this->postData('form');
+        $form_type = input('form_type');
+        $exam_model = new Exam;
+        // $exam_model->updateExam($form,$form_type,$this->user['user_id']);
+        // 
+        if ($exam_model->updateExam($form, $form_type, $this->user['user_id'], $this->getLevelOption())) {
+            return $this->renderSuccess('申请成功');
+        } else {
+            return $this->renderError($exam_model->error);
+        }
+    }
 
 
 

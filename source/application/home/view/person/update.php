@@ -15,7 +15,7 @@
     }
 
     .avatar-uploader-icon {
-        font-size: 28px;
+        font-size: 28px;onClose
         color: #8c939d;
         width: 178px;
         height: 178px;
@@ -149,57 +149,57 @@
                     <el-tab-pane label="专家会员" name="expert"></el-tab-pane>
                 <?php endif; ?>
                 <!-- todo -->
-                <?php if ($levelOption != 1) : ?>
+                <?php if ($levelOption == 1) : ?>
                     <el-tab-pane label="单位会员" name="company">
-                        <el-form ref="form" :model="form_company" label-width="80px" label-position="left" style="margin-top:30px;">
+                        <el-form ref="company" :model="form_company" :rules="company_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">单位基本信息</div>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="24">
-                                    <el-form-item label="单位名称：">
+                                    <el-form-item label="单位名称：" prop="company_name">
                                         <el-input v-model="form_company.company_name" placeholder="请填写单位名称"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="成立时间：">
-                                        <el-date-picker type="date" placeholder="选择日期" v-model="form_company.date1" style="width: 100%;"></el-date-picker>
+                                    <el-form-item label="成立时间：" prop="build_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_company.build_time" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位法人：" class="">
+                                    <el-form-item label="单位法人：" class="" prop="legal_person">
                                         <el-input v-model="form_company.legal_person" placeholder="请填写单位法人"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="统一社会信用代码：" label-width="32%">
+                                    <el-form-item label="统一社会信用代码：" label-width="33%" prop="company_code">
                                         <el-input v-model="form_company.company_code" placeholder="请填写单位的统一社会信用代码"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位类型：" class="">
+                                    <el-form-item label="单位类型：" class="" prop="company_type">
                                         <el-input v-model="form_company.company_type" placeholder="请填写单位类型"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="24">
-                                    <el-form-item label="工程服务资格及等级：" label-width="18%">
+                                    <el-form-item label="工程服务资格及等级：" label-width="20%" prop="server_level">
                                         <el-input v-model="form_company.server_level" placeholder="如：生态建设和环境工程/公共工程/城市轨道交通/综合经济/电影广播电视"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="公司电话：">
+                                    <el-form-item label="公司电话：" prop="company_tel">
                                         <el-input v-model="form_company.company_tel" placeholder="0898-66666666"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位邮箱：" class="">
+                                    <el-form-item label="单位邮箱：" class="" prop="email">
                                         <el-input type="email" v-model="form_company.email" placeholder="xx@xx.com"></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -209,31 +209,31 @@
                             <div class="divider" style="margin-top:25px;">联系人基本信息</div>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="姓名：">
+                                    <el-form-item label="姓名：" prop="manager_name">
                                         <el-input v-model="form_company.manager_name" placeholder="请填写联系人姓名"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位职务：" class="">
+                                    <el-form-item label="单位职务：" class="" prop="manager_job">
                                         <el-input type="email" v-model="form_company.manager_job" placeholder="请填写联系人职务"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="联系手机：">
-                                        <el-input v-model="form_company.manager_phone" placeholder="请填写联系人手机"></el-input>
+                                    <el-form-item label="联系手机：" prop="manager_phone">
+                                        <el-input v-model.number="form_company.manager_phone" placeholder="请填写联系人手机"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="微信号：" class="">
+                                    <el-form-item label="微信号：" class="" prop="manager_wechat">
                                         <el-input v-model="form_company.manager_wechat" placeholder="请填写联系人微信号"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
 
                             <!--  -->
-                            <div class="divider" style="margin-top:25px;">图片信息</div>
+                            <div class="divider" style="margin-top:25px;">图片信息</div>                            
                             <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
                                 <el-col :span="24">
                                     单位LOGO图片：
@@ -242,7 +242,7 @@
 
                             <div style="padding:20px 0px;">
                                 <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=logo" ref="avatar" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                                    <img v-if="form_company.imageUrl" :src="form_company.imageUrl" class="avatar">
+                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
                             </div>
@@ -257,7 +257,7 @@
 
                             <div style="padding:20px 0px;">
                                 <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=companyFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleFileSuccess" :before-upload="beforeFileUpload">
-                                    <img v-if="form_company.fileUrl" :src="form_company.fileUrl" class="avatar">
+                                    <img v-if="fileUrl" :src="fileUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
                             </div>
@@ -266,7 +266,7 @@
 
                             <el-row>
                                 <el-col :span="24" style="position:relative;">
-                                    <el-form-item label="简介描述">
+                                    <el-form-item label="简介描述" prop="company_intro">
                                         <el-input 
                                         type="textarea" 
                                         maxlength="800" 
@@ -311,33 +311,112 @@
         window.vue = new Vue({
             el: '#app',
             data: {
+                posting:false,
                 activeName: '',
+                imageUrl: '',
+                fileUrl: '',
                 form_company: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: '',
-                    company_logo: '',
-                    license_file: '',
-                    imageUrl: '',
-                    fileUrl: '',
-                    company_intro: ''
+                    company_name: '',
+                    build_time: '',
+                    legal_person: '',
+                    company_code: '',
+                    company_type: '',
+                    server_level: '',
+                    company_tel: '',
+                    email: '',
+                    manager_name: '',
+                    manager_job: '',
+                    manager_phone:'',
+                    manager_wechat:'',
+                    company_logo:'',
+                    license_file:'',
+                    company_intro: ''                                
                 },
+                company_rules:{
+                    company_name: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                    ],
+                    build_time: [
+                        { required: true, message: '请选择日期', trigger: 'blur' }                        
+                    ],
+                    legal_person: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                    ],
+                    company_code: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                    ],
+                    company_type: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                    ],
+                    server_level: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                    ],
+                    company_tel: [
+                        { required: true, message: '请输入公司电话',trigger: 'blur'}                        
+                    ],
+                    email: [
+                        { required: true, message: '请输入单位邮箱', trigger: 'blur' },
+                        {type:'email',message:'请填写邮箱格式'}                      
+                    ],
+                    manager_name: [
+                        { required: true, message: '请输入联系人姓名', trigger: 'blur' }                        
+                    ],
+                    manager_job: [
+                        { required: true, message: '请输入联系人职务', trigger: 'blur' }                        
+                    ],
+                    manager_phone:[
+                        { required: true, message: '请输入联系人电话',trigger: 'blur'},
+                        { type:'number', message: '必须为数字'}                     
+                    ],
+                    manager_wechat:[
+                        { required: true, message: '请输入联系人微信号', trigger: 'blur' }                        
+                    ],                    
+                    company_intro: [
+                        { required: true, message: '请输入公司简介', trigger: 'blur' }                        
+                    ],
+                }
             },
             methods: {
+                doPost(form){
+                    if(!this.posting){
+                        this.posting = true;
+                        var _this = this;                                            
+                        $.post('<?= url('updateAjax') ?>',{form:form,form_type:_this.activeName},function(res){
+                            console.log(res);
+                            if (res.code == 1) {                                                         
+                                _this.$message.success(res.msg);
+                                window.location.reload();
+                                // 
+                            } else {
+                                _this.$message.error(res.msg);
+                                _this.posting = false;
+                            }
+                        });
+                    }else{
+                       
+                    }                    
+                }
+                ,
                 handleClick(tab, event) {
 
                 },
                 onSubmit() {
-
+                    this.$refs['company'].validate((valid) => {
+                        if (valid) {
+                            if(this.form_company.company_logo&&this.form_company.license_file){
+                                this.doPost(this.form_company);
+                            }else{
+                                this.$message.error('请上传相应图片和附件');
+                            }
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
                 },
                 handleAvatarSuccess(res, file) {
                     if (res.code == 1) {
-                        this.form_company.imageUrl = URL.createObjectURL(file.raw);
+                        this.imageUrl = URL.createObjectURL(file.raw);
                         this.$message.success(res.msg);
                         this.form_company.company_logo = res.data.file_id;
                         // 
@@ -346,8 +425,8 @@
                     }
                 },
                 handleFileSuccess(res, file) {
-                    if (res.code == 1) {
-                        // this.imageUrl = URL.createObjectURL(file.raw);                        
+                    if (res.code == 1) {                         
+                        this.fileUrl = 'assets/home/images/pdf-icon.png';
                         this.$message.success(res.msg);
                         this.form_company.license_file = res.data.file_id;
                         // 

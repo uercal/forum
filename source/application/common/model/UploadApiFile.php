@@ -36,7 +36,7 @@ class UploadApiFile extends BaseModel
     public static function getFilePath($fileId)
     {
         $data = self::where(['file_id' => $fileId])->find();
-        return self::$base_url . 'uploads/' . $data['file_name'];
+        return self::$base_url . 'uploads/api/' . $data['file_name'];
     }
 
 
@@ -44,7 +44,7 @@ class UploadApiFile extends BaseModel
     {
         $data = self::whereIn('file_id', $filesIds)->select()->toArray();
         foreach ($data as $key => $value) {
-            $data[$key] = self::$base_url . 'uploads/' . $value['file_name'];
+            $data[$key] = self::$base_url . 'uploads/api/' . $value['file_name'];
         }
         return $data;
     }

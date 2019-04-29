@@ -21,23 +21,45 @@ class Exam extends ExamModel
     public static function attrTextMap()
     {
         $data = [
-            // 用户认证
-            'user_name' => '个人姓名',
-            'company' => '公司名称',
-            'org_code_id' => '组织机构代码证',
-            'license_id' => '营业执照',
-            'idcard_ids' => '身份证正反面',
-            'other_content' => '其他信息',
-            'other_ids' => '其他图片',
-            // 送达审批
-            'order_id' => '查看订单',
-            'send_content' => '送达说明',
-            'send_pic_ids' => '送达图片说明',
-            //线下提现
-            'cash_price' => '提现金额',
+            // 用户升级
+            // company
+            'company_name'=>'单位名称',
+            'build_time'=> '成立时间',
+            'legal_person'=> '单位法人',
+            'company_code'=> '统一社会信用码',
+            'company_type'=> '单位类型',
+            'server_level'=> '工程服务资格及等级',
+            'company_tel'=> '公司电话',
+            'email'=> '单位邮箱',
+            'manager_name'=> '联系人姓名',
+            'manager_job'=> '联系人职务',
+            'manager_phone'=>'联系人手机',
+            'manager_wechat'=>'联系人微信号',
+            'company_logo'=>'单位logo',
+            'license_file'=>'单位证件附件',
+            'company_intro'=> '单位简介',             
         ];
         return $data;
     }
+
+
+    public static function attrImgMap(){
+        return [
+            // company
+            'company_logo'
+        ];
+    }
+
+    public static function attrFileMap(){
+        return [
+            // company
+            'license_file'
+        ];
+    }
+
+
+
+
 
 
     public function updateStatus($data)
