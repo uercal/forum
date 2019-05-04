@@ -175,7 +175,7 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="统一社会信用代码：" label-width="33%" prop="company_code">
+                                    <el-form-item label="统一社会信用代码：" label-width="42%" prop="company_code">
                                         <el-input v-model="form_company.company_code" placeholder="请填写单位的统一社会信用代码"></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -187,7 +187,7 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="24">
-                                    <el-form-item label="工程服务资格及等级：" label-width="20%" prop="server_level">
+                                    <el-form-item label="工程服务资格及等级：" label-width="25%" prop="server_level">
                                         <el-input v-model="form_company.server_level" placeholder="如：生态建设和环境工程/公共工程/城市轨道交通/综合经济/电影广播电视"></el-input>
                                     </el-form-item>
                                 </el-col>

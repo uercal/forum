@@ -165,18 +165,11 @@
                     break;
             }
 
-            var quota_money = $('#quota_money').val();
-
-            if (status == 20 && quota_money == '') {
-                quota_money = 0;
-            }
-
             var content = JSON.parse($('#content').val());
 
             $.post("<?= url('exam/examine') ?>", {
                 id: $('#id').val(),
                 status: status,
-                quota_money: quota_money,
                 content: content
             }, function(res) {
                 console.log(res);
@@ -185,7 +178,7 @@
                     anim: 1
                 }, function() {
                     var url = "<?= url('exam/index') ?>&type=<?= $type ?>";
-                    window.location.href = url;
+                    // window.location.href = url;
                 });
             })
 

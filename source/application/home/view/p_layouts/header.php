@@ -34,7 +34,7 @@
             <div class="header-logo">
                 <img src="assets/home/images/logo.png" alt="">
             </div>
-            <ul class="header-ul" style="text-align:center;">
+            <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
                 <?php foreach ($menus as $item) : ?>
                     <li>
