@@ -161,9 +161,7 @@ class Index extends Controller
 
 
                 break;
-        }
-
-
+        }        
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
@@ -233,8 +231,7 @@ class Index extends Controller
     public function userDetail($user_id, $category_id)
     {
         $model = Category::get($category_id);
-        $detail = User::detail($user_id)->toArray();
-        // halt($detail['avatar']);
+        $detail = User::detail($user_id)->toArray();        
         //         
         return $this->fetch('user_detail', compact('detail', 'model'));
     }

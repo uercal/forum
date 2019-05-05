@@ -16,6 +16,10 @@ use think\Db;
  */
 class Exam extends ExamModel
 {
+
+    public $error;
+
+
     public static function attrTextMap()
     {
         $data = [
@@ -28,6 +32,7 @@ class Exam extends ExamModel
             'company_type' => '单位类型',
             'server_level' => '工程服务资格及等级',
             'company_tel' => '公司电话',
+            'address' => '公司地址',
             'email' => '单位邮箱',
             'manager_name' => '联系人姓名',
             'manager_job' => '联系人职务',
@@ -36,6 +41,28 @@ class Exam extends ExamModel
             'company_logo' => '单位logo',
             'license_file' => '单位证件附件',
             'company_intro' => '单位简介',
+            // person
+            'name' => '姓名',
+            'id_card' => '身份证',
+            'gender' => '性别',
+            'email' => '邮箱',
+            'phone' => '手机号',
+            'post_code' => '邮编',
+            'person_address' => '住址',
+            'education_school' => '毕业院校',
+            'education_degree' => '学历学位',
+            'education_major' => '专业',
+            'education_time' => '毕业时间',
+            'belong_company' => '所在单位',
+            'positio' => '职称',
+            'job' => '职务',
+            'work_limit' => '工作年限',
+            'positio_time' => '职称取得时间',
+            'sector' => '业务行业',
+            'area' => '业务领域',
+            'id_photo' => '个人证件照',
+            'person_file' => '个人证件附件',
+            'introduce' => '个人简介'
         ];
 
         return $data;
@@ -46,6 +73,8 @@ class Exam extends ExamModel
         return [
             // company
             'company_logo',
+            // person
+            'id_photo'
         ];
     }
 
@@ -54,14 +83,28 @@ class Exam extends ExamModel
         return [
             // company
             'license_file',
+            // person
+            'person_file'
         ];
     }
+
+    public static function attrTextAreaMap()
+    {
+        return [
+            // company
+            'company_intro',
+            // person
+            'introduce'
+        ];
+    }
+
+
 
     public function updateStatus($data)
     {
         $obj = $this->where('id', $data['id'])->find();
 
-        $content = $data['content'];
+        $content = json_decode($obj['content'], true);
         // 筛选空值 content
         foreach ($content as $key => $value) {
             if (empty($value)) {
@@ -78,52 +121,65 @@ class Exam extends ExamModel
                 $user = User::get($obj['user_id']);
                 $role_str = $user['role'];
                 $type_bonus = $obj['type_bonus'];
-                switch ($type_bonus) {
-                    case 'person':
-                        // 个人会员
-                        $role = 1;
-                        $new_role = strtr($role_str, 0, $role);
-                        $user_model = new UserPerson();
+                // 
+                if ($data['status'] == 20) {
+                    switch ($type_bonus) {
+                        case 'person':
+                            // 个人会员
+                            $role = 1;
+                            $new_role = strtr($role_str, 0, $role);
+                            $user_model = new UserPerson();
+                            $_obj = $user_model::get(['user_id' => $obj['user_id']]);
+                            //              
+                            $content['education_time'] = strtotime($content['education_time']);
+                            $content['positio_time'] = strtotime($content['positio_time']);
+                            if ($_obj) {
+                                $_obj->save($content);
+                            } else {
+                                $content['user_id'] = $obj['user_id'];
+                                $user_model->save($content);
+                            }
+                            break;
 
-                        break;
+                        case 'company':
+                            // 单位会员
+                            $role = 3;
+                            $new_role = strtr($role_str, 0, $role);
+                            $user_model = new UserCompany();
+                            $_obj = $user_model::get(['user_id' => $obj['user_id']]);
+                            // 
+                            $content['build_time'] = strtotime($content['build_time']);
+                            if ($_obj) {
+                                $_obj->save($content);
+                            } else {
+                                $content['user_id'] = $obj['user_id'];
+                                $user_model->save($content);
+                            }
 
-                    case 'company':
-                        // 单位会员
-                        $role = 3;
-                        $new_role = strtr($role_str, 0, $role);
-                        $user_model = new UserCompany();
-                        $_obj = $user_model::get(['user_id'=>$obj['user_id']]);
-                        if($_obj){
-                            $_obj->save($content);
-                        }else{
-                            $content['user_id'] = $obj['user_id'];
-                            $user_model->insert($content);    
-                        }
-                        
-                        break;
+                            break;
 
-                    case 'expert':
-                        $role = 2;
-                        $new_role = $role_str . ',2';
-                        break;
+                        case 'expert':
+                            $role = 2;
+                            $new_role = $role_str . ',2';
+                            break;
 
-                    case 'supplier':
-                        $role = 4;
-                        $new_role = $role_str . ',4';
-                        break;
+                        case 'supplier':
+                            $role = 4;
+                            $new_role = $role_str . ',4';
+                            break;
+                    }
+
+
+                    // 
+                    // 用户认证 更新用户资料
+                    $user->save([
+                        'role' => $new_role,
+                    ]);
                 }
-                
-                
+
                 $this->where('id', $data['id'])->update([
                     'status' => $data['status'],
                 ]);
-               
-                // 用户认证 更新用户资料
-                $user->save([
-                    'role' => $new_role,
-                ]);
-
-
             }
             // $type==30 线下提现 确认
             if ($obj['type'] == 30) {
@@ -152,7 +208,6 @@ class Exam extends ExamModel
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
             Db::rollback();
-            halt($e->getMessage());
         }
 
         return false;

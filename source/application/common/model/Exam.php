@@ -36,10 +36,10 @@ class Exam extends BaseModel
     public function getTypeBonusTextAttr($value, $data)
     {
         $type = [
-            'person' => '升级个人会员',
-            'company' => '升级单位会员',
-            'expert' => '升级专家会员',
-            'supplier' => '升级供应商'
+            'person' => '个人会员',
+            'company' => '单位会员',
+            'expert' => '专家会员',
+            'supplier' => '供应商'
         ];
         return $type[$data['type_bonus']];
     }

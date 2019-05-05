@@ -41,11 +41,6 @@
 
 
 
-
-
-
-
-
                             <!--  -->
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">审核信息</div>
@@ -56,7 +51,16 @@
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
                                             <div class="am-u-sm-9 am-u-end">
-                                                <input type="text" class="tpl-form-input" name="<?= $k ?>" value="<?= $v ?>" disabled="disabled">
+                                                <input type="text" class="tpl-form-input" name="<?= $k ?>" value="<?= $k == 'gender' ? ($v == 0 ? '男' : '女') : $v ?>" disabled="disabled">
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php elseif ($key == "text") : ?>
+                                    <?php foreach ($item as $k => $v) : ?>
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <div class="am-u-sm-9 am-u-end">
+                                                <textarea name="<?= $k ?>" disabled="disabled" rows="10"><?= $v ?></textarea>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
@@ -118,8 +122,7 @@
                                     <button class="j-submit am-btn am-btn-danger" data-type="failed">驳回
                                     </button>
                                 </div>
-                                <input type="hidden" id="id" value="<?= $id ?>">
-                                <input type="hidden" id="content" value='<?= $content ?>'>
+                                <input type="hidden" id="id" value="<?= $id ?>">                                
                             </div>
                         <?php endif; ?>
                     </fieldset>
@@ -163,23 +166,27 @@
                 case 'failed':
                     status = 30;
                     break;
-            }
-
-            var content = JSON.parse($('#content').val());
+            }            
 
             $.post("<?= url('exam/examine') ?>", {
                 id: $('#id').val(),
-                status: status,
-                content: content
+                status: status                
             }, function(res) {
-                console.log(res);
-                layer.msg(res.msg, {
-                    time: 1500,
-                    anim: 1
-                }, function() {
-                    var url = "<?= url('exam/index') ?>&type=<?= $type ?>";
-                    // window.location.href = url;
-                });
+                if (res.code == 1) {
+                    layer.msg(res.msg, {
+                        time: 1500,
+                        anim: 1
+                    }, function(res) {
+                        var url = "<?= url('exam/index') ?>&type=<?= $type ?>";
+                        window.location.href = url;
+                    });
+                } else {
+                    layer.msg(res.msg, {
+                        time: 1500,
+                        anim: 1
+                    }, function(res) {});
+                }
+
             })
 
             return false;

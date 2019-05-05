@@ -25,10 +25,11 @@ class Exam extends Controller
     // 审核
     public function detail($id)
     {
-        $info = ExamModel::with(['user' => ['company', 'person']])->find($id);        
+        $info = ExamModel::with(['user' => ['company', 'person']])->find($id);
         $map = ExamModel::attrTextMap();
         $imgMap = ExamModel::attrImgMap();
         $fileMap = ExamModel::attrFileMap();
+        $textareaMap = ExamModel::attrTextAreaMap();
         // 
         $type = $info['type'];
         $status = $info['status'];
@@ -45,6 +46,8 @@ class Exam extends Controller
                 $data['image'][$key] = UploadApiFile::getFilePath($value);
             } elseif (in_array($key, $fileMap)) {
                 $data['file'][$key] = UploadApiFile::getFilePath($value);
+            } elseif (in_array($key, $textareaMap)) {
+                $data['text'][$key] = $value;
             } else {
                 $data['input'][$key] = $value;
             }
@@ -59,7 +62,7 @@ class Exam extends Controller
         $post = input();
         $model = new ExamModel;
         if (!$model->updateStatus($post)) {
-            return $this->renderError('审批失败');
+            return $this->renderError('审批失败,' . $model->error);
         }
         return $this->renderSuccess('审批成功');
     }

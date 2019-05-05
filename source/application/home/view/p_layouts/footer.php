@@ -188,7 +188,7 @@
             btn: ['确定', '取消'] //按钮
         }, function() {
             $.get('<?= url('quitUser') ?>', function(res) {
-                window.location.reload();
+                window.location.href = '/';
             })
         }, function() {
             layer.closeAll();

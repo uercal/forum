@@ -15,8 +15,8 @@
     }
 
     .avatar-uploader-icon {
-        font-size: 28px;onClose
-        color: #8c939d;
+        font-size: 28px;
+        onClose color: #8c939d;
         width: 178px;
         height: 178px;
         line-height: 178px;
@@ -143,7 +143,177 @@
         <template>
             <el-tabs v-model="activeName" type="card" class="">
                 <?php if ($levelOption == 1) : ?>
-                    <el-tab-pane label="个人会员" name="person"></el-tab-pane>
+                    <el-tab-pane label="个人会员" name="person">
+                        <el-form ref="person" :model="form_person" :rules="person_rules" label-width="80px" label-position="left" style="margin-top:30px;">
+                            <!--  -->
+                            <div class="divider">个人基本信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="姓名：" prop="name">
+                                        <el-input v-model="form_person.name" placeholder="请填写姓名 "></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="身份证：" prop="id_card">
+                                        <el-input v-model="form_person.id_card" placeholder="请填写身份证号码 "></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="性别：" prop="gender">
+                                        <el-radio v-model="form_person.gender" label="0">男</el-radio>
+                                        <el-radio v-model="form_person.gender" label="1">女</el-radio>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮箱：" prop="email">
+                                        <el-input v-model="form_person.email" placeholder="请填写邮箱"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="手机号" prop="phone">
+                                        <el-input v-model="form_person.phone" placeholder="请填写手机号"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮编：" prop="post_code">
+                                        <el-input v-model="form_person.post_code" placeholder="请填写邮编"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="住址：" prop="person_address">
+                                        <el-input v-model="form_person.person_address" placeholder="请填写住址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <div class="divider">学历教育信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="毕业院校：" prop="education_school">
+                                        <el-input v-model="form_person.education_school" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="学历学位：" prop="education_degree">
+                                        <el-input v-model="form_person.education_degree" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="专业：" prop="education_major">
+                                        <el-input v-model="form_person.education_major" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="毕业时间：" prop="education_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.education_time" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <div class="divider">工作信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="所在单位：" prop="belong_company">
+                                        <el-input v-model="form_person.belong_company" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="职务：" prop="job">
+                                        <el-input v-model="form_person.job" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="职称等级：" prop="positio">
+                                        <el-input v-model="form_person.positio" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="业务行业：" prop="sector">
+                                        <el-input v-model="form_person.sector" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="业务领域：" prop="area">
+                                        <el-input v-model="form_person.area" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="工作年限：" prop="work_limit">
+                                        <el-date-picker v-model="form_person.work_limit" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+                                        </el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="职称取得时间：" label-width="32%" prop="positio_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">图片信息</div>
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="24">
+                                    个人证件照：
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=idcard" ref="idcard" :show-file-list="false" :on-success="handleIdcardSuccess" :before-upload="beforeAvatarUpload">
+                                    <img v-if="idPhotoUrl" :src="idPhotoUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+
+                            <!-- PDF -->
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">个人证件附件：<small style="color:#999999;font-weight:100;font-size:10px;">（学历和学位、职称、职业资格、高层次人才等证书制成一个PDF文件上传，且不超过2MB）</small>
+                                    </label>
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=personfile" ref="personFile" accept=".pdf" :show-file-list="false" :on-success="handlePersonFileSuccess" :before-upload="beforeFileUpload">
+                                    <img v-if="personFileUrl" :src="personFileUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+
+                            <div class="divider" style="margin-top:25px;">个人简介</div>
+
+                            <el-row>
+                                <el-col :span="24" style="position:relative;">
+                                    <el-form-item label="简介描述" prop="introduce">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="company_intro_limit" v-model="form_person.introduce">
+                                        </el-input>
+                                    </el-form-item>
+                                    <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
+                                </el-col>
+                            </el-row>
+
+                            <el-col :span="24" style="margin-top:30px;">
+                                <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
+                            </el-col>
+                        </el-form>
+                    </el-tab-pane>
                 <?php endif; ?>
                 <?php if ($levelOption == 2) : ?>
                     <el-tab-pane label="专家会员" name="expert"></el-tab-pane>
@@ -204,6 +374,13 @@
                                     </el-form-item>
                                 </el-col>
                             </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="地址邮编：" prop="address">
+                                        <el-input v-model="form_company.address" placeholder="请填写公司地址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
 
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">联系人基本信息</div>
@@ -233,7 +410,7 @@
                             </el-row>
 
                             <!--  -->
-                            <div class="divider" style="margin-top:25px;">图片信息</div>                            
+                            <div class="divider" style="margin-top:25px;">图片信息</div>
                             <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
                                 <el-col :span="24">
                                     单位LOGO图片：
@@ -267,13 +444,7 @@
                             <el-row>
                                 <el-col :span="24" style="position:relative;">
                                     <el-form-item label="简介描述" prop="company_intro">
-                                        <el-input 
-                                        type="textarea" 
-                                        maxlength="800" 
-                                        rows=8 
-                                        placeholder="请输入内容" 
-                                        @input="company_intro_limit" 
-                                        v-model="form_company.company_intro">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="company_intro_limit" v-model="form_company.company_intro">
                                         </el-input>
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_company.company_intro.length }}个字</small>
@@ -283,7 +454,7 @@
 
 
                             <el-col :span="24" style="margin-top:30px;">
-                                <el-button type="primary" @click="onSubmit">提交申请</el-button>
+                                <el-button type="primary" @click="onSubmit('company')">提交申请</el-button>
                             </el-col>
                         </el-form>
                     </el-tab-pane>
@@ -311,10 +482,138 @@
         window.vue = new Vue({
             el: '#app',
             data: {
-                posting:false,
+                posting: false,
                 activeName: '',
                 imageUrl: '',
                 fileUrl: '',
+                idPhotoUrl: '',
+                personFileUrl: '',
+                // 个人
+                form_person: {
+                    name: '',
+                    id_card: '',
+                    gender: '',
+                    email: '',
+                    phone: '',
+                    post_code: '',
+                    person_address: '',
+                    education_school: '',
+                    education_degree: '',
+                    education_major: '',
+                    education_time: '',
+                    belong_company: '',
+                    positio: '',
+                    job: '',
+                    work_limit: '',
+                    positio_time: '',
+                    sector: '',
+                    area: '',
+                    id_photo: '',
+                    person_file: '',
+                    introduce: ''
+                },
+                person_rules: {
+                    name: [{
+                        required: true,
+                        message: '请填写姓名',
+                        trigger: 'blur'
+                    }],
+                    id_card: [{
+                        required: true,
+                        message: '请填写身份证号码',
+                        trigger: 'blur'
+                    }, {
+                        pattern: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+                        message: '身份证号码格式错误',
+                        trigger: 'blur'
+                    }],
+                    gender: [{
+                        required: true,
+                        message: '请选择性别',
+                        trigger: 'blur'
+                    }],
+                    email: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    phone: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    post_code: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    person_address: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    education_school: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    education_degree: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    education_major: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    education_time: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    belong_company: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    positio: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    job: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    work_limit: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    positio_time: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sector: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    area: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    introduce: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }]
+                },
+                // 单位
                 form_company: {
                     company_name: '',
                     build_time: '',
@@ -323,96 +622,172 @@
                     company_type: '',
                     server_level: '',
                     company_tel: '',
+                    address: '',
                     email: '',
                     manager_name: '',
                     manager_job: '',
-                    manager_phone:'',
-                    manager_wechat:'',
-                    company_logo:'',
-                    license_file:'',
-                    company_intro: ''                                
+                    manager_phone: '',
+                    manager_wechat: '',
+                    company_logo: '',
+                    license_file: '',
+                    company_intro: ''
                 },
-                company_rules:{
-                    company_name: [
-                        { required: true, message: '请填写内容', trigger: 'blur' }                        
+                company_rules: {
+                    company_name: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    build_time: [{
+                        required: true,
+                        message: '请选择日期',
+                        trigger: 'blur'
+                    }],
+                    legal_person: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    company_code: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    company_type: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    server_level: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    company_tel: [{
+                        required: true,
+                        message: '请输入公司电话',
+                        trigger: 'blur'
+                    }],
+                    address: [{
+                        required: true,
+                        message: '请输入公司地址',
+                        trigger: 'blur'
+                    }],
+                    email: [{
+                            required: true,
+                            message: '请输入单位邮箱',
+                            trigger: 'blur'
+                        },
+                        {
+                            type: 'email',
+                            message: '请填写邮箱格式'
+                        }
                     ],
-                    build_time: [
-                        { required: true, message: '请选择日期', trigger: 'blur' }                        
+                    manager_name: [{
+                        required: true,
+                        message: '请输入联系人姓名',
+                        trigger: 'blur'
+                    }],
+                    manager_job: [{
+                        required: true,
+                        message: '请输入联系人职务',
+                        trigger: 'blur'
+                    }],
+                    manager_phone: [{
+                            required: true,
+                            message: '请输入联系人电话',
+                            trigger: 'blur'
+                        },
+                        {
+                            type: 'number',
+                            message: '必须为数字'
+                        }
                     ],
-                    legal_person: [
-                        { required: true, message: '请填写内容', trigger: 'blur' }                        
-                    ],
-                    company_code: [
-                        { required: true, message: '请填写内容', trigger: 'blur' }                        
-                    ],
-                    company_type: [
-                        { required: true, message: '请填写内容', trigger: 'blur' }                        
-                    ],
-                    server_level: [
-                        { required: true, message: '请填写内容', trigger: 'blur' }                        
-                    ],
-                    company_tel: [
-                        { required: true, message: '请输入公司电话',trigger: 'blur'}                        
-                    ],
-                    email: [
-                        { required: true, message: '请输入单位邮箱', trigger: 'blur' },
-                        {type:'email',message:'请填写邮箱格式'}                      
-                    ],
-                    manager_name: [
-                        { required: true, message: '请输入联系人姓名', trigger: 'blur' }                        
-                    ],
-                    manager_job: [
-                        { required: true, message: '请输入联系人职务', trigger: 'blur' }                        
-                    ],
-                    manager_phone:[
-                        { required: true, message: '请输入联系人电话',trigger: 'blur'},
-                        { type:'number', message: '必须为数字'}                     
-                    ],
-                    manager_wechat:[
-                        { required: true, message: '请输入联系人微信号', trigger: 'blur' }                        
-                    ],                    
-                    company_intro: [
-                        { required: true, message: '请输入公司简介', trigger: 'blur' }                        
-                    ],
+                    manager_wechat: [{
+                        required: true,
+                        message: '请输入联系人微信号',
+                        trigger: 'blur'
+                    }],
+                    company_intro: [{
+                        required: true,
+                        message: '请输入公司简介',
+                        trigger: 'blur'
+                    }],
                 }
             },
             methods: {
-                doPost(form){
-                    if(!this.posting){
+                doPost(form) {
+                    if (!this.posting) {
                         this.posting = true;
-                        var _this = this;                                            
-                        $.post('<?= url('updateAjax') ?>',{form:form,form_type:_this.activeName},function(res){
+                        var _this = this;
+                        $.post('<?= url('updateAjax') ?>', {
+                            form: form,
+                            form_type: _this.activeName
+                        }, function(res) {
                             console.log(res);
-                            if (res.code == 1) {                                                         
+                            if (res.code == 1) {
                                 _this.$message.success(res.msg);
-                                window.location.reload();
+                                setTimeout(function() {
+                                    window.location.href = '<?= url('personcenter') ?>'
+                                }, 1000);
                                 // 
                             } else {
                                 _this.$message.error(res.msg);
                                 _this.posting = false;
                             }
                         });
-                    }else{
-                       
-                    }                    
-                }
-                ,
+                    } else {
+
+                    }
+                },
                 handleClick(tab, event) {
 
                 },
-                onSubmit() {
-                    this.$refs['company'].validate((valid) => {
-                        if (valid) {
-                            if(this.form_company.company_logo&&this.form_company.license_file){
-                                this.doPost(this.form_company);
-                            }else{
-                                this.$message.error('请上传相应图片和附件');
+                onSubmit(type) {
+                    if (type == 'person') {
+                        this.$refs['person'].validate((valid) => {
+                            if (valid) {
+                                if (this.form_person.id_photo && this.form_person.person_file) {
+                                    this.doPost(this.form_person);
+                                } else {
+                                    this.$message.error('请上传相应图片和附件');
+                                }
+                            } else {
+                                console.log('error submit!!');
+                                return false;
                             }
-                        } else {
-                            console.log('error submit!!');
-                            return false;
-                        }
-                    });
+                        });
+                    }
+
+
+                    // 
+                    if (type == 'company') {
+                        this.$refs['company'].validate((valid) => {
+                            if (valid) {
+                                if (this.form_company.company_logo && this.form_company.license_file) {
+                                    this.doPost(this.form_company);
+                                } else {
+                                    this.$message.error('请上传相应图片和附件');
+                                }
+                            } else {
+                                console.log('error submit!!');
+                                return false;
+                            }
+                        });
+                    }
+
+                    // 
+
+                },
+                handleIdcardSuccess(res, file) {
+                    if (res.code == 1) {
+                        this.idPhotoUrl = URL.createObjectURL(file.raw);
+                        this.$message.success(res.msg);
+                        this.form_person.id_photo = res.data.file_id;
+                        // 
+                    } else {
+                        this.$message.error(res.msg);
+                    }
                 },
                 handleAvatarSuccess(res, file) {
                     if (res.code == 1) {
@@ -424,8 +799,18 @@
                         this.$message.error(res.msg);
                     }
                 },
+                handlePersonFileSuccess(res, file) {
+                    if (res.code == 1) {
+                        this.personFileUrl = 'assets/home/images/pdf-icon.png';
+                        this.$message.success(res.msg);
+                        this.form_person.person_file = res.data.file_id;
+                        // 
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                },
                 handleFileSuccess(res, file) {
-                    if (res.code == 1) {                         
+                    if (res.code == 1) {
                         this.fileUrl = 'assets/home/images/pdf-icon.png';
                         this.$message.success(res.msg);
                         this.form_company.license_file = res.data.file_id;

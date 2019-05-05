@@ -34,9 +34,7 @@ class User extends UserModel
 
         if (input('type')) {
             $mode_data = input('type');
-        } else {
-            $mode_data = 'normal';
-        }
+        }        
         // 
         switch ($mode_data) {
             case 'normal':
@@ -47,25 +45,32 @@ class User extends UserModel
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'person':
-                # code...
+                if (input('title')) {
+                    $map['name'] = ['like', '%' . input('title') . '%'];
+                }
+                $model = new UserPerson;
+                $list = $model->where($map)->order($order)
+                    ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
                 # code...
                 break;
             case 'company':
-                # code...
+                if (input('title')) {
+                    $map['company_name'] = ['like', '%' . input('title') . '%'];
+                }
+                $model = new UserCompany;
+                $list = $model->with(['user'])->where($map)->order($order)
+                    ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'supplier':
                 # code...
-                break;
-            default:
-                # code...
-                break;
+                break;           
         }
 
 
 
-        return compact('list');
+        return compact('list', 'mode_data');
     }
 
 
@@ -130,7 +135,8 @@ class User extends UserModel
         try {
             $this->allowField(true)->save([
                 'user_name' => $user_name,
-                'password' => $password
+                'password' => $password,
+                'role' => '0'
             ]);
             Db::commit();
             return true;

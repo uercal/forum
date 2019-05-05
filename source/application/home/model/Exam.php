@@ -19,8 +19,11 @@ class Exam extends ExamModel
     public function updateExam($form, $form_type, $user_id, $level_option)
     {
 
+        //         
+        if ($form_type == 'person') {
+            $form['work_limit'] = implode(',', $form['work_limit']);
+        }
         // 
-        $form['build_time'] = strtotime($form['build_time']);
         $content = json_encode($form);
         $post = [
             'user_id' => $user_id,

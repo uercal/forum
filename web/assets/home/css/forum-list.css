@@ -339,8 +339,8 @@
 .users-list-item>img {
     position: absolute;
     left: 0;
-    width: 33.33333%;
-    height: 60%;
+    width: 30%;
+    height: 70%;
     bottom: 40px;
     border-radius: 5px;
     z-index: 9;
@@ -370,7 +370,7 @@
     position: absolute;
     height: 32px;
     width: 84px;
-    bottom: 15px;
+    bottom: 10px;
     left: 0;
     background: #7FBAFF;
     display: flex;

@@ -32,11 +32,15 @@ class Person extends Controller
     {
         parent::_initialize();
         if (!session('forum_user')) {
-            return $this->redirect(url('/index/index'));
+            return $this->redirect('/');
         } else {
-            // 
+            //             
             $this->user = User::detail(session('forum_user')['user']['user_id']);
             // 
+            if ($this->user['role'] != session('form_user')['user']['role']) {
+                User::freshUserSession();
+            }
+            //             
             $this->view->engine->layout('p_layouts/layout');
         }
     }
@@ -139,7 +143,6 @@ class Person extends Controller
     public function quitUser()
     {
         session('forum_user', null);
-        return $this->redirect('/index/index');
     }
 
     /**
@@ -189,9 +192,36 @@ class Person extends Controller
 
     public function updateGrade()
     {
-        // 
-        $levelOption = $this->getLevelOption();
-        return $this->fetch('update', compact('levelOption'));
+
+        $exam_model = new Exam;
+        // 是否有正在审批的升级请求
+        $obj = $exam_model->where([
+            'user_id' => $this->user['user_id'],
+            'type' => 10,
+            'status' => 10
+        ])->find();
+
+        if ($obj) {
+            switch ($obj['type_bonus']) {
+                case 'person':
+                    $obj_type = '个人会员';
+                    break;
+                case 'company':
+                    $obj_type = '单位会员';
+                    break;
+                case 'expert':
+                    $obj_type = '专家会员';
+                    break;
+                case 'supplier':
+                    $obj_type = '供应商';
+                    break;
+            }            
+            return $this->fetch('update_ing', compact('obj_type'));
+        } else {
+            // 
+            $levelOption = $this->getLevelOption();
+            return $this->fetch('update', compact('levelOption'));
+        }
     }
 
 
@@ -235,7 +265,7 @@ class Person extends Controller
         $form = $this->postData('form');
         $form_type = input('form_type');
         $exam_model = new Exam;
-        // $exam_model->updateExam($form,$form_type,$this->user['user_id']);
+        // halt([$form,$form_type]);        
         // 
         if ($exam_model->updateExam($form, $form_type, $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');

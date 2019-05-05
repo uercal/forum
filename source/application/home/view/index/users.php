@@ -53,10 +53,13 @@
                     <?php endif; ?>
                 </div>
                 <div class="list-filter" id="filter">
-                    <el-select v-model="type" @change="changeType" placeholder="会员类型">
-                        <el-option v-for="item in options" :key="item.value" :label="item.name" :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <?php if ($data['mode_data'] != 'expert' && $data['mode_data'] != 'supplier') : ?>
+                        <el-select v-model="type" @change="changeType" placeholder="会员类型">
+                            <el-option v-for="item in options" :key="item.value" :label="item.name" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    <?php endif; ?>
+
                     <div class="list-filter-order" onclick="list_sort('<?= input('sort') ? input('sort') : 'asc' ?>')">
                         <p>按公布日期</p>
                         <span class="<?= input('sort') ? (input('sort') == 'asc' ? 'am-icon-sort-amount-asc' : 'am-icon-sort-amount-desc') : 'am-icon-sort-amount-asc' ?>" style="color:#44874B;"></span>
@@ -78,42 +81,80 @@
 
         <div class="users-list">
             <?php foreach ($data['list'] as $item) : ?>
-                <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
-                    <img style="background-image:url(assets/home/images/about/004.jpg);" alt="">
-                    <div>
-                        <div class="users-level">
-                            <p>普通会员</p>
-                        </div>
-                        <div class="users-item-info">
-                            <strong>北京揽月机械有限公司</strong>
-                            <div>
-                                <div>
-                                    <span class="am-icon-building-o"></span>
-                                    <p>北京揽月机械有限公司</p>
-                                </div>
-                                <div>
-                                    <span class="am-icon-file-text-o"></span>
-                                    <p>投资咨询</p>
-                                </div>
-                                <div>
-                                    <span class="am-icon-phone"></span>
-                                    <p>020-1234455</p>
-                                </div>
-                                <div>
-                                    <span class="am-icon-at"></span>
-                                    <p>mayun@126.com</p>
-                                </div>
-                                <div>
-                                    <span class="am-icon-send-o"></span>
-                                    <p>北京市海淀区华海北路289号</p>
-                                </div>
+                <?php if (input('type') == 'company') : ?>
+                    <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
+                        <img style="object-fit:cover;" src="<?= $item['company_logo_path'] ?>" alt="">
+                        <div>
+                            <div class="users-level">
+                                <p><?= $item['user']['role_name'] ?></p>
                             </div>
-                            <div class="users-item-arrow">
+                            <div class="users-item-info">
+                                <strong><?= $item['user']['user_name'] ?></strong>
+                                <div>
+                                    <div>
+                                        <span class="am-icon-building-o"></span>
+                                        <p><?= $item['company_name'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-file-text-o"></span>
+                                        <p><?= $item['company_type'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-phone"></span>
+                                        <p><?= $item['company_tel'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-at"></span>
+                                        <p><?= $item['email'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-send-o"></span>
+                                        <p><?= $item['address'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="users-item-arrow">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php elseif (input('type') == 'person') : ?>
+                    <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
+                        <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
+                        <div>
+                            <div class="users-level">
+                                <p><?= $item['user']['role_name'] ?></p>
+                            </div>
+                            <div class="users-item-info">
+                                <strong><?= $item['name'] ?></strong>
+                                <div>
+                                    <div>
+                                        <span class="am-icon-building-o"></span>
+                                        <p><?= $item['education_major'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-file-text-o"></span>
+                                        <p><?= $item['education_degree'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-briefcase"></span>
+                                        <p><?= $item['job'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-book"></span>
+                                        <p><?= $item['positio'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-send-o"></span>
+                                        <p><?= $item['person_address'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="users-item-arrow">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -127,8 +168,7 @@
 
 
 
-
-
+                <?php endif; ?>
                 <!--  -->
             <?php endforeach; ?>
         </div>
