@@ -171,8 +171,6 @@
     <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 </div>
 
-
-
 <!--  -->
 <!-- <script src="assets/home/js/jquery-1.8.2.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -182,6 +180,15 @@
 <script src="assets/head/main.js"></script>
 </body>
 <script>
+    $(function() {
+        //         
+        $('.el-icon-close').on('click',function(){
+            $(this).parent().parent().toggle('slow');
+        })
+    })
+
+
+
     function quit() {
         layer.confirm('是否确定退出', {
             title: '确认',
@@ -262,7 +269,6 @@
         function activity(id) {
             window.location.href = "<?= url('/index/activity') ?>/id/" + id;
         }
-
     });
 </script>
 

@@ -27,6 +27,7 @@ use app\home\model\Exam;
 class Person extends Controller
 {
     protected $user;
+    protected $msg;
     // 
     public function _initialize()
     {
@@ -34,12 +35,15 @@ class Person extends Controller
         if (!session('forum_user')) {
             return $this->redirect('/');
         } else {
-            //             
             $this->user = User::detail(session('forum_user')['user']['user_id']);
             // 
-            if ($this->user['role'] != session('form_user')['user']['role']) {
+            if ($this->user['role'] != session('forum_user')['user']['role']) {
+                $this->getResExamMsg('success');
                 User::freshUserSession();
+            } else {
+                $this->getResExamMsg('reject');
             }
+
             //             
             $this->view->engine->layout('p_layouts/layout');
         }
@@ -127,19 +131,6 @@ class Person extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function quitUser()
     {
         session('forum_user', null);
@@ -176,6 +167,7 @@ class Person extends Controller
     private function getLevelOption()
     {
         $role_arr = explode(',', $this->user['role']);
+        $levelOption = $role_arr;
         if (in_array(0, $role_arr)) {
             // 普通会员
             $levelOption = 1;
@@ -192,7 +184,6 @@ class Person extends Controller
 
     public function updateGrade()
     {
-
         $exam_model = new Exam;
         // 是否有正在审批的升级请求
         $obj = $exam_model->where([
@@ -215,18 +206,32 @@ class Person extends Controller
                 case 'supplier':
                     $obj_type = '供应商';
                     break;
-            }            
+            }
             return $this->fetch('update_ing', compact('obj_type'));
         } else {
             // 
             $levelOption = $this->getLevelOption();
-            return $this->fetch('update', compact('levelOption'));
+            $roleArr = explode(',', $this->user['role']);
+            $fullRole = 0;
+            $fullPerson = in_array(2, $roleArr) && in_array(4, $roleArr) && $levelOption == 2;
+            $fullCompany = in_array(4, $roleArr) && $levelOption == 3;
+            if ($fullPerson || $fullCompany) {
+                $fullRole = 1;
+            }
+            return $this->fetch('update', compact('levelOption', 'roleArr', 'fullRole'));
         }
     }
 
 
 
-
+    public function getResExamMsg($type)
+    {
+        $exam_model = new Exam;
+        $msg = $exam_model->getResMsg($this->user['user_id'], $type);
+        if (!empty($msg)) {
+            $this->assign('msg', ['type' => $type, 'data' => $msg]);
+        }
+    }
 
 
 
@@ -273,6 +278,17 @@ class Person extends Controller
             return $this->renderError($exam_model->error);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

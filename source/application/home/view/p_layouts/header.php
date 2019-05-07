@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>个人中心</title>
     <link rel="stylesheet" href="assets/home/css/index.css" />
-    <!-- <link rel="stylesheet" href="assets/home/css/amazeui.css" /> -->
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
     <link rel="stylesheet" href="assets/home/css/forum-list.css" />
@@ -20,6 +19,7 @@
     <link rel="stylesheet" href="assets/head/cropper.min.css">
     <link rel="stylesheet" href="assets/head/main.css">
     <!--  -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
     <script>
         BASE_URL = '<?= isset($base_url) ? $base_url : '
         ' ?>';
@@ -102,6 +102,27 @@
 
 
         <!--  -->
+        <?php if (isset($msg)) : ?>
+            <?php if ($msg['type'] == 'reject') : ?>
+                <div class="el-alert el-alert--warning is-center is-light exam-message">
+                    <!---->
+                    <div class="el-alert__content" style="text-align: center;"><span class="el-alert__title is-bold">你的升级审批请求被驳回</span>
+                        <!---->
+                        <p class="el-alert__description"><?= $msg['data']['bonus'] ?></p><i class="el-alert__closebtn el-icon-close"></i>
+                    </div>
+                </div>
+            <?php elseif ($msg['type'] == 'success') : ?>
+                <div class="el-alert el-alert--success is-center is-light exam-message"><i class="el-alert__icon el-icon-info"></i>
+                    <div class="el-alert__content"><span class="el-alert__title">你的升级审批已通过！</span><i class="el-alert__closebtn el-icon-close"></i></div>
+                </div>
+            <?php endif;
+    endif; ?>
+
+
+
+
+
+
         <div class="person-body">
             <div class="person-left">
                 <div class="person-user-info">

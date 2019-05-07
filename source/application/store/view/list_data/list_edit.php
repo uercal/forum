@@ -20,7 +20,7 @@
 
                             <?php if ($model['mode']['key_word'] == 'user_news') : ?>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">列表是否含类别 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否含类别 </label>
                                     <div class="am-u-sm-9 am-u-end" id="radio_show">
                                         <label class="am-radio-inline">
                                             <input type="radio" name="list[cate_exist]" value="0" data-am-ucheck <?= $model['cate_exist'] == 0 ? 'checked' : '' ?>>
@@ -32,7 +32,30 @@
                                         </label>
                                     </div>
                                 </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否含封面 </label>
+                                    <div class="am-u-sm-9 am-u-end" id="radio_show">
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="list[cover_exist]" value="0" data-am-ucheck <?= $model['cover_exist'] == 0 ? 'checked' : '' ?>>
+                                            否
+                                        </label>
+                                        <label class="am-radio-inline">
+                                            <input type="radio" name="list[cover_exist]" value="1" data-am-ucheck <?= $model['cover_exist'] == 1 ? 'checked' : '' ?>>
+                                            是
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" id="cate_exist" style="display:<?= $model['cate_exist'] == 0 ? 'none' : 'block' ?>">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别<small>(每个类别用逗号隔开)</small></label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="list[options]" value="<?= $model['options'] ?>" required>
+                                    </div>
+                                </div>
+                                
                             <?php endif; ?>
+
 
 
                             <div class="am-form-group">
@@ -57,5 +80,12 @@
          */
         $('#my-form').superForm();
 
+        $("input[name='list[cate_exist]']").on('click', function() {
+            if ($(this).val() == 1) {
+                $('#cate_exist').show();
+            } else {
+                $('#cate_exist').hide();
+            }
+        })
     });
 </script>

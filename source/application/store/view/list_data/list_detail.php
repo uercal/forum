@@ -33,7 +33,7 @@
 
                         <?php if ($model['mode']['key_word'] == 'news') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                        tpl-table-black am-text-nowrap">
+                                                            tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -96,7 +96,7 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'job') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                        tpl-table-black am-text-nowrap">
+                                                            tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -161,7 +161,7 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'mag') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                        tpl-table-black am-text-nowrap">
+                                                            tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -219,13 +219,15 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'user_news') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                        tpl-table-black am-text-nowrap">
+                                                            tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
-                                        <th>标题</th>                                        
+                                        <th>标题</th>
+                                        <?= $model['cover_exist'] == 1 ? '<th>封面</th>' : '' ?>
                                         <th>排序</th>
                                         <th>添加时间</th>
+                                        <th>上传人</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
@@ -239,7 +241,14 @@
                                                     <p class="item-title">
                                                         <?= $item['title'] ?>
                                                     </p>
-                                                </td>                                                
+                                                </td>
+                                                <?php if ($model['cover_exist'] == 1) : ?>
+                                                    <td class="am-text-middle">
+                                                        <a href="<?= $item['cover']['file_path'] ?>" title="点击查看大图" target="_blank">
+                                                            <img src="<?= $item['cover']['file_path'] ?>" width="72" height="72" alt="">
+                                                        </a>
+                                                    </td>
+                                                <?php endif; ?>
                                                 <td class="am-text-middle">
                                                     <?= $item['sort'] ?>
                                                 </td>
@@ -247,12 +256,15 @@
                                                     <?= $item['create_time'] ?>
                                                 </td>
                                                 <td class="am-text-middle">
+                                                    <?= empty($item['user'])?'admin':$item['user']['user_name'] ?>
+                                                </td>
+                                                <td class="am-text-middle">
                                                     <div class="tpl-table-black-operation">
                                                         <a href="<?= url(
                                                                         'list_data/detail_edit',
                                                                         ['id' => $item['id']]
                                                                     ) ?>">
-                                                            <i class="am-icon-pencil"></i> 编辑
+                                                            <i class="am-icon-pencil"></i> 查看
                                                         </a>
                                                         <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['id'] ?>">
                                                             <i class="am-icon-trash"></i> 删除
@@ -263,7 +275,7 @@
                                         <?php endforeach;
                                 else : ?>
                                         <tr>
-                                            <td colspan="5" class="am-text-center">暂无记录</td>
+                                            <td colspan="<?= $model['cover_exist'] == 1 ? '6' : '5' ?>" class="am-text-center">暂无记录</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>

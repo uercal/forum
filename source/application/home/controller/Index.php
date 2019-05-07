@@ -157,11 +157,9 @@ class Index extends Controller
 
             default:
 
-
-
-
                 break;
         }        
+        
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 

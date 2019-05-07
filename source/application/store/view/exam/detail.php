@@ -38,9 +38,6 @@
                             </div>
 
 
-
-
-
                             <!--  -->
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">审核信息</div>
@@ -56,6 +53,9 @@
                                         </div>
                                     <?php endforeach; ?>
                                 <?php elseif ($key == "text") : ?>
+                                    <div class="widget-head am-cf">
+                                        <div class="widget-title am-fl">详细信息</div>
+                                    </div>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
@@ -90,6 +90,22 @@
 
                                     <?php endforeach; ?>
 
+                                <?php elseif ($key == 'array') : ?>
+                                    <?php foreach ($item as $k => $v) :  ?>
+                                        <div class="widget-head am-cf">
+                                            <div class="widget-title am-fl"><?= $map[$k] ?></div>
+                                        </div>
+                                        <div class="am-form-group">
+                                            <?php foreach ($v as $_k => $_v) : foreach ($_v as $i => $value) : ?>
+                                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $value['name'] . ($_k + 1) ?>:</label>
+                                                    <div class="am-u-sm-9 am-u-end">
+                                                        <input type="text" class="tpl-form-input" value="<?= $value['value'] ?>" disabled="disabled">
+                                                    </div>
+                                                <?php endforeach;
+                                        endforeach; ?>
+                                            <!-- todo -->
+                                        </div>
+                                    <?php endforeach; ?>
 
                                 <?php elseif ($key == "file") : ?>
                                     <?php foreach ($item as $k => $v) : ?>
@@ -109,6 +125,14 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">备注信息</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <textarea type="text" id="bonus" class="tpl-form-input" value=""></textarea>
+                                </div>
+                            </div>
+
                         </form>
 
                         <?php if ($status == 10) : ?>
@@ -122,7 +146,7 @@
                                     <button class="j-submit am-btn am-btn-danger" data-type="failed">驳回
                                     </button>
                                 </div>
-                                <input type="hidden" id="id" value="<?= $id ?>">                                
+                                <input type="hidden" id="id" value="<?= $id ?>">
                             </div>
                         <?php endif; ?>
                     </fieldset>
@@ -139,23 +163,6 @@
          * @type {*}
          */
         $('.j-submit').on('click', function() {
-            var post_data = [];
-            $('input').map(function() {
-                var name = $(this).attr('name');
-                var value = $(this).val();
-                if (!name || value == "") {
-                    return false;
-                }
-                var data = {
-                    'name': name,
-                    'value': value
-                };
-                post_data.push(data);
-            })
-            $('img').map(function() {
-                console.log($(this));
-            })
-            console.log(post_data);
             var type = $(this).attr('data-type');
             var status = 10;
             switch (type) {
@@ -166,11 +173,12 @@
                 case 'failed':
                     status = 30;
                     break;
-            }            
+            }
 
             $.post("<?= url('exam/examine') ?>", {
                 id: $('#id').val(),
-                status: status                
+                bonus: $('#bonus').val(),
+                status: status
             }, function(res) {
                 if (res.code == 1) {
                     layer.msg(res.msg, {

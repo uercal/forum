@@ -1,5 +1,4 @@
 <!--  -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
 <!-- <link rel="stylesheet" href="assets/home/css/1.css"> -->
 <style>
     .avatar-uploader .el-upload {
@@ -16,7 +15,7 @@
 
     .avatar-uploader-icon {
         font-size: 28px;
-        onClose color: #8c939d;
+        color: #8c939d;
         width: 178px;
         height: 178px;
         line-height: 178px;
@@ -302,7 +301,7 @@
                             <el-row>
                                 <el-col :span="24" style="position:relative;">
                                     <el-form-item label="简介描述" prop="introduce">
-                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="company_intro_limit" v-model="form_person.introduce">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="intro_limit('person')" v-model="form_person.introduce">
                                         </el-input>
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
@@ -318,7 +317,6 @@
                 <?php if ($levelOption == 2) : ?>
                     <el-tab-pane label="专家会员" name="expert"></el-tab-pane>
                 <?php endif; ?>
-                <!-- todo -->
                 <?php if ($levelOption == 1) : ?>
                     <el-tab-pane label="单位会员" name="company">
                         <el-form ref="company" :model="form_company" :rules="company_rules" label-width="80px" label-position="left" style="margin-top:30px;">
@@ -444,7 +442,7 @@
                             <el-row>
                                 <el-col :span="24" style="position:relative;">
                                     <el-form-item label="简介描述" prop="company_intro">
-                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="company_intro_limit" v-model="form_company.company_intro">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="intro_limit('company')" v-model="form_company.company_intro">
                                         </el-input>
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_company.company_intro.length }}个字</small>
@@ -459,7 +457,239 @@
                         </el-form>
                     </el-tab-pane>
                 <?php endif; ?>
-                <el-tab-pane label="供应商" name="supplier"></el-tab-pane>
+                <?php if (!in_array(4, $roleArr)) : ?>
+                    <el-tab-pane label="供应商" name="supplier">
+                        <el-form ref="sup" :model="form_sup" :rules="supplier_rules" label-width="80px" label-position="left" style="margin-top:30px;">
+                            <!--  -->
+                            <div class="divider">供应商单位基本信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="单位名称：" prop="sup_company_name">
+                                        <el-input v-model="form_sup.sup_company_name" placeholder="请填写单位名称"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="成立时间：" prop="sup_build_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_sup.sup_build_time" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="单位类型：" class="" prop="sup_company_type">
+                                        <el-input v-model="form_sup.sup_company_type" placeholder="请填写单位类型"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="统一社会信用代码：" label-width="130px" prop="sup_company_code">
+                                        <el-input v-model="form_sup.sup_company_code" placeholder="XXXXXXX"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="单位法人：" class="" prop="sup_legal_person">
+                                        <el-input v-model="form_sup.sup_legal_person" placeholder="请填写单位法人"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="单位电话：" prop="sup_company_tel">
+                                        <el-input v-model.number="form_sup.sup_company_tel" placeholder="0898-66666666"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="单位邮箱：" class="" prop="sup_company_email">
+                                        <el-input type="email" v-model="form_sup.sup_company_email" placeholder="xx@xx.com"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="地址：" prop="sup_company_address">
+                                        <el-input v-model="form_sup.sup_company_address" placeholder="请填写公司地址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮编：" prop="sup_post_code">
+                                        <el-input v-model="form_sup.sup_post_code" placeholder="请填写邮编"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">联系人基本信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="姓名：" prop="sup_manager_name">
+                                        <el-input v-model="form_sup.sup_manager_name" placeholder="请填写联系人姓名"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="单位职务：" class="" prop="sup_manager_job">
+                                        <el-input type="email" v-model="form_sup.sup_manager_job" placeholder="请填写联系人职务"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="联系手机：" prop="sup_manager_phone">
+                                        <el-input v-model.number="form_sup.sup_manager_phone" placeholder="请填写联系人手机"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="微信号：" class="" prop="sup_manager_wechat">
+                                        <el-input v-model="form_sup.sup_manager_wechat" placeholder="请填写联系人微信号"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <!-- cates -->
+                            <div class="divider" style="margin-top:25px;">供应类别</div>
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    工程类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span type="text" @click="addCate('eng')" style="cursor:pointer;">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_sup.sup_eng_cate" :key="index">
+                                    <el-col :span="12">
+                                        <el-form-item :label="'资质标准类别'+(index+1)" label-width="100px">
+                                            <el-input v-model="item.cate" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="11">
+                                        <el-form-item label="资质类别等级：" label-width="100px">
+                                            <el-input v-model="item.level" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('eng',index)"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    货物类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span type="text" @click="addCate('goods')" style="cursor:pointer;">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_sup.sup_goods_cate" :key="index">
+                                    <el-col :span="12">
+                                        <el-form-item :label="'生产销售许可'+(index+1)" label-width="100px">
+                                            <el-input v-model="item.permit" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="11">
+                                        <el-form-item label="供应内容：" label-width="80px">
+                                            <el-input v-model="item.content" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('goods',index)"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    服务类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span @click="addCate('server')" style="cursor:pointer;" type="text">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_sup.sup_server_cate" :key="index">
+                                    <el-col :span="12">
+                                        <el-form-item :label="'资质资格资信专业'+(index+1)" label-width="130px">
+                                            <el-input v-model="item.major" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="11">
+                                        <el-form-item label="资质类别等级：" label-width="100px">
+                                            <el-input v-model="item.level" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('server',index)"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
+
+
+
+
+
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">图片信息</div>
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="24">
+                                    个人证件照：
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=supIdFile" ref="avatar" :show-file-list="false" :on-success="handleSupIdPhotoSuccess" :before-upload="beforeAvatarUpload">
+                                    <img v-if="supIdPhotoUrl" :src="supIdPhotoUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+
+                            <!-- PDF -->
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">个人证件附件：<small style="color:#999999;font-weight:100;font-size:10px;">（请将相关证书制成一个PDF文件上传，且不超过2MB）</small>
+                                    </label>
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=supFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleSupFileSuccess" :before-upload="beforeFileUpload">
+                                    <img v-if="supFileUrl" :src="supFileUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+
+                            <div class="divider" style="margin-top:25px;">供应商简介</div>
+
+                            <el-row>
+                                <el-col :span="24" style="position:relative;">
+                                    <el-form-item label="简介描述" prop="sup_intro">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="intro_limit('sup')" v-model="form_sup.sup_intro">
+                                        </el-input>
+                                    </el-form-item>
+                                    <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_sup.sup_intro.length }}个字</small>
+                                </el-col>
+                            </el-row>
+
+
+
+                            <el-col :span="24" style="margin-top:30px;">
+                                <el-button type="primary" @click="onSubmit('sup')">提交申请</el-button>
+                            </el-col>
+                        </el-form>
+                    </el-tab-pane>
+                <?php endif; ?>
+                <?php if ($fullRole == 1) : ?>
+                    <div class="my-act-item" style="background-color:#fff;">
+                        <div style="width:100%;display:flex;align-items:center;jusity-content:center;">
+                            <strong style="font-size:48px;color:#e8e8e8;">你已是最高级会员</strong>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </el-tabs>
         </template>
     </div>
@@ -470,7 +700,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-<!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 
 <!--  -->
@@ -488,6 +717,8 @@
                 fileUrl: '',
                 idPhotoUrl: '',
                 personFileUrl: '',
+                supIdPhotoUrl: '',
+                supFileUrl: '',
                 // 个人
                 form_person: {
                     name: '',
@@ -536,6 +767,9 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
+                    },{
+                        type:'email',
+                        message:'请填写正确的邮箱格式！'
                     }],
                     phone: [{
                         required: true,
@@ -713,6 +947,118 @@
                         message: '请输入公司简介',
                         trigger: 'blur'
                     }],
+                },
+                // 供应商
+                form_sup: {
+                    sup_company_name: '',
+                    sup_build_time: '',
+                    sup_company_type: '',
+                    sup_company_code: '',
+                    sup_legal_person: '',
+                    sup_company_tel: '',
+                    sup_company_email: '',
+                    sup_company_address: '',
+                    sup_post_code: '',
+                    sup_manager_name: '',
+                    sup_manager_job: '',
+                    sup_manager_phone: '',
+                    sup_manager_wechat: '',
+                    sup_eng_cate: [{
+                        cate: '',
+                        level: ''
+                    }],
+                    sup_goods_cate: [{
+                        permit: '',
+                        content: ''
+                    }],
+                    sup_server_cate: [{
+                        major: '',
+                        level: ''
+                    }],
+                    id_photo: '',
+                    person_file: '',
+                    sup_intro: ''
+                },
+                supplier_rules: {
+                    sup_company_name: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_build_time: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_company_type: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_company_code: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_legal_person: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_company_tel: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }, {
+                        type: 'number',
+                        message: '必须为数字'
+                    }],
+                    sup_company_email: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }, {
+                        type: 'email',
+                        message: '请填写邮箱格式'
+                    }],
+                    sup_company_address: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_post_code: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_manager_name: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_manager_job: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_manager_phone: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }, {
+                        type: 'number',
+                        message: '必须为数字'
+                    }],
+                    sup_manager_wechat: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_intro: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
                 }
             },
             methods: {
@@ -777,7 +1123,33 @@
                     }
 
                     // 
+                    if (type == 'sup') {
+                        if (this.sup_cate_valid()) {
+                            this.$refs['sup'].validate((valid) => {
+                                if (valid) {
+                                    if (this.form_sup.id_photo && this.form_sup.person_file) {
+                                        this.doPost(this.form_sup);
+                                    } else {
+                                        this.$message.error('请上传相应图片和附件');
+                                    }
+                                } else {
+                                    console.log('error submit!!');
+                                    return false;
+                                }
+                            });
+                        }
+                    }
 
+                },
+                handleSupIdPhotoSuccess(res, file) {
+                    if (res.code == 1) {
+                        this.supIdPhotoUrl = URL.createObjectURL(file.raw);
+                        this.$message.success(res.msg);
+                        this.form_sup.id_photo = res.data.file_id;
+                        // 
+                    } else {
+                        this.$message.error(res.msg);
+                    }
                 },
                 handleIdcardSuccess(res, file) {
                     if (res.code == 1) {
@@ -794,6 +1166,16 @@
                         this.imageUrl = URL.createObjectURL(file.raw);
                         this.$message.success(res.msg);
                         this.form_company.company_logo = res.data.file_id;
+                        // 
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                },
+                handleSupFileSuccess(res, file) {
+                    if (res.code == 1) {
+                        this.supFileUrl = 'assets/home/images/pdf-icon.png';
+                        this.$message.success(res.msg);
+                        this.form_sup.person_file = res.data.file_id;
                         // 
                     } else {
                         this.$message.error(res.msg);
@@ -842,10 +1224,82 @@
                     }
                     return isPDF && isLt2M;
                 },
-                company_intro_limit() {
+                intro_limit(type) {
                     // 
-                    if (this.form_company.company_intro.length >= 800) {
-                        this.form_company.company_intro = this.form_company.company_intro.substring(0, 800);
+                    if (type == 'company') {
+                        if (this.form_company.company_intro.length >= 800) {
+                            this.form_company.company_intro = this.form_company.company_intro.substring(0, 800);
+                        }
+                    } else if (type == 'person') {
+                        if (this.form_person.introduce.length >= 800) {
+                            this.form_person.introduce = this.form_person.introduce.substring(0, 800);
+                        }
+                    } else if (type == 'sup') {
+                        if (this.form_sup.sup_intro.length >= 800) {
+                            this.form_sup.sup_intro = this.form_sup.sup_intro.substring(0, 800);
+                        }
+                    }
+
+                },
+                // supplier
+                addCate(type) {
+                    if (type == 'eng') {
+                        var d = {
+                            cate: '',
+                            level: ''
+                        };
+                        if (this.form_sup.sup_eng_cate.length == 5) {
+                            this.$message.error('最多添加五项');
+                        } else {
+                            this.form_sup.sup_eng_cate.push(d);
+                        }
+                    } else if (type == 'goods') {
+                        var d = {
+                            permit: '',
+                            content: ''
+                        };
+                        if (this.form_sup.sup_goods_cate.length == 5) {
+                            this.$message.error('最多添加五项');
+                        } else {
+                            this.form_sup.sup_goods_cate.push(d);
+                        }
+                    } else if (type == 'server') {
+                        var d = {
+                            major: '',
+                            level: ''
+                        };
+                        if (this.form_sup.sup_server_cate.length == 5) {
+                            this.$message.error('最多添加五项');
+                        } else {
+                            this.form_sup.sup_server_cate.push(d);
+                        }
+                    }
+                },
+                delCate(type, index) {
+                    if (type == 'eng') {
+                        this.form_sup.sup_eng_cate.splice(index, 1);
+                    } else if (type == 'goods') {
+                        this.form_sup.sup_goods_cate.splice(index, 1);
+                    } else if (type == 'server') {
+                        this.form_sup.sup_server_cate.splice(index, 1);
+                    }
+                },
+                sup_cate_valid() {
+                    var result = true;
+                    var a = this.form_sup.sup_eng_cate.findIndex(function(e) {
+                        return e.cate == '' || e.level == '';
+                    });
+                    var b = this.form_sup.sup_goods_cate.findIndex(function(e) {
+                        return e.permit == '' || e.content == '';
+                    });
+                    var c = this.form_sup.sup_server_cate.findIndex(function(e) {
+                        return e.major == '' || e.level == '';
+                    });
+                    if (a == -1 || b == -1 || c == -1) {
+                        return true;
+                    } else {
+                        this.$message.error('供应类别不能为空');
+                        return false;
                     }
                 },
                 submitUpload() {

@@ -143,21 +143,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                                        <div class="am-u-sm-9 am-u-end">
-                                                                            <div class="am-form-file">
-                                                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                                    <i class="am-icon-cloud-upload"></i> 选择
-                                                                                </button>
-                                                                                <div class="uploader-list am-cf">
+                                                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                                <div class="am-u-sm-9 am-u-end">
+                                                                                    <div class="am-form-file">
+                                                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                            <i class="am-icon-cloud-upload"></i> 选择
+                                                                                        </button>
+                                                                                        <div class="uploader-list am-cf">
 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="help-block am-margin-top-sm">
+                                                                                        <small>大小2M以下</small>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="help-block am-margin-top-sm">
-                                                                                <small>大小2M以下</small>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> -->
+                                                                            </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -236,23 +236,43 @@
                                     </div>
                                 </div>
 
+
+
+
                                 <?php if ($list['cate_exist'] == 1) : ?>
                                     <div class="am-form-group">
                                         <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别 </label>
                                         <div class="am-u-sm-9 am-u-end">
-                                            <select name="detail[option_id]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
-                                                <option value></option>
-                                                <?php foreach ($option as $first) : ?>
-                                                    <option value="<?= $first['id'] ?>">
-                                                        <?= $first['name'] ?></option>
-                                                <?php endforeach;
-                                            ?>
-                                            </select>
+                                            <?php foreach ($option as $first) : ?>
+                                                <label class="am-checkbox-inline">
+                                                    <input type="checkbox" name="detail[option_id][]" value="<?= $first['id'] ?>" data-am-ucheck><?= $first['name'] ?>
+                                                </label>
+                                            <?php endforeach; ?>
                                         </div>
+
                                     </div>
                                 <?php endif; ?>
 
+                                <?php if ($list['cover_exist'] == 1) : ?>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">封面图</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <div class="am-form-file">
+                                                <div class="am-form-file">
+                                                    <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
+                                                        <i class="am-icon-cloud-upload"></i> 选择图片
+                                                    </button>
+                                                    <div class="uploader-list am-cf">
 
+                                                    </div>
+                                                </div>
+                                                <div class="help-block am-margin-top-sm">
+                                                    <small>尺寸750x750像素以上，大小2M以下</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
 
 
                                 <div class="detail_mode">
@@ -266,21 +286,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                        <div class="am-u-sm-9 am-u-end">
-                                                            <div class="am-form-file">
-                                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                    <i class="am-icon-cloud-upload"></i> 选择
-                                                                </button>
-                                                                <div class="uploader-list am-cf">
+                                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                <div class="am-u-sm-9 am-u-end">
+                                                                    <div class="am-form-file">
+                                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                            <i class="am-icon-cloud-upload"></i> 选择
+                                                                        </button>
+                                                                        <div class="uploader-list am-cf">
 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="help-block am-margin-top-sm">
+                                                                        <small>大小2M以下</small>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="help-block am-margin-top-sm">
-                                                                <small>大小2M以下</small>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                                                            </div> -->
 
                                 </div>
 

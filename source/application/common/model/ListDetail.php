@@ -28,6 +28,11 @@ class ListDetail extends BaseModel
         return $this->hasOne('ListModel', 'id', 'list_id');
     }
 
+    public function user()
+    {
+        return $this->hasOne('User', 'user_id', 'user_id');
+    }
+
     public function getAttachmentAttr($value, $data)
     {
         if (!empty($data['attachment_ids'])) {
@@ -61,7 +66,7 @@ class ListDetail extends BaseModel
 
     public static function detail($id)
     {
-        return self::get($id, ['list' => ['mode']]);
+        return self::get($id, ['list' => ['mode', 'userNewsOption']]);
     }
 
 

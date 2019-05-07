@@ -30,12 +30,14 @@ class Exam extends Controller
         $imgMap = ExamModel::attrImgMap();
         $fileMap = ExamModel::attrFileMap();
         $textareaMap = ExamModel::attrTextAreaMap();
+        $cateArrMap = ExamModel::attrCateArrMap();
         // 
         $type = $info['type'];
         $status = $info['status'];
         $id = $info['id'];
         $content = $info['content'];
         $data_arr = json_decode($content, true);
+        // halt($data_arr);
         // 包含图片更换 属性更替
         $data = [];
         $data['input'] = [];
@@ -48,10 +50,30 @@ class Exam extends Controller
                 $data['file'][$key] = UploadApiFile::getFilePath($value);
             } elseif (in_array($key, $textareaMap)) {
                 $data['text'][$key] = $value;
+            } elseif (array_key_exists($key, $cateArrMap)) {
+                $_arr = [];
+                foreach ($value as $k => $v) {
+                    if (reset($v) == '' && end($v) == '') {
+                        continue;
+                    }
+                    $__arr = [];
+                    $__arr[] = [
+                        'name' => reset($cateArrMap[$key]),
+                        'value' => reset($v)
+                    ];
+                    $__arr[] = [
+                        'name' => end($cateArrMap[$key]),
+                        'value' => end($v)
+                    ];
+                    $_arr[] = $__arr;                    
+                }
+                if(empty($_arr)) continue;
+                $data['array'][$key] = $_arr;
             } else {
                 $data['input'][$key] = $value;
             }
         }
+        // halt(reset($data['array']));
         //         
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }

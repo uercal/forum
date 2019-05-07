@@ -22,8 +22,20 @@ class ListModel extends ListModelModel
      */
     public function add($data)
     {
+        $data['options'] = str_replace('，', ',', $data['options']);
+        $options = explode(',', $data['options']);
+        $options_data = [];
+        foreach ($options as $key => $value) {
+            $_options_data = [];
+            $_options_data['name'] = $value;
+            $options_data[] = $_options_data;
+        }
+
         Db::startTrans();
         try {
+            // 
+            $this->user_news_option()->saveAll($options_data);
+            // 
             $this->allowField(true)->save($data);
             Db::commit();
             return true;
@@ -41,8 +53,22 @@ class ListModel extends ListModelModel
      */
     public function edit($data)
     {
+        $data['options'] = str_replace('，', ',', $data['options']);
+        $options = explode(',', $data['options']);
+        $options_data = [];
+        foreach ($options as $key => $value) {
+            $_options_data = [];
+            $_options_data['name'] = $value;
+            $options_data[] = $_options_data;
+        }
+
         Db::startTrans();
         try {
+            // 
+            $this->user_news_option()->delete();
+            // 
+            $this->user_news_option()->saveAll($options_data);
+            //             
             $this->allowField(true)->save($data);
             Db::commit();
             return true;

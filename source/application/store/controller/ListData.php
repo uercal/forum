@@ -42,7 +42,7 @@ class ListData extends Controller
 
     public function list_edit($id)
     {
-        $model = ListModel::get($id, ['mode']);
+        $model = ListModel::get($id, ['mode']);        
         if (!$this->request->isAjax()) {
             return $this->fetch('list_edit', compact('model'));
         }

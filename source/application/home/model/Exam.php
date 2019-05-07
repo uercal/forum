@@ -44,4 +44,32 @@ class Exam extends ExamModel
             return false;
         }
     }
+
+    /**
+     * 
+     */
+    public function getResMsg($user_id, $type)
+    {        
+        $map = [];
+        $map['user_id'] = ['=', $user_id];
+        $map['type'] = ['=', 10];
+        if ($type == 'success') {
+            $map['status'] = ['=', 20];
+            $obj = $this->where($map)->order('update_time desc')->find();
+        }
+
+        if ($type == 'reject') {
+            $new_status = $this->order('update_time desc')->value('status');
+            //
+            if($new_status==30){
+                $map['update_time'] = ['between', [strtotime('-3 days'), time()]];
+                $map['status'] = ['=', 30];
+                // $r = $this->where($map)->order('update_time desc')->fetchSql(true)->find();            
+                $obj = $this->where($map)->order('update_time desc')->find();
+            }            
+        }
+        $obj = isset($obj) ? $obj : [];
+
+        return $obj;
+    }
 }

@@ -10,5 +10,5 @@ namespace app\common\model;
 class UserNewsOption extends BaseModel
 {
     protected $name = 'users_news_option';
-    
+    protected $updateTime = false;
 }

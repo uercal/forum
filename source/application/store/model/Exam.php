@@ -8,6 +8,7 @@ use app\common\model\PayLog;
 use app\common\model\User;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
+use app\common\model\UserSup;
 use think\Db;
 
 /**
@@ -62,7 +63,27 @@ class Exam extends ExamModel
             'area' => '业务领域',
             'id_photo' => '个人证件照',
             'person_file' => '个人证件附件',
-            'introduce' => '个人简介'
+            'introduce' => '个人简介',
+            // supplier
+            'sup_company_name' => '单位名称',
+            'sup_build_time' => '单位成立时间',
+            'sup_company_type' => '单位类型',
+            'sup_company_code' => '统一社会信用代码',
+            'sup_legal_person' => '单位法人',
+            'sup_company_tel' => '单位电话',
+            'sup_company_email' =>  '单位邮箱',
+            'sup_company_address' => '地址',
+            'sup_post_code' => '邮编',
+            'sup_manager_name' => '联系人姓名',
+            'sup_manager_job' => '联系人职务',
+            'sup_manager_phone' => '联系人电话',
+            'sup_manager_wechat' => '联系人微信号',
+            'sup_eng_cate' => '工程类供应',
+            'sup_goods_cate' => '货物类供应',
+            'sup_server_cate' => '服务类供应',
+            'id_photo' => '个人证件照',
+            'person_file' => '个人证件附件',
+            'sup_intro' => '供应商简介'
         ];
 
         return $data;
@@ -73,7 +94,7 @@ class Exam extends ExamModel
         return [
             // company
             'company_logo',
-            // person
+            // person & supplier
             'id_photo'
         ];
     }
@@ -83,7 +104,7 @@ class Exam extends ExamModel
         return [
             // company
             'license_file',
-            // person
+            // person & supplier
             'person_file'
         ];
     }
@@ -94,9 +115,34 @@ class Exam extends ExamModel
             // company
             'company_intro',
             // person
-            'introduce'
+            'introduce',
+            // supplier
+            'sup_intro'
         ];
     }
+
+
+
+    public static function attrCateArrMap()
+    {
+        return [
+            // supplier
+            'sup_eng_cate' => [
+                'cate' => '资质标准类别',
+                'level' => '资质类别等级'
+            ],
+            'sup_goods_cate' => [
+                'permit' => '生产销售许可',
+                'content' => '供应内容'
+            ],
+            'sup_server_cate' => [
+                'major' => '资质资格资信专业',
+                'level' => '资质类别等级'
+            ]
+        ];
+    }
+
+
 
 
 
@@ -112,7 +158,6 @@ class Exam extends ExamModel
             }
         }
 
-        // halt($data);
         // 开启事务
         Db::startTrans();
         try {
@@ -166,19 +211,31 @@ class Exam extends ExamModel
                         case 'supplier':
                             $role = 4;
                             $new_role = $role_str . ',4';
+                            $user_model = new UserSup();
+                            $_obj = $user_model::get(['user_id' => $obj['user_id']]);
+                            //                             
+                            $content['sup_eng_cate'] = json_encode($content['sup_eng_cate']);
+                            $content['sup_goods_cate'] = json_encode($content['sup_goods_cate']);
+                            $content['sup_server_cate'] = json_encode($content['sup_server_cate']);
+                            $content['sup_build_time'] = strtotime($content['sup_build_time']);
+                            if ($_obj) {
+                                $_obj->save($content);
+                            } else {
+                                $content['user_id'] = $obj['user_id'];
+                                $user_model->save($content);
+                            }
                             break;
                     }
-
-
                     // 
-                    // 用户认证 更新用户资料
+                    // 用户认证 更新用户资料                    
                     $user->save([
                         'role' => $new_role,
                     ]);
                 }
 
-                $this->where('id', $data['id'])->update([
+                $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
+                    'bonus' => $data['bonus']
                 ]);
             }
             // $type==30 线下提现 确认

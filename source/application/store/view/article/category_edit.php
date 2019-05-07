@@ -314,10 +314,10 @@
         $('#my-form').superForm();
 
         // 
-        var $list_select = $('#list_select');
+        var $list_select = $('#_list_select');
 
         $list_select.on('change', function() {
-            var list_mode_id = $(this).val();
+            let list_mode_id = $(this).val();            
             // 
             var url = "<?= url('get_list_ajax') ?>&list_mode_id=" + list_mode_id;
             $.get(url, function(res) {

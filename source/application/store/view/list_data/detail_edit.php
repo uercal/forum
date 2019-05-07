@@ -7,244 +7,353 @@
                 <form id="my-form" class="am-form tpl-form-line-form" enctype="multipart/form-data" method="post">
 
                     <?php if ($model['list']['mode']['key_word'] == 'news') : ?>
-                    <div class="widget-body">
-                        <fieldset>
-                            <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">编辑</div>
-                            </div>
-
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">新闻名称 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">编辑</div>
                                 </div>
-                            </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">封面图</label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <div class="am-form-file">
-                                        <div class="am-form-file">
-                                            <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
-                                                <i class="am-icon-cloud-upload"></i> 选择图片
-                                            </button>
-                                            <div class="uploader-list am-cf">
-                                                <?php if (!empty($model['cover'])) : ?>
-                                                <div class="file-item">
-                                                    <img src="<?= $model['cover']['file_path'] ?>">
-                                                    <input type="hidden" name="detail[cover_id][]" value="<?= $model['cover']['file_id'] ?>">
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                        <div class="help-block am-margin-top-sm">
-                                            <small>尺寸750x750像素以上，大小2M以下</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="detail_mode">
-                                <!-- 详情列表 -->
-                                <div class="am-form-group" id="richText">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">内容</label>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">新闻名称 </label>
                                     <div class="am-u-sm-9 am-u-end">
-                                        <!-- 加载编辑器的容器 -->
-                                        <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
+                                        <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">封面图</label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <div class="am-form-file">
-                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                <i class="am-icon-cloud-upload"></i> 选择
-                                            </button>
-                                            <div class="uploader-list am-cf">
-                                                <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
-                                                <div>
-                                                    <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
-                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                        <?= $item['origin_name'] ?>
-                                                    </a>
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                            <div class="am-form-file">
+                                                <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
+                                                    <i class="am-icon-cloud-upload"></i> 选择图片
+                                                </button>
+                                                <div class="uploader-list am-cf">
+                                                    <?php if (!empty($model['cover'])) : ?>
+                                                        <div class="file-item">
+                                                            <img src="<?= $model['cover']['file_path'] ?>">
+                                                            <input type="hidden" name="detail[cover_id][]" value="<?= $model['cover']['file_id'] ?>">
+                                                            <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </div>
-                                                <?php endforeach;
-                                        endif; ?>
                                             </div>
-                                        </div>
-                                        <div class="help-block am-margin-top-sm">
-                                            <small>大小2M以下</small>
+                                            <div class="help-block am-margin-top-sm">
+                                                <small>尺寸750x750像素以上，大小2M以下</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类排序 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
-                                    <small>数字越小越靠前</small>
+                                <div class="detail_mode">
+                                    <!-- 详情列表 -->
+                                    <div class="am-form-group" id="richText">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">内容</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <!-- 加载编辑器的容器 -->
+                                            <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <div class="am-form-file">
+                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                    <i class="am-icon-cloud-upload"></i> 选择
+                                                </button>
+                                                <div class="uploader-list am-cf">
+                                                    <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
+                                                            <div>
+                                                                <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
+                                                                <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                    <?= $item['origin_name'] ?>
+                                                                </a>
+                                                                <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                            </div>
+                                                        <?php endforeach;
+                                                endif; ?>
+                                                </div>
+                                            </div>
+                                            <div class="help-block am-margin-top-sm">
+                                                <small>大小2M以下</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
-                                    <button type="submit" class="j-submit am-btn am-btn-secondary">提交
-                                    </button>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类排序 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
+                                        <small>数字越小越靠前</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </div>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                        <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
 
 
-                    <!-- 头像+职务+富文本 -->
+                        <!-- 头像+职务+富文本 -->
                     <?php elseif ($model['list']['mode']['key_word'] == 'job') : ?>
-                    <div class="widget-body">
-                        <fieldset>
-                            <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">编辑</div>
-                            </div>
-
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">姓名 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">编辑</div>
                                 </div>
-                            </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职位 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="detail[job]" value="<?= $model['job'] ?>" required>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">头像</label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <div class="am-form-file">
-                                        <div class="am-form-file">
-                                            <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
-                                                <i class="am-icon-cloud-upload"></i> 选择图片
-                                            </button>
-                                            <div class="uploader-list am-cf">
-                                                <?php if (!empty($model['cover'])) : ?>
-                                                <div class="file-item">
-                                                    <img src="<?= $model['cover']['file_path'] ?>">
-                                                    <input type="hidden" name="detail[cover_id][]" value="<?= $model['cover']['file_id'] ?>">
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                        <div class="help-block am-margin-top-sm">
-                                            <small>尺寸750x750像素以上，大小2M以下</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="detail_mode">
-                                <!-- 详情列表 -->
-                                <div class="am-form-group" id="richText">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">个人简介</label>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">姓名 </label>
                                     <div class="am-u-sm-9 am-u-end">
-                                        <!-- 加载编辑器的容器 -->
-                                        <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
+                                        <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
                                     </div>
                                 </div>
 
-                                <!-- <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职位 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="detail[job]" value="<?= $model['job'] ?>" required>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">头像</label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <div class="am-form-file">
-                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                <i class="am-icon-cloud-upload"></i> 选择
-                                            </button>
-                                            <div class="uploader-list am-cf">
-                                                <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
-                                                <div>
-                                                    <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
-                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                        <?= $item['origin_name'] ?>
-                                                    </a>
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                            <div class="am-form-file">
+                                                <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
+                                                    <i class="am-icon-cloud-upload"></i> 选择图片
+                                                </button>
+                                                <div class="uploader-list am-cf">
+                                                    <?php if (!empty($model['cover'])) : ?>
+                                                        <div class="file-item">
+                                                            <img src="<?= $model['cover']['file_path'] ?>">
+                                                            <input type="hidden" name="detail[cover_id][]" value="<?= $model['cover']['file_id'] ?>">
+                                                            <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </div>
-                                                <?php endforeach;
-                                        endif; ?>
+                                            </div>
+                                            <div class="help-block am-margin-top-sm">
+                                                <small>尺寸750x750像素以上，大小2M以下</small>
                                             </div>
                                         </div>
-                                        <div class="help-block am-margin-top-sm">
-                                            <small>大小2M以下</small>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="detail_mode">
+                                    <!-- 详情列表 -->
+                                    <div class="am-form-group" id="richText">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">个人简介</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <!-- 加载编辑器的容器 -->
+                                            <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
                                         </div>
                                     </div>
-                                </div> -->
-                            </div>
-                           
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">个人排序 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
-                                    <small>数字越小越靠前</small>
+
+                                    <!-- <div class="am-form-group">
+                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                <div class="am-u-sm-9 am-u-end">
+                                                    <div class="am-form-file">
+                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                            <i class="am-icon-cloud-upload"></i> 选择
+                                                        </button>
+                                                        <div class="uploader-list am-cf">
+                                                            <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
+                                                                                    <div>
+                                                                                        <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
+                                                                                        <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                                            <?= $item['origin_name'] ?>
+                                                                                        </a>
+                                                                                        <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                                                    </div>
+                                                                        <?php endforeach;
+                                                                endif; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="help-block am-margin-top-sm">
+                                                        <small>大小2M以下</small>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                 </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
-                                    <button type="submit" class="j-submit am-btn am-btn-secondary">提交
-                                    </button>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">个人排序 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
+                                        <small>数字越小越靠前</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </div>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                        <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
 
 
                     <?php elseif ($model['list']['mode']['key_word'] == 'mag') : ?>
-                    <div class="widget-body">
-                        <fieldset>
-                            <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">编辑</div>
-                            </div>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">编辑</div>
+                                </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">标题 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">标题 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">期数 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="detail[mag_num]" value="<?= $model['mag_num'] ?>" required>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">期数 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[mag_num]" value="<?= $model['mag_num'] ?>" required>
+                                    </div>
                                 </div>
-                            </div>                                
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="detail[data]" value="<?= $model['data']['jumpUrl'] ?>" required>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="detail[data]" value="<?= $model['data']['jumpUrl'] ?>" required>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">排序 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
-                                    <small>数字越小越靠前</small>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">排序 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
+                                        <small>数字越小越靠前</small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
-                                    <button type="submit" class="j-submit am-btn am-btn-secondary">提交
-                                    </button>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                        <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </div>
+                            </fieldset>
+                        </div>
+
+
+
+                    <?php elseif ($model['list']['mode']['key_word'] == 'user_news') : ?>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">编辑</div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">标题 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="text" class="tpl-form-input" name="detail[title]" value="<?= $model['title'] ?>" required>
+                                    </div>
+                                </div>
+
+
+
+
+                                <?php if ($model['list']['cate_exist'] == 1) : ?>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别 </label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <?php foreach ($model['list']['user_news_option'] as $first) : ?>
+                                                <label class="am-checkbox-inline">
+                                                    <input type="checkbox" name="detail[option_id][]" value="<?= $first['id'] ?>" data-am-ucheck <?= in_array($first['id'], explode(',', $model['option_id'])) ? 'checked' : '' ?>><?= $first['name'] ?>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
+
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($model['list']['cover_exist'] == 1) : ?>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">封面图</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <div class="am-form-file">
+                                                <div class="am-form-file">
+                                                    <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
+                                                        <i class="am-icon-cloud-upload"></i> 选择图片
+                                                    </button>
+                                                    <div class="uploader-list am-cf">
+                                                        <?php if (!empty($model['cover'])) : ?>
+                                                            <div class="file-item">
+                                                                <img src="<?= $model['cover']['file_path'] ?>">
+                                                                <input type="hidden" name="detail[cover_id][]" value="<?= $model['cover']['file_id'] ?>">
+                                                                <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                                <div class="help-block am-margin-top-sm">
+                                                    <small>尺寸750x750像素以上，大小2M以下</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+
+
+                                <div class="detail_mode">
+                                    <!-- 详情列表 -->
+                                    <div class="am-form-group" id="richText">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">内容</label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <!-- 加载编辑器的容器 -->
+                                            <textarea id="container" name="detail[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="am-form-group">
+                                                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                            <div class="am-u-sm-9 am-u-end">
+                                                                                <div class="am-form-file">
+                                                                                    <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                        <i class="am-icon-cloud-upload"></i> 选择
+                                                                                    </button>
+                                                                                    <div class="uploader-list am-cf">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="help-block am-margin-top-sm">
+                                                                                    <small>大小2M以下</small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
+
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分类排序 </label>
+                                    <div class="am-u-sm-9 am-u-end">
+                                        <input type="number" class="tpl-form-input" name="detail[sort]" value="<?= $model['sort'] ?>" required>
+                                        <small>数字越小越靠前</small>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                        <button type="submit" class="j-submit am-btn am-btn-secondary">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+
+
 
 
                     <?php endif; ?>
@@ -290,4 +399,4 @@
         $('#my-form').superForm();
 
     });
-</script> 
+</script>

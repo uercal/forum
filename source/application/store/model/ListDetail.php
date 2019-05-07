@@ -22,6 +22,7 @@ class ListDetail extends ListDetailModel
      */
     public function add($data, $key_word)
     {
+        // halt([$data,$key_word]);
         Db::startTrans();
         try {
             switch ($key_word) {
@@ -52,6 +53,14 @@ class ListDetail extends ListDetailModel
                     // 
                 case 'mag':
                     $data['data'] = json_encode(['jumpUrl' => $data['data']]);
+                    $this->allowField(true)->save($data);
+                    break;
+
+                case 'user_news':
+                    $data['option_id'] = implode(',',$data['option_id']);
+                    if (isset($data['cover_id'])) {
+                        $data['cover_id'] = array_values($data['cover_id'])[0];
+                    }
                     $this->allowField(true)->save($data);
                     break;
             }
