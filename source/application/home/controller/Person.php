@@ -5,6 +5,8 @@ use app\common\model\Article;
 use app\common\model\News;
 use app\common\model\Project;
 use app\store\model\Category;
+use app\home\model\ListMode;
+use app\home\model\ListModel;
 use think\Request;
 use function Qiniu\json_decode;
 use app\home\model\ListDetail;
@@ -313,9 +315,45 @@ class Person extends Controller
      */
     public function personPaper()
     {
-
-        return $this->fetch('paper');
+        $role_arr = explode(',', $this->user['role']);
+        $mode = new ListMode;
+        if (in_array(3, $role_arr)) {
+            $mode_ids = $mode->where('key_word', 'user_news')->whereOr('key_word', 'user_project')->column('id');
+        } else {
+            $mode_ids = $mode->where(['key_word' => 'user_news'])->column('id');
+        }
+        $list = new ListModel;
+        $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);
+        $type_list = [];
+        foreach ($_type_list as $key => $value) {
+            $type_list[] = [
+                'text' => $value,
+                'value' => $key
+            ];
+        }
+        return $this->fetch('paper', compact('type_list'));
     }
+
+    public function paperAjax()
+    {
+        $exam = new Exam;        
+        $data = $exam->getDataAjax($this->user['user_id']);
+        return $this->renderSuccess('success', '', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 招聘发布

@@ -3,6 +3,9 @@
 namespace app\home\model;
 
 use app\common\model\Exam as ExamModel;
+use app\home\model\ListMode;
+use app\home\model\ListModel;
+use app\home\model\ListDetail;
 use think\Request;
 use think\Db;
 
@@ -49,7 +52,7 @@ class Exam extends ExamModel
      * 
      */
     public function getResMsg($user_id, $type)
-    {        
+    {
         $map = [];
         $map['user_id'] = ['=', $user_id];
         $map['type'] = ['=', 10];
@@ -61,15 +64,45 @@ class Exam extends ExamModel
         if ($type == 'reject') {
             $new_status = $this->order('update_time desc')->value('status');
             //
-            if($new_status==30){
+            if ($new_status == 30) {
                 $map['update_time'] = ['between', [strtotime('-3 days'), time()]];
                 $map['status'] = ['=', 30];
                 // $r = $this->where($map)->order('update_time desc')->fetchSql(true)->find();            
                 $obj = $this->where($map)->order('update_time desc')->find();
-            }            
+            }
         }
         $obj = isset($obj) ? $obj : [];
 
         return $obj;
+    }
+
+
+
+    /**
+     * 获取提交的论文
+     */
+    public function getDataAjax($user_id)
+    {
+        //        
+        $map = [];
+        $map['user_id'] = ['=', $user_id];
+        // 类型 论文
+        $map['type'] = ['=', 20];
+        if (input('list_id')) {
+            $list_id = explode(',', input('list_id'));
+            $map['id_bonus'] = ['in', $list_id];
+        }
+        if (input('status')) {
+            $map['status'] = ['=', input('status')];
+        }
+        if (input('key_word')) {
+            $map['str_bonus'] = ['like', '%' . input('key_word') . '%'];
+        }
+        
+        $data = $this->with(['listDetail', 'listDetail.list'])->where($map)->paginate(1, false, [
+            'query' => Request::instance()->request()
+        ]);    
+
+        return $data;
     }
 }

@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 用户提交时的角色 :</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 用户提交时的等级 :</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" value="<?= $info['level_option'] ?>" disabled="disabled">
                                 </div>
@@ -44,14 +44,15 @@
                             </div>
                             <?php foreach ($data as $key => $item) : ?>
                                 <?php if ($key == 'input') : ?>
-                                    <?php foreach ($item as $k => $v) : ?>
-                                        <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
-                                            <div class="am-u-sm-9 am-u-end">
-                                                <input type="text" class="tpl-form-input" name="<?= $k ?>" value="<?= $k == 'gender' ? ($v == 0 ? '男' : '女') : $v ?>" disabled="disabled">
+                                    <?php foreach ($item as $k => $v) : if (isset($map[$k])) : ?>
+                                            <div class="am-form-group">
+                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                                <div class="am-u-sm-9 am-u-end">
+                                                    <input type="text" class="tpl-form-input" name="<?= $k ?>" value="<?= $k == 'gender' ? ($v == 0 ? '男' : '女') : $v ?>" disabled="disabled">
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endif;
+                                endforeach; ?>
                                 <?php elseif ($key == "text") : ?>
                                     <div class="widget-head am-cf">
                                         <div class="widget-title am-fl">详细信息</div>
@@ -124,12 +125,11 @@
 
                                 <?php endif; ?>
                             <?php endforeach; ?>
-
-
+                            
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">备注信息</label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <textarea type="text" id="bonus" class="tpl-form-input" value=""></textarea>
+                                    <textarea type="text" id="bonus" class="tpl-form-input"><?= $info['bonus'] ?></textarea>
                                 </div>
                             </div>
 

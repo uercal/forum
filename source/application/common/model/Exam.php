@@ -14,11 +14,19 @@ class Exam extends BaseModel
 {
     protected $name = 'exam';
     protected $insert = ['wxapp_id' => 10001];
+    protected $append = ['status_text'];
 
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');
     }
+
+    // 
+    public function listDetail()
+    {
+        return $this->hasOne('ListDetail');
+    }
+
 
 
     public function getStatusTextAttr($value, $data)

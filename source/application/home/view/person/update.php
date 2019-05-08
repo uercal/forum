@@ -1,5 +1,3 @@
-<!--  -->
-<!-- <link rel="stylesheet" href="assets/home/css/1.css"> -->
 <style>
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
@@ -314,8 +312,20 @@
                         </el-form>
                     </el-tab-pane>
                 <?php endif; ?>
-                <?php if ($levelOption == 2) : ?>
-                    <el-tab-pane label="专家会员" name="expert"></el-tab-pane>
+                <?php if ($levelOption == 2 && !in_array(2, $roleArr)) : ?>
+                    <el-tab-pane label="专家会员" name="expert">
+                        <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
+                            <div style="width:100%;display:flex;">
+                                <p style="font-size:16px;text-indent:2rem;">申请专家会员需经过主管理员审核个人会员信息资料，若资质符合专家会员要求，将成为海南省全过程工程咨询专家库专家。</p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">高级专家：高级工程师、副教授、副研究员</p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">资深专家：正高级工程师、教师、研究员</p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">顶级专家：院士、长江学者、百人计划、杰青优青、千人计划、万人计划、双一流学术带头人、其他高层次人才</p>
+                            </div>
+                        </div>
+                        <el-col :span="24" style="margin-top:30px;">
+                            <el-button type="primary" @click="onSubmit('expert')">提交申请</el-button>
+                        </el-col>
+                    </el-tab-pane>
                 <?php endif; ?>
                 <?php if ($levelOption == 1) : ?>
                     <el-tab-pane label="单位会员" name="company">
@@ -767,9 +777,9 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    },{
-                        type:'email',
-                        message:'请填写正确的邮箱格式！'
+                    }, {
+                        type: 'email',
+                        message: '请填写正确的邮箱格式！'
                     }],
                     phone: [{
                         required: true,
@@ -1090,45 +1100,13 @@
 
                 },
                 onSubmit(type) {
-                    if (type == 'person') {
-                        this.$refs['person'].validate((valid) => {
-                            if (valid) {
-                                if (this.form_person.id_photo && this.form_person.person_file) {
-                                    this.doPost(this.form_person);
-                                } else {
-                                    this.$message.error('请上传相应图片和附件');
-                                }
-                            } else {
-                                console.log('error submit!!');
-                                return false;
-                            }
-                        });
-                    }
 
-
-                    // 
-                    if (type == 'company') {
-                        this.$refs['company'].validate((valid) => {
-                            if (valid) {
-                                if (this.form_company.company_logo && this.form_company.license_file) {
-                                    this.doPost(this.form_company);
-                                } else {
-                                    this.$message.error('请上传相应图片和附件');
-                                }
-                            } else {
-                                console.log('error submit!!');
-                                return false;
-                            }
-                        });
-                    }
-
-                    // 
-                    if (type == 'sup') {
-                        if (this.sup_cate_valid()) {
-                            this.$refs['sup'].validate((valid) => {
+                    switch (type) {
+                        case 'person':
+                            this.$refs['person'].validate((valid) => {
                                 if (valid) {
-                                    if (this.form_sup.id_photo && this.form_sup.person_file) {
-                                        this.doPost(this.form_sup);
+                                    if (this.form_person.id_photo && this.form_person.person_file) {
+                                        this.doPost(this.form_person);
                                     } else {
                                         this.$message.error('请上传相应图片和附件');
                                     }
@@ -1137,7 +1115,40 @@
                                     return false;
                                 }
                             });
-                        }
+                            break;
+                        case 'company':
+                            this.$refs['company'].validate((valid) => {
+                                if (valid) {
+                                    if (this.form_company.company_logo && this.form_company.license_file) {
+                                        this.doPost(this.form_company);
+                                    } else {
+                                        this.$message.error('请上传相应图片和附件');
+                                    }
+                                } else {
+                                    console.log('error submit!!');
+                                    return false;
+                                }
+                            });
+                            break;
+                        case 'sup':
+                            if (this.sup_cate_valid()) {
+                                this.$refs['sup'].validate((valid) => {
+                                    if (valid) {
+                                        if (this.form_sup.id_photo && this.form_sup.person_file) {
+                                            this.doPost(this.form_sup);
+                                        } else {
+                                            this.$message.error('请上传相应图片和附件');
+                                        }
+                                    } else {
+                                        console.log('error submit!!');
+                                        return false;
+                                    }
+                                });
+                            }
+                            break;
+                        case 'expert':
+                            this.doPost([]);
+                            break;
                     }
 
                 },

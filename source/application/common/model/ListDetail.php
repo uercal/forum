@@ -17,6 +17,8 @@ use app\common\model\UserNewsOption;
 class ListDetail extends BaseModel
 {
     protected $name = 'list_detail';
+    protected $append = ['create_time_date'];
+
 
     public function cover()
     {
@@ -26,6 +28,11 @@ class ListDetail extends BaseModel
     public function list()
     {
         return $this->hasOne('ListModel', 'id', 'list_id');
+    }
+
+    public function exam()
+    {
+        return $this->belongsTo('Exam', 'id', 'exam_id');
     }
 
     public function user()
@@ -42,6 +49,10 @@ class ListDetail extends BaseModel
         }
     }
 
+    public function getCreateTimeDateAttr($value, $data)
+    {
+        return date('Y-m-d', $data['create_time']);
+    }
 
     public function getOptionAttr($value, $data)
     {

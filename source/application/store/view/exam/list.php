@@ -57,6 +57,7 @@
                          tpl-table-black am-text-nowrap">
                             <thead>
                                 <tr>
+                                    <th>审核ID</th>
                                     <th>用户ID</th>
                                     <th>用户名</th>                                                                        
                                     <th>审核类型</th>
@@ -69,6 +70,7 @@
                             <tbody>
                                 <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
                                 <tr>
+                                    <td class="am-text-middle"><?= $item['id'] ?></td>
                                     <td class="am-text-middle"><?= $item['user']['user_id'] ?></td>
                                     <td class="am-text-middle"><?= $item['user']['user_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['type_text'] ?></td>  

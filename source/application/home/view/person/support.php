@@ -1,6 +1,5 @@
 <!--  -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css">
-<!-- <link rel="stylesheet" href="assets/home/css/1.css"> -->
+
 <style>
     .sup-act-title>div {
         white-space: nowrap !important;

@@ -3,6 +3,7 @@
 namespace app\store\controller;
 
 use app\store\model\Exam as ExamModel;
+use app\store\model\User;
 use app\common\model\UploadApiFile;
 
 /**
@@ -43,7 +44,12 @@ class Exam extends Controller
         $data['input'] = [];
         $data['image'] = [];
         $data['file'] = [];
-        foreach ($data_arr as $key => $value) {
+        if (empty($data_arr) && $info['type_bonus'] == 'expert') {
+            // 
+            $user_data = User::get($info['user_id'], ['person'])->toArray();
+            $data_arr = $user_data['person'];                      
+        }
+        foreach ($data_arr as $key => $value) {            
             if (in_array($key, $imgMap)) {
                 $data['image'][$key] = UploadApiFile::getFilePath($value);
             } elseif (in_array($key, $fileMap)) {
@@ -65,16 +71,15 @@ class Exam extends Controller
                         'name' => end($cateArrMap[$key]),
                         'value' => end($v)
                     ];
-                    $_arr[] = $__arr;                    
+                    $_arr[] = $__arr;
                 }
-                if(empty($_arr)) continue;
+                if (empty($_arr)) continue;
                 $data['array'][$key] = $_arr;
             } else {
                 $data['input'][$key] = $value;
-            }
+            }            
         }
-        // halt(reset($data['array']));
-        //         
+        
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }
 

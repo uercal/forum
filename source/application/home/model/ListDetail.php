@@ -3,6 +3,8 @@
 namespace app\home\model;
 
 use app\common\model\ListDetail as ListDetailModel;
+use app\home\model\ListMode;
+use app\home\model\ListModel;
 use think\Cache;
 use think\Request;
 use think\Db;
@@ -25,7 +27,7 @@ class ListDetail extends ListDetailModel
             foreach ($list as $key => $value) {
                 $job_sort[$value['job']]['data'][] = $value;
             }
-            usort($job_sort,function($a,$b){
+            usort($job_sort, function ($a, $b) {
                 return $a['value'] > $b['value'];
             });
             // halt(end($job_sort)['data'][0]['cover']);
@@ -68,4 +70,7 @@ class ListDetail extends ListDetailModel
             ]);
         }
     }
+
+
+    
 }

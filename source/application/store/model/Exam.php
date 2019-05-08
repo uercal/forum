@@ -151,13 +151,7 @@ class Exam extends ExamModel
         $obj = $this->where('id', $data['id'])->find();
 
         $content = json_decode($obj['content'], true);
-        // 筛选空值 content
-        foreach ($content as $key => $value) {
-            if (empty($value)) {
-                unset($content[$key]);
-            }
-        }
-
+        
         // 开启事务
         Db::startTrans();
         try {
