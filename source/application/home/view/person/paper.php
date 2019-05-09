@@ -70,22 +70,22 @@
 
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;">
-        <el-input placeholder="请输入内容" v-model="key_word" class="input-with-select" style="width:346px;">            
-            <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-input placeholder="请输入内容" v-model="filter.key_word" class="input-with-select" style="width:346px;">
+            <el-button slot="append" icon="el-icon-search" @click="handleKeyWord"></el-button>
         </el-input>
-        <el-button type="primary" icon="el-icon-plus">发布论文</el-button>
+        <el-button type="primary" @click="handleAddPaper" icon="el-icon-plus">发布论文</el-button>
     </div>
     <div class="person-my-act-body" style="margin-top:20px;">
         <template>
             <!--  -->
-            <el-table v-loading="loading" lazy ref="filterTable" :data="data.data" style="width: 100%">
-                <el-table-column class-name="sup-act-title" prop="list_detail.title" label="文章标题" sortable width="220">
+            <el-table v-loading="loading" lazy ref="filterTable" :data="data.data" style="width: 100%" @filter-change="handleFilter">
+                <el-table-column class-name="sup-act-title" prop="list_detail.title" label="文章标题" sortable width="280">
                 </el-table-column>
                 <el-table-column prop="list_detail.create_time_date" label="时间" width="100" sortable>
                 </el-table-column>
-                <el-table-column prop="list_detail.list.name" label="论文类型" width="120" :filters="list_type" :filter-method="filterTag" filter-placement="bottom-end">
+                <el-table-column prop="list_detail.list.name" column-key="list_id" label="论文类型" width="120" :filters="list_type" filter-placement="bottom-end">
                 </el-table-column>
-                <el-table-column prop="status" label="审核状态" width="180" :filters="[{ text: '审核中', value: '10' },{ text: '已发布', value: '20' },{ text: '未通过', value: '30' }]" :filter-method="filterTag" filter-placement="bottom-end">
+                <el-table-column prop="status" label="审核状态" column-key="status" width="180" :filters="[{ text: '审核中', value: '10' },{ text: '已发布', value: '20' },{ text: '未通过', value: '30' }]" filter-placement="bottom-end">
                     <template slot-scope="scope">
                         <div :class="
                         scope.row.status == 10 ? 'primary' : (
@@ -109,7 +109,6 @@
     </div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
@@ -125,25 +124,44 @@
         // 
         window.vue = new Vue({
             el: '#app',
-            data: {
-                key_word: null,
+            data: {                
                 data: data,
                 loading: true,
-                list_type: list_type
+                list_type: list_type,
+                filter: {
+                    list_id: [],
+                    status: 0,
+                    page: 1,
+                    key_word:null
+                },
             },
             methods: {
-                filterTag: function(value, row) {
-                    return row.activity.status == value;
+                handleKeyWord:function(){
+                    this.getList();
                 },
-                changePage: function(e) {
+                handleAddPaper:function(){
+                    window.location.href = '<?= url('paperUpload') ?>';
+                },
+                handleFilter: function(filters) {                    
+                    for (var i in filters) {
+                        this.filter[i] = filters[i];
+                    }
+                    this.page = 1;
+                    this.getList();
+                },
+                getList: function() {
                     this.loading = true;
-                    var page = e;
+                    var param = this.filter;
                     var _this = this;
-                    $.get('<?= url('supportAjax') ?>&page=' + e, function(res) {
-                        console.log(res.data);
+                    console.log(param);
+                    $.post('<?= url('paperAjax') ?>', param, function(res) {
                         _this.data = res.data;
                         _this.loading = false;
-                    });
+                    })
+                },
+                changePage: function(e) {
+                    this.filter.page = e;                    
+                    this.getList();                    
                 },
                 actDetail: function(id) {
                     console.log(id);

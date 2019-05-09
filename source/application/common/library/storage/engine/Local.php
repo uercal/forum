@@ -26,7 +26,7 @@ class Local extends Server
             case 'attachment':
                 // 验证文件并上传
                 $info = $this->file->validate([
-                    'size' => 4 * 1024 * 1024
+                    'size' => 2 * 1024 * 1024
                 ])
                     ->move($uplodDir, $this->fileName);
                 break;                
@@ -34,7 +34,7 @@ class Local extends Server
             default:
                 // 验证文件并上传
                 $info = $this->file->validate([
-                    'size' => 4 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'
+                    'size' => 2 * 1024 * 1024, 'ext' => 'jpg,jpeg,png,gif'
                 ])
                     ->move($uplodDir, $this->fileName);
                 break;

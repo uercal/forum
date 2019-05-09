@@ -26,8 +26,7 @@
         display: block;
         object-fit: contain;
     }
-</style>
-<style>
+
     /*  */
     .el-tabs--card>.el-tabs__header {
         border-bottom: none;

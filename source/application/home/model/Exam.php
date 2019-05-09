@@ -83,25 +83,25 @@ class Exam extends ExamModel
      */
     public function getDataAjax($user_id)
     {
-        //        
+        //  
+        $input = input();
         $map = [];
         $map['user_id'] = ['=', $user_id];
         // 类型 论文
         $map['type'] = ['=', 20];
-        if (input('list_id')) {
-            $list_id = explode(',', input('list_id'));
-            $map['id_bonus'] = ['in', $list_id];
+        if (!empty($input['list_id'])) {
+            $map['id_bonus'] = ['in', $input['list_id']];
         }
-        if (input('status')) {
-            $map['status'] = ['=', input('status')];
+        if (!empty($input['status'])) {
+            $map['status'] = ['in', $input['status']];
         }
-        if (input('key_word')) {
-            $map['str_bonus'] = ['like', '%' . input('key_word') . '%'];
+        if (!empty($input['key_word'])) {
+            $map['str_bonus'] = ['like', '%' . $input['key_word'] . '%'];
         }
         
         $data = $this->with(['listDetail', 'listDetail.list'])->where($map)->paginate(1, false, [
             'query' => Request::instance()->request()
-        ]);    
+        ]);
 
         return $data;
     }

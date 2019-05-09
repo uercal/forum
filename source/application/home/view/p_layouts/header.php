@@ -23,8 +23,7 @@
     <script>
         BASE_URL = '<?= isset($base_url) ? $base_url : '
         ' ?>';
-        STORE_URL = '<?= isset($store_url) ? $store_url : '
-        ' ?>';
+        STORE_URL = '<?= isset($store_url) ? $store_url : '' ?>';
     </script>
 </head>
 

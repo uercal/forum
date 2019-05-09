@@ -15,9 +15,9 @@ use app\common\model\UserNewsOption;
  * @package app\common\model
  */
 class ListDetail extends BaseModel
-{
+{   
     protected $name = 'list_detail';
-    protected $append = ['create_time_date'];
+    protected $append = ['create_time_date','option'];
 
 
     public function cover()

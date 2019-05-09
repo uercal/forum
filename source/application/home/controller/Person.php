@@ -247,7 +247,7 @@ class Person extends Controller
         $param = input('param');
         $file = $request->file('file');
         $file_info = $file->getInfo();
-        $file_type = $file_info['type'];
+        $file_type = $file_info['type'];        
         $upload_api = new UploadApiFile;
         if ($file_type === 'image/png' || $file_type === 'image/jpg' || $file_type === 'image/jpeg' || $file_type === 'application/pdf') {
             //            
@@ -313,7 +313,8 @@ class Person extends Controller
     /**
      * 论文管理
      */
-    public function personPaper()
+
+    public function getPaperTypeList()
     {
         $role_arr = explode(',', $this->user['role']);
         $mode = new ListMode;
@@ -324,6 +325,12 @@ class Person extends Controller
         }
         $list = new ListModel;
         $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);
+        return $_type_list;
+    }
+
+    public function personPaper()
+    {
+        $_type_list = $this->getPaperTypeList();
         $type_list = [];
         foreach ($_type_list as $key => $value) {
             $type_list[] = [
@@ -336,18 +343,32 @@ class Person extends Controller
 
     public function paperAjax()
     {
-        $exam = new Exam;        
+        $exam = new Exam;
         $data = $exam->getDataAjax($this->user['user_id']);
         return $this->renderSuccess('success', '', $data);
     }
 
 
+    public function paperUpload()
+    {
+        $type_list = $this->getPaperTypeList();
+
+        return $this->fetch('paper_upload', compact('type_list'));
+    }
 
 
+    // ajax
+    public function getListInfo($id){
+        $list = ListModel::get($id,['userNewsOption'])->toArray();
+        return $list;
+    }
 
 
-
-
+    // paper img ajax
+    public function uploadPaperImg(Request $request){
+        $file = input();
+        halt($file);
+    }
 
 
 

@@ -28,7 +28,7 @@ class ListModel extends BaseModel
     public function userNewsOption()
     {
         return $this->hasMany('UserNewsOption', 'list_id', 'id');
-    }
+    }    
 
     public function listDetail()
     {
