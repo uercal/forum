@@ -39,6 +39,10 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
+                    $data['option_id'] = implode(',',$data['option_id']);
+                    if (isset($data['cover_id'])) {
+                        $data['cover_id'] = array_values($data['cover_id'])[0];
+                    }
                     $this->allowField(true)->save($data);
                     break;
 
@@ -97,6 +101,8 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
+                    $data['option_id'] = implode(',',$data['option_id']);
+                    
                     $this->allowField(true)->save($data);
                     break;
 

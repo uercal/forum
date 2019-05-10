@@ -3,7 +3,7 @@
         font-size: 1.4rem;
     }
 </style>
-
+<link rel="stylesheet" href="assets/store/plugins/umeditor/themes/default/css/umeditor.css">
 <div class="row-content am-cf">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -122,16 +122,49 @@
                                     <?php endforeach; ?>
 
 
+                                <?php elseif ($key == "cover") : ?>
+                                    <?php foreach ($item as $k => $v) : ?>
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <div class="am-u-sm-9 am-u-end">
+                                                <a href="<?= $item[$k] ?>" title="点击查看大图" target="_blank">
+                                                    <img name="<?= $k ?>" src="<?= $v ?>" width="144" height="144" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
 
+                                <?php elseif ($key == 'content') : ?>
+                                    <?php foreach ($item as $k => $v) : ?>
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"><?= $map[$k] ?></label>
+                                            <div class="am-u-sm-9 am-u-end">
+                                                <textarea id="container" type="text/plain" style="width:1000px;height:600px;"><?= $v ?></textarea>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
+
                             <?php endforeach; ?>
-                            
+
+
+
+
+
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">备注</div>
+                            </div>
+
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">备注信息</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <textarea type="text" id="bonus" class="tpl-form-input"><?= $info['bonus'] ?></textarea>
                                 </div>
                             </div>
+
+
+
+
 
                         </form>
 
@@ -156,8 +189,17 @@
     </div>
 </div>
 
+<script src="assets/store/plugins/umeditor/umeditor.config.js"></script>
+<script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
 <script>
     $(function() {
+
+        // 富文本编辑器
+        var ue = UM.getEditor('container');
+        ue.ready(function() {
+            //不可编辑
+            ue.setDisabled();
+        });
         /**
          * 表单验证提交
          * @type {*}
@@ -194,7 +236,6 @@
                         anim: 1
                     }, function(res) {});
                 }
-
             })
 
             return false;

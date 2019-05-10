@@ -123,12 +123,12 @@ class Index extends Controller
                     $data = $project->getListData();
                 } else {
                     $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
-                    if ($key_word == 'user_news') {
+                    if ($key_word == 'user_news' || $key_word == 'news') {
                         $options = UserNewsOption::where('list_id', $model['list']['id'])->select()->toArray();
                         $_data = [];
                         $_data['list'] = $data;
                         $_data['options'] = $options;
-                        $data = $_data;
+                        $data = $_data;                        
                     }
                 }
                 break;
@@ -158,8 +158,8 @@ class Index extends Controller
             default:
 
                 break;
-        }        
-        
+        }
+
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
@@ -229,7 +229,7 @@ class Index extends Controller
     public function userDetail($user_id, $category_id)
     {
         $model = Category::get($category_id);
-        $detail = User::detail($user_id)->toArray();        
+        $detail = User::detail($user_id)->toArray();
         //         
         return $this->fetch('user_detail', compact('detail', 'model'));
     }

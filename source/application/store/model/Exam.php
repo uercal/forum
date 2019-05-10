@@ -9,6 +9,8 @@ use app\common\model\User;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
 use app\common\model\UserSup;
+// 
+use app\store\model\ListDetail;
 use think\Db;
 
 /**
@@ -89,6 +91,20 @@ class Exam extends ExamModel
         return $data;
     }
 
+    public static function attrPaperTextMap()
+    {
+        $data = [
+            'list_id' => '论文类型',
+            'cover_id' => '封面图',
+            'option_id' => '类别',
+            'title' => '文章标题',
+            'content' => '文章内容'
+        ];
+        return $data;
+    }
+
+
+
     public static function attrImgMap()
     {
         return [
@@ -96,6 +112,14 @@ class Exam extends ExamModel
             'company_logo',
             // person & supplier
             'id_photo'
+        ];
+    }
+
+    public static function attrCoverMap()
+    {
+        return [
+            // paper
+            'cover_id'
         ];
     }
 
@@ -142,8 +166,12 @@ class Exam extends ExamModel
         ];
     }
 
-
-
+    public static function attrContentArrMap()
+    {
+        return [
+            'content'
+        ];
+    }
 
 
     public function updateStatus($data)
@@ -151,7 +179,13 @@ class Exam extends ExamModel
         $obj = $this->where('id', $data['id'])->find();
 
         $content = json_decode($obj['content'], true);
-        
+
+        if (!empty($content)) {
+            foreach ($content as $key => $value) {
+                if (empty($value)) unset($content[$key]);
+            }
+        }
+
         // 开启事务
         Db::startTrans();
         try {
@@ -225,6 +259,30 @@ class Exam extends ExamModel
                     $user->save([
                         'role' => $new_role,
                     ]);
+                }
+
+                $this::get(['id', $data['id']])->save([
+                    'status' => $data['status'],
+                    'bonus' => $data['bonus']
+                ]);
+            }
+            // type==20 论文提交
+            if ($obj['type'] == 20) {
+                // 
+                if ($data['status'] == 20) {
+                    //                     
+                    $detail = new ListDetail;
+                    $detail_data = [
+                        'list_id' => $content['list_id'],
+                        'title' => $content['title'],
+                        'option_id' => implode(',', $content['option_id']),
+                        'cover_id' => isset($content['cover_id']) ? $content['cover_id'] : null,
+                        'content' => $content['content'],
+                        'user_id' => $obj['user_id'],
+                        'exam_id' => $obj['id']
+                    ];
+
+                    $detail->save($detail_data);
                 }
 
                 $this::get(['id', $data['id']])->save([

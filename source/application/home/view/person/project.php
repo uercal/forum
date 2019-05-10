@@ -64,7 +64,7 @@
 <div class="person-my-act" id="app">
     <div class="person-my-act-head">
         <div>
-            <p>我的论文</p>
+            <p>我的项目</p>
             <small style="margin-left:15px;color: #8C8C8B;" v-html="'('+data.total+')'"></small>
         </div>
 
@@ -73,19 +73,17 @@
         <el-input placeholder="请输入内容" v-model="filter.key_word" class="input-with-select" style="width:346px;">
             <el-button slot="append" icon="el-icon-search" @click="handleKeyWord"></el-button>
         </el-input>
-        <el-button type="primary" @click="handleAddPaper" icon="el-icon-plus">发布论文</el-button>
+        <el-button type="primary" @click="handleAddPaper" icon="el-icon-plus">发布项目</el-button>
     </div>
     <div class="person-my-act-body" style="margin-top:20px;">
         <template>
             <!--  -->
             <el-table v-loading="loading" lazy ref="filterTable" :data="data.data" style="width: 100%" @filter-change="handleFilter">
-                <el-table-column class-name="sup-act-title" prop="str_bonus" label="文章标题" sortable width="240">
+                <el-table-column class-name="sup-act-title" prop="str_bonus" label="项目名称" sortable width="260">
                 </el-table-column>
-                <el-table-column prop="create_time_date" label="时间" width="120" sortable>
-                </el-table-column>
-                <el-table-column prop="id_bonus_text" column-key="list_id" label="论文类型" width="120" :filters="list_type" filter-placement="bottom-end">
-                </el-table-column>
-                <el-table-column prop="status" label="审核状态" column-key="status" width="120" :filters="[{ text: '审核中', value: '10' },{ text: '已发布', value: '20' },{ text: '未通过', value: '30' }]" filter-placement="bottom-end">
+                <el-table-column prop="create_time_date" label="时间" sortable>
+                </el-table-column>                
+                <el-table-column prop="status" label="审核状态" column-key="status" :filters="[{ text: '审核中', value: '10' },{ text: '已发布', value: '20' },{ text: '未通过', value: '30' }]" filter-placement="bottom-end">
                     <template slot-scope="scope">
                         <div :class="
                         scope.row.status == 10 ? 'primary' : (
@@ -100,7 +98,7 @@
                     <template slot-scope="scope">
                         <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.list_detail.id)">查看详情</div>
                         <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(scope.row.list_detail.id)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.list_detail.id)">查看原因</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.list_detail.id)">查看原因</div>                        
                     </template>
                 </el-table-column>
             </el-table>
@@ -117,9 +115,7 @@
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script>
 <script>
-    // 
-    var list_type = JSON.parse('<?= json_encode($type_list) ?>');
-
+    //    
     $.get('<?= url('paperAjax') ?>&type=project', function(res) {
         //         
         var data = res.data;
@@ -128,8 +124,7 @@
             el: '#app',
             data: {
                 data: data,
-                loading: true,
-                list_type: list_type,
+                loading: true,                
                 filter: {
                     list_id: [],
                     status: 0,
@@ -142,7 +137,7 @@
                     this.getList();
                 },
                 handleAddPaper: function() {
-                    window.location.href = '<?= url('paperUpload') ?>';
+                    window.location.href = '<?= url('projectUpload') ?>';
                 },
                 handleFilter: function(filters) {
                     for (var i in filters) {
@@ -156,7 +151,7 @@
                     var param = this.filter;
                     var _this = this;
                     console.log(param);
-                    $.post('<?= url('paperAjax') ?>', param, function(res) {
+                    $.post('<?= url('paperAjax') ?>&type=project', param, function(res) {
                         _this.data = res.data;
                         _this.loading = false;
                     })
@@ -166,7 +161,7 @@
                     this.getList();
                 },
                 actDetail: function(id) {
-                    console.log(id);
+                    console.log(id);                    
                 }
             },
             mounted: function() {

@@ -78,7 +78,7 @@ class UploadApiFile extends UploadApiFileModel
         $model = new UploadFile;
         $data = [
             'storage' => 'local',
-            'file_name' => $fileName,
+            'file_name' => 'api/'.$fileName,
             'file_type' => 'paperCover',
             'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION)
         ];

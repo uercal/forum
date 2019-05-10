@@ -42,7 +42,7 @@ class ListData extends Controller
 
     public function list_edit($id)
     {
-        $model = ListModel::get($id, ['mode']);        
+        $model = ListModel::get($id, ['mode']);
         if (!$this->request->isAjax()) {
             return $this->fetch('list_edit', compact('model'));
         }
@@ -125,7 +125,8 @@ class ListData extends Controller
     {
         $list = ListModel::get($list_id, ['mode']);
         if (!$this->request->isAjax()) {
-            if ($list['mode']['key_word'] == 'user_news' && $list['cate_exist'] == 1) {
+            $key_word = $list['mode']['key_word'];
+            if (($key_word == 'user_news' || $key_word == 'news') && $list['cate_exist'] == 1) {
                 $option = UserNewsOption::where('list_id', $list_id)->select();
                 return $this->fetch('detail_add', compact('list', 'option'));
             } else {
@@ -156,9 +157,9 @@ class ListData extends Controller
     }
 
 
-    public function detail_delect($id)
+    public function detail_delete($id)
     {
-        $model = News::get($id);
+        $model = ListDetail::get($id);
         if (!$model->remove($id)) {
             $error = $model->getError() ?: '删除失败';
             return $this->renderError($error);

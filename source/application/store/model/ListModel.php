@@ -33,10 +33,11 @@ class ListModel extends ListModelModel
 
         Db::startTrans();
         try {
-            // 
-            $this->user_news_option()->saveAll($options_data);
-            // 
+            //           
             $this->allowField(true)->save($data);
+            // 
+            $this->userNewsOption()->saveAll($options_data);
+                        
             Db::commit();
             return true;
         } catch (\Exception $e) {
@@ -65,9 +66,9 @@ class ListModel extends ListModelModel
         Db::startTrans();
         try {
             // 
-            $this->user_news_option()->delete();
+            $this->userNewsOption()->delete();
             // 
-            $this->user_news_option()->saveAll($options_data);
+            $this->userNewsOption()->saveAll($options_data);
             //             
             $this->allowField(true)->save($data);
             Db::commit();

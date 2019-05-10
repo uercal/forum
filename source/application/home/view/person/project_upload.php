@@ -129,29 +129,54 @@
 <div class="person-my-act" id="app">
     <div class="person-my-act-head">
         <div>
-            <p>发布文章</p>
+            <p>发布项目</p>
         </div>
     </div>
 
     <div class="person-my-act-body" style="margin-top:35px;">
         <template>
-            <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="文章分类">
-                    <el-select v-model="form.list_id" placeholder="请选择分类" @change="changeListId">
-                        <el-option v-for="(item,index) in type_list" :label="item" :value="index"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="文章类别" v-if="isOption">
-                    <el-checkbox-group v-model="form.option_id">
-                        <el-checkbox v-for="item in option_arr" :label="item.id" :key="item.id" name="option_id">{{item.name}}</el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-                <el-form-item label="文章标题">
+            <el-form ref="form" :model="form" :rules="form_rules" label-width="80px" label-position="left" style="margin-top:30px;">
+                <el-form-item label="项目名称:" prop="title">
                     <el-input v-model="form.title"></el-input>
-                </el-form-item>
-                <el-form-item label="文章封面" v-if="isCover">
-                    <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=paperCover" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
-                        <img v-if="paperCoverUrl" :src="paperCoverUrl" class="avatar">
+                </el-form-item>               
+                <el-row type="flex">
+                    <el-col :span="24">
+                        <el-form-item label="服务类别:">
+                            <el-select v-model="form.server_cate" multiple placeholder="请选择" style="width:100%;">
+                                <el-option v-for="(item,index) in server_cate" :key="index" :label="item" :value="index">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row type="flex">
+                    <el-col :span="24">
+                        <el-form-item label="工程类别:">
+                            <el-select v-model="form.eng_cate" multiple placeholder="请选择" style="width:100%;">
+                                <el-option v-for="(item,index) in eng_cate" :key="index" :label="item" :value="index">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>              
+
+                <el-row type="flex">
+                    <el-col :span="12">
+                        <el-form-item label="服务合同金额（元）:" prop="assignment_money" label-width="140px">
+                            <el-input v-model.number="form.assignment_money" placeholder=""></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="总投资金额（元）:" prop="total_invest" label-width="140px">
+                            <el-input type="email" v-model="form.total_invest" placeholder="xx@xx.com"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+
+                <el-form-item label="项目封面">
+                    <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=projectCoverUrl" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
+                        <img v-if="projectCoverUrl" :src="projectCoverUrl" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
@@ -182,25 +207,58 @@
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
 <!--  -->
 <script>
-    var $type_list = JSON.parse('<?= json_encode($type_list) ?>');
+    var $eng_cate = JSON.parse('<?= json_encode($eng_cate) ?>');
+    var $server_cate = JSON.parse('<?= json_encode($server_cate) ?>');
     //     
     // 
     window.vue = new Vue({
         el: '#app',
         data() {
             return {
-                type_list: $type_list,
-                option_arr: [],
-                paperCoverUrl: '',
-                isCover: false,
-                isOption: false,
+                eng_cate: $eng_cate,
+                server_cate: $server_cate,
+                eng_arr: [],
+                server_arr: [],
+                projectCoverUrl: '',
                 posting: false,
                 form: {
-                    list_id: '',
-                    cover_id: '',
-                    option_id: [],
                     title: '',
-                    content: ''
+                    cover_id: '',
+                    content: '',
+                    server_cate: [],
+                    eng_cate: [],
+                    city_id: '',
+                    province_id: '',
+                    region_id: '',
+                    assignment_money: '',
+                    assignment_date: '',
+                    total_invest: ''
+                },
+                form_rules: {
+                    title: [{
+                        required: true,
+                        message: '请填写标题',
+                        trigger: 'blur'
+                    }],
+                    server_cate: [{
+                        required: true,
+                        message: '请勾选服务类别',
+                        trigger: 'blur'
+                    }],
+                    eng_cate: [{
+                        required: true,
+                        message: '请勾选工程类别',
+                        trigger: 'blur'
+                    }],
+                    id_card: [{
+                        required: true,
+                        message: '请填写身份证号码',
+                        trigger: 'blur'
+                    }, {
+                        pattern: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+                        message: '身份证号码格式错误',
+                        trigger: 'blur'
+                    }],
                 }
             }
         },
@@ -209,14 +267,14 @@
                 if (!this.posting) {
                     this.posting = true;
                     var _this = this;
-                    $.post('<?= url('paperUploadAjax') ?>', {
-                        form: form                        
+                    $.post('<?= url('projectUploadAjax') ?>', {
+                        form: form
                     }, function(res) {
                         console.log(res);
                         if (res.code == 1) {
                             _this.$message.success(res.msg);
                             setTimeout(function() {
-                                window.location.href = '<?= url('personPaper') ?>'
+                                window.location.href = '<?= url('projectPaper') ?>'
                             }, 1000);
                             // 
                         } else {

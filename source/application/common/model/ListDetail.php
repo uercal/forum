@@ -18,7 +18,7 @@ class ListDetail extends BaseModel
 {   
     protected $name = 'list_detail';
     protected $append = ['create_time_date','option'];
-
+    protected $updateTime = false;
 
     public function cover()
     {

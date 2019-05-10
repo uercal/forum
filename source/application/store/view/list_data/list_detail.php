@@ -303,7 +303,7 @@
     $(function() {
 
         // 删除元素
-        var url = "<?= url('list_data/news_delete') ?>";
+        var url = "<?= url('list_data/detail_delete') ?>";
         $('.item-delete').delete('id', url);
 
     });

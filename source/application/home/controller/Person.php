@@ -247,7 +247,7 @@ class Person extends Controller
         $param = input('param');
         $file = $request->file('file');
         $file_info = $file->getInfo();
-        $file_type = $file_info['type'];        
+        $file_type = $file_info['type'];
         $upload_api = new UploadApiFile;
         if ($file_type === 'image/png' || $file_type === 'image/jpg' || $file_type === 'image/jpeg' || $file_type === 'application/pdf') {
             //            
@@ -341,10 +341,10 @@ class Person extends Controller
         return $this->fetch('paper', compact('type_list'));
     }
 
-    public function paperAjax()
+    public function paperAjax($type)
     {
         $exam = new Exam;
-        $data = $exam->getDataAjax($this->user['user_id']);
+        $data = $exam->getDataAjax($this->user['user_id'], $type);
         return $this->renderSuccess('success', '', $data);
     }
 
@@ -358,21 +358,39 @@ class Person extends Controller
 
 
     // ajax
-    public function getListInfo($id){
-        $list = ListModel::get($id,['userNewsOption'])->toArray();
+    public function getListInfo($id)
+    {
+        $list = ListModel::get($id, ['userNewsOption'])->toArray();
         return $list;
     }
 
-
-    // paper img ajax
-    public function uploadPaperImg(Request $request){
-        $file = input();
-        halt($file);
+    // 论文发布 接口
+    public function paperUploadAjax()
+    {
+        $form = $this->postData('form');
+        $exam_model = new Exam;
+        // 
+        if ($exam_model->updatePaperExam($form, $this->user['user_id'], $this->getLevelOption())) {
+            return $this->renderSuccess('申请成功');
+        } else {
+            return $this->renderError($exam_model->error);
+        }
     }
 
 
+    public function personProject()
+    {
+        return $this->fetch('project');
+    }
 
+    public function projectUpload()
+    {
 
+        $eng_cate = Projects::$eng_cate;
+        $server_cate = Projects::$server_cate;
+
+        return $this->fetch('project_upload', compact('eng_cate', 'server_cate'));
+    }
 
 
 

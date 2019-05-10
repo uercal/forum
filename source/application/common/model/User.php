@@ -38,8 +38,14 @@ class User extends BaseModel
     { }
 
 
-    // 供应商关联
+    // supplier
+    public function supplier()
+    {
+        return $this->hasOne('UserSup', 'user_id', 'user_id');
+    }
 
+
+    
     public function avatar()
     {
         return $this->hasOne('UploadApiFile', 'file_id', 'avatar');

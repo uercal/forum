@@ -22,7 +22,7 @@ class Projects extends BaseModel
         return $this->hasOne('UploadFile', 'file_id', 'cover_id');
     }
 
-    protected static $server_cate = [
+    public static $server_cate = [
         '1' => '投资咨询',
         '2' => '招标代理',
         '3' => '勘察',
@@ -33,7 +33,7 @@ class Projects extends BaseModel
         '8' => '其他服务'
     ];
 
-    protected static $eng_cate = [
+    public static $eng_cate = [
         'a' => '农业林业',
         'b' => '水利水电',
         'c' => '电力',

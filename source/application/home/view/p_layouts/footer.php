@@ -1,7 +1,5 @@
 </div>
 </div>
-
-
 </section>
 <!--===========layout-footer================-->
 <div class="layout-footer">
@@ -180,7 +178,7 @@
 <script>
     $(function() {
         //         
-        $('.el-icon-close').on('click',function(){
+        $('.el-icon-close').on('click', function() {
             $(this).parent().parent().toggle('slow');
         })
     })

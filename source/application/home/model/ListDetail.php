@@ -35,6 +35,11 @@ class ListDetail extends ListDetailModel
             // 
         } else {
             $map = [];
+            $mapRaw = '';
+            if (input('option_id')) {
+                $option_id = input('option_id');
+                $mapRaw = "concat(',',option_id,',') LIKE '%$option_id%'";
+            }
             if (input('title')) {
                 $map['title'] = ['like', '%' . input('title') . '%'];
             }
@@ -44,7 +49,6 @@ class ListDetail extends ListDetailModel
                 $order = 'create_time asc';
             }
             $map['list_id'] = ['=', $list_id];
-
             // 
             switch ($key_word) {
                 case 'news':
@@ -55,22 +59,22 @@ class ListDetail extends ListDetailModel
                     break;
                 case 'user_news':
                     $pageNum = 10;
-                    input('option_id') ? $map['option_id'] = ['like', '%' . input('option_id') . '%'] : '';
                     break;
                 default:
                     $pageNum = 10;
                     break;
             }
 
-            // $r = $this->with(['cover'])->where($map)->order($order)->fetchSql(true)->select();
-            // halt($r);
-            // 
-            return $this->with(['cover'])->where($map)->order($order)->paginate($pageNum, false, [
+            if (empty($mapRaw)) {
+                return $this->with(['cover','user'])->where($map)->order($order)->paginate($pageNum, false, [
+                    'query' => Request::instance()->request()
+                ]);
+            }
+            return $this->with(['cover','user'])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
                 'query' => Request::instance()->request()
             ]);
+            // 
+
         }
     }
-
-
-    
 }

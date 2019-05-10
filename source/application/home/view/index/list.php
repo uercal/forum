@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <?php if ($key_word == 'news') : ?>
+    <?php if ($key_word == '_news') : ?>
         <div class="list-body">
             <form action="" id="pro_list" class="list-body" style="margin-bottom:30px;">
                 <input type="hidden" name="sort" value="<?= input('sort') ?>">
@@ -49,7 +49,9 @@
                         <div class="list-news-body">
                             <strong><?= $item['title'] ?></strong>
                             <div class="list-news-content">
-                                <?= htmlspecialchars_decode($item['content']) ?>
+                                <p>
+                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                </p>
                             </div>
                             <div class="list-news-foot">
                                 <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
@@ -93,7 +95,7 @@
                             <div class="job-list-info-item" onclick="job_sort('<?= $member['content'] ?>')">
                                 <img src="<?= $member['cover']['file_path'] ?>" alt="">
                                 <a><?= $member['title'] ?></a>
-                            </div>                            
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -103,9 +105,9 @@
 
         </div>
         <style>
-        .yourclass>.layui-layer-content{
-            padding: 30px;
-        }
+            .yourclass>.layui-layer-content {
+                padding: 30px;
+            }
         </style>
         <script>
             function job_sort(content) {
@@ -519,7 +521,7 @@
 
         </div>
 
-    <?php elseif ($key_word == 'user_news') : ?>
+    <?php elseif ($key_word == 'user_news' || $key_word == 'news') : ?>
         <!--  -->
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <style>
@@ -589,28 +591,57 @@
 
 
             <div class="user-news-list">
-                <?php foreach ($data['list'] as $item) : ?>
-                    <div class="user-news-item">
-                        <div class="user-news-head">
-                            <div class="user-news-head-info">
-                                <img src="assets/home/images/about/002.jpg" alt="">
-                                <p>编辑：</p>
+                <?php if ($key_word == 'user_news') : foreach ($data['list'] as $item) : ?>
+                        <div class="user-news-item">
+                            <div class="user-news-head">
+                                <div class="user-news-head-info">
+                                    <img src="<?= $item['user']['avatar_path'] ?>" alt="">
+                                    <p>编辑：<?= $item['user']['user_name'] ?></p>
+                                </div>
+                                <p><?= implode('/', $item['option']) ?></p>
                             </div>
-                            <p><?= implode('/', $item['option']) ?></p>
+                            <hr style="height:1px;border:none;border-top:2px dashed #979797;margin:0;margin-top:10px;opacity: 0.2;" />
+                            <div class="user-news-body">
+                                <strong><?= $item['title'] ?></strong>
+                                <div style="margin:20px 0px;color: #999999;font-size:16px;">
+                                    <p>
+                                        <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                    </p>
+                                </div>
+                                <div style="color: #B4BEAB;font-size:14px;">
+                                    <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
+                                    <p>查看更多 》</p>
+                                </div>
+                            </div>
                         </div>
-                        <hr style="height:1px;border:none;border-top:2px dashed #979797;margin:0;margin-top:10px;opacity: 0.2;" />
-                        <div class="user-news-body">
-                            <strong><?= $item['title'] ?></strong>
-                            <div style="margin:20px 0px;color: #999999;font-size:16px;"><?= htmlspecialchars_decode($item['content']) ?></div>
-                            <div style="color: #B4BEAB;font-size:14px;">
-                                <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
-                                <p>查看更多 》</p>
+                        <!--  -->
+                    <?php endforeach;
+            endif; ?>
+            </div>
+
+            <?php if ($key_word == 'news') : foreach ($data['list'] as $item) : ?>
+                    <div class="list-news-item">
+                        <div class="list-news-item">
+                            <div class="list-news-img">
+                                <img src="<?= $item['cover']['file_path'] ?>" alt="">
+                            </div>
+                            <div class="list-news-body">
+                                <strong><?= $item['title'] ?></strong>
+                                <div class="list-news-content">
+                                    <p>
+                                        <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                    </p>
+                                </div>
+                                <div class="list-news-foot">
+                                    <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
+                                    <p>查看更多》</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--  -->
-                <?php endforeach; ?>
-            </div>
+                <?php endforeach;
+        endif; ?>
+
 
 
 

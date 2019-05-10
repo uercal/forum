@@ -2,6 +2,7 @@
 
 namespace app\common\model;
 
+use app\common\model\ListModel;
 use think\Request;
 use think\Db;
 
@@ -14,7 +15,7 @@ class Exam extends BaseModel
 {
     protected $name = 'exam';
     protected $insert = ['wxapp_id' => 10001];
-    protected $append = ['status_text'];
+    protected $append = ['status_text', 'id_bonus_text', 'create_time_date'];
 
     public function user()
     {
@@ -37,7 +38,7 @@ class Exam extends BaseModel
 
     public function getTypeTextAttr($value, $data)
     {
-        $type = [10 => '会员升级', 20 => '员工送达审批', 30 => '线下提现'];
+        $type = [10 => '会员升级', 20 => '论文提交', 30 => '线下提现'];
         return $type[$data['type']];
     }
 
@@ -47,8 +48,14 @@ class Exam extends BaseModel
             'person' => '个人会员',
             'company' => '单位会员',
             'expert' => '专家会员',
-            'supplier' => '供应商'
+            'supplier' => '供应商',
+            //             
         ];
+
+        if($data['type_bonus']=='paper'){
+            return ListModel::where('id',$data['id_bonus'])->value('name');
+        }
+
         return $type[$data['type_bonus']];
     }
 
@@ -62,7 +69,23 @@ class Exam extends BaseModel
         return $type[$data['level_option']];
     }
 
+    public function getIdBonusTextAttr($value, $data)
+    {
+        switch ($data['type']) {
+            case 20:
+                return ListModel::where('id', $data['id_bonus'])->value('name');
+                break;
 
+            default:
+                return '';
+                break;
+        }
+    }
+
+    public function getCreateTimeDateAttr($value, $data)
+    {
+        return date('Y-m-d', $data['create_time']);
+    }
 
     public function getList()
     {
@@ -79,15 +102,11 @@ class Exam extends BaseModel
             $map['type'] = 10;
         }
 
-        if ($map['type'] == 20) {
-            $data = $this->with(['member'])->where($_map)
-                ->order(['update_time' => 'desc'])
-                ->paginate(15, false, ['query' => $request->request()])->append(['order']);
-        } else {
-            $data = $this->with(['user'])->where($_map)
-                ->order(['update_time' => 'desc'])
-                ->paginate(15, false, ['query' => $request->request()]);
-        }
+
+        $data = $this->with(['user'])->where($_map)
+            ->order(['update_time' => 'desc'])
+            ->paginate(15, false, ['query' => $request->request()]);
+
 
         return ['data' => $data, 'map' => $map];
     }

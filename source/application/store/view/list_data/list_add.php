@@ -21,7 +21,7 @@
                             </div>
 
                             <!--  -->
-                            <?php if ($mode['key_word'] == 'user_news') : ?>
+                            <?php if ($mode['key_word'] == 'user_news' || $mode['key_word'] == 'news') : ?>
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否含类别 </label>
                                     <div class="am-u-sm-9 am-u-end" id="radio_show">
@@ -53,10 +53,10 @@
                                 <div class="am-form-group" id="cate_exist" style="display:none;">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别<small>(每个类别用逗号隔开)</small></label>
                                     <div class="am-u-sm-9 am-u-end">
-                                        <input type="text" class="tpl-form-input" name="list[options]" value="<?= $model['options'] ?>" required>
+                                        <input type="text" class="tpl-form-input" name="list[options]" value="" required>
                                     </div>
                                 </div>
-                                
+
                             <?php endif; ?>
 
 

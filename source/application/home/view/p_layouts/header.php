@@ -25,6 +25,8 @@
         ' ?>';
         STORE_URL = '<?= isset($store_url) ? $store_url : '' ?>';
     </script>
+    <!--  -->
+    <script src="assets/store/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -171,6 +173,12 @@
                         <div class="<?= request()->action() == 'personpaper' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personPaper') ?>';">
                             <p>
                                 论文管理<?= request()->action() == 'personpaper' ?
+                                        '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
+                            </p>
+                        </div>
+                        <div class="<?= request()->action() == 'personproject' ? 'active' : '' ?>" onclick="window.location.href='<?= url('personProject') ?>';">
+                            <p>
+                                项目管理<?= request()->action() == 'personproject' ?
                                         '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : '' ?>
                             </p>
                         </div>

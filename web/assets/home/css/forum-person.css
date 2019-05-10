@@ -1,9 +1,22 @@
+@media (min-width:1280px) and (max-width:1760px) {
+    .person-body {
+        width: 1280px !important;        
+    }
+}
+
 .person-body {
     width: 67.5%;
     margin: 20px 0px 80px 0px;
     display: flex;
     justify-content: space-between;
 }
+
+
+
+
+
+
+
 
 
 .person-left {

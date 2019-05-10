@@ -16,7 +16,7 @@
                                     </a>
                                     <select name="type" class="am-field-valid" id="type" style="font-size:12px;" data-am-selected="{btnSize: 'sm',  placeholder:'请选择审核类型'}">
                                         <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>用户升级</option>
-                                        <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>员工派送</option>
+                                        <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>论文提交</option>
                                         <option value="30" <?php if (isset($map['type']) && $map['type'] == 30) : ?> selected <?php endif; ?>>线下提现</option>
                                     </select>
                                 </div>
@@ -59,9 +59,9 @@
                                 <tr>
                                     <th>审核ID</th>
                                     <th>用户ID</th>
-                                    <th>用户名</th>                                                                        
+                                    <th>用户名</th>
                                     <th>审核类型</th>
-                                    <th><?= $map['type']==10?'升级类型':'' ?></th>
+                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : '') ?></th>
                                     <th>提交文件</th>
                                     <th>状态</th>
                                     <th>更新时间</th>
@@ -69,28 +69,28 @@
                             </thead>
                             <tbody>
                                 <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
-                                <tr>
-                                    <td class="am-text-middle"><?= $item['id'] ?></td>
-                                    <td class="am-text-middle"><?= $item['user']['user_id'] ?></td>
-                                    <td class="am-text-middle"><?= $item['user']['user_name'] ?></td>
-                                    <td class="am-text-middle"><?= $item['type_text'] ?></td>  
-                                    <td class="am-text-middle"><?= $item['type_bonus_text'] ?></td>  
-                                    <td class="am-text-middle">
-                                        <button class="am-btn am-btn-sm am-btn-secondary" onclick="detail(<?= $item['id'] ?>)">查看并审核</button>
-                                    </td>
-                                    <td class="am-text-middle
-                                    <?php if ($item['status'] == 10) : ?>am-warning 
-                                    <?php elseif ($item['status'] == 20) : ?>am-success 
-                                    <?php else : ?>am-danger 
-                                    <?php endif; ?> 
-                                    "><?= $item['status_text'] ?></td>
-                                    <td class="am-text-middle"><?= $item['update_time'] ?></td>
-                                </tr>
-                                <?php endforeach;
-                        else : ?>
-                                <tr>
-                                    <td colspan="6" class="am-text-center">暂无记录</td>
-                                </tr>
+                                        <tr>
+                                            <td class="am-text-middle"><?= $item['id'] ?></td>
+                                            <td class="am-text-middle"><?= $item['user']['user_id'] ?></td>
+                                            <td class="am-text-middle"><?= $item['user']['user_name'] ?></td>
+                                            <td class="am-text-middle"><?= $item['type_text'] ?></td>
+                                            <td class="am-text-middle"><?= $item['type_bonus_text'] ?></td>
+                                            <td class="am-text-middle">
+                                                <button class="am-btn am-btn-sm am-btn-secondary" onclick="detail(<?= $item['id'] ?>)">查看并审核</button>
+                                            </td>
+                                            <td class="am-text-middle
+                                            <?php if ($item['status'] == 10) : ?>am-warning 
+                                            <?php elseif ($item['status'] == 20) : ?>am-success 
+                                            <?php else : ?>am-danger 
+                                            <?php endif; ?> 
+                                            "><?= $item['status_text'] ?></td>
+                                            <td class="am-text-middle"><?= $item['update_time'] ?></td>
+                                        </tr>
+                                    <?php endforeach;
+                            else : ?>
+                                    <tr>
+                                        <td colspan="6" class="am-text-center">暂无记录</td>
+                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -125,8 +125,7 @@
     });
 </script>
 <script>
-    
     function detail(id) {
         window.location.href = "<?= url('exam/detail') ?>&id=" + id;
     }
-</script> 
+</script>
