@@ -31,7 +31,7 @@ class UploadApiFile extends UploadApiFileModel
         $uplodDir = WEB_PATH . 'uploads/api';
         $salt = md5('yugu' . $user_id . $param);
         $salt = substr($salt, 0, 8);
-        if ($param == 'paperCover') $salt = time();
+        if ($param == 'paperCover' || $param == 'projectCover') $salt = time();
         $fileName = 'u' . $user_id . $param . $salt . '.' . pathinfo($this->fileInfo['name'], PATHINFO_EXTENSION);
         // 验证文件并上传
         $info = $this->file->validate([
@@ -45,7 +45,7 @@ class UploadApiFile extends UploadApiFileModel
             $res = ['code' => 0, 'msg' => $this->error];
             return $res;
         }
-        if ($param == 'paperCover') {
+        if ($param == 'paperCover' || $param == 'projectCover') {
             $file_id = $this->addLocalUploadFile($fileName, $this->fileInfo);
         } else {
             $file_id = $this->addUploadFile($fileName, $this->fileInfo);
@@ -78,7 +78,7 @@ class UploadApiFile extends UploadApiFileModel
         $model = new UploadFile;
         $data = [
             'storage' => 'local',
-            'file_name' => 'api/'.$fileName,
+            'file_name' => 'api/' . $fileName,
             'file_type' => 'paperCover',
             'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION)
         ];

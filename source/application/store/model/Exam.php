@@ -11,6 +11,7 @@ use app\common\model\UserPerson;
 use app\common\model\UserSup;
 // 
 use app\store\model\ListDetail;
+use app\store\model\Projects;
 use think\Db;
 
 /**
@@ -103,7 +104,21 @@ class Exam extends ExamModel
         return $data;
     }
 
-
+    public static function attrProjectTextMap()
+    {
+        return [
+            'title' => '项目标题',
+            'cover_id' => '封面图',
+            'content' => '项目内容',
+            'server_cate' => '服务类别',
+            'eng_cate' => '工程类别',
+            'cover_id' => '封面图',
+            'region_id' => '项目所在地',
+            'assignment_money' => '服务合同金额（元）',
+            'assignment_date' => '合同签订日期',
+            'total_invest' => '总投资金额（元）',
+        ];
+    }
 
     public static function attrImgMap()
     {
@@ -290,25 +305,33 @@ class Exam extends ExamModel
                     'bonus' => $data['bonus']
                 ]);
             }
-            // $type==30 线下提现 确认
+            // $type==30 项目提交
             if ($obj['type'] == 30) {
                 if ($data['status'] == 20) {
-                    // 扣掉余额。
-                    $price = $content['cash_price'];
-                    $account = new AccountMoney();
-                    $account_obj = $account::get($obj['user_id']);
-                    $account_obj->setDec('account_money', $price * 100);
-                    // payLog 添加
-                    $payLog = new PayLog();
-                    $payLog->save([
-                        'pay_type' => 40, //提现
-                        'pay_price' => $price,
+                    //                     
+                    $project = new Projects;
+                    $pro_data = [
+                        'title' => $content['title'],
+                        'cover_id' => $content['cover_id'],
+                        'content' => $content['content'],
+                        'server_cate' => implode(',', $content['server_cate']),
+                        'eng_cate' => implode(',', $content['eng_cate']),
+                        'city_id' => $content['city_id'],
+                        'province_id' => $content['province_id'],
+                        'region_id' => $content['region_id'],
+                        'assignment_money' => $content['assignment_money'],
+                        'assignment_date' => strtotime($content['assignment_date']),
+                        'total_invest' => $content['total_invest'],
                         'user_id' => $obj['user_id'],
-                    ]);
+                        'exam_id' => $obj['id']
+                    ];
+
+                    $project->save($pro_data);
                 }
 
-                $this->where('id', $data['id'])->update([
+                $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
+                    'bonus' => $data['bonus']
                 ]);
             }
             Db::commit();

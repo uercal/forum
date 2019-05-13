@@ -87,7 +87,7 @@
                                             <td class="am-text-middle">
                                                 <div class="tpl-table-black-operation">
                                                     <a class="tpl-table-black-operation" href="<?= url(
-                                                                                                    'list_date/project_detail',
+                                                                                                    'list_data/project_detail',
                                                                                                     ['id' => $item['id']]
                                                                                                 ) ?>" class="am-btn am-btn-xs am-radius">
                                                         <i class="am-icon-book"></i> 查看

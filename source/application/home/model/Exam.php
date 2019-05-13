@@ -151,4 +151,30 @@ class Exam extends ExamModel
             return false;
         }
     }
+
+
+    public function updateProjectExam($form, $user_id, $level_option)
+    {        
+        $str_bonus = $form['title'];
+        $content = json_encode($form);
+        $post = [
+            'user_id' => $user_id,
+            'level_option' => $level_option,
+            'content' => $content,
+            'type' => 30, //项目提交
+            'type_bonus' => 'project',            
+            'str_bonus' => $str_bonus
+        ];
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->allowField(true)->save($post);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
+    }
 }

@@ -17,7 +17,7 @@
                                     <select name="type" class="am-field-valid" id="type" style="font-size:12px;" data-am-selected="{btnSize: 'sm',  placeholder:'请选择审核类型'}">
                                         <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>用户升级</option>
                                         <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>论文提交</option>
-                                        <option value="30" <?php if (isset($map['type']) && $map['type'] == 30) : ?> selected <?php endif; ?>>线下提现</option>
+                                        <option value="30" <?php if (isset($map['type']) && $map['type'] == 30) : ?> selected <?php endif; ?>>项目提交</option>
                                     </select>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs" style="display:flex;">
@@ -61,7 +61,7 @@
                                     <th>用户ID</th>
                                     <th>用户名</th>
                                     <th>审核类型</th>
-                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : '') ?></th>
+                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : '项目名称') ?></th>
                                     <th>提交文件</th>
                                     <th>状态</th>
                                     <th>更新时间</th>

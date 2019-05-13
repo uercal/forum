@@ -136,53 +136,74 @@
     <div class="person-my-act-body" style="margin-top:35px;">
         <template>
             <el-form ref="form" :model="form" :rules="form_rules" label-width="80px" label-position="left" style="margin-top:30px;">
-                <el-form-item label="项目名称:" prop="title">
-                    <el-input v-model="form.title"></el-input>
-                </el-form-item>               
                 <el-row type="flex">
-                    <el-col :span="24">
-                        <el-form-item label="服务类别:">
+                    <el-col :span="12">
+                        <el-form-item label="项目名称:" prop="title">
+                            <el-input v-model="form.title"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="合同签订时间" prop="assignment_date" label-width="120px">
+                            <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form.assignment_date" style="width: 100%;"></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row type="flex">
+                    <el-col :span="12">
+                        <el-form-item label="服务类别:" prop="server_cate">
                             <el-select v-model="form.server_cate" multiple placeholder="请选择" style="width:100%;">
                                 <el-option v-for="(item,index) in server_cate" :key="index" :label="item" :value="index">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row type="flex">
-                    <el-col :span="24">
-                        <el-form-item label="工程类别:">
+                    <el-col :span="12">
+                        <el-form-item label="工程类别:" prop="eng_cate">
                             <el-select v-model="form.eng_cate" multiple placeholder="请选择" style="width:100%;">
                                 <el-option v-for="(item,index) in eng_cate" :key="index" :label="item" :value="index">
                                 </el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>              
-
+                </el-row>
                 <el-row type="flex">
                     <el-col :span="12">
-                        <el-form-item label="服务合同金额（元）:" prop="assignment_money" label-width="140px">
+                        <el-form-item label="服务合同金额（元）" prop="assignment_money" label-width="135px">
                             <el-input v-model.number="form.assignment_money" placeholder=""></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="总投资金额（元）:" prop="total_invest" label-width="140px">
-                            <el-input type="email" v-model="form.total_invest" placeholder="xx@xx.com"></el-input>
+                        <el-form-item label="总投资金额（元）" prop="total_invest" label-width="140px">
+                            <el-input type="email" v-model.number="form.total_invest" placeholder=""></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
 
 
-                <el-form-item label="项目封面">
-                    <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=projectCoverUrl" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
-                        <img v-if="projectCoverUrl" :src="projectCoverUrl" class="avatar">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>
-                </el-form-item>
+                <el-row type="flex">
+                    <el-col :span="12">
+                        <el-form-item label="项目所在地" prop="region_option" label-width="100px">
+                            <el-cascader expand-trigger="hover" :options="region_data" v-model="region_option" @change="handleChange" style="width:100%;">
+                            </el-cascader>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row type="flex">
+                    <el-col :span="12">
+                        <el-form-item label="项目封面">
+                            <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=projectCover" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
+                                <img v-if="projectCoverUrl" :src="projectCoverUrl" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+
 
                 <!--  -->
-                <el-form-item label="文章内容">
+                <el-form-item label="文章内容" prop="content">
                     <div id="container">
                     </div>
                 </el-form-item>
@@ -209,14 +230,25 @@
 <script>
     var $eng_cate = JSON.parse('<?= json_encode($eng_cate) ?>');
     var $server_cate = JSON.parse('<?= json_encode($server_cate) ?>');
+    var $region_data = JSON.parse('<?= json_encode($region_data) ?>');
     //     
     // 
     window.vue = new Vue({
         el: '#app',
         data() {
+            var validateRegion = (rule, value, callback) => {
+                var r = this.form.province_id;
+                if (r == '') {
+                    callback(new Error('不能为空'));
+                } else {
+                    callback();
+                }
+            };
             return {
                 eng_cate: $eng_cate,
                 server_cate: $server_cate,
+                region_data: $region_data,
+                region_option: [],
                 eng_arr: [],
                 server_arr: [],
                 projectCoverUrl: '',
@@ -250,15 +282,42 @@
                         message: '请勾选工程类别',
                         trigger: 'blur'
                     }],
-                    id_card: [{
+                    assignment_money: [{
                         required: true,
-                        message: '请填写身份证号码',
+                        message: '金额不能为空',
                         trigger: 'blur'
                     }, {
-                        pattern: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-                        message: '身份证号码格式错误',
+                        type: 'number',
+                        message: '必须为整数数字'
+                    }],
+                    assignment_date: [{
+                        required: true,
+                        message: '时间不能为空',
                         trigger: 'blur'
                     }],
+                    total_invest: [{
+                        required: true,
+                        message: '金额不能为空',
+                        trigger: 'blur'
+                    }, {
+                        type: 'number',
+                        message: '必须为整数数字'
+                    }],
+                    projectCoverUrl: [{
+                        required: true,
+                        message: '封面不能为空',
+                        trigger: 'blur'
+                    }],
+                    region_option: [{
+                        type: 'array',
+                        validator: validateRegion,
+                        trigger: 'change'
+                    }],
+                    content: [{
+                        required: true,
+                        message: '内容不能为空',
+                        trigger: 'blur'
+                    }]
                 }
             }
         },
@@ -274,7 +333,7 @@
                         if (res.code == 1) {
                             _this.$message.success(res.msg);
                             setTimeout(function() {
-                                window.location.href = '<?= url('projectPaper') ?>'
+                                window.location.href = '<?= url('personCenter') ?>'
                             }, 1000);
                             // 
                         } else {
@@ -288,41 +347,24 @@
             },
             onSubmit() {
                 this.form.content = UM.getEditor('container').getContent();
-                var form = this.form;
-                var valid = true;
-                // 
-                if (form.list_id == '') {
-                    this.$message.error('请选择文章分类');
-                    valid = false;
-                    return valid;
-                }
-                if (this.isCover) {
-                    if (form.cover_id == '') {
-                        this.$message.error('请上传封面');
-                        valid = false;
-                        return valid;
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+                        if (this.form.cover_id) {
+                            this.doPost(this.form);
+                        } else {
+                            this.$message.error('请上传相应图片和附件');
+                        }
+                    } else {
+                        console.log('error submit!!');
+                        return false;
                     }
-                }
-                if (this.isOption) {
-                    if (form.option_id.length == 0) {
-                        this.$message.error('请选择类别');
-                        valid = false;
-                        return valid;
-                    }
-                }
-                if (form.title == '') {
-                    this.$message.error('请填写标题');
-                    valid = false;
-                    return valid;
-                }
-                if (form.content == '') {
-                    this.$message.error('请填写内容');
-                    valid = false;
-                    return valid;
-                }
-                if (valid) {
-                    this.doPost(form);
-                }
+                });
+            },
+            handleChange: function(value) {
+                this.form.province_id = value[0];
+                this.form.city_id = value[1];
+                this.form.region_id = value[2];
+                this.region_option = value;
             },
             changeListId(v) {
                 this.isCover = false;
@@ -343,7 +385,7 @@
             },
             handleCoverSuccess(res, file) {
                 if (res.code == 1) {
-                    this.paperCoverUrl = URL.createObjectURL(file.raw);
+                    this.projectCoverUrl = URL.createObjectURL(file.raw);
                     this.$message.success(res.msg);
                     this.form.cover_id = res.data.file_id;
                     // 

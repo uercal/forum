@@ -7,6 +7,8 @@ use app\store\model\User;
 use app\store\model\UserNewsOption;
 use app\store\model\UploadFile;
 use app\common\model\UploadApiFile;
+use app\store\model\Projects;
+use app\store\model\Region;
 use app\store\model\ListModel;
 
 /**
@@ -37,6 +39,9 @@ class Exam extends Controller
             case 20:
                 $map = ExamModel::attrPaperTextMap();
                 break;
+            case 30:
+                $map = ExamModel::attrProjectTextMap();
+                break;
             default:
                 # code...
                 break;
@@ -64,6 +69,7 @@ class Exam extends Controller
             $data_arr = $user_data['person'];
         }
 
+        // 论文
         if ($info['type_bonus'] == 'paper') {
             if (!empty($data_arr['option_id'])) {
                 $options = UserNewsOption::whereIn('id', $data_arr['option_id'])->column('name');
@@ -71,6 +77,22 @@ class Exam extends Controller
             }
             $data_arr['list_id'] = ListModel::get($data_arr['list_id'])->value('name');
         }
+
+        // 项目        
+        if ($info['type_bonus'] == 'project') {
+            $server_cate = Projects::$server_cate;
+            $eng_cate = Projects::$eng_cate;
+            $data_arr['region_id'] = Region::getMergeNameById($data_arr['region_id']);
+            foreach ($data_arr['server_cate'] as $key => $value) {
+                $data_arr['server_cate'][$key] = $server_cate[$value];
+            }
+            foreach ($data_arr['eng_cate'] as $key => $value) {
+                $data_arr['eng_cate'][$key] = $eng_cate[$value];
+            }
+            $data_arr['server_cate'] =  implode(',', $data_arr['server_cate']);
+            $data_arr['eng_cate'] =  implode(',', $data_arr['eng_cate']);
+        }
+        
 
         foreach ($data_arr as $key => $value) {
             if (empty($value)) unset($data_arr[$key]);

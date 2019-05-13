@@ -498,7 +498,7 @@
                             <div class="pro-item-detail">
                                 <div class="pro-item-detail-l">
                                     <div>
-                                        <strong><?= ($item['total_invest'] / 10000) . '万/' . ($item['assignment_money'] / 10000) . '万' ?></strong>
+                                        <strong><?= bcdiv($item['total_invest'], 10000, 2) . '万/' . bcdiv($item['assignment_money'], 10000, 2) . '万' ?></strong>
                                     </div>
                                     <p>总投资/合同金额</p>
                                 </div>

@@ -39,8 +39,7 @@
                                 <th>员工姓名</th>
                                 <th>角色</th>
                                 <th>手机号码</th>                                
-                                <th>职称</th>                                
-                                <th>状态<th>                                
+                                <th>职称</th>                                                                                         
                                 <th>注册时间</th>
                                 <th>操作</th>
                             </tr>
@@ -52,8 +51,7 @@
                                     <td class="am-text-middle"><?= $item['name'] ?></td>
                                     <td class="am-text-middle"><?= $item['role']['role_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['phone'] ?></td>                                    
-                                    <td class="am-text-middle"><?= $item['function'] ?></td>                                    
-                                    <td class="am-text-middle"><?= $item['status'] == 40 ? '休息' : getMemeberStatus($item['order_log'])['msg'] ?></td>                                    
+                                    <td class="am-text-middle"><?= $item['function'] ?></td>                                                                        
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
@@ -65,13 +63,7 @@
                                             </a>
                                             <a  onclick="reset(<?= $item['id'] ?>)" class="tpl-table-black-operation-green">
                                                 <i class="am-icon-book"></i> 修改密码
-                                            </a>
-                                            <?php if (getMemeberStatus($item['order_log'])['code'] == 0) : ?>
-                                            <a href="javascript:;"
-                                               data-id="<?= $item['id'] ?>" onclick="exchange(<?= $item['id'] ?>)">
-                                                <i class="am-icon-edit"></i> 状态切换
-                                            </a>
-                                            <?php endif; ?>
+                                            </a>                                           
                                             <a href="javascript:;" class="item-delete tpl-table-black-operation-del"
                                                data-id="<?= $item['id'] ?>">
                                                 <i class="am-icon-trash"></i> 删除

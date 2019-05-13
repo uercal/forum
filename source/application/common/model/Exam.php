@@ -38,7 +38,7 @@ class Exam extends BaseModel
 
     public function getTypeTextAttr($value, $data)
     {
-        $type = [10 => '会员升级', 20 => '论文提交', 30 => '线下提现'];
+        $type = [10 => '会员升级', 20 => '论文提交', 30 => '项目提交'];
         return $type[$data['type']];
     }
 
@@ -49,11 +49,15 @@ class Exam extends BaseModel
             'company' => '单位会员',
             'expert' => '专家会员',
             'supplier' => '供应商',
-            //             
+            //           
         ];
 
-        if($data['type_bonus']=='paper'){
-            return ListModel::where('id',$data['id_bonus'])->value('name');
+        if ($data['type_bonus'] == 'paper') {
+            return ListModel::where('id', $data['id_bonus'])->value('name');
+        }
+
+        if ($data['type_bonus'] == 'project') {
+            return $data['str_bonus'];
         }
 
         return $type[$data['type_bonus']];

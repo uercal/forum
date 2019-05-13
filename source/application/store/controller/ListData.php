@@ -76,7 +76,12 @@ class ListData extends Controller
         return $this->fetch('projects', compact('list', 'cates', 'map'));
     }
 
-
+    public function project_detail($id)
+    {
+        $model = Projects::get($id);
+        // halt($model->toArray());
+        return $this->fetch('project_detail', compact('model'));
+    }
 
 
 

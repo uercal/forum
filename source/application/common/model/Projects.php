@@ -9,6 +9,7 @@ class Projects extends BaseModel
 {
     protected $name = 'projects';
     protected $append = ['region_span'];
+    protected $updateTime = false;
 
     public function getCates()
     {

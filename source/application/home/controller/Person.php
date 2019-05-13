@@ -5,6 +5,7 @@ use app\common\model\Article;
 use app\common\model\News;
 use app\common\model\Project;
 use app\store\model\Category;
+use app\home\model\Region;
 use app\home\model\ListMode;
 use app\home\model\ListModel;
 use think\Request;
@@ -388,10 +389,40 @@ class Person extends Controller
 
         $eng_cate = Projects::$eng_cate;
         $server_cate = Projects::$server_cate;
-
-        return $this->fetch('project_upload', compact('eng_cate', 'server_cate'));
+        // 
+        $regionData = Region::getCacheTree();
+        foreach ($regionData as $key => $value) {
+            $regionData[$key]['children'] = [];
+            $regionData[$key]['value'] = $value['id'];
+            $regionData[$key]['label'] = $value['name'];
+            foreach ($value['city'] as $k => $v) {
+                $v['label'] = $v['name'];
+                $v['value'] = $v['id'];
+                $v['children'] = [];
+                foreach ($v['region'] as $_k => $_v) {
+                    $_v['label'] = $_v['name'];
+                    $_v['value'] = $_v['id'];
+                    $v['children'][] = $_v;
+                }
+                $regionData[$key]['children'][] = $v;
+            }
+        }
+        $region_data = array_values($regionData);
+        return $this->fetch('project_upload', compact('eng_cate', 'server_cate', 'region_data'));
     }
 
+
+    public function projectUploadAjax()
+    {
+        $form = $this->postData('form');
+        $exam_model = new Exam;
+        // 
+        if ($exam_model->updateProjectExam($form, $this->user['user_id'], $this->getLevelOption())) {
+            return $this->renderSuccess('申请成功');
+        } else {
+            return $this->renderError($exam_model->error);
+        }
+    }
 
 
     /**
