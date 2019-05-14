@@ -284,18 +284,6 @@ class Person extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 活动赞助
      */
@@ -342,6 +330,11 @@ class Person extends Controller
         return $this->fetch('paper', compact('type_list'));
     }
 
+
+
+    /**
+     *  获取审批相关ajax
+     */
     public function paperAjax($type)
     {
         $exam = new Exam;
@@ -371,14 +364,16 @@ class Person extends Controller
         $form = $this->postData('form');
         $exam_model = new Exam;
         // 
-        if ($exam_model->updatePaperExam($form, $this->user['user_id'], $this->getLevelOption())) {
+        if ($exam_model->updateExam($form, 'paper', $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
             return $this->renderError($exam_model->error);
         }
     }
 
-
+    /**
+     * 项目提交
+     */
     public function personProject()
     {
         return $this->fetch('project');
@@ -417,7 +412,7 @@ class Person extends Controller
         $form = $this->postData('form');
         $exam_model = new Exam;
         // 
-        if ($exam_model->updateProjectExam($form, $this->user['user_id'], $this->getLevelOption())) {
+        if ($exam_model->updateExam($form, 'project', $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
             return $this->renderError($exam_model->error);
@@ -430,9 +425,66 @@ class Person extends Controller
      */
     public function personRecruit()
     {
-
         return $this->fetch('recruit');
     }
+
+
+    public function recruitUpload()
+    {
+        $company_name = $this->user['company']['company_name'];
+        $regionData = Region::getCacheTree();
+        foreach ($regionData as $key => $value) {
+            $regionData[$key]['children'] = [];
+            $regionData[$key]['value'] = $value['id'];
+            $regionData[$key]['label'] = $value['name'];
+            foreach ($value['city'] as $k => $v) {
+                $v['label'] = $v['name'];
+                $v['value'] = $v['id'];
+                $v['children'] = [];
+                foreach ($v['region'] as $_k => $_v) {
+                    $_v['label'] = $_v['name'];
+                    $_v['value'] = $_v['id'];
+                    $v['children'][] = $_v;
+                }
+                $regionData[$key]['children'][] = $v;
+            }
+        }
+        $region_data = array_values($regionData);
+        return $this->fetch('recruit_upload', compact('company_name', 'region_data'));
+    }
+
+    public function recruitUploadAjax()
+    {
+        $form = $this->postData('form');
+        $exam_model = new Exam;
+        // 
+        if ($exam_model->updateExam($form, 'recruit', $this->user['user_id'], $this->getLevelOption())) {
+            return $this->renderSuccess('申请成功');
+        } else {
+            return $this->renderError($exam_model->error);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 账号设置

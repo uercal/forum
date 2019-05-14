@@ -314,6 +314,9 @@
         window.location.href = "<?= url('/index/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
     }
 
+    function listDetail(id, category_id) {
+        window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
+    }
 
 
     // more

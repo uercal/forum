@@ -34,8 +34,25 @@
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">工作地点 </label>
-                                <div class="am-u-sm-9 am-u-end price">
-                                    <input type="text" class="tpl-form-input" name="recruit[job_address]" value="<?= $model['job_address'] ?>" required>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <select name="recruit[job_address][0]" id="province" required data-am-selected="{btnSize: 'sm',maxHeight:'300px'}">
+                                        <option value=""></option>
+                                        <?php foreach ($region_data as $key => $first) : ?>
+                                            <option value="<?= $first['id'] ?>" <?= $first['id'] == explode(',', $model['job_address'])[0] ? 'selected' : '' ?>><?= $first['name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <select name="recruit[job_address][1]" id="city" required data-am-selected="{btnSize: 'sm',maxHeight:'300px'}">
+                                        <option value=""></option>
+                                        <?php foreach ($region_data[explode(',', $model['job_address'])[0]]['city'] as $key => $first) : ?>
+                                            <option value="<?= $first['id'] ?>" <?= $first['id'] == explode(',', $model['job_address'])[1] ? 'selected' : '' ?>><?= $first['name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <select name="recruit[job_address][2]" id="region" required data-am-selected="{btnSize: 'sm',maxHeight:'300px'}">
+                                        <option value=""></option>
+                                        <?php foreach ($region_data[explode(',', $model['job_address'])[0]]['city'][explode(',', $model['job_address'])[1]]['region'] as $key => $first) : ?>
+                                            <option value="<?= $first['id'] ?>" <?= $first['id'] == explode(',', $model['job_address'])[2] ? 'selected' : '' ?>><?= $first['name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
 
@@ -52,10 +69,19 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">工作经验 </label>
                                 <div class="am-u-sm-9 am-u-end price">
-                                    <input type="tel" class="tpl-form-input" name="recruit[job_experience]" value="<?= explode(',', $model['job_experience'])[0] ?>" required>
-                                    至
-                                    <input type="tel" class="tpl-form-input" name="recruit[_job_experience]" value="<?= explode(',', $model['job_experience'])[1] ?>" required>
-                                    <small>年</small>
+                                    <select name="recruit[job_experience]" required data-am-selected="{btnSize: 'sm'}">
+                                        <?php foreach ([
+                                            '-2' => '不限',
+                                            '-1' => '应届生',
+                                            '0,1' => '1年以内',
+                                            '1,3' => '1-3年',
+                                            '3,5' => '3-5年',
+                                            '5,10' => '5-10年',
+                                            '11' => '10年以上'
+                                        ] as $key => $first) : ?>
+                                            <option value="<?= $key ?>" <?= $key == $model['job_experience'] ? 'selected' : '' ?>><?= $first ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
 
@@ -150,6 +176,54 @@
                 'background-color': '#fff'
             }
         });
+
+
+
+        $('#province').on('change', function() {
+            var p_id = $(this).val();
+            $.get('<?= url('regionAjax') ?>', {
+                type: 'province',
+                pid: p_id,
+                cid: 0
+            }, function(res) {
+                var data = res.city;
+                var html = '';
+                $('#city').html('');
+                for (var i in data) {
+                    html += '<option value="';
+                    html += data[i].id;
+                    html += '">';
+                    html += data[i].name;
+                    html += '</option>';
+                }
+                $('#city').html(html);
+            })
+        })
+
+        $('#city').on('change', function() {
+            var c_id = $(this).val();
+            if (c_id == 0) {
+                return false;
+            }
+            var p_id = $('#province').val();
+            $.get('<?= url('regionAjax') ?>', {
+                type: 'city',
+                pid: p_id,
+                cid: c_id
+            }, function(res) {
+                var data = res.region;
+                var html = '';
+                $('#region').html('');
+                for (var i in data) {
+                    html += '<option value="';
+                    html += data[i].id;
+                    html += '">';
+                    html += data[i].name;
+                    html += '</option>';
+                }
+                $('#region').html(html);
+            })
+        })
 
 
         /**

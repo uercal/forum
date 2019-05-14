@@ -18,6 +18,13 @@ class Projects extends BaseModel
         return compact('server_cate', 'eng_cate');
     }
 
+
+    public function user()
+    {
+        return $this->hasOne('User', 'user_id', 'user_id');
+    }
+
+
     public function cover()
     {
         return $this->hasOne('UploadFile', 'file_id', 'cover_id');
@@ -95,6 +102,6 @@ class Projects extends BaseModel
 
     public static function detail($id)
     {
-        return self::get($id);
+        return self::get($id, ['user' => ['company']]);
     }
 }

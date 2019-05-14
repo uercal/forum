@@ -38,6 +38,17 @@
                             </div>
 
 
+                            <!-- 单位 -->
+                            <?php if (!empty($info['user']['company'])) : ?>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 用户单位 :</label>
+                                    <div class="am-u-sm-9 am-u-end">                                        
+                                        <input type="text" class="tpl-form-input" value="<?= $info['user']['company']['company_name'] ?>" disabled="disabled">
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+
                             <!--  -->
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">审核信息</div>

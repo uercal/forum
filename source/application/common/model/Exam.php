@@ -28,6 +28,10 @@ class Exam extends BaseModel
         return $this->hasOne('ListDetail');
     }
 
+    public function project()
+    {
+        return $this->hasOne('Projects', 'exam_id', 'id');
+    }
 
 
     public function getStatusTextAttr($value, $data)
@@ -38,7 +42,7 @@ class Exam extends BaseModel
 
     public function getTypeTextAttr($value, $data)
     {
-        $type = [10 => '会员升级', 20 => '论文提交', 30 => '项目提交'];
+        $type = [10 => '会员升级', 20 => '论文提交', 30 => '项目提交', 40 => '招聘提交'];
         return $type[$data['type']];
     }
 
@@ -52,12 +56,19 @@ class Exam extends BaseModel
             //           
         ];
 
-        if ($data['type_bonus'] == 'paper') {
-            return ListModel::where('id', $data['id_bonus'])->value('name');
-        }
 
-        if ($data['type_bonus'] == 'project') {
-            return $data['str_bonus'];
+        switch ($data['type_bonus']) {
+            case 'paper':
+                return ListModel::where('id', $data['id_bonus'])->value('name');
+                break;
+
+            case 'project':
+                return $data['str_bonus'];
+                break;
+
+            case 'recruit':
+                return $data['str_bonus'];
+                break;
         }
 
         return $type[$data['type_bonus']];

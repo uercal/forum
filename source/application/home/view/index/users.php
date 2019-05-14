@@ -81,12 +81,12 @@
 
         <div class="users-list">
             <?php foreach ($data['list'] as $item) : ?>
-                <?php if (input('type') == 'company') : ?>
+                <?php if ($data['mode_data'] == 'company') : ?>
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
                         <img style="object-fit:cover;" src="<?= $item['company_logo_path'] ?>" alt="">
                         <div>
                             <div class="users-level">
-                                <p><?= $item['user']['role_name'] ?></p>
+                                <p>单位会员</p>
                             </div>
                             <div class="users-item-info">
                                 <strong><?= $item['user']['user_name'] ?></strong>
@@ -118,12 +118,12 @@
                             </div>
                         </div>
                     </div>
-                <?php elseif (input('type') == 'person') : ?>
+                <?php elseif ($data['mode_data'] == 'person') : ?>
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
                         <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
                         <div>
                             <div class="users-level">
-                                <p><?= $item['user']['role_name'] ?></p>
+                                <p>个人会员</p>
                             </div>
                             <div class="users-item-info">
                                 <strong><?= $item['name'] ?></strong>
@@ -157,17 +157,83 @@
                     </div>
 
 
+                <?php elseif ($data['mode_data'] == 'expert') : ?>
+                    <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
+                        <img style="object-fit:cover;" src="<?= $item['person']['id_photo_path'] ?>" alt="">
+                        <div>
+                            <div class="users-level">
+                                <p>专家会员</p>
+                            </div>
+                            <div class="users-item-info">
+                                <strong><?= $item['person']['name'] ?></strong>
+                                <div>
+                                    <div>
+                                        <span class="am-icon-building-o"></span>
+                                        <p><?= $item['person']['education_major'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-file-text-o"></span>
+                                        <p><?= $item['person']['education_degree'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-briefcase"></span>
+                                        <p><?= $item['person']['job'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-book"></span>
+                                        <p><?= $item['person']['positio'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-send-o"></span>
+                                        <p><?= $item['person']['person_address'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="users-item-arrow">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
+                <?php elseif ($data['mode_data'] == 'supplier') : ?>
+                    <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
+                        <img style="object-fit:cover;" src="<?= $item['user']['avatar_path'] ?>" alt="">
+                        <div>
+                            <div class="users-level">
+                                <p>供应商</p>
+                            </div>
+                            <div class="users-item-info">
+                                <strong><?= $item['user']['user_name'] ?></strong>
+                                <div>
+                                    <div>
+                                        <span class="am-icon-building-o"></span>
+                                        <p><?= $item['sup_company_name'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-file-text-o"></span>
+                                        <p><?= $item['sup_company_type'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-phone"></span>
+                                        <p><?= $item['sup_company_tel'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-at"></span>
+                                        <p><?= $item['sup_company_email'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-send-o"></span>
+                                        <p><?= $item['sup_company_address'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="users-item-arrow">
 
-
-
-
-
-
-
-
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <?php endif; ?>
                 <!--  -->
             <?php endforeach; ?>
@@ -187,10 +253,6 @@
                 el: '#filter',
                 data: {
                     options: [{
-                            name: '普通会员',
-                            value: 'normal'
-                        },
-                        {
                             name: '个人会员',
                             value: 'person'
                         },
@@ -199,7 +261,7 @@
                             value: 'company'
                         }
                     ],
-                    type: type ? type : ''
+                    type: type ? type : 'person'
                 },
                 methods: {
                     changeType: function(e) {

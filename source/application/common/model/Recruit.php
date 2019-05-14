@@ -2,13 +2,16 @@
 
 namespace app\common\model;
 
+use app\common\model\Region;
+
 /**
  * @package app\common\model
  */
 class Recruit extends BaseModel
 {
     protected $name = 'recruit';
-    protected $append = ['job_education_name', 'job_experience_name'];
+    protected $append = ['job_education_name', 'job_experience_name', 'job_address_name'];
+    protected $updateTime = false;
 
     protected $job_edu_cate = [
         '0' => '不限',
@@ -18,24 +21,33 @@ class Recruit extends BaseModel
         '40' => '博士'
     ];
 
+    protected $job_exp_cate = [
+        '-2' => '不限',
+        '-1' => '应届生',
+        '0,1' => '1年以内',
+        '1,3' => '1-3年',
+        '3,5' => '3-5年',
+        '5,10' => '5-10年',
+        '11' => '10年以上'
+    ];
+
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
 
+    public function getJobAddressNameAttr($value, $data)
+    {
+        $region_id = explode(',', $data['job_address'])[1];
+        $name = Region::getMergeNameById($region_id);
+        return $name;
+    }
+
+
     public function getJobExperienceNameAttr($value, $data)
     {
-        $b = explode(',', $data['job_experience'])[0];
-        $e = explode(',', $data['job_experience'])[1];
-
-        if ($b == $e) {
-            return $b . '年';
-        } else if ($b == 0) {
-            return $e . '年内';
-        } else {
-            return $b . '-' . $e . '年';
-        }
+        return $this->job_exp_cate[$data['job_experience']];
     }
 
 

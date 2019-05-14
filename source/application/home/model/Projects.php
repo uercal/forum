@@ -7,7 +7,7 @@ use app\common\model\Region;
 use think\Request;
 
 /**
- * 地区模型
+ * 项目模型
  * Class Region
  * @package app\store\model
  */

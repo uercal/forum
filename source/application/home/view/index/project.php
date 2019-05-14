@@ -49,12 +49,12 @@
                         </div>
                         <div class="projects-item-option">
                             <p>建设单位：</p>
-                            <span>单位名称单位名称单位名称单位名称单位名称单位名称名称</span>
+                            <span><?= $detail['user']['company']['company_name'] ?></span>
                         </div>
-                        <div class="projects-item-option">
+                        <!-- <div class="projects-item-option">
                             <p>建设单位：</p>
                             <span>单位名称单位名称单位名称单位名称单位名称单位名称名称</span>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="projects-item">

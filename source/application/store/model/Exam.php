@@ -12,6 +12,7 @@ use app\common\model\UserSup;
 // 
 use app\store\model\ListDetail;
 use app\store\model\Projects;
+use app\store\model\Recruit;
 use think\Db;
 
 /**
@@ -119,6 +120,22 @@ class Exam extends ExamModel
             'total_invest' => '总投资金额（元）',
         ];
     }
+
+    public static function attrRecruitTextMap()
+    {
+        return [
+            'job_name' => '招聘职位',
+            'job_address' => '工作地点',
+            'job_price' => '工作薪资',
+            'job_experience' => '工作经验',
+            'job_education' => '学历',
+            'content' => '招聘详细内容'
+        ];
+    }
+
+
+
+
 
     public static function attrImgMap()
     {
@@ -327,6 +344,29 @@ class Exam extends ExamModel
                     ];
 
                     $project->save($pro_data);
+                }
+
+                $this::get(['id', $data['id']])->save([
+                    'status' => $data['status'],
+                    'bonus' => $data['bonus']
+                ]);
+            }
+            // $type==40 招聘提交
+            if ($obj['type'] == 40) {
+                if ($data['status'] == 20) {
+                    //                     
+                    $recruit = new Recruit;
+                    $recruit_data = [
+                        'job_name' => $content['job_name'],
+                        'job_address' => implode(',', $content['job_address']),
+                        'content' => $content['content'],
+                        'job_experience' => $content['job_experience'],
+                        'job_price' => implode(',', $content['job_price']),
+                        'user_id' => $obj['user_id'],
+                        'exam_id' => $obj['id']
+                    ];
+
+                    $recruit->save($recruit_data);
                 }
 
                 $this::get(['id', $data['id']])->save([

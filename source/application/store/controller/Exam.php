@@ -10,6 +10,7 @@ use app\common\model\UploadApiFile;
 use app\store\model\Projects;
 use app\store\model\Region;
 use app\store\model\ListModel;
+use app\store\model\Recruit;
 
 /**
  * 审核管理控制器
@@ -42,6 +43,9 @@ class Exam extends Controller
             case 30:
                 $map = ExamModel::attrProjectTextMap();
                 break;
+            case 40:
+                $map = ExamModel::attrRecruitTextMap();
+                break;
             default:
                 # code...
                 break;
@@ -69,35 +73,52 @@ class Exam extends Controller
             $data_arr = $user_data['person'];
         }
 
-        // 论文
-        if ($info['type_bonus'] == 'paper') {
-            if (!empty($data_arr['option_id'])) {
-                $options = UserNewsOption::whereIn('id', $data_arr['option_id'])->column('name');
-                $data_arr['option_id'] = implode(',', $options);
-            }
-            $data_arr['list_id'] = ListModel::get($data_arr['list_id'])->value('name');
+
+        // 特殊字段处理
+        switch ($info['type_bonus']) {
+
+            case 'paper':
+                if (!empty($data_arr['option_id'])) {
+                    $options = UserNewsOption::whereIn('id', $data_arr['option_id'])->column('name');
+                    $data_arr['option_id'] = implode(',', $options);
+                }
+                $data_arr['list_id'] = ListModel::get($data_arr['list_id'])->value('name');
+                break;
+
+            case 'project':
+                $server_cate = Projects::$server_cate;
+                $eng_cate = Projects::$eng_cate;
+                $data_arr['region_id'] = Region::getMergeNameById($data_arr['region_id']);
+                foreach ($data_arr['server_cate'] as $key => $value) {
+                    $data_arr['server_cate'][$key] = $server_cate[$value];
+                }
+                foreach ($data_arr['eng_cate'] as $key => $value) {
+                    $data_arr['eng_cate'][$key] = $eng_cate[$value];
+                }
+                $data_arr['server_cate'] =  implode(',', $data_arr['server_cate']);
+                $data_arr['eng_cate'] =  implode(',', $data_arr['eng_cate']);
+                break;
+
+            case 'recruit':
+                $recruit = new Recruit;
+                $data_arr['job_address'] = Region::getMergeNameById($data_arr['job_address'][2]);
+                $data_arr['job_experience'] = $recruit->getJobExperienceNameAttr('', $data_arr);
+                $data_arr['job_education'] = $recruit->getJobEducationNameAttr('', $data_arr);
+                $data_arr['job_price'] = implode('-', $data_arr['job_price']);                
+
+            default:
+                # code...
+                break;
         }
 
-        // 项目        
-        if ($info['type_bonus'] == 'project') {
-            $server_cate = Projects::$server_cate;
-            $eng_cate = Projects::$eng_cate;
-            $data_arr['region_id'] = Region::getMergeNameById($data_arr['region_id']);
-            foreach ($data_arr['server_cate'] as $key => $value) {
-                $data_arr['server_cate'][$key] = $server_cate[$value];
-            }
-            foreach ($data_arr['eng_cate'] as $key => $value) {
-                $data_arr['eng_cate'][$key] = $eng_cate[$value];
-            }
-            $data_arr['server_cate'] =  implode(',', $data_arr['server_cate']);
-            $data_arr['eng_cate'] =  implode(',', $data_arr['eng_cate']);
-        }
-        
 
         foreach ($data_arr as $key => $value) {
             if (empty($value)) unset($data_arr[$key]);
         }
 
+
+
+        // 组装数据
         foreach ($data_arr as $key => $value) {
             if (in_array($key, $imgMap)) {
                 $data['image'][$key] = UploadApiFile::getFilePath($value);

@@ -605,16 +605,25 @@
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    align-items: center !important;
+}
+
+.recruit-l{
+    width:200px;
+}
+
+.recruit-m{
+    width: 300px;
 }
 
 .flex-c {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
 .flex-c>p {
-    margin: 5px;
+    margin: 0;
 }
 
 .flex-col {

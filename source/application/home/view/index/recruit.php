@@ -36,15 +36,16 @@
                             </span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </form>
 
         <?php foreach ($data['list'] as $item) : ?>
 
-            <div class="recruit-item" onclick="recruit('<?= $item['id'] ?>','<?= $model['category_id'] ?>')">
+            <div class="recruit-item">
                 <div class="recruit-l flex-c flex-col">
-                    <strong><?= $item['job_address'] . ' | ' . $item['job_name'] ?></strong>
+                    <strong><?= $item['job_name'] ?></strong>
                     <p><?= explode(',', $item['job_price'])[0] . '-' . explode(',', $item['job_price'])[1] . '元/月' ?></p>
                 </div>
                 <div class="recruit-m flex-c flex-col">
@@ -53,10 +54,10 @@
                         <?= $item['job_name'] . ' /&nbsp;&nbsp; ' . $item['job_experience_name'] . '工作经验 /&nbsp;&nbsp;' . $item['job_education_name'] ?>
                     </p>
                     <p style="font-size:12px;">
-                        发布时间：<?= $item['create_time'] ?>
+                        发布时间：<?= date('Y-m-d', strtotime($item['create_time'])) ?>
                     </p>
                 </div>
-                <div class="recruit-r flex-c">
+                <div class="recruit-r flex-c" onclick="recruit('<?= $item['id'] ?>','<?= $model['category_id'] ?>')">
                     查看
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace app\store\controller;
 
 use app\store\model\Recruit as RecruitModel;
+use app\store\model\Region;
 
 /**
  * 商品管理控制器
@@ -23,7 +24,8 @@ class Recruit extends Controller
     public function add()
     {
         if (!$this->request->isAjax()) {
-            return $this->fetch('add');
+            $region_data = Region::getCacheTree();
+            return $this->fetch('add', compact('region_data'));
         }
         $model = new RecruitModel;
         if ($model->add($this->postData('recruit'))) {
@@ -39,7 +41,8 @@ class Recruit extends Controller
         // 商品详情
         $model = RecruitModel::detail($id);
         if (!$this->request->isAjax()) {
-            return $this->fetch('edit', compact('model'));
+            $region_data = Region::getCacheTree();
+            return $this->fetch('edit', compact('model','region_data'));
         }
         // 更新记录
         if ($model->edit($this->postData('recruit'))) {
@@ -57,5 +60,22 @@ class Recruit extends Controller
             return $this->renderError($error);
         }
         return $this->renderSuccess('删除成功');
+    }
+
+
+    public function regionAjax($type, $pid, $cid)
+    {
+        $region_data = Region::getCacheTree();
+        switch ($type) {
+            case 'province':
+                $res = $region_data[$pid];
+                break;
+
+            case 'city':
+                $res = $region_data[$pid]['city'][$cid];
+                break;
+        }
+
+        return $res;
     }
 }

@@ -128,7 +128,7 @@ class Index extends Controller
                         $_data = [];
                         $_data['list'] = $data;
                         $_data['options'] = $options;
-                        $data = $_data;                        
+                        $data = $_data;
                     }
                 }
                 break;
@@ -159,7 +159,7 @@ class Index extends Controller
 
                 break;
         }
-
+        // halt([$data['list']]);
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
@@ -216,6 +216,13 @@ class Index extends Controller
     }
 
 
+    public function listDetail($id, $category_id)
+    {
+        $model = Category::get($category_id);
+        $detail = ListDetail::detail($id);
+        //         
+        return $this->fetch('list_detail', compact('detail', 'model'));
+    }
 
 
     public function projectDetail($id, $category_id)

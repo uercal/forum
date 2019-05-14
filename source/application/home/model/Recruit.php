@@ -17,6 +17,8 @@ class Recruit extends RecruitModel
         $_map = [];
         if ($mode_data == 'admin') {
             $_map['user_id'] = ['=', 0];
+        } else {
+            $_map['user_id'] = ['<>', 0];
         }
         if (input('title')) {
             $_map['job_name'] = ['like', '%' . input('title') . '%'];

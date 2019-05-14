@@ -11,9 +11,12 @@
     <div class="list-body">
         <div class="detail-container">
             <div class="detail-head">
-                <strong><?= $detail['job_name'] ?></strong>
+                <strong><?= $detail['title'] ?></strong>
                 <div>
-                    <p>发布时间：<?= $detail['create_time'] ?> &nbsp;&nbsp; 工作地点：<?= $detail['job_address_name'] ?></p>                                                                         
+                    <p>发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?></p>
+                </div>
+                <div>
+                    <p>发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?></p>
                 </div>
             </div>
             <div class="detail-body">

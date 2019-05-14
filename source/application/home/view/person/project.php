@@ -96,9 +96,9 @@
                 </el-table-column>
                 <el-table-column label="操作" prop="activity.id">
                     <template slot-scope="scope">
-                        <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.list_detail.id)">查看详情</div>
-                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(scope.row.list_detail.id)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.list_detail.id)">查看原因</div>                        
+                        <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.project.id)">查看详情</div>
+                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail()">/</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus)">查看原因</div>                        
                     </template>
                 </el-table-column>
             </el-table>
@@ -161,7 +161,13 @@
                     this.getList();
                 },
                 actDetail: function(id) {
-                    console.log(id);                    
+                    if (isNaN(id)) {
+                        this.$alert(id, '驳回理由', {
+                            confirmButtonText: '确定'                            
+                        });
+                    } else {
+                        
+                    }
                 }
             },
             mounted: function() {

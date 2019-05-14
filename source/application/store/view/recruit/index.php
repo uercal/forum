@@ -73,7 +73,7 @@
                                                 <?= $item['job_name'] ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['job_address'] ?>
+                                                <?= $item['job_address_name'] ?>
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= explode(',',$item['job_price'])[0].'~'.explode(',',$item['job_price'])[1] ?>

@@ -99,8 +99,8 @@
                 <el-table-column label="操作" prop="activity.id">
                     <template slot-scope="scope">
                         <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.list_detail.id)">查看详情</div>
-                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(scope.row.list_detail.id)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.list_detail.id)">查看原因</div>
+                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail()">/</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus)">查看原因</div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -120,7 +120,7 @@
     // 
     var list_type = JSON.parse('<?= json_encode($type_list) ?>');
 
-    $.get('<?= url('paperAjax') ?>&type=project', function(res) {
+    $.get('<?= url('paperAjax') ?>&type=paper', function(res) {
         //         
         var data = res.data;
         // 
@@ -156,7 +156,7 @@
                     var param = this.filter;
                     var _this = this;
                     console.log(param);
-                    $.post('<?= url('paperAjax') ?>', param, function(res) {
+                    $.post('<?= url('paperAjax') ?>&type=paper', param, function(res) {
                         _this.data = res.data;
                         _this.loading = false;
                     })
@@ -166,7 +166,13 @@
                     this.getList();
                 },
                 actDetail: function(id) {
-                    console.log(id);
+                    if (isNaN(id)) {
+                        this.$alert(id, '驳回理由', {
+                            confirmButtonText: '确定'                            
+                        });
+                    } else {
+                        
+                    }
                 }
             },
             mounted: function() {

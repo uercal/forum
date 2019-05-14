@@ -591,8 +591,8 @@
 
 
             <div class="user-news-list">
-                <?php if ($key_word == 'user_news') : foreach ($data['list'] as $item) : ?>
-                        <div class="user-news-item">
+                <?php if ($key_word == 'user_news' && $model['list']['cover_exist'] == 0) : foreach ($data['list'] as $item) : ?>
+                        <div class="user-news-item" onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
                             <div class="user-news-head">
                                 <div class="user-news-head-info">
                                     <img src="<?= $item['user']['avatar_path'] ?>" alt="">
@@ -619,8 +619,8 @@
             endif; ?>
             </div>
 
-            <?php if ($key_word == 'news') : foreach ($data['list'] as $item) : ?>
-                    <div class="list-news-item">
+            <?php if ($key_word == 'news' || ($model['list']['cover_exist'] == 1 && $key_word == 'user_news')) : foreach ($data['list'] as $item) : ?>
+                    <div class="list-news-item" onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
                         <div class="list-news-item">
                             <div class="list-news-img">
                                 <img src="<?= $item['cover']['file_path'] ?>" alt="">

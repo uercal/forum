@@ -18,6 +18,7 @@
                                         <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>用户升级</option>
                                         <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>论文提交</option>
                                         <option value="30" <?php if (isset($map['type']) && $map['type'] == 30) : ?> selected <?php endif; ?>>项目提交</option>
+                                        <option value="40" <?php if (isset($map['type']) && $map['type'] == 40) : ?> selected <?php endif; ?>>招聘提交</option>
                                     </select>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs" style="display:flex;">
@@ -61,10 +62,10 @@
                                     <th>用户ID</th>
                                     <th>用户名</th>
                                     <th>审核类型</th>
-                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : '项目名称') ?></th>
+                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : ($map['type'] == 30 ? '项目名称' : '招聘职位')) ?></th>
                                     <th>提交文件</th>
                                     <th>状态</th>
-                                    <th>更新时间</th>
+                                    <th>提交时间</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,12 +80,12 @@
                                                 <button class="am-btn am-btn-sm am-btn-secondary" onclick="detail(<?= $item['id'] ?>)">查看并审核</button>
                                             </td>
                                             <td class="am-text-middle
-                                            <?php if ($item['status'] == 10) : ?>am-warning 
-                                            <?php elseif ($item['status'] == 20) : ?>am-success 
-                                            <?php else : ?>am-danger 
-                                            <?php endif; ?> 
-                                            "><?= $item['status_text'] ?></td>
-                                            <td class="am-text-middle"><?= $item['update_time'] ?></td>
+                                                            <?php if ($item['status'] == 10) : ?>am-warning 
+                                                            <?php elseif ($item['status'] == 20) : ?>am-success 
+                                                            <?php else : ?>am-danger 
+                                                            <?php endif; ?> 
+                                                            "><?= $item['status_text'] ?></td>
+                                            <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                         </tr>
                                     <?php endforeach;
                             else : ?>

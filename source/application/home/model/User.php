@@ -5,6 +5,7 @@ namespace app\home\model;
 use app\common\model\User as UserModel;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
+use app\home\model\UserSup;
 use app\home\model\ActivityUserLog;
 use think\Session;
 use think\Request;
@@ -34,15 +35,18 @@ class User extends UserModel
 
         if (input('type')) {
             $mode_data = input('type');
-        }        
+        }
         // 
         switch ($mode_data) {
             case 'normal':
                 if (input('title')) {
-                    $map['user_name'] = ['like', '%' . input('title') . '%'];
+                    $map['name'] = ['like', '%' . input('title') . '%'];
                 }
-                $list = $this->where($map)->order($order)
+                $model = new UserPerson;
+                $list = $model->where($map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
+                // 
+                $mode_data = 'person';
                 break;
             case 'person':
                 if (input('title')) {
@@ -53,7 +57,12 @@ class User extends UserModel
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
-                # code...
+                if (input('title')) {
+                    $map['name'] = ['like', '%' . input('title') . '%'];
+                }
+                $map['role'] = ['like', '%2%'];
+                $list = $this->with(['person'])->where($map)->order($order)
+                    ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
                 if (input('title')) {
@@ -64,11 +73,14 @@ class User extends UserModel
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'supplier':
-                # code...
-                break;           
+                if (input('title')) {
+                    $map['name'] = ['like', '%' . input('title') . '%'];
+                }
+                $model = new UserSup;
+                $list = $model->with(['user'])->where($map)->order($order)
+                    ->paginate(10, false, ['query' => $request->request()]);
+                break;
         }
-
-
 
         return compact('list', 'mode_data');
     }

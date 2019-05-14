@@ -36,15 +36,12 @@ class Recruit extends RecruitModel
             $this->error = '薪资区间错误!';
             return false;
         }
-        if ($data['job_experience'] > $data['_job_experience']) {
-            $this->error = '工作经验区间错误!';
-            return false;
-        }
         // 开启事务
         Db::startTrans();
         try {
             $data['job_price'] = $data['job_price'] . ',' . $data['_job_price'];
-            $data['job_experience'] = $data['job_experience'] . ',' . $data['_job_experience'];
+            $data['job_experience'] = $data['job_experience'];
+            $data['job_address'] = implode(',',$data['job_address']);
             $data['user_id'] = 0;
             $this->allowField(true)->save($data);
             Db::commit();
@@ -62,15 +59,12 @@ class Recruit extends RecruitModel
             $this->error = '薪资区间错误!';
             return false;
         }
-        if ($data['job_experience'] > $data['_job_experience']) {
-            $this->error = '工作经验区间错误!';
-            return false;
-        }
         // 开启事务
         Db::startTrans();
         try {
             $data['job_price'] = $data['job_price'] . ',' . $data['_job_price'];
-            $data['job_experience'] = $data['job_experience'] . ',' . $data['_job_experience'];            
+            $data['job_experience'] = $data['job_experience'];
+            $data['job_address'] = implode(',',$data['job_address']);            
             $this->allowField(true)->save($data);
             Db::commit();
             return true;
