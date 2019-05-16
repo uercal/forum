@@ -218,8 +218,8 @@ class Index extends Controller
 
     public function listDetail($id, $category_id)
     {
-        $model = Category::get($category_id);
-        $detail = ListDetail::detail($id);
+        $model = Category::get($category_id, ['listMode', 'list']);
+        $detail = ListDetail::detail($id);        
         //         
         return $this->fetch('list_detail', compact('detail', 'model'));
     }

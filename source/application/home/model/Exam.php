@@ -148,7 +148,16 @@ class Exam extends ExamModel
                     'str_bonus' => $str_bonus
                 ];
                 break;
-
+            case 'site':
+                $content = json_encode([]);
+                $post = [
+                    'user_id' => $user_id,
+                    'level_option' => $level_option,
+                    'content' => $content,
+                    'type' => 50, //子站申请
+                    'type_bonus' => 'site',
+                ];
+                break;
             default:
                 $content = json_encode($form);
                 $post = [

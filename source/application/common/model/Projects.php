@@ -8,7 +8,7 @@ namespace app\common\model;
 class Projects extends BaseModel
 {
     protected $name = 'projects';
-    protected $append = ['region_span'];
+    protected $append = ['region_span', 'server_cate_span', 'eng_cate_span', 'region_span_name', 'assignment_date_time'];
     protected $updateTime = false;
 
     public function getCates()
@@ -24,6 +24,12 @@ class Projects extends BaseModel
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
+    public function company()
+    {
+        return $this->hasOne('UserCompany', 'user_id', 'user_id')->bind([
+            'company_name'
+        ]);
+    }
 
     public function cover()
     {
@@ -80,6 +86,11 @@ class Projects extends BaseModel
         ];
     }
 
+    public function getRegionSpanNameAttr($value, $data)
+    {
+        return Region::getMergeNameById($data['region_id']);
+    }
+
     public function getServerCateAttr($value, $data)
     {
         $arr = explode(',', $data['server_cate']);
@@ -88,6 +99,16 @@ class Projects extends BaseModel
             $_arr[] = self::$server_cate[$value];
         }
         return $_arr;
+    }
+
+    public function getServerCateSpanAttr($value, $data)
+    {
+        $arr = explode(',', $data['server_cate']);
+        $_arr = [];
+        foreach ($arr as $key => $value) {
+            $_arr[] = self::$server_cate[$value];
+        }
+        return implode(',', $_arr);
     }
 
     public function getEngCateAttr($value, $data)
@@ -99,6 +120,24 @@ class Projects extends BaseModel
         }
         return $_arr;
     }
+
+    public function getEngCateSpanAttr($value, $data)
+    {
+        $arr = explode(',', $data['eng_cate']);
+        $_arr = [];
+        foreach ($arr as $key => $value) {
+            $_arr[] = self::$eng_cate[$value];
+        }
+        return implode(',', $_arr);
+    }
+
+
+    public function getAssignmentDateTimeAttr($value, $data)
+    {
+        return date('Y-m-d', $data['assignment_date']);
+    }
+
+
 
     public static function detail($id)
     {

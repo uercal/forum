@@ -11,7 +11,7 @@ use think\Request;
  * @package app\store\model
  */
 class Projects extends ProjectsModel
-{
+{    
     public function getList()
     {
         $map = input();

@@ -14,7 +14,7 @@ class Activity extends ActivityModel
 {
     public function getList()
     {
-        return $this->with(['cover'])->where([])->paginate(15, false, [
+        return $this->with(['cover'])->where([])->order('create_time desc')->paginate(15, false, [
             'query' => Request::instance()->request()
         ]);
     }

@@ -13,6 +13,7 @@ use app\common\model\UserSup;
 use app\store\model\ListDetail;
 use app\store\model\Projects;
 use app\store\model\Recruit;
+use app\store\model\UserSite;
 use think\Db;
 
 /**
@@ -367,6 +368,25 @@ class Exam extends ExamModel
                     ];
 
                     $recruit->save($recruit_data);
+                }
+
+                $this::get(['id', $data['id']])->save([
+                    'status' => $data['status'],
+                    'bonus' => $data['bonus']
+                ]);
+            }
+            // $type==50 子站申请
+            if ($obj['type'] == 50) {
+                if ($data['status'] == 20) {
+                    //                   
+                    $company_id = UserCompany::where(['user_id' => $obj['user_id']])->value('id');
+                    $site = new UserSite;
+                    $site_data = [
+                        'user_id' => $obj['user_id'],
+                        'user_company_id' => $company_id,
+                        'site_code' => strtoupper(yoshop_hash('woshizhu' . $obj['user_id']))
+                    ];
+                    $site->save($site_data);
                 }
 
                 $this::get(['id', $data['id']])->save([

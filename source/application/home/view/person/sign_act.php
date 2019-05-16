@@ -120,19 +120,19 @@
                     <div class="am-u-sm-10">
                         <input type="tel" name="sign[phone]" placeholder="输入联系人手机号码" value="<?= $info['phone'] ?>">
                     </div>
-                </div>
+                </div>                
 
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">个人学历</label>
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">学历学位</label>
                     <div class="am-u-sm-10">
-                        <input type="text" value="<?= $info['education'] ?>" disabled="disabled">
+                        <input type="text" value="<?= $info['education_degree'] ?>" disabled="disabled">
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">个人学位</label>
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">职位</label>
                     <div class="am-u-sm-10">
-                        <input type="text" value="<?= $info['education_degree'] ?>" disabled="disabled">
+                        <input type="text" value="<?= $info['job'] ?>" disabled="disabled">
                     </div>
                 </div>
 

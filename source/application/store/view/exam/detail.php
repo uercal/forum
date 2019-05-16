@@ -42,7 +42,7 @@
                             <?php if (!empty($info['user']['company'])) : ?>
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 用户单位 :</label>
-                                    <div class="am-u-sm-9 am-u-end">                                        
+                                    <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?= $info['user']['company']['company_name'] ?>" disabled="disabled">
                                     </div>
                                 </div>
@@ -158,6 +158,18 @@
 
                             <?php endforeach; ?>
 
+                            <?php if ($info['type_bonus'] == 'site') : ?>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">用户单位信息：</label>
+                                    <div class="am-u-sm-9 am-u-end" style="padding-top:.6rem;">
+                                        <a style="font-size:14px;" href="<?= url('user/show', ['user_id' => $info['user_id']]) ?>">点击跳转</a>
+                                    </div>
+                                </div>
+
+
+
+                            <?php endif; ?>
 
 
 

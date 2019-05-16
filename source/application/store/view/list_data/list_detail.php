@@ -33,7 +33,7 @@
 
                         <?php if ($model['mode']['key_word'] == 'news') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                                            tpl-table-black am-text-nowrap">
+                                                                tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -96,7 +96,7 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'job') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                                            tpl-table-black am-text-nowrap">
+                                                                tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -161,7 +161,7 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'mag') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                                            tpl-table-black am-text-nowrap">
+                                                                tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -219,7 +219,7 @@
 
                         <?php elseif ($model['mode']['key_word'] == 'user_news') : ?>
                             <table width="100%" class="am-table am-table-compact am-table-striped
-                                                            tpl-table-black am-text-nowrap">
+                                                                tpl-table-black am-text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
@@ -256,7 +256,7 @@
                                                     <?= $item['create_time'] ?>
                                                 </td>
                                                 <td class="am-text-middle">
-                                                    <?= empty($item['user'])?'admin':$item['user']['user_name'] ?>
+                                                    <?= empty($item['user']) ? 'admin' : $item['user']['user_name'] ?>
                                                 </td>
                                                 <td class="am-text-middle">
                                                     <div class="tpl-table-black-operation">
@@ -265,7 +265,7 @@
                                                                         ['id' => $item['id']]
                                                                     ) ?>">
                                                             <i class="am-icon-pencil"></i> 查看
-                                                        </a>
+                                                        </a>                                                        
                                                         <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['id'] ?>">
                                                             <i class="am-icon-trash"></i> 删除
                                                         </a>

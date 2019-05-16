@@ -49,6 +49,11 @@
                                         <span class="am-icon-search"></span> 搜索
                                     </a>
                                 </div>
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-primary am-btn-success am-radius" id="export" href="javascript:;">
+                                        <span class="am-icon-file"></span> 导出清单
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -83,7 +88,7 @@
                                             <td class="am-text-middle"><?= implode('/', $item['eng_cate']) ?></td>
                                             <td class="am-text-middle"> <?= $item['assignment_money'] ?></td>
                                             <td class="am-text-middle"> <?= $item['total_invest'] ?></td>
-                                            <td class="am-text-middle"> <?= date('Y-m-d',$item['assignment_date']) ?></td>
+                                            <td class="am-text-middle"> <?= date('Y-m-d', $item['assignment_date']) ?></td>
                                             <td class="am-text-middle">
                                                 <div class="tpl-table-black-operation">
                                                     <a class="tpl-table-black-operation" href="<?= url(
@@ -93,8 +98,8 @@
                                                         <i class="am-icon-book"></i> 查看
                                                     </a>
                                                     <!-- <a class="tpl-table-black-operation-del" href="javascript:;" onclick="">
-                                                                <i class="am-icon-pencil"></i> 删除
-                                                            </a> -->
+                                                                        <i class="am-icon-pencil"></i> 删除
+                                                                    </a> -->
                                                 </div>
 
                                             </td>
@@ -128,7 +133,10 @@
             var html = url + '&' + param;
             window.location.href = html;
         });
-        //        
+        //   
+        $('#export').on('click', function() {
+            window.location.href = "<?= url('list_data/exportProject') ?>";
+        });
     });
 </script>
 <script>

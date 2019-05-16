@@ -29,6 +29,29 @@ class ActivityUserLog extends BaseModel
         return $this->belongsTo('Activity', 'act_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->hasOne('User', 'user_id', 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne('UserCompany', 'user_id', 'user_id')->bind([
+            'company_name',
+            'company_tel',
+            'email'
+        ]);
+    }
+
+    public function person()
+    {
+        return $this->hasOne('UserPerson', 'user_id', 'user_id')->bind([
+            'education_degree',
+            'job',
+            'positio'
+        ]);
+    }
+
 
     public static function isExist($user_id, $act_id)
     {

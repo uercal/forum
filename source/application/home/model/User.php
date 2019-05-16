@@ -234,4 +234,33 @@ class User extends UserModel
 
         return compact('my_act');
     }
+
+
+
+
+    /**
+     * 修改密码
+     */
+    public function resetPass($pass, $new_pass)
+    {
+        $password = yoshop_hash($pass);
+        if ($password != $this->password) {
+            $this->error = '旧密码错误！';
+            return false;
+        }
+        $new_password = yoshop_hash($new_pass);
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->save([
+                'password' => $new_password
+            ]);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
+    }
 }

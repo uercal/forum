@@ -203,7 +203,7 @@
                     </div>
                 </div>
 
-                <div class="person-helpCenter">
+                <!-- <div class="person-helpCenter">
                     <div class="p-help-head">
                         <div>
                             <p>帮助中心</p>
@@ -225,7 +225,7 @@
                         </li>
 
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!--  -->

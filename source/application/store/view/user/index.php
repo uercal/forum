@@ -13,34 +13,40 @@
                                 <tr>
                                     <th>会员ID</th>
                                     <th>用户名</th>
-                                    <th>角色</th>                                    
+                                    <th>用户头像</th>
+                                    <th>角色</th>
                                     <th>注册时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
-                                <tr>
-                                    <td class="am-text-middle"><?= $item['user_id'] ?></td>
-                                    <td class="am-text-middle"><?= $item['user_name'] ?></td>
-                                    <td class="am-text-middle"><?= $item['role_name'] ?></td>                                                                        
-                                    <td class="am-text-middle"><?= $item['create_time'] ?></td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="<?= url(
-                                                            'user/show',
-                                                            ['user_id' => $item['user_id']]
-                                                        ) ?>">
-                                                <i class="am-icon-pencil"></i> 角色详情
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endforeach;
-                        else : ?>
-                                <tr>
-                                    <td colspan="5" class="am-text-center">暂无记录</td>
-                                </tr>
+                                        <tr>
+                                            <td class="am-text-middle"><?= $item['user_id'] ?></td>
+                                            <td class="am-text-middle"><?= $item['user_name'] ?></td>
+                                            <td class="am-text-middle">
+                                                <a href="<?= $item['avatar_path'] ?>" title="点击查看大图" target="_blank">
+                                                    <img src="<?= $item['avatar_path'] ?>" width="72" height="72" alt="">
+                                                </a>
+                                            </td>
+                                            <td class="am-text-middle"><?= $item['role_name'] ?></td>
+                                            <td class="am-text-middle"><?= $item['create_time'] ?></td>
+                                            <td class="am-text-middle">
+                                                <div class="tpl-table-black-operation">
+                                                    <a href="<?= url(
+                                                                    'user/show',
+                                                                    ['user_id' => $item['user_id']]
+                                                                ) ?>">
+                                                        <i class="am-icon-pencil"></i> 角色详情
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach;
+                            else : ?>
+                                    <tr>
+                                        <td colspan="5" class="am-text-center">暂无记录</td>
+                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -60,4 +66,4 @@
     $(function() {
 
     });
-</script> 
+</script>

@@ -105,6 +105,11 @@ return [
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=3'
             ],
+            [
+                'name' => '供应商会员',
+                'icon' => 'icon-user',
+                'index' => 'user/role&role=4'
+            ],
 
         ]
     ],

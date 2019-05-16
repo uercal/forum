@@ -13,17 +13,26 @@
             <div class="detail-head">
                 <strong><?= $detail['title'] ?></strong>
                 <div>
-                    <p>发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?></p>
-                </div>
-                <div>
-                    <p>发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?></p>
+                    <p>
+                        发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?>
+                        <?= $model['list']['cate_exist'] == 1 ? '&nbsp;&nbsp;&nbsp;类别：' . implode(', ', $detail['option']) : '' ?>
+                    </p>
                 </div>
             </div>
-            <div class="detail-body">
+            <div class="detail-body <?= $model['listMode']['key_word'] == 'user_news' ? 'forbid' : '' ?>">
                 <?= htmlspecialchars_decode($detail['content']) ?>
             </div>
         </div>
     </div>
-
-
 </section>
+
+<style>
+    .forbid {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>

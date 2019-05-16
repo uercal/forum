@@ -14,5 +14,10 @@ use app\common\model\ActivitySupport as ActivitySupportModel;
  */
 class ActivitySupport extends ActivitySupportModel
 {
-    
+    public function getReportList($act_id)
+    {
+        return $this->with(['user' => ['person', 'company']])->where(['act_id' => $act_id])->paginate(15, false, [
+            'query' => Request::instance()->request()
+        ]);;
+    }
 }

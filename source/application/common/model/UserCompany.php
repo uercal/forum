@@ -13,7 +13,7 @@ use think\Request;
 class UserCompany extends BaseModel
 {
     protected $name = 'users_company';
-    protected $append = ['company_logo_path'];
+    protected $append = ['company_logo_path', 'license_file_path', 'build_time_text'];
 
 
 
@@ -27,9 +27,18 @@ class UserCompany extends BaseModel
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
+    public function getBuildTimeTextAttr($value, $data)
+    {
+        return date('Y-m-d', $data['build_time']);
+    }
 
     public function getCompanyLogoPathAttr($value, $data)
     {
         return UploadApiFile::getFilePath($data['company_logo']);
+    }
+
+    public function getLicenseFilePathAttr($value, $data)
+    {
+        return UploadApiFile::getFilePath($data['license_file']);
     }
 }

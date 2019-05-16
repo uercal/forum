@@ -42,7 +42,7 @@ class Exam extends BaseModel
 
     public function getTypeTextAttr($value, $data)
     {
-        $type = [10 => '会员升级', 20 => '论文提交', 30 => '项目提交', 40 => '招聘提交'];
+        $type = [10 => '会员升级', 20 => '论文提交', 30 => '项目提交', 40 => '招聘提交', 50 => '子站申请'];
         return $type[$data['type']];
     }
 
@@ -56,7 +56,6 @@ class Exam extends BaseModel
             //           
         ];
 
-
         switch ($data['type_bonus']) {
             case 'paper':
                 return ListModel::where('id', $data['id_bonus'])->value('name');
@@ -68,6 +67,10 @@ class Exam extends BaseModel
 
             case 'recruit':
                 return $data['str_bonus'];
+                break;
+
+            case 'site':
+                return '';
                 break;
         }
 

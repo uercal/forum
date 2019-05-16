@@ -18,7 +18,6 @@ class ActivitySupport extends BaseModel
     protected $name = 'activity_support';
     protected $insert = ['wxapp_id' => 10001];
 
-
     public static function detail($id)
     {
         return self::get($id);
@@ -34,6 +33,16 @@ class ActivitySupport extends BaseModel
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
+
+    public function company()
+    {
+        return $this->hasOne('UserCompany', 'user_id', 'user_id')->bind([
+            'company_name',
+            'company_tel',
+            'email'
+        ]);
+    }
+   
     public static function isExist($user_id, $act_id)
     {
         $data = self::where([

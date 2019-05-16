@@ -19,7 +19,8 @@
         "php": ">=5.4.0",
         "topthink/framework": "5.0.*",
         "qiniu/php-sdk": "^7.2",
-        "topthink/think-captcha": "1.*"
+        "topthink/think-captcha": "1.*",
+        "phpoffice/phpspreadsheet": "^1.6"
     },
     "autoload": {
         "psr-4": {

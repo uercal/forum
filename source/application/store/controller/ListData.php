@@ -65,6 +65,50 @@ class ListData extends Controller
     }
 
 
+
+    /**
+     * 导出列表清单
+     */
+    public function exportList($id)
+    {
+        $excel = new Office;
+        $detail = ListModel::get($id);
+        $model = new ListDetail;
+        $data = $model->with(['person', 'company'])->where(['list_id' => $id])->select();
+        //设置表头：
+        $head = ['序号', '标题', '发布时间', '发布人个人姓名', '发布人个人电话', '发布人单位名称',  '发布人单位电话'];
+
+        //数据中对应的字段，用于读取相应数据：
+        $keys = ['index', 'title', 'create_time', 'person_name', 'person_phone', 'company_name', 'company_tel'];
+
+        $excel->outdata($detail['name'] . '清单', $data, $head, $keys);
+    }
+
+
+    public function exportProject()
+    {
+        $excel = new Office;
+        $data = Projects::all(null, ['company'])->toArray();
+        //设置表头：
+        $head = ['序号', '项目标题', '服务类别', '工程类别', '合同金额', '总投资额',  '合同签订日期', '项目公司名称'];
+
+        //数据中对应的字段，用于读取相应数据：
+        $keys = ['index', 'title', 'server_cate_span', 'eng_cate_span', 'assignment_money', 'total_invest', 'assignment_date_time', 'company_name'];
+
+        $excel->outdata('会员项目清单', $data, $head, $keys);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function user_project()
     {
         $project = new Projects;

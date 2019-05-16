@@ -15,9 +15,9 @@ use app\common\model\UserNewsOption;
  * @package app\common\model
  */
 class ListDetail extends BaseModel
-{   
+{
     protected $name = 'list_detail';
-    protected $append = ['create_time_date','option'];
+    protected $append = ['create_time_date', 'option'];
     protected $updateTime = false;
 
     public function cover()
@@ -39,6 +39,28 @@ class ListDetail extends BaseModel
     {
         return $this->hasOne('User', 'user_id', 'user_id');
     }
+
+    // export using
+    public function company()
+    {
+        return $this->hasOne('UserCompany', 'user_id', 'user_id')->bind([
+            'company_name',
+            'company_tel',
+            'email'
+        ]);
+    }
+
+    public function person()
+    {
+        return $this->hasOne('UserPerson', 'user_id', 'user_id')->bind([
+            'person_name' => 'name',
+            'person_phone' => 'phone',
+            'person_job' => 'job',
+            'positio'
+        ]);
+    }
+
+
 
     public function getAttachmentAttr($value, $data)
     {

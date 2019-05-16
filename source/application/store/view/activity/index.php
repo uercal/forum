@@ -28,6 +28,8 @@
                                     <th>报名时间</th>
                                     <th>活动时间</th>
                                     <th>添加时间</th>
+                                    <th>报名人员</th>                                    
+                                    <th>赞助人员</th>                                    
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -37,7 +39,7 @@
                                             <td class="am-text-middle">
                                                 <?= $item['id'] ?>
                                             </td>
-                                            <td class="am-text-middle">
+                                            <td class="am-text-middle" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                                 <?= $item['title'] ?>
                                             </td>
                                             <td class="am-text-middle">
@@ -50,9 +52,29 @@
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= date('Y/m/d', $item['active_begin']) . '~' . date('Y/m/d', $item['active_end']) ?>
-                                            </td>
+                                            </td>                                            
                                             <td class="am-text-middle">
                                                 <?= $item['create_time'] ?>
+                                            </td>
+                                            <td class="am-text-middle">
+                                                <div class="tpl-table-black-operation">
+                                                    <a class="tpl-table-black-operation-green" href="<?= url(
+                                                                    'activity/sign_report',
+                                                                    ['id' => $item['id']]
+                                                                ) ?>">
+                                                        <i class="am-icon-users"></i> 查看
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="am-text-middle">
+                                                <div class="tpl-table-black-operation">
+                                                    <a class="tpl-table-black-operation-green" href="<?= url(
+                                                                    'activity/sup_report',
+                                                                    ['id' => $item['id']]
+                                                                ) ?>">
+                                                        <i class="am-icon-users"></i> 查看
+                                                    </a>
+                                                </div>
                                             </td>
                                             <td class="am-text-middle">
                                                 <div class="tpl-table-black-operation">

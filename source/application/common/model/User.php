@@ -32,12 +32,6 @@ class User extends BaseModel
         return $this->hasOne('UserCompany', 'user_id', 'user_id');
     }
 
-
-    // 专家关联
-    public function expert()
-    { }
-
-
     // supplier
     public function supplier()
     {
@@ -45,7 +39,6 @@ class User extends BaseModel
     }
 
 
-    
     public function avatar()
     {
         return $this->hasOne('UploadApiFile', 'file_id', 'avatar');
@@ -105,9 +98,9 @@ class User extends BaseModel
     public function getListByRole($role)
     {
         $request = Request::instance();
-        return $this->where([
-            'role' => $role
-        ])->order(['create_time' => 'desc'])
+        $map = [];
+        $map['role'] = ['like', '%' . $role . '%'];
+        return $this->with(['person', 'company', 'supplier', 'avatar'])->where($map)->order(['create_time' => 'desc'])
             ->paginate(15, false, ['query' => $request->request()]);
     }
 

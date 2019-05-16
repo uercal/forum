@@ -14,6 +14,7 @@ use app\home\model\ListDetail;
 use app\home\model\Projects;
 use app\common\model\UserNewsOption;
 use app\home\model\User;
+use app\home\model\UserSite;
 use app\home\model\Activity;
 use app\home\model\Crop;
 use app\home\model\Recruit;
@@ -496,14 +497,58 @@ class Person extends Controller
     }
 
 
+    public function resetPass()
+    {
+        $form = $this->postData('form');
+        $model = User::get($this->user['user_id']);
+        if ($model->resetPass($form['password'], $form['new_password'])) {
+            return $this->renderSuccess('修改成功');
+        } else {
+            return $this->renderError($model->error);
+        }
+    }
+
+
+
+
+
+
+
+
+
     /**
      * 子站管理
      */
     public function personSite()
     {
-
-        return $this->fetch('site');
+        $detail = UserSite::where(['user_id' => $this->user['user_id']])->find();
+        if ($detail) {
+            $code = 10;
+        } else {
+            $exam = Exam::where(['user_id' => $this->user['user_id'], 'type' => 50, 'status' => 10])->find();
+            $code = $exam ? 20 : 30;
+        }
+        # code  10 已有子站  20 子站审核中  30 没有子站
+        return $this->fetch('site', compact('code'));
     }
+
+
+    public function applySite()
+    {
+        if ($this->request->isPost()) {
+            $exam_model = new Exam;
+            // 
+            if ($exam_model->updateExam([], 'site', $this->user['user_id'], $this->getLevelOption())) {
+                return $this->renderSuccess('申请成功');
+            } else {
+                return $this->renderError($exam_model->error);
+            }
+        }
+    }
+
+
+
+
 
     public function changeHead()
     {

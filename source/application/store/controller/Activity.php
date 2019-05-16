@@ -3,6 +3,9 @@
 namespace app\store\controller;
 
 use app\store\model\Activity as ActivityModel;
+use app\store\model\ActivitySupport;
+use app\store\model\ActivityUserLog;
+use app\store\controller\Office;
 
 /**
  * 商品管理控制器
@@ -55,5 +58,63 @@ class Activity extends Controller
             return $this->renderError($error);
         }
         return $this->renderSuccess('删除成功');
+    }
+
+
+    /**
+     * report
+     * 报名人员
+     */
+    public function sign_report($id)
+    {
+        $model = new ActivityUserLog;
+        $detail = ActivityModel::get($id);
+        $list = $model->getReportList($id);
+        return $this->fetch('sign_report', compact('list', 'detail'));
+    }
+
+
+
+    /**
+     * report
+     * 赞助人员
+     */
+    public function sup_report($id)
+    {
+        $model = new ActivitySupport;
+        $detail = ActivityModel::get($id);
+        $list = $model->getReportList($id);
+        return $this->fetch('sup_report', compact('list', 'detail'));
+    }
+
+
+    public function outsign($act_id)
+    {
+        $excel = new Office;
+        $detail = ActivityModel::get($act_id);
+        $model = new ActivityUserLog;
+        $data = $model->with(['company', 'person'])->where(['act_id' => $act_id])->select()->toArray();
+        //设置表头：
+        $head = ['序号', '联系人', '联系电话', '报名人数', '学历学位', '职位', '职称', '单位名称', '单位电话', '邮箱'];
+
+        //数据中对应的字段，用于读取相应数据：
+        $keys = ['index', 'concat_person', 'phone', 'member_count', 'education_degree', 'job', 'positio', 'company_name', 'company_tel', 'email'];
+
+        $excel->outdata($detail['title'] . '报名表', $data, $head, $keys);
+    }
+
+    public function outsup($act_id)
+    {
+        $excel = new Office;
+        $detail = ActivityModel::get($act_id);
+        $model = new ActivitySupport;
+        $data = $model->with(['company'])->where(['act_id' => $act_id])->select()->toArray();
+        //设置表头：
+        $head = ['序号', '联系人', '联系电话', '单位名称', '单位电话', '邮箱'];
+
+        //数据中对应的字段，用于读取相应数据：
+        $keys = ['index', 'concat_person', 'phone', 'company_name', 'company_tel', 'email'];
+
+        $excel->outdata($detail['title'] . '赞助表', $data, $head, $keys);
     }
 }
