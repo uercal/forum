@@ -527,9 +527,10 @@ class Person extends Controller
         } else {
             $exam = Exam::where(['user_id' => $this->user['user_id'], 'type' => 50, 'status' => 10])->find();
             $code = $exam ? 20 : 30;
+            $detail = [];
         }
         # code  10 已有子站  20 子站审核中  30 没有子站
-        return $this->fetch('site', compact('code'));
+        return $this->fetch('site', compact('code','detail'));
     }
 
 

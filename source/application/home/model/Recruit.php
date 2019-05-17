@@ -11,14 +11,18 @@ use think\Request;
  */
 class Recruit extends RecruitModel
 {
-    public function getDataList($mode_data)
+    public function getDataList($mode_data, $user_id = null)
     {
         $map = input();
         $_map = [];
         if ($mode_data == 'admin') {
             $_map['user_id'] = ['=', 0];
         } else {
-            $_map['user_id'] = ['<>', 0];
+            if ($user_id) {
+                $_map['user_id'] = ['=', $user_id];
+            } else {
+                $_map['user_id'] = ['<>', 0];
+            }
         }
         if (input('title')) {
             $_map['job_name'] = ['like', '%' . input('title') . '%'];

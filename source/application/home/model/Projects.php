@@ -13,10 +13,13 @@ use think\Request;
  */
 class Projects extends ProjectsModel
 {
-    public function getListData()
+    public function getListData($user_id = null)
     {
         $map = input();
         $_map = [];
+        if ($user_id) {
+            $_map['user_id'] = ['=', $user_id];
+        }
         if (input('title')) {
             $_map['title'] = ['like', '%' . input('title') . '%'];
         }
@@ -35,7 +38,7 @@ class Projects extends ProjectsModel
             'total_invest',
             'assignment_date'
         ];
-        $filter = $map;        
+        $filter = $map;
         foreach ($filter as $key => $value) {
             if (!in_array($key, $filter_arr) ||  empty($value)) {
                 unset($filter[$key]);
@@ -51,12 +54,12 @@ class Projects extends ProjectsModel
                     $filter[$key] = $_t[0] . '至' . $_t[1];
                 }
             }
-        }        
+        }
         if (input('region_option')) {
             $region_ids = explode(',', input('region_option'));
             $_map['province_id'] = ['=', $region_ids[0]];
             isset($region_ids[1]) ? $_map['city_id'] = ['=', $region_ids[1]] : '';
-            isset($region_ids[2]) ? $_map['region_id'] = ['=', $region_ids[2]] : '';            
+            isset($region_ids[2]) ? $_map['region_id'] = ['=', $region_ids[2]] : '';
             $region_name = Region::getMergeNameById(end($region_ids));
             $filter['region_option'] = $region_name;
         }
@@ -102,7 +105,7 @@ class Projects extends ProjectsModel
         // halt($list[0]);
         // 
         $regionData = Region::getCacheTree();
-        
+
         foreach ($regionData as $key => $value) {
             $regionData[$key]['children'] = [];
             $regionData[$key]['value'] = $value['id'];

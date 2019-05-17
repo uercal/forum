@@ -17,7 +17,7 @@ use app\common\model\JobSort;
  */
 class ListDetail extends ListDetailModel
 {
-    public function getListDetail($list_id, $key_word)
+    public function getListDetail($list_id, $key_word, $user_id = null)
     {
         if ($key_word == 'job') {
             // 
@@ -36,6 +36,9 @@ class ListDetail extends ListDetailModel
         } else {
             $map = [];
             $mapRaw = '';
+            if ($user_id) {
+                $map['user_id'] = ['=', $user_id];
+            }
             if (input('option_id')) {
                 $option_id = input('option_id');
                 $mapRaw = "concat(',',option_id,',') LIKE '%$option_id%'";
@@ -66,11 +69,11 @@ class ListDetail extends ListDetailModel
             }
 
             if (empty($mapRaw)) {
-                return $this->with(['cover','user'])->where($map)->order($order)->paginate($pageNum, false, [
+                return $this->with(['cover', 'user'])->where($map)->order($order)->paginate($pageNum, false, [
                     'query' => Request::instance()->request()
                 ]);
             }
-            return $this->with(['cover','user'])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
+            return $this->with(['cover', 'user'])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
                 'query' => Request::instance()->request()
             ]);
             // 

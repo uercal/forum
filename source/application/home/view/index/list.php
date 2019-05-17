@@ -288,11 +288,11 @@
                                 <?php foreach ($data['filter'] as $k => $f) : ?>
                                     <div class="pro-filter-item">
                                         <p><?= $f ?></p>
-                                        <span onclick="pro_filter_rm('<?= $k ?>')" class="am-icon-close"></span>
+                                        <span style="cursor:pointer;" onclick="pro_filter_rm('<?= $k ?>')" class="am-icon-close"></span>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <p style="color: #44874B;">清空条件</p>
+                            <p style="color: #44874B;cursor:pointer;" onclick="window.location.href='<?= url('category',['category_id'=>$model['category_id']]) ?>'">清空条件</p>
                         </div>
                     <?php endif; ?>
 

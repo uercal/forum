@@ -360,7 +360,7 @@
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .news-slider-text p {
@@ -720,6 +720,7 @@
     color: #666666;
     letter-spacing: 0;
     line-height: 27px;
+    height: 81px;
     /*  */
     overflow: hidden;
     text-overflow: ellipsis;
@@ -747,7 +748,7 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .eright-title {
@@ -872,7 +873,7 @@
 .pro-filter-body {
     height: 78px;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     width: 80%;
 }
@@ -896,6 +897,7 @@
     font-size: 18px;
     color: #44874B;
     letter-spacing: 0;
+    white-space: nowrap;
 }
 
 .pro-filter-item>span {
@@ -1217,7 +1219,7 @@
 .u-header {
     height: 60%;
     display: flex;
-    align-items: stretch;    
+    align-items: stretch;
 }
 
 .u-header>img {
@@ -1273,5 +1275,59 @@
     font-size: 12px;
     color: #fff;
     letter-spacing: 0;
-    margin: 0;    
+    margin: 0;
+}
+
+
+
+
+/* site */
+.news-site-empty {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EFF2EC;
+}
+
+.news-site-empty>.site-empty-info {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.eleft-empty>.site-empty-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.news-site-empty>.site-empty-info>p,
+.eleft-empty>.site-empty-info>p {
+    width: 400px;
+    opacity: 0.7;
+    font-family: PingFangSC-Regular;
+    font-size: 30px;
+    color: #999999;
+    line-height: 48px;
+}
+
+.news-site-empty>.site-empty-info>.addSiteContent,
+.eleft-empty>.site-empty-info>.addSiteContent {
+    background: #7FBAFF;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.eleft-empty {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

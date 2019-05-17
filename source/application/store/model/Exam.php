@@ -380,13 +380,30 @@ class Exam extends ExamModel
                 if ($data['status'] == 20) {
                     //                   
                     $company_id = UserCompany::where(['user_id' => $obj['user_id']])->value('id');
-                    $site = new UserSite;
+                    $siteObj = UserSite::where([
+                        'user_id' => $obj['user_id'],
+                        'user_company_id' => $company_id
+                    ])->find();
+                    $site_code = substr(strtoupper(yoshop_hash('wsz' . $obj['user_id'])), 0, 5) . $obj['user_id'];
+                    $re = array();
+                    for ($i = 0; $i < strlen($site_code); $i++) {
+                        $d = substr($site_code, $i, 1);
+                        if (is_numeric($d)) {
+                            $re[] = strtoupper(chr($d + 65));
+                        } else {
+                            $re[] = $d;
+                        }
+                    }
+                    $re = implode('', $re);
                     $site_data = [
                         'user_id' => $obj['user_id'],
                         'user_company_id' => $company_id,
-                        'site_code' => strtoupper(yoshop_hash('woshizhu' . $obj['user_id']))
+                        'site_code' => $re
                     ];
-                    $site->save($site_data);
+                    if (!$siteObj) {
+                        $siteObj = new UserSite;
+                    }
+                    $siteObj->save($site_data);
                 }
 
                 $this::get(['id', $data['id']])->save([

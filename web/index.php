@@ -5,6 +5,7 @@
 // 手动定义路由
 //绑定admin模块
 define('BIND_MODULE','home');
+
 // define('BIND_MODULE','home/Index');
 // 定义运行目录
 define('WEB_PATH', __DIR__ . '/');

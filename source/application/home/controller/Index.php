@@ -37,17 +37,13 @@ class Index extends Controller
     }
 
     public function _empty()
-    {
-        $code = $this->request->action();
-        return $this->fetch('404');
-        return $this->redirect('index');
+    {        
+        return $this->fetch('404');      
     }
 
 
     public function index()
-    {
-        // session('forum_user') ? halt(session('forum_user')) : '';
-        //         
+    {            
         return $this->fetch('index/index');
     }
 

@@ -158,9 +158,8 @@
                     <el-tab-pane label="我的子站" name="site">
                         <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
                             <div style="width:100%;display:flex;">
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">高级专家：高级工程师、副教授、副研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">资深专家：正高级工程师、教师、研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">顶级专家：院士、长江学者、百人计划、杰青优青、千人计划、万人计划、双一流学术带头人、其他高层次人才</p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">子站标识码：<?= $detail['site_code'] ?></p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">直接访问：<a href="<?= base_url().'/'.$detail['site_code'] ?>">点击访问</a> </p>                                
                             </div>
                         </div>
                     </el-tab-pane>

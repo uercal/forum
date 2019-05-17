@@ -62,6 +62,10 @@ class Controller extends \think\Controller
         $this->layout();
     }
 
+    public function _empty(){
+        
+    }
+
     /**
      * 全局layout模板输出
      */
@@ -105,8 +109,7 @@ class Controller extends \think\Controller
      */
     private function menus()
     {
-        $list = Category::getCacheTree();
-        // halt($list)     ;
+        $list = Category::getCacheTree();        
         return $list;
     }
 
