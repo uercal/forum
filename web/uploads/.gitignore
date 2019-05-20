@@ -1,2 +1,4 @@
 *
 !.gitignore
+!api
+!user_head_pic
