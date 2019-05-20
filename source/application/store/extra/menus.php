@@ -17,16 +17,12 @@ return [
         'name' => '文章管理',
         'icon' => 'icon-order',
         'index' => 'article/category',
-        'submenu' => [
-            [
-                'name' => '分类管理',
-                'index' => 'article/category',
-            ],
-            [
-                'name' => '文章管理',
-                'index' => 'article/index',
-            ]
-        ]
+        // 'submenu' => [
+        //     [
+        //         'name' => '分类管理',
+        //         'index' => 'article/category',
+        //     ]            
+        // ]
     ],
     // 'data' => [
     //     'name' => '数据管理',
@@ -136,12 +132,12 @@ return [
         'name' => '审批管理',
         'icon' => 'icon-order',
         'index' => 'exam/index',
-        'submenu' => [
-            [
-                'name' => '审核列表',
-                'index' => 'exam/index',
-            ],
-        ]
+        // 'submenu' => [
+        //     [
+        //         'name' => '审核列表',
+        //         'index' => 'exam/index',
+        //     ],
+        // ]
     ],
     'member' => [
         'name' => '员工管理',

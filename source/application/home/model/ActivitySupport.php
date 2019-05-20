@@ -46,7 +46,7 @@ class ActivitySupport extends ActivitySupportModel
         $map = [];
 
         // 
-        $r =  $this->with(['activity'])->where(['user_id' => $user_id])->paginate(1, false, [
+        $r =  $this->with(['activity'])->where(['user_id' => $user_id])->paginate(5, false, [
             'query' => Request::instance()->request()
         ]);
 

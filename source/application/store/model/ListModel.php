@@ -22,13 +22,15 @@ class ListModel extends ListModelModel
      */
     public function add($data)
     {
-        $data['options'] = str_replace('，', ',', $data['options']);
-        $options = explode(',', $data['options']);
-        $options_data = [];
-        foreach ($options as $key => $value) {
-            $_options_data = [];
-            $_options_data['name'] = $value;
-            $options_data[] = $_options_data;
+        if (isset($data['options'])) {
+            $data['options'] = str_replace('，', ',', $data['options']);
+            $options = explode(',', $data['options']);
+            $options_data = [];
+            foreach ($options as $key => $value) {
+                $_options_data = [];
+                $_options_data['name'] = $value;
+                $options_data[] = $_options_data;
+            }
         }
 
         Db::startTrans();
@@ -36,8 +38,10 @@ class ListModel extends ListModelModel
             //           
             $this->allowField(true)->save($data);
             // 
-            $this->userNewsOption()->saveAll($options_data);
-                        
+            if (isset($data['options'])) {
+                $this->userNewsOption()->saveAll($options_data);
+            }
+
             Db::commit();
             return true;
         } catch (\Exception $e) {

@@ -108,17 +108,17 @@ class Index extends Controller
             'listMode',
             'list' => ['list_detail' => ['cover']]
         ]);
-        $mode = $model['mode'];
+        $mode = $model['mode'];        
         switch ($mode) {
             case 'list':
                 $list_detail_model = new ListDetail;
                 $key_word = $model['list']['mode']['key_word'];
-                $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];
+                $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];                
                 if ($key_word == 'user_project') {
                     $project = new Projects;
                     $data = $project->getListData();
                 } else {
-                    $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
+                    $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);                    
                     if ($key_word == 'user_news' || $key_word == 'news') {
                         $options = UserNewsOption::where('list_id', $model['list']['id'])->select()->toArray();
                         $_data = [];

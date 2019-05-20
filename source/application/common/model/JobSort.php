@@ -18,9 +18,9 @@ class JobSort extends BaseModel
     protected $updateTime = false;
 
     public function getInfo($list_id)
-    {
+    {        
         $model = new ListDetail;
-        $data = $model->field(['job'])->where(['list_id' => $list_id])->select()->toArray();
+        $data = $model->field(['job','create_time'])->where(['list_id' => $list_id])->select()->toArray();        
         $data = array_column($data, null, 'job');
         $_data = [];
         foreach ($data as $key => $value) {

@@ -135,7 +135,7 @@ class ListData extends Controller
     //职务列表模式的职位排序
     public function job_sort($list_id)
     {
-        $model = ListModel::get($list_id);
+        $model = ListModel::get($list_id);             
         $jobModel = new JobSort;
         if (!$this->request->isAjax()) {
             $data = $jobModel->getInfo($list_id);

@@ -3,6 +3,7 @@
 namespace app\store\model;
 
 use app\common\model\ListDetail as ListDetailModel;
+use app\common\model\JobSort;
 use think\Cache;
 use think\Request;
 use think\Db;
@@ -22,7 +23,7 @@ class ListDetail extends ListDetailModel
      */
     public function add($data, $key_word)
     {
-        // halt([$data,$key_word]);
+        // halt([$data, $key_word]);
         Db::startTrans();
         try {
             switch ($key_word) {
@@ -39,7 +40,7 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
-                    $data['option_id'] = implode(',',$data['option_id']);
+                    $data['option_id'] = implode(',', $data['option_id']);
                     if (isset($data['cover_id'])) {
                         $data['cover_id'] = array_values($data['cover_id'])[0];
                     }
@@ -52,6 +53,25 @@ class ListDetail extends ListDetailModel
                         $data['cover_id'] = array_values($data['cover_id'])[0];
                     }
                     $this->allowField(true)->save($data);
+
+                    $job_model = JobSort::get(['list_id' => $data['list_id']]);
+                    // 
+                    if ($job_model) {
+                        $_data = $job_model->getInfo($data['list_id']);
+                        $_data = json_encode($_data);
+                        $job_model->save(['data' => $_data]);
+                    } else {
+                        $_data = [];
+                        $_data[] = [
+                            'name' => $data['job'],
+                            'value' => 100,
+                            'content' => ''
+                        ];
+                        $_data = json_encode($_data);
+                        $job_model = new JobSort;
+                        $job_model->save(['data' => $_data, 'list_id' => $data['list_id']]);
+                    }
+                    //
                     break;
 
                     // 
@@ -61,7 +81,7 @@ class ListDetail extends ListDetailModel
                     break;
 
                 case 'user_news':
-                    $data['option_id'] = implode(',',$data['option_id']);
+                    $data['option_id'] = implode(',', $data['option_id']);
                     if (isset($data['cover_id'])) {
                         $data['cover_id'] = array_values($data['cover_id'])[0];
                     }
@@ -101,8 +121,8 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
-                    $data['option_id'] = implode(',',$data['option_id']);
-                    
+                    $data['option_id'] = implode(',', $data['option_id']);
+
                     $this->allowField(true)->save($data);
                     break;
 

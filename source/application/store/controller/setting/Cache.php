@@ -56,15 +56,15 @@ class Cache extends Controller
         return [
             'setting' => [
                 'key' => 'setting_' . $wxapp_id,
-                'name' => '商城设置'
+                'name' => '后台设置'
             ],
             'category' => [
                 'key' => 'category_' . $wxapp_id,
-                'name' => '商品分类'
+                'name' => '数据分类'
             ],
             'wxapp' => [
                 'key' => 'wxapp_' . $wxapp_id,
-                'name' => '小程序设置'
+                'name' => '数据设置'
             ],
         ];
     }

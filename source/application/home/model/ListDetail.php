@@ -26,7 +26,7 @@ class ListDetail extends ListDetailModel
             $list = $this->with(['cover'])->where('list_id', $list_id)->select()->toArray();
             foreach ($list as $key => $value) {
                 $job_sort[$value['job']]['data'][] = $value;
-            }
+            }            
             usort($job_sort, function ($a, $b) {
                 return $a['value'] > $b['value'];
             });
