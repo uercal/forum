@@ -97,54 +97,31 @@
                     <div class="eleft-title">
                         <p>学术天地</p>
                     </div>
-
-                    <div class="eleft-item">
-                        <div class="eleft-item-title">
-                            <div class="eleft-item-author">
-                                <img src="/assets/home/images/index/f01.jpg" alt="">
-                                <p>编辑：王大锤等</p>
+                    <?php foreach ($index_data['user_news']['data'] as $item) : ?>
+                        <div class="eleft-item">
+                            <div class="eleft-item-title">
+                                <div class="eleft-item-author">
+                                    <img src="<?= $item['user']['avatar_path'] ?>" alt="">
+                                    <p>编辑：<?= $item['user']['show_name'] ?></p>
+                                </div>
+                                <p style="font-family: HelveticaNeue;font-size: 14px;color: #666666;letter-spacing: 0.88px;"><?= $item['option'][0] ?></p>
                             </div>
-                            <p style="font-family: HelveticaNeue;font-size: 14px;color: #666666;letter-spacing: 0.88px;">投资咨询</p>
-                        </div>
 
-                        <hr style="height:1px;border:none;border-top:1px dashed #DEE0DC;margin:2px 0px;" />
+                            <hr style="height:1px;border:none;border-top:1px dashed #DEE0DC;margin:2px 0px;" />
 
-                        <div class="eleft-item-content">
-                            <strong>四川省行政区域内的国家投资工程建设项目四川省行政区域内的国家投资工程建四川省行政区域内的国家投资工程建设项目四川省行政区域内的国家投资工程建</strong>
-                            <p>特朗普的前任奥巴马当天批评继任者犯下“严重错误”，警告这会加剧中东动荡局势。美国前国务卿克里说，特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经济制裁。特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经
-                                特朗普的前任奥巴马当天批评继任者犯下“严重错误”，警告这会加剧中东动荡局势。美国前国务卿克里说，特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经济制裁。特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经
-                            </p>
-                        </div>
-
-                        <div class="eleft-item-bottom">
-                            <p style="font-size: 12px;color: #999999;letter-spacing: 0.88px;">2019/03/29</p>
-                            <p style="font-size: 12px;color: #9AD1A1;letter-spacing: 0;">查看详情</p>
-                        </div>
-                    </div>
-
-                    <div class="eleft-item">
-                        <div class="eleft-item-title">
-                            <div class="eleft-item-author">
-                                <img src="/assets/home/images/index/f01.jpg" alt="">
-                                <p>编辑：王大锤等</p>
+                            <div class="eleft-item-content">
+                                <strong><?= $item['title'] ?></strong>
+                                <p>
+                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                </p>
                             </div>
-                            <p style="font-family: HelveticaNeue;font-size: 14px;color: #666666;letter-spacing: 0.88px;">投资咨询</p>
-                        </div>
 
-                        <hr style="height:1px;border:none;border-top:1px dashed #DEE0DC;margin:2px 0px;" />
-
-                        <div class="eleft-item-content">
-                            <strong>四川省行政区域内的国家投资工程建设项目四川省行政区域内的国家投资工程建四川省行政区域内的国家投资工程建设项目四川省行政区域内的国家投资工程建</strong>
-                            <p>特朗普的前任奥巴马当天批评继任者犯下“严重错误”，警告这会加剧中东动荡局势。美国前国务卿克里说，特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经济制裁。特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经
-                                特朗普的前任奥巴马当天批评继任者犯下“严重错误”，警告这会加剧中东动荡局势。美国前国务卿克里说，特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经济制裁。特朗普的决定使美国失信于盟友和国际社会。除了退出协议，特朗普宣布将对伊朗实施“最高级别”经
-                            </p>
+                            <div class="eleft-item-bottom">
+                                <p style="font-size: 12px;color: #999999;letter-spacing: 0.88px;"><?= date('Y/m/d', strtotime($item['create_time_date'])) ?></p>
+                                <p style="font-size: 12px;color: #9AD1A1;letter-spacing: 0;">查看详情</p>
+                            </div>
                         </div>
-
-                        <div class="eleft-item-bottom">
-                            <p style="font-size: 12px;color: #999999;letter-spacing: 0.88px;">2019/03/29</p>
-                            <p style="font-size: 12px;color: #9AD1A1;letter-spacing: 0;">查看详情</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
                 </div>
                 <div class="exp-right">
@@ -152,59 +129,25 @@
                         <p>实践范例</p>
                     </div>
 
-                    <div class="eright-item">
-                        <div class="eright-item-title">
-                            <p>海口</p>
-                            <p>招标代理 | 轨道交通</p>
-                        </div>
-                        <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
-                        <div class="eright-item-body">
-                            <div class="eright-item-name">
-                                <p style="font-weight:bold;width:60%;">四川省行政区域内的国家投资工程建设项目</p>
-                                <p style="font-weight:bold;color: #FF8670;font-size: 28px;">8000万</p>
+                    <?php foreach ($index_data['projects']['data'] as $item) : ?>
+                        <div class="eright-item">
+                            <div class="eright-item-title">
+                                <p><?= $item['region_span']['city'] ?></p>
+                                <p><?= explode(',', $item['server_cate_span'])[0] . ' | ' . explode(',', $item['eng_cate_span'])[0] ?></p>
                             </div>
-                            <div class="eright-item-b">
-                                <p>2019/03/29</p>
-                                <p>总投资</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="eright-item">
-                        <div class="eright-item-title">
-                            <p>海口</p>
-                            <p>招标代理 | 轨道交通</p>
-                        </div>
-                        <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
-                        <div class="eright-item-body">
-                            <div class="eright-item-name">
-                                <p style="font-weight:bold;width:60%;">四川省行政区域内的国家投资工程建设项目</p>
-                                <p style="font-weight:bold;color: #FF8670;font-size: 28px;">8000万</p>
-                            </div>
-                            <div class="eright-item-b">
-                                <p>2019/03/29</p>
-                                <p>总投资</p>
+                            <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
+                            <div class="eright-item-body">
+                                <div class="eright-item-name">
+                                    <p style="font-weight:bold;width:60%;"><?= $item['title'] ?></p>
+                                    <p style="font-weight:bold;color: #FF8670;font-size: 28px;"><?= bcdiv($item['total_invest'], 10000, 2) . '万' ?></p>
+                                </div>
+                                <div class="eright-item-b">
+                                    <p><?= date('Y/m/d', strtotime($item['assignment_date_time'])) ?></p>
+                                    <p>总投资</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="eright-item">
-                        <div class="eright-item-title">
-                            <p>海口</p>
-                            <p>招标代理 | 轨道交通</p>
-                        </div>
-                        <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
-                        <div class="eright-item-body">
-                            <div class="eright-item-name">
-                                <p style="font-weight:bold;width:60%;">四川省行政区域内的国家投资工程建设项目</p>
-                                <p style="font-weight:bold;color: #FF8670;font-size: 28px;">8000万</p>
-                            </div>
-                            <div class="eright-item-b">
-                                <p>2019/03/29</p>
-                                <p>总投资</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
                 </div>
             </div>

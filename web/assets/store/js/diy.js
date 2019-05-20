@@ -28,94 +28,86 @@
                     btnShape: 'round'
                 },
                 data: [{
-                        imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                        imgName: 'banner-1.jpg',
-                        linkUrl: ''
-                    },
-                    {
-                        imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
-                        imgName: 'banner-2.jpg',
-                        linkUrl: ''
-                    }
+                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
+                    imgName: 'banner-1.jpg',
+                    linkUrl: ''
+                },
+                {
+                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
+                    imgName: 'banner-2.jpg',
+                    linkUrl: ''
+                }
                 ]
             },
             concat: {
                 data: [{
-                        title: '电话',
-                        value: ''
-                    }, {
-                        title: '地址',
-                        value: ''
-                    },
-                    {
-                        title: '邮箱',
-                        value: ''
-                    },
-                    {
-                        title: '传真',
-                        value: ''
-                    }
+                    title: '电话',
+                    value: ''
+                }, {
+                    title: '地址',
+                    value: ''
+                },
+                {
+                    title: '邮箱',
+                    value: ''
+                },
+                {
+                    title: '传真',
+                    value: ''
+                }
                 ]
             },
             nav: {
                 data: [{
-                        imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                        imgName: 'banner-1.jpg',
-                        coverColor: '#ffffff',
-                        opacity: 0,
-                        artId: 0,
-                        title: '',
-                        en: ''
-                    },
-                    {
-                        imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
-                        imgName: 'banner-2.jpg',
-                        coverColor: '#ffffff',
-                        opacity: 0,
-                        artId: 0,
-                        title: '',
-                        en: ''
-                    },
-                    {
-                        imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
-                        imgName: 'banner-2.jpg',
-                        coverColor: '#ffffff',
-                        opacity: 0,
-                        artId: 0,
-                        title: '',
-                        en: ''
+                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
+                    imgName: 'banner-1.jpg',
+                    coverColor: '#ffffff',
+                    opacity: 0,
+                    artId: 0,
+                    title: '',
+                    en: ''
+                },
+                {
+                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
+                    imgName: 'banner-2.jpg',
+                    coverColor: '#ffffff',
+                    opacity: 0,
+                    artId: 0,
+                    title: '',
+                    en: ''
+                },
+                {
+                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_02.jpg',
+                    imgName: 'banner-2.jpg',
+                    coverColor: '#ffffff',
+                    opacity: 0,
+                    artId: 0,
+                    title: '',
+                    en: ''
 
-                    }
+                }
                 ]
             },
-            activity:{
-                data:[
-                    {id:0},
-                    {id:0},
-                    {id:0}
+            activity: {
+                data: [
+                    { id: 0 },
+                    { id: 0 },
+                    { id: 0 }
+                ]
+            },
+            user_news: {
+                data: [
+                    { id: 0 },
+                    { id: 0 }                  
                 ]
             },
             projects: {
                 data: [{
-                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                    imgName: 'banner-1.jpg',
-                    project_id: 0,
-                    content: ''
+                    project_id: 0
                 }, {
-                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                    imgName: 'banner-1.jpg',
-                    project_id: 0,
-                    content: ''
+                    project_id: 0
                 }, {
-                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                    imgName: 'banner-1.jpg',
-                    project_id: 0,
-                    content: ''
-                }, {
-                    imgUrl: BASE_URL + 'assets/store/img/diy/banner_01.jpg',
-                    imgName: 'banner-1.jpg',
-                    project_id: 0,
-                    content: ''
+                    project_id: 0
                 }]
             },
             news: {

@@ -28,6 +28,9 @@ class Site extends Controller
         $code = $this->request->path();
         $code = strtoupper(explode('/', $code)[0]);
         $obj = $model->with(['user', 'company'])->where(['site_code' => $code])->find();
+        if(!$obj){
+            echo('404 not found');die;            
+        }
         // 
         $this->user_id = $obj['user']['user_id'];
         // 
@@ -136,5 +139,9 @@ class Site extends Controller
     {
         $detail =  Recruit::detail($id);
         return $this->fetch('/site/recruit', compact('detail'));
+    }
+
+    public function errorSite(){
+
     }
 }

@@ -155,8 +155,7 @@
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">
-                    <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
+                <div class="container">                  
                     <div class="item-form am-form-file">                       
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">项目ID </label>
@@ -164,22 +163,33 @@
                                 <input class="" type="text" name="project_id"
                                     data-bind="data.{{ $index }}.project_id" value="{{ $value.project_id }}">
                             </div>                                                        
-                        </div>                                  
+                        </div>                                                                                                                                                  
+                    </div>
+                </div>
+                <!-- <i class="iconfont icon-shanchu item-delete"></i> -->
+
+            </div>
+            {{/each}}
+        </div>      
+    </form>
+</script>
+
+<!-- 编辑器：userNews -->
+<script id="tpl_editor_user_news" type="text/template">
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
+        <div class="form-items">会员类新闻</div>      
+        <div class="form-items">
+            {{each data}}
+            <div class="item" data-key="{{ $index }}">
+                <div class="container">                  
+                    <div class="item-form am-form-file">                       
                         <div class="input-group">
-                        <label class="am-u-sm-3 am-form-label am-text-xs">显示描述</label>
+                        <label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>
                             <div class="am-u-sm-9 am-u-end">
-                                <input type="text" name="content" data-bind="data.{{ $index }}.content"
-                                        value="{{ $value.content }}"
-                                        placeholder="">   
-                            </div>                                                
-                        </div>             
-                        <div class="input-group">
-                            <input type="text" name="imgName" data-bind="data.{{ $index }}.imgName"
-                                   value="{{ $value.imgName }}" placeholder="请选择图片" readonly>
-                            <span class="input-group-addon">选择图片</span>
-                            <input type="hidden" name="imgUrl" data-bind="data.{{ $index }}.imgUrl"
-                                   value="{{ $value.imgUrl }}">
-                        </div>                                                                                                                                        
+                                <input class="" type="text" name="id"
+                                    data-bind="data.{{ $index }}.id" value="{{ $value.id }}">
+                            </div>                                                        
+                        </div>                                                                                                                                                  
                     </div>
                 </div>
                 <!-- <i class="iconfont icon-shanchu item-delete"></i> -->

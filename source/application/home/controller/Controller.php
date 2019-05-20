@@ -10,7 +10,9 @@ use app\store\model\Setting;
 use think\Request;
 use think\Route;
 use app\common\model\Category;
+use app\home\model\ListDetail;
 use app\home\model\Activity;
+use app\home\model\Projects;
 
 /**
  * 后台控制器基类
@@ -62,9 +64,8 @@ class Controller extends \think\Controller
         $this->layout();
     }
 
-    public function _empty(){
-        
-    }
+    public function _empty()
+    { }
 
     /**
      * 全局layout模板输出
@@ -109,7 +110,7 @@ class Controller extends \think\Controller
      */
     private function menus()
     {
-        $list = Category::getCacheTree();        
+        $list = Category::getCacheTree();
         return $list;
     }
 
@@ -147,7 +148,7 @@ class Controller extends \think\Controller
         $model = new WxappPage;
         $items = $model::detail()['page_data']['array']['items'];
         $items = array_column($items, null, 'type');
-        // halt($items['news']);
+        
         if (isset($items['activity'])) {
             $activity = $items['activity']['data'];
             $activity_ids = array_column($activity, 'id', null);
@@ -155,6 +156,22 @@ class Controller extends \think\Controller
             $_data = $act_model->with(['cover'])->whereIn('id', $activity_ids)->select()->toArray();
             $items['activity']['data'] = $_data;
         }
+        if (isset($items['projects'])) {
+            $projects = $items['projects']['data'];
+            $projects_ids = array_column($projects, 'project_id', null);
+            $pro_model = new Projects;
+            $_data = $pro_model->with(['cover'])->whereIn('id', $projects_ids)->select()->toArray();
+            $items['projects']['data'] = $_data;
+        }
+        if (isset($items['user_news'])) {
+            $user_news = $items['user_news']['data'];            
+            $user_news_ids = array_column($user_news, 'id', null);            
+            $list_detail = new ListDetail;
+            $_data = $list_detail->with(['user'])->whereIn('id', $user_news_ids)->select()->toArray();
+            $items['user_news']['data'] = $_data;
+        }
+        // halt($items['projects']['data']);
+        // halt($items['user_news']['data']);
         return $items;
     }
 
