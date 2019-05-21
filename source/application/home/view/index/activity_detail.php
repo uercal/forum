@@ -87,18 +87,14 @@
 
 
             <!--  -->
-            <?php if ($login_user) : ?>
-                <div class="act-users-button">
-                    <?php if (in_array(3, explode(',', $login_user['role']))) : ?>
-                        <div style="background: #BFA46F;" onclick="supportAct(<?= $detail['id'] ?>)">
-                            <p>赞助</p>
-                        </div>
-                    <?php endif; ?>
-                    <div style="background: #44874B;" onclick="<?php if (time() > $detail['sign_begin'] && time() < $detail['sign_end']) : ?>signAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
-                        <p>报名</p>
-                    </div>
+            <div class="act-users-button">
+                <div style="background: #BFA46F;" onclick="supportAct(<?= $detail['id'] ?>)">
+                    <p>赞助</p>
                 </div>
-            <?php endif; ?>
+                <div style="background: #44874B;" onclick="<?php if (time() > $detail['sign_begin'] && time() < $detail['sign_end']) : ?>signAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
+                    <p>报名</p>
+                </div>
+            </div>
 
 
 

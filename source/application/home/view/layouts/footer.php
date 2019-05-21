@@ -237,59 +237,71 @@
         }
 
         function supportAct(act_id) {
-            <?php if (isset($is_support)) : if (!$is_support) : ?>
-                    layer.open({
-                        id: 'support',
-                        type: 2,
-                        title: '赞助活动',
-                        maxmin: false,
-                        scrollbar: false,
-                        resize: false,
-                        shadeClose: true, //点击遮罩关闭层
-                        area: ['600px', '480px'],
-                        content: '/person/support_act?act_id=' + act_id, //弹框显示的url
-                        success: function(layero, index) {
+            <?php if ($login_user) : if (in_array(3, explode(',', $login_user['role']))) : ?>
+                    <?php if (isset($is_support)) : if (!$is_support) : ?>
+                            layer.open({
+                                id: 'support',
+                                type: 2,
+                                title: '赞助活动',
+                                maxmin: false,
+                                scrollbar: false,
+                                resize: false,
+                                shadeClose: true, //点击遮罩关闭层
+                                area: ['600px', '480px'],
+                                content: '/person/support_act?act_id=' + act_id, //弹框显示的url
+                                success: function(layero, index) {
 
-                        },
-                        cancel: function(index) {
-                            layer.close(index);
-                        },
-                        end: function() {
+                                },
+                                cancel: function(index) {
+                                    layer.close(index);
+                                },
+                                end: function() {
 
-                        }
-                    });
+                                }
+                            });
+                        <?php else : ?>
+                            layer.msg('你已赞助过该活动');
+                        <?php endif;
+                endif; ?>
                 <?php else : ?>
-                    layer.msg('你已赞助过该活动');
+                    layer.msg('你还不是单位会员');
                 <?php endif;
-        endif; ?>
+        else : ?>
+                layer.msg('你还没未登录');
+            <?php endif; ?>
+
         }
 
         function signAct(act_id) {
-            <?php if (isset($is_sign)) : if (!$is_sign) : ?>
-                    layer.open({
-                        id: 'sign',
-                        type: 2,
-                        title: '报名活动',
-                        maxmin: false,
-                        resize: false,
-                        scrollbar: false,
-                        shadeClose: true, //点击遮罩关闭层
-                        area: ['600px', '520px'],
-                        content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
-                        success: function(layero, index) {
+            <?php if ($login_user) : ?>
+                <?php if (isset($is_sign)) : if (!$is_sign) : ?>
+                        layer.open({
+                            id: 'sign',
+                            type: 2,
+                            title: '报名活动',
+                            maxmin: false,
+                            resize: false,
+                            scrollbar: false,
+                            shadeClose: true, //点击遮罩关闭层
+                            area: ['600px', '520px'],
+                            content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
+                            success: function(layero, index) {
 
-                        },
-                        cancel: function(index) {
-                            layer.close(index);
-                        },
-                        end: function() {
+                            },
+                            cancel: function(index) {
+                                layer.close(index);
+                            },
+                            end: function() {
 
-                        }
-                    });
-                <?php else : ?>
-                    layer.msg('你已报名过该活动');
-                <?php endif;
-        endif; ?>
+                            }
+                        });
+                    <?php else : ?>
+                        layer.msg('你已报名过该活动');
+                    <?php endif;
+            endif; ?>
+            <?php else : ?>
+                layer.msg('你还没未登录');
+            <?php endif; ?>
         }
 
     <?php endif; ?>
