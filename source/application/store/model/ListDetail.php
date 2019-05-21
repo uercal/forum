@@ -40,10 +40,9 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
-                    $data['option_id'] = implode(',', $data['option_id']);
-                    if (isset($data['cover_id'])) {
-                        $data['cover_id'] = array_values($data['cover_id'])[0];
-                    }
+                    if (isset($data['option_id'])) {
+                        $data['option_id'] = implode(',', $data['option_id']);
+                    }                    
                     $this->allowField(true)->save($data);
                     break;
 
@@ -55,21 +54,24 @@ class ListDetail extends ListDetailModel
                     $this->allowField(true)->save($data);
 
                     $job_model = JobSort::get(['list_id' => $data['list_id']]);
-                    // 
-                    if ($job_model) {
+                    //    
+                    $_data = [];
+                    $_data[] = [
+                        'name' => $data['job'],
+                        'value' => 100,
+                        'content' => ''
+                    ];
+                    $_data = json_encode($_data);
+                    //  
+                    if (!$job_model) {
+                        $job_model = new JobSort;
+                        $job_model->save(['data' => $_data, 'list_id' => $data['list_id']]);
+                    } elseif ($job_model['data'] == 'null') {
+                        $job_model->save(['data' => $_data, 'list_id' => $data['list_id']]);
+                    } else {
                         $_data = $job_model->getInfo($data['list_id']);
                         $_data = json_encode($_data);
                         $job_model->save(['data' => $_data]);
-                    } else {
-                        $_data = [];
-                        $_data[] = [
-                            'name' => $data['job'],
-                            'value' => 100,
-                            'content' => ''
-                        ];
-                        $_data = json_encode($_data);
-                        $job_model = new JobSort;
-                        $job_model->save(['data' => $_data, 'list_id' => $data['list_id']]);
                     }
                     //
                     break;
@@ -121,7 +123,9 @@ class ListDetail extends ListDetailModel
                         }
                         $data['attachment_ids'] = implode(',', $upload_ids);
                     }
-                    $data['option_id'] = implode(',', $data['option_id']);
+                    if (isset($data['option_id'])) {
+                        $data['option_id'] = implode(',', $data['option_id']);
+                    }                    
 
                     $this->allowField(true)->save($data);
                     break;

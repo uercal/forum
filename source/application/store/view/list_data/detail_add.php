@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="am-form-group">
+                                    <!-- <div class="am-form-group">
                                         <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
                                         <div class="am-u-sm-9 am-u-end">
                                             <div class="am-form-file">
@@ -70,7 +70,7 @@
                                                 <small>大小2M以下</small>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -285,7 +285,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="am-form-group">
+                                    <!-- <div class="am-form-group">
                                         <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
                                         <div class="am-u-sm-9 am-u-end">
                                             <div class="am-form-file">
@@ -300,7 +300,7 @@
                                                 <small>大小2M以下</small>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                 </div>
 
