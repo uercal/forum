@@ -567,7 +567,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="list-filter" id="filter">
-                        <?php if (!empty($data['options'])) : ?>
+                        <?php if ($model['list']['cate_exist'] == 1) : ?>
                             <el-select v-model="category" @change="changeOption" placeholder="文章类别">
                                 <el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">
                                 </el-option>

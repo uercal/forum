@@ -156,7 +156,7 @@ class Index extends Controller
 
                 break;
         }
-        // halt([$data['options'][0]]);
+        // halt($model['list']['cate_exist']);
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
