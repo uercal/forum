@@ -14,7 +14,7 @@
                         <ul class="am-slides">
                             <?php foreach ($index_data['news']['data'] as $item) : ?>
                                 <li>
-                                    <img src="<?= $item['imgUrl'] ?>" />
+                                    <img src="<?= $item['imgUrl'] ?>" style="cursor:pointer;" onclick="listDetail(<?= $item['newId'] ?>,0)" />
                                     <div class="news-slider-text">
                                         <p><?= $item['content'] ?></p>
                                     </div>
