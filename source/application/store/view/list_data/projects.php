@@ -65,8 +65,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>标题</th>
-                                    <th>服务类别</th>
-                                    <th>工程类别</th>
+                                    <th style="width:200px;">服务类别</th>
+                                    <th style="width:200px;">工程类别</th>
                                     <th>合同金额</th>
                                     <th>总投资额</th>
                                     <th>签订日期</th>
