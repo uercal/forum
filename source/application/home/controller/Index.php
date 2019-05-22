@@ -155,7 +155,7 @@ class Index extends Controller
 
                 break;
         }
-        // halt([$data['list']]);
+        // halt([$data['options'][0]]);
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
