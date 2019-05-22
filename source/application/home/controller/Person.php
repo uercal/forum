@@ -116,8 +116,7 @@ class Person extends Controller
             } else {
                 // 
                 return $this->redirect('/index/index');
-            }
-
+            }            
             // 
             return $this->fetch('sign_act', compact('act_id', 'role', 'info'));
         } else {

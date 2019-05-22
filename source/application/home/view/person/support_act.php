@@ -101,7 +101,7 @@
             <div class="am-form-group">
                 <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位电话</label>
                 <div class="am-u-sm-10">
-                    <input type="text" value="<?= $company['company_phone'] ?>" disabled="disabled">
+                    <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
                 </div>
             </div>
 

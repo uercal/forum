@@ -645,7 +645,7 @@
                         <div class="divider" style="margin-top:25px;">图片信息</div>
                         <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
                             <el-col :span="24">
-                                个人证件照：
+                                单位LOGO图片：
                             </el-col>
                         </el-row>
 
@@ -659,7 +659,7 @@
                         <!-- PDF -->
                         <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
                             <el-col :span="20" style="display:flex;align-items:center;">
-                                <label style="margin:0;">个人证件附件：<small style="color:#999999;font-weight:100;font-size:10px;">（请将相关证书制成一个PDF文件上传，且不超过2MB）</small>
+                                <label style="margin:0;">证件附件：<small style="color:#999999;font-weight:100;font-size:10px;">（将营业执照副本、资质资格资质、生产直销认可证或销售授权书等制成一个PDF文件上传，且不超过2MB）</small>
                                 </label>
                             </el-col>
                         </el-row>
