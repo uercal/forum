@@ -5,6 +5,7 @@ namespace app\home\model;
 use app\common\model\Projects as ProjectsModel;
 use app\common\model\Region;
 use think\Request;
+use think\Db;
 
 /**
  * 项目模型
@@ -126,5 +127,25 @@ class Projects extends ProjectsModel
 
 
         return compact('map', 'list', 'cates', 'filter', 'regionData');
+    }
+
+    public function deleteExamProject($project_id)
+    {
+        $exam_id = $this->where(['id' => $project_id])->value('exam_id');
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->where(['id' => $project_id])->delete();
+            $model = new Exam;
+            $model->where(['id' => $exam_id])->update([
+                'status' => 40
+            ]);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
     }
 }

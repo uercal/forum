@@ -186,13 +186,14 @@ function hex2rgb($hexColor)
 }
 
 
-
-function exif_imagetype($image)
-{    
-    try {
-        $info = getimagesize($image);
-        return $info ? $info[2] : false;
-    } catch (\Exception $e) {
-        return false;
+if (!function_exists('exif_imagetype')) {
+    function exif_imagetype($image)
+    {
+        try {
+            $info = getimagesize($image);
+            return $info ? $info[2] : false;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

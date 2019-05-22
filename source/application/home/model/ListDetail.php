@@ -8,6 +8,7 @@ use app\home\model\ListModel;
 use think\Cache;
 use think\Request;
 use think\Db;
+use app\home\model\Exam;
 use app\common\model\JobSort;
 
 /**
@@ -26,7 +27,7 @@ class ListDetail extends ListDetailModel
             $list = $this->with(['cover'])->where('list_id', $list_id)->select()->toArray();
             foreach ($list as $key => $value) {
                 $job_sort[$value['job']]['data'][] = $value;
-            }            
+            }
             usort($job_sort, function ($a, $b) {
                 return $a['value'] > $b['value'];
             });
@@ -78,6 +79,27 @@ class ListDetail extends ListDetailModel
             ]);
             // 
 
+        }
+    }
+
+
+    public function deleteExamPaper($detail_id)
+    {
+        $exam_id = $this->where(['id' => $detail_id])->value('exam_id');
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->where(['id' => $detail_id])->delete();
+            $model = new Exam;
+            $model->where(['id' => $exam_id])->update([
+                'status' => 40
+            ]);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
         }
     }
 }

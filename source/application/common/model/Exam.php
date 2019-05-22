@@ -33,10 +33,15 @@ class Exam extends BaseModel
         return $this->hasOne('Projects', 'exam_id', 'id');
     }
 
+    public function recruit()
+    {
+        return $this->hasOne('Recruit', 'exam_id', 'id');
+    }
+
 
     public function getStatusTextAttr($value, $data)
     {
-        $status = [10 => '审核中', 20 => '已通过', 30 => '已驳回'];
+        $status = [10 => '审核中', 20 => '已通过', 30 => '已驳回', 40 => '已删除'];
         return $status[$data['status']];
     }
 

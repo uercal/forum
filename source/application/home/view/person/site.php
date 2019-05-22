@@ -175,7 +175,7 @@
 </div>
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-<script src="assets/home/js/jquery-1.8.2.min.js"></script>
+<script src="assets/home/js/jquery-1.12.4.min.js"></script>
 <!-- import Vue before Element -->
 <!-- <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script> -->
 <script src="assets/home/js/vue.js"></script>

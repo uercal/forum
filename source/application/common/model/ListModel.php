@@ -20,6 +20,11 @@ class ListModel extends BaseModel
     protected $insert = ['wxapp_id' => 10001];
     protected $append = ['options', 'options_arr'];
 
+    public function category()
+    {
+        return $this->hasOne('Category', 'list_id', 'id');
+    }
+
     public function mode()
     {
         return $this->hasOne('ListMode', 'id', 'list_mode_id');
@@ -28,7 +33,7 @@ class ListModel extends BaseModel
     public function userNewsOption()
     {
         return $this->hasMany('UserNewsOption', 'list_id', 'id');
-    }    
+    }
 
     public function listDetail()
     {

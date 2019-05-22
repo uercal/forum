@@ -6,6 +6,8 @@ use app\common\model\Exam as ExamModel;
 use app\home\model\ListMode;
 use app\home\model\ListModel;
 use app\home\model\ListDetail;
+use app\home\model\Projects;
+use app\home\model\Recruit;
 use think\Request;
 use think\Db;
 
@@ -74,6 +76,8 @@ class Exam extends ExamModel
         }
         if (!empty($input['status'])) {
             $map['status'] = ['in', $input['status']];
+        } else {
+            $map['status'] = ['in', [10, 20, 30]];
         }
         // project
 
@@ -85,7 +89,7 @@ class Exam extends ExamModel
         }
 
 
-        $data = $this->with(['listDetail', 'listDetail.list', 'project'])->where($map)->order('create_time desc')->paginate(5, false, [
+        $data = $this->with(['listDetail', 'listDetail.list', 'project', 'recruit'])->where($map)->order('create_time desc')->paginate(5, false, [
             'query' => Request::instance()->request()
         ]);
 
@@ -174,6 +178,46 @@ class Exam extends ExamModel
         Db::startTrans();
         try {
             $this->allowField(true)->save($post);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
+    }
+
+
+
+
+
+    public function deleteExamPaper($id, $type)
+    {
+
+        //$id 为 exam_id
+
+        switch ($type) {
+            case 'paper':
+                $model = new ListDetail;
+                break;
+
+            case 'project':
+                $model = new Projects;
+                break;
+
+
+            case 'recruit':
+                $model = new Recruit;
+                break;
+        }
+
+        // 开启事务
+        Db::startTrans();
+        try {
+            $model->where(['exam_id' => $id])->delete();
+            $this->where(['id' => $id])->update([
+                'status' => 40
+            ]);
             Db::commit();
             return true;
         } catch (\Exception $e) {

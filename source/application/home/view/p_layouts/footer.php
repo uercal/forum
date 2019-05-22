@@ -219,12 +219,19 @@
         window.location.href = url;
     }
 
+    function listDetail(id) {
+        window.location.href = "<?= url('/index/listDetail') ?>&id=" + id;
+    }
 
     function headerQuit() {
         var $nav = $('#menu-offcanvas');
         $nav.offCanvas('close');
     }
 
+    function recruit(id) {
+        var url = "<?= url('/index/recruit') ?>&id=" + id;
+        window.location.href = url;
+    }
 
     function goTop() {
         $('html,body').animate({
@@ -232,6 +239,10 @@
         }, 500);
     }
 
+    function project(id) {
+        var url = "<?= url('/index/projectDetail') ?>&id=" + id;
+        window.location.href = url;
+    }
 
 
     $(document).ready(function() {

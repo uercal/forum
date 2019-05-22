@@ -42,13 +42,23 @@
         color: #666666;
     }
 
-    .cell>.detail {
+    .el-table .cell {
+        display: flex;
+    }
+
+    .cell>.detail,
+    .cell>.del {
         color: #666666;
         cursor: pointer;
+        margin-right: .8rem;
     }
 
     .cell>.detail:hover {
         color: #44874B;
+    }
+
+    .cell>.del:hover {
+        color: #AE291F;
     }
 
     .el-table th,
@@ -82,7 +92,7 @@
                 <el-table-column class-name="sup-act-title" prop="str_bonus" label="招聘职位" sortable width="260">
                 </el-table-column>
                 <el-table-column prop="create_time_date" label="时间" sortable>
-                </el-table-column>                
+                </el-table-column>
                 <el-table-column prop="status" label="审核状态" column-key="status" :filters="[{ text: '审核中', value: '10' },{ text: '已发布', value: '20' },{ text: '未通过', value: '30' }]" filter-placement="bottom-end">
                     <template slot-scope="scope">
                         <div :class="
@@ -94,11 +104,12 @@
                         ">{{scope.row.status_text}}</div>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作" prop="activity.id">
+                <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.list_detail.id)">查看详情</div>
-                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(scope.row.list_detail.id)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.list_detail.id)">查看原因</div>                        
+                        <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.recruit.id)">详情</div>
+                        <div :class="'del'" v-if="scope.row.status==20" @click="delDetail(scope.row.id)">删除</div>
+                        <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(0)">/</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus)">查看原因</div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -110,7 +121,7 @@
 </div>
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-<script src="assets/home/js/jquery-1.8.2.min.js"></script>
+<script src="assets/home/js/jquery-1.12.4.min.js"></script>
 <!-- import Vue before Element -->
 <!-- <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script> -->
 <script src="assets/home/js/vue.js"></script>
@@ -127,8 +138,8 @@
             el: '#app',
             data: {
                 data: data,
-                loading: true,                
-                filter: {                    
+                loading: true,
+                filter: {
                     status: 0,
                     page: 1,
                     key_word: null
@@ -163,7 +174,51 @@
                     this.getList();
                 },
                 actDetail: function(id) {
-                    console.log(id);                    
+                    if (isNaN(id)) {
+                        this.$alert(id, '驳回理由', {
+                            confirmButtonText: '确定'
+                        });
+                    } else {
+                        if (id == 0) {
+
+                        } else {
+                            window.recruit(id);
+                        }
+                    }
+                },
+                delDetail: function(id) {
+                    this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        let _this = this;
+                        $.post('<?= url('delPaper') ?>', {
+                            id: id,
+                            type: 'recruit'
+                        }, function(res) {
+                            if (res.code == 1) {
+                                _this.$message({
+                                    type: 'success',
+                                    message: '删除成功!',
+                                    duration: 1000,
+                                    onClose() {
+                                        window.location.reload();
+                                    }
+                                });
+                            } else {
+                                _this.$message({
+                                    type: 'info',
+                                    message: '删除错误'
+                                });
+                            }
+                        })
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
                 }
             },
             mounted: function() {

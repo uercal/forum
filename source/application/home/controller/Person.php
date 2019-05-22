@@ -469,22 +469,19 @@ class Person extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 删除
+     */
+    public function delPaper($id, $type)
+    {
+        $model = new Exam;
+        $res = $model->deleteExamPaper($id,$type);                
+        if ($res) {
+            return $this->renderSuccess('删除成功');
+        } else {
+            return $this->renderError('删除失败');
+        }
+    }
 
 
     /**
@@ -530,7 +527,7 @@ class Person extends Controller
             $detail = [];
         }
         # code  10 已有子站  20 子站审核中  30 没有子站
-        return $this->fetch('site', compact('code','detail'));
+        return $this->fetch('site', compact('code', 'detail'));
     }
 
 

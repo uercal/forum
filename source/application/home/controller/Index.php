@@ -8,6 +8,7 @@ use app\store\model\Category;
 use think\Request;
 use function Qiniu\json_decode;
 use app\home\model\ListDetail;
+use app\home\model\ListMode;
 use app\home\model\Projects;
 use app\common\model\UserNewsOption;
 use app\home\model\User;
@@ -37,13 +38,13 @@ class Index extends Controller
     }
 
     public function _empty()
-    {        
-        return $this->fetch('404');      
+    {
+        return $this->fetch('404');
     }
 
 
     public function index()
-    {            
+    {
         return $this->fetch('index/index');
     }
 
@@ -108,17 +109,17 @@ class Index extends Controller
             'listMode',
             'list' => ['list_detail' => ['cover']]
         ]);
-        $mode = $model['mode'];        
+        $mode = $model['mode'];
         switch ($mode) {
             case 'list':
                 $list_detail_model = new ListDetail;
                 $key_word = $model['list']['mode']['key_word'];
-                $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];                
+                $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];
                 if ($key_word == 'user_project') {
                     $project = new Projects;
                     $data = $project->getListData();
                 } else {
-                    $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);                    
+                    $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
                     if ($key_word == 'user_news' || $key_word == 'news') {
                         $options = UserNewsOption::where('list_id', $model['list']['id'])->select()->toArray();
                         $_data = [];
@@ -189,11 +190,16 @@ class Index extends Controller
         return $this->fetch('activity_detail', compact('detail', 'model', 'is_support', 'is_sign'));
     }
 
-    public function recruit($id, $category_id)
+    public function recruit($id, $category_id = 0)
     {
-        $Category = new Category;
-        $model = $Category->where('category_id', $category_id)->find();
-        $detail =  Recruit::detail($id);
+        $detail = Recruit::detail($id);
+        // 
+        if ($category_id != 0) {
+            $model = Category::get($category_id, ['listMode', 'list']);
+        } else {
+            $model = Category::with(['listMode', 'list'])->where(['mode' => 'recruit', 'mode_data' => ''])->find();
+        }
+
         return $this->fetch('recruit_detail', compact('detail', 'model'));
     }
 
@@ -212,19 +218,32 @@ class Index extends Controller
     }
 
 
-    public function listDetail($id, $category_id)
+    public function listDetail($id, $category_id = 0)
     {
-        $model = Category::get($category_id, ['listMode', 'list']);
-        $detail = ListDetail::detail($id);        
+        $detail = ListDetail::detail($id);
+        // 
+        if ($category_id != 0) {
+            $model = Category::get($category_id, ['listMode', 'list']);
+        } else {
+
+            $category_id = $detail['list']['category']['category_id'];
+            $model = Category::get($category_id, ['listMode', 'list']);
+        }
         //         
         return $this->fetch('list_detail', compact('detail', 'model'));
     }
 
 
-    public function projectDetail($id, $category_id)
+    public function projectDetail($id, $category_id = 0)
     {
-        $model = Category::get($category_id);
         $detail = Projects::detail($id);
+        // 
+        if ($category_id != 0) {
+            $model = Category::get($category_id);
+        } else {
+            $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
+            $model = Category::with(['listMode', 'list'])->where(['list_mode_id' => $list_mode_id])->value('category_id');
+        }
         //         
         return $this->fetch('project', compact('detail', 'model'));
     }

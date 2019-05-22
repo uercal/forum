@@ -1,6 +1,6 @@
 <?php
 
-namespace app\store\model;
+namespace app\home\model;
 
 use app\common\model\Category as CategoryModel;
 use think\Cache;
