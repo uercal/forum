@@ -292,7 +292,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <p style="color: #44874B;cursor:pointer;" onclick="window.location.href='<?= url('category',['category_id'=>$model['category_id']]) ?>'">清空条件</p>
+                            <p style="color: #44874B;cursor:pointer;" onclick="window.location.href='<?= url('category', ['category_id' => $model['category_id']]) ?>'">清空条件</p>
                         </div>
                     <?php endif; ?>
 
@@ -567,10 +567,12 @@
                         <?php endif; ?>
                     </div>
                     <div class="list-filter" id="filter">
-                        <el-select v-model="category" @change="changeOption" placeholder="文章类别">
-                            <el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">
-                            </el-option>
-                        </el-select>
+                        <?php if (!empty($data['options'])) : ?>
+                            <el-select v-model="category" @change="changeOption" placeholder="文章类别">
+                                <el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">
+                                </el-option>
+                            </el-select>
+                        <?php endif; ?>
                         <div class="list-filter-order" onclick="list_sort('<?= input('sort') ? input('sort') : 'asc' ?>')">
                             <p>按公布日期</p>
                             <span class="<?= input('sort') ? (input('sort') == 'asc' ? 'am-icon-sort-amount-asc' : 'am-icon-sort-amount-desc') : 'am-icon-sort-amount-asc' ?>" style="color:#44874B;"></span>

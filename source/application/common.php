@@ -180,8 +180,19 @@ function hex2rgb($hexColor)
             'g' => hexdec($g),
             'b' => hexdec($b)
         );
-    }    
-    $rgb = implode(',',$rgb);
+    }
+    $rgb = implode(',', $rgb);
     return $rgb;
 }
 
+
+
+function exif_imagetype($image)
+{    
+    try {
+        $info = getimagesize($image);
+        return $info ? $info[2] : false;
+    } catch (\Exception $e) {
+        return false;
+    }
+}
