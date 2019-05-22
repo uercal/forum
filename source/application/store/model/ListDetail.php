@@ -16,6 +16,7 @@ use think\Db;
  */
 class ListDetail extends ListDetailModel
 {
+    protected $error;
     /**
      * 添加新记录
      * @param $data
@@ -42,7 +43,7 @@ class ListDetail extends ListDetailModel
                     }
                     if (isset($data['option_id'])) {
                         $data['option_id'] = implode(',', $data['option_id']);
-                    }                    
+                    }
                     $this->allowField(true)->save($data);
                     break;
 
@@ -125,7 +126,7 @@ class ListDetail extends ListDetailModel
                     }
                     if (isset($data['option_id'])) {
                         $data['option_id'] = implode(',', $data['option_id']);
-                    }                    
+                    }
 
                     $this->allowField(true)->save($data);
                     break;
@@ -157,7 +158,21 @@ class ListDetail extends ListDetailModel
 
     public function remove()
     {
-        return $this->delete();
+        $exam_id = $this->exam_id;
+        Db::startTrans();
+        try {
+            if (!empty($exam_id)) {
+                $exam_model = new Exam;
+                $exam_model->where(['id' => $exam_id])->delete();
+            }
+            $this->delete();
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
     }
 
     public function getList($map = [])
