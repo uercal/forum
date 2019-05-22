@@ -25,7 +25,7 @@
                 </div>
                 <div class="news-list">
                     <?php foreach ($index_data['news']['data'] as $item) : ?>
-                        <div class="news-item">
+                        <div class="news-item" onclick="listDetail(<?= $item['newId'] ?>,0)">
                             <strong>
                                 <strong>
                                     <?= $item['title'] ?>
@@ -98,7 +98,7 @@
                         <p>学术天地</p>
                     </div>
                     <?php foreach ($index_data['user_news']['data'] as $item) : ?>
-                        <div class="eleft-item">
+                        <div class="eleft-item" onclick="listDetail(<?= $item['id'] ?>,0)">
                             <div class="eleft-item-title">
                                 <div class="eleft-item-author">
                                     <img src="<?= $item['user']['avatar_path'] ?>" alt="">
@@ -138,7 +138,7 @@
                             <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
                             <div class="eright-item-body">
                                 <div class="eright-item-name">
-                                    <p style="font-weight:bold;width:60%;"><?= $item['title'] ?></p>
+                                    <p style="font-weight:bold;width:60%;" onclick="userProject(<?= $item['id'] ?>,0)"><?= $item['title'] ?></p>
                                     <p style="font-weight:bold;color: #FF8670;font-size: 28px;"><?= bcdiv($item['total_invest'], 10000, 2) . '万' ?></p>
                                 </div>
                                 <div class="eright-item-b">
