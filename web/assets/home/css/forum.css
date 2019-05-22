@@ -1118,15 +1118,16 @@
     border-bottom: 1px solid #DEE0DC;
     display: flex;
     flex-direction: column;
+    margin-bottom: 32px;
 }
 
 .user-news-item:hover {
     background: #E5EBE0;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .user-news-head {
-    height: 92px;
+    height: 72px;
     display: flex;
     padding: 10px 25px;
     align-items: center;
@@ -1148,8 +1149,8 @@
 }
 
 .user-news-head-info>img {
-    width: 72px;
-    height: 72px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 

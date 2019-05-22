@@ -250,8 +250,12 @@ class Index extends Controller
 
     public function userDetail($user_id, $category_id)
     {
-        $model = Category::get($category_id);
         $detail = User::detail($user_id)->toArray();
+        if ($category_id != 0) {
+            $model = Category::get($category_id);
+        } else {
+            $model = Category::where(['mode' => 'users', 'mode_data' => 'normal'])->find();
+        }
         //         
         return $this->fetch('user_detail', compact('detail', 'model'));
     }

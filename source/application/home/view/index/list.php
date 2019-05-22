@@ -594,15 +594,15 @@
 
             <div class="user-news-list">
                 <?php if ($key_word == 'user_news' && $model['list']['cover_exist'] == 0) : foreach ($data['list'] as $item) : ?>
-                        <div class="user-news-item" onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
+                        <div class="user-news-item">
                             <div class="user-news-head">
-                                <div class="user-news-head-info">
+                                <div class="user-news-head-info" style="cursor:pointer;" onclick="userDetail(<?= $item['user']['user_id'] ?>,0)">
                                     <img src="<?= $item['user']['avatar_path'] ?>" alt="">
                                     <p>编辑：<?= $item['user']['user_name'] ?></p>
                                 </div>
                                 <p><?= implode('/', $item['option']) ?></p>
                             </div>
-                            <hr style="height:1px;border:none;border-top:2px dashed #979797;margin:0;margin-top:10px;opacity: 0.2;" />
+                            <hr style="width:96%;height:1px;border:none;border-top:2px dashed rgba(151, 151, 151, 0.4);margin:0 auto;opacity: 0.2;" />
                             <div class="user-news-body">
                                 <strong><?= $item['title'] ?></strong>
                                 <div style="margin:20px 0px;color: #999999;font-size:16px;">
@@ -612,7 +612,7 @@
                                 </div>
                                 <div style="color: #B4BEAB;font-size:14px;">
                                     <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
-                                    <p>查看更多 》</p>
+                                    <p onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)" style="cursor:pointer;">查看更多 》</p>
                                 </div>
                             </div>
                         </div>
