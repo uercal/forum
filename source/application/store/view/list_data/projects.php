@@ -97,9 +97,9 @@
                                                                                                 ) ?>" class="am-btn am-btn-xs am-radius">
                                                         <i class="am-icon-book"></i> 查看
                                                     </a>
-                                                    <!-- <a class="tpl-table-black-operation-del" href="javascript:;" onclick="">
-                                                                        <i class="am-icon-pencil"></i> 删除
-                                                                    </a> -->
+                                                    <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['id'] ?>">
+                                                        <i class="am-icon-trash"></i> 删除
+                                                    </a>
                                                 </div>
 
                                             </td>
@@ -167,5 +167,11 @@
             }
             $(this).datepicker('close');
         });
+
+        // 删除元素
+        var url = "<?= url('list_data/project_delete') ?>";
+        $('.item-delete').delete('id', url);
+
+
     });
 </script>

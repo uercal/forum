@@ -4,14 +4,14 @@ namespace app\store\model;
 
 use app\common\model\Projects as ProjectsModel;
 use think\Request;
-
+use think\Db;
 /**
  * 地区模型
  * Class Region
  * @package app\store\model
  */
 class Projects extends ProjectsModel
-{    
+{
     public function getList()
     {
         $map = input();
@@ -26,5 +26,24 @@ class Projects extends ProjectsModel
             'query' => Request::instance()->request()
         ]);
         return compact('map', 'list');
+    }
+
+    public function remove()
+    {
+        $exam_id = $this->exam_id;
+        Db::startTrans();
+        try {
+            if (!empty($exam_id)) {
+                $exam_model = new Exam;
+                $exam_model->where(['id' => $exam_id])->delete();
+            }
+            $this->delete();
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
     }
 }

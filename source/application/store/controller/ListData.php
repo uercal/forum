@@ -135,7 +135,7 @@ class ListData extends Controller
     //职务列表模式的职位排序
     public function job_sort($list_id)
     {
-        $model = ListModel::get($list_id);             
+        $model = ListModel::get($list_id);
         $jobModel = new JobSort;
         if (!$this->request->isAjax()) {
             $data = $jobModel->getInfo($list_id);
@@ -209,6 +209,16 @@ class ListData extends Controller
     public function detail_delete($id)
     {
         $model = ListDetail::get($id);
+        if (!$model->remove($id)) {
+            $error = $model->getError() ?: '删除失败';
+            return $this->renderError($error);
+        }
+        return $this->renderSuccess('删除成功');
+    }
+
+    public function project_delete($id)
+    {
+        $model = Projects::get($id);
         if (!$model->remove($id)) {
             $error = $model->getError() ?: '删除失败';
             return $this->renderError($error);
