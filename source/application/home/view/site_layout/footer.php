@@ -66,6 +66,12 @@
         window.location.href = "<?= url('listDetail') ?>&id=" + $id;
     }
 
+
+    $('.addSiteContent').on('click', function() {
+        window.location.href = '<?= url('person/personCenter') ?>';
+    })
+
+
     // footer
 </script>
 <!--  -->
