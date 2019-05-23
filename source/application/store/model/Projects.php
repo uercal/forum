@@ -21,7 +21,7 @@ class Projects extends ProjectsModel
         if (!empty($map['eng_cate'])) $_map['eng_cate'] = ['like', '%' . $map['eng_cate'] . '%'];
         if (!empty($map['startDate'])) $_map['assignment_date'] = ['>=', strtotime($map['startDate'])];
         if (!empty($map['endDate'])) $_map['assignment_date'] = ['<=', strtotime($map['endDate'] . ' 23:59:59')];
-
+        
         $list =  $this->where($_map)->order('assignment_date asc')->paginate(15, false, [
             'query' => Request::instance()->request()
         ]);

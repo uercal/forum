@@ -308,7 +308,7 @@ class Exam extends ExamModel
                     $detail_data = [
                         'list_id' => $content['list_id'],
                         'title' => $content['title'],
-                        'option_id' => implode(',', $content['option_id']),
+                        'option_id' => isset($content['option_id']) ? implode(',', $content['option_id']) : null,
                         'cover_id' => isset($content['cover_id']) ? $content['cover_id'] : null,
                         'content' => $content['content'],
                         'user_id' => $obj['user_id'],
