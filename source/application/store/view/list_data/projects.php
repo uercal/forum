@@ -60,13 +60,13 @@
 
                     <div class="am-scrollable-horizontal am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped
-                         tpl-table-black am-text-nowrap">
+                         tpl-table-black">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>标题</th>
-                                    <th style="width:200px;">服务类别</th>
-                                    <th style="width:200px;">工程类别</th>
+                                    <th width="20%">标题</th>
+                                    <th width="20%">服务类别</th>
+                                    <th width="20%">工程类别</th>
                                     <th>合同金额</th>
                                     <th>总投资额</th>
                                     <th>签订日期</th>
