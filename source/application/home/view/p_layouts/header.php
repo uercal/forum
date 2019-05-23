@@ -72,7 +72,7 @@
                 <?php else : ?>
                     <div class="user-header">
                         <div class="u-header">
-                            <img src="<?= $login_user['avatar'] ?>" alt="">
+                            <img src="<?= $login_user['avatar'] ? $login_user['avatar'] : 'assets/home/images/about/003.jpg' ?>" alt="">
                             <div>
                                 <p>用户名：<?= $login_user['user_name'] ?></p>
 
