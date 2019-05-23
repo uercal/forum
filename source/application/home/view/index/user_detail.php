@@ -10,7 +10,49 @@
     </div>
 
     <div class="list-body">
-        <?php if (!empty($detail['company'])) : ?>
+        <?php if (!empty($is_sup)) : ?>
+            <div class="detail-container">
+                <div class="users-detail-head">
+                    <div class="users-detail-avatar">
+                        <img src="<?= $detail['supplier']['id_photo_path'] ?>" style="object-fit:cover;" alt="">
+                    </div>
+                    <div class="users-detail-info">
+                        <div class="info-bonus"></div>
+                        <strong><?= $detail['supplier']['sup_company_name'] ?></strong>
+                        <p class="info-role-name"><?= $detail['role_name'] ?></p>
+
+                        <div class="projects-item-option">
+                            <p>供应商类型：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_type'] ?></span>
+                        </div>                       
+                        <div class="projects-item-option">
+                            <p>联系方式：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] . ' | ' . $detail['supplier']['sup_manager_phone'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>供应商邮箱：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_email'] ?></span>
+                        </div>
+                        <div class="projects-item-option" style="margin-bottom:40px;">
+                            <p>供应商地址：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <strong style="margin-left:30px;margin-top:35px;">供应商简介</strong>
+
+                <div class="detail-body">
+                    <?= htmlspecialchars_decode($detail['supplier']['sup_intro']) ?>
+                </div>
+
+            </div>
+
+
+
+
+        <?php elseif (!empty($detail['company'])) : ?>
             <div class="detail-container">
 
                 <div class="users-detail-head">
@@ -100,25 +142,5 @@
 
             </div>
         <?php endif; ?>
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>

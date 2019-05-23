@@ -322,8 +322,8 @@
         window.location.href = "<?= url('/index/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
     }
 
-    function userDetail(id, category_id) {
-        window.location.href = "<?= url('/index/userDetail') ?>&user_id=" + id + "&category_id=" + category_id;
+    function userDetail(id, category_id, is_sup = 0) {
+        window.location.href = "<?= url('/index/userDetail') ?>&user_id=" + id + "&category_id=" + category_id + '&is_sup=' + is_sup;
     }
 
     function listDetail(id, category_id) {

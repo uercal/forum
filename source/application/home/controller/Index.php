@@ -248,7 +248,7 @@ class Index extends Controller
         return $this->fetch('project', compact('detail', 'model'));
     }
 
-    public function userDetail($user_id, $category_id)
+    public function userDetail($user_id, $category_id, $is_sup = null)
     {
         $detail = User::detail($user_id)->toArray();
         if ($category_id != 0) {
@@ -256,7 +256,12 @@ class Index extends Controller
         } else {
             $model = Category::where(['mode' => 'users', 'mode_data' => 'normal'])->find();
         }
+        if ($is_sup == 1) {
+            $is_sup = 1;
+        } else {
+            $is_sup = 0;
+        }
         //         
-        return $this->fetch('user_detail', compact('detail', 'model'));
+        return $this->fetch('user_detail', compact('detail', 'model', 'is_sup'));
     }
 }
