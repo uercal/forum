@@ -23,7 +23,7 @@
                                 <div class="am-u-sm-9 am-u-end">                                
                                     <?php foreach ($privilege_list as $item): ?>
                                     <label class="am-checkbox">
-                                        <input type="checkbox" value="<?= $item['id'] ?>"  name="role[privilege_ids][]" data-am-ucheck /> <?= $item['privilege_name'] ?>                                    
+                                        <input type="checkbox" value="<?= $item['id'] ?>"  name="role[privilege_ids][]" data-am-ucheck required /> <?= $item['privilege_name'] ?>
                                     </label>
                                     <?php endforeach; ?>                                
                                 </div>

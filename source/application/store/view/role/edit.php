@@ -23,7 +23,7 @@
                                 <div class="am-u-sm-9 am-u-end">                                
                                     <?php foreach ($model['privilege_list'] as $item) : ?>
                                     <label class="am-checkbox">
-                                        <input type="checkbox" value="<?= $item['id'] ?>" name="role[privilege_ids][]" data-am-ucheck <?php if ($item['is_selected']) : ?> checked <?php endif; ?>/> 
+                                        <input type="checkbox" value="<?= $item['id'] ?>" name="role[privilege_ids][]" data-am-ucheck <?php if ($item['is_selected']) : ?> checked <?php endif; ?> required/> 
                                         <?= $item['privilege_name'] ?>
                                     </label>
                                     <?php endforeach; ?>
