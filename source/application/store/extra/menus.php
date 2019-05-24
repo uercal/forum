@@ -14,7 +14,7 @@ return [
         'index' => 'index/index',
     ],
     'article' => [
-        'name' => '文章管理',
+        'name' => '页面管理',
         'icon' => 'icon-order',
         'index' => 'article/category',
         // 'submenu' => [
@@ -30,7 +30,7 @@ return [
     //     'index' => 'data/index',
     // ],
     'list_data' => [
-        'name' => '列表管理',
+        'name' => '文章管理',
         'icon' => 'icon-order',
         'index' => 'list_data/index&mode=news',
         'submenu' => [
