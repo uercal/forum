@@ -89,12 +89,12 @@
                                 <p>单位会员</p>
                             </div>
                             <div class="users-item-info">
-                                <strong><?= $item['user']['user_name'] ?></strong>
+                                <strong><?= $item['company_name'] ?></strong>
                                 <div>
-                                    <div>
+                                    <!-- <div>
                                         <span class="am-icon-building-o"></span>
                                         <p><?= $item['company_name'] ?></p>
-                                    </div>
+                                    </div> -->
                                     <div>
                                         <span class="am-icon-file-text-o"></span>
                                         <p><?= $item['company_type'] ?></p>
