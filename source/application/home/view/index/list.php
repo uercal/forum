@@ -598,7 +598,7 @@
                             <div class="user-news-head">
                                 <div class="user-news-head-info" style="cursor:pointer;" onclick="userDetail(<?= $item['user']['user_id'] ?>,0)">
                                     <img src="<?= !empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'] ?>" alt="">
-                                    <p>编辑：<?= !empty($item['user']['person']) ? $item['user']['person']['user_name'] : $item['user']['company']['company_name'] ?></p>
+                                    <p>编辑：<?= !empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name'] ?></p>
                                 </div>
                                 <p><?= implode('/', $item['option']) ?></p>
                             </div>
