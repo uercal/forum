@@ -205,12 +205,8 @@
                                 <p>供应商</p>
                             </div>
                             <div class="users-item-info">
-                                <strong><?= $item['user']['user_name'] ?></strong>
-                                <div>
-                                    <div>
-                                        <span class="am-icon-building-o"></span>
-                                        <p><?= $item['sup_company_name'] ?></p>
-                                    </div>
+                                <strong><?= $item['sup_company_name'] ?></strong>
+                                <div>                                    
                                     <div>
                                         <span class="am-icon-file-text-o"></span>
                                         <p><?= $item['sup_company_type'] ?></p>
