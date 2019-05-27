@@ -28,8 +28,9 @@ class Site extends Controller
         $code = $this->request->path();
         $code = strtoupper(explode('/', $code)[0]);
         $obj = $model->with(['user', 'company'])->where(['site_code' => $code])->find();
-        if(!$obj){
-            echo('404 not found');die;            
+        if (!$obj) {
+            echo ('404 not found');
+            die;
         }
         // 
         $this->user_id = $obj['user']['user_id'];
@@ -44,11 +45,11 @@ class Site extends Controller
         }])->where(['list_mode_id' => $list_mode_id, 'cover_exist' => 1])->find();
         // 学术天地（不带图）
         $normal_list = ListModel::with(['listDetail' => function ($query) use ($user_id) {
-            $query->with(['user'])->where(['user_id' => $user_id])->order('create_time desc')->limit(2);
+            $query->with(['user' => ['company']])->where(['user_id' => $user_id])->order('create_time desc')->limit(2);
         }])->where(['list_mode_id' => $list_mode_id, 'cover_exist' => 0])->find();
         //         
         $project_list = Projects::where(['user_id' => $user_id])->order('create_time desc')->limit(3)->select();
-        
+
         $index_data = compact('img_list', 'normal_list', 'project_list');
 
         // 
@@ -141,7 +142,6 @@ class Site extends Controller
         return $this->fetch('/site/recruit', compact('detail'));
     }
 
-    public function errorSite(){
-
-    }
+    public function errorSite()
+    { }
 }
