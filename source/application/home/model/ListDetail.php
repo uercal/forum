@@ -70,11 +70,11 @@ class ListDetail extends ListDetailModel
             }
 
             if (empty($mapRaw)) {
-                return $this->with(['cover', 'user'])->where($map)->order($order)->paginate($pageNum, false, [
+                return $this->with(['cover', 'user' => ['person', 'company']])->where($map)->order($order)->paginate($pageNum, false, [
                     'query' => Request::instance()->request()
                 ]);
             }
-            return $this->with(['cover', 'user'])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
+            return $this->with(['cover', 'user' => ['person', 'company']])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
                 'query' => Request::instance()->request()
             ]);
             // 
