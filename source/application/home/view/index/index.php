@@ -101,8 +101,8 @@
                         <div class="eleft-item" onclick="listDetail(<?= $item['id'] ?>,0)">
                             <div class="eleft-item-title">
                                 <div class="eleft-item-author">
-                                    <img src="<?= $item['user']['avatar_path'] ?>" alt="">
-                                    <p>编辑：<?= $item['user']['show_name'] ?></p>
+                                    <img src="<?= !empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'] ?>" alt="">
+                                    <p>编辑：<?= !empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name'] ?></p>
                                 </div>
                                 <p style="font-family: HelveticaNeue;font-size: 14px;color: #666666;letter-spacing: 0.88px;"><?= $item['option'][0] ?></p>
                             </div>

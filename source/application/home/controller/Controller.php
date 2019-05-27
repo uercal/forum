@@ -148,7 +148,7 @@ class Controller extends \think\Controller
         $model = new WxappPage;
         $items = $model::detail()['page_data']['array']['items'];
         $items = array_column($items, null, 'type');
-        
+
         if (isset($items['activity'])) {
             $activity = $items['activity']['data'];
             $activity_ids = array_column($activity, 'id', null);
@@ -164,10 +164,10 @@ class Controller extends \think\Controller
             $items['projects']['data'] = $_data;
         }
         if (isset($items['user_news'])) {
-            $user_news = $items['user_news']['data'];            
-            $user_news_ids = array_column($user_news, 'id', null);            
+            $user_news = $items['user_news']['data'];
+            $user_news_ids = array_column($user_news, 'id', null);
             $list_detail = new ListDetail;
-            $_data = $list_detail->with(['user'])->whereIn('id', $user_news_ids)->select()->toArray();
+            $_data = $list_detail->with(['user' => ['person', 'company']])->whereIn('id', $user_news_ids)->select()->toArray();
             $items['user_news']['data'] = $_data;
         }
         // halt($items['projects']['data']);
