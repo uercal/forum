@@ -241,8 +241,9 @@ class Index extends Controller
         if ($category_id != 0) {
             $model = Category::get($category_id);
         } else {
-            $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
-            $model = Category::with(['listMode', 'list'])->where(['list_mode_id' => $list_mode_id])->value('category_id');
+            $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');            
+            $category_id = Category::with(['listMode', 'list'])->where(['list_mode_id' => $list_mode_id])->value('category_id');
+            $model = Category::get($category_id);
         }
         //         
         return $this->fetch('project', compact('detail', 'model'));
