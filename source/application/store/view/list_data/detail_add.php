@@ -16,7 +16,7 @@
                         <div class="widget-body">
                             <fieldset>
                                 <div class="widget-head am-cf">
-                                    <div class="widget-title am-fl">编辑</div>
+                                    <div class="widget-title am-fl">新增</div>
                                 </div>
 
                                 <div class="am-form-group">
@@ -39,7 +39,7 @@
                                                 </div>
                                             </div>
                                             <div class="help-block am-margin-top-sm">
-                                                <small>尺寸750x750像素以上，大小2M以下</small>
+                                                <small>尺寸360*180像素以上，大小2M以下</small>
                                             </div>
                                         </div>
                                     </div>
@@ -56,21 +56,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                        <div class="am-u-sm-9 am-u-end">
-                                            <div class="am-form-file">
-                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                    <i class="am-icon-cloud-upload"></i> 选择
-                                                </button>
-                                                <div class="uploader-list am-cf">
+                                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                            <div class="am-u-sm-9 am-u-end">
+                                                                <div class="am-form-file">
+                                                                    <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                        <i class="am-icon-cloud-upload"></i> 选择
+                                                                    </button>
+                                                                    <div class="uploader-list am-cf">
 
-                                                </div>
-                                            </div>
-                                            <div class="help-block am-margin-top-sm">
-                                                <small>大小2M以下</small>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="help-block am-margin-top-sm">
+                                                                    <small>大小2M以下</small>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -143,21 +143,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                                                        <div class="am-u-sm-9 am-u-end">
-                                                                                            <div class="am-form-file">
-                                                                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                                                    <i class="am-icon-cloud-upload"></i> 选择
-                                                                                                </button>
-                                                                                                <div class="uploader-list am-cf">
+                                                                                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                                                            <div class="am-u-sm-9 am-u-end">
+                                                                                                                <div class="am-form-file">
+                                                                                                                    <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                                                        <i class="am-icon-cloud-upload"></i> 选择
+                                                                                                                    </button>
+                                                                                                                    <div class="uploader-list am-cf">
 
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="help-block am-margin-top-sm">
-                                                                                                <small>大小2M以下</small>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="help-block am-margin-top-sm">
+                                                                                                                    <small>大小2M以下</small>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -226,7 +226,7 @@
                         <div class="widget-body">
                             <fieldset>
                                 <div class="widget-head am-cf">
-                                    <div class="widget-title am-fl">编辑</div>
+                                    <div class="widget-title am-fl">新增</div>
                                 </div>
 
                                 <div class="am-form-group">
@@ -255,7 +255,7 @@
 
                                 <?php if ($list['cover_exist'] == 1) : ?>
                                     <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">封面图</label>
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">封面图</label>
                                         <div class="am-u-sm-9 am-u-end">
                                             <div class="am-form-file">
                                                 <div class="am-form-file">
@@ -267,7 +267,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="help-block am-margin-top-sm">
-                                                    <small>尺寸750x750像素以上，大小2M以下</small>
+                                                    <small>尺寸360*180像素以上，大小2M以下</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,21 +286,21 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                        <div class="am-u-sm-9 am-u-end">
-                                            <div class="am-form-file">
-                                                <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                    <i class="am-icon-cloud-upload"></i> 选择
-                                                </button>
-                                                <div class="uploader-list am-cf">
+                                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                            <div class="am-u-sm-9 am-u-end">
+                                                                <div class="am-form-file">
+                                                                    <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                        <i class="am-icon-cloud-upload"></i> 选择
+                                                                    </button>
+                                                                    <div class="uploader-list am-cf">
 
-                                                </div>
-                                            </div>
-                                            <div class="help-block am-margin-top-sm">
-                                                <small>大小2M以下</small>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="help-block am-margin-top-sm">
+                                                                    <small>大小2M以下</small>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
 
                                 </div>
 
@@ -365,7 +365,24 @@
          * 表单验证提交
          * @type {*}
          */
-        $('#my-form').superForm();
+        <?php if (($list['mode']['key_word'] == 'user_news' || $list['mode']['key_word'] == 'news') && $list['cover_exist'] == 1) : ?>
+            $('#my-form').superForm({
+                // 自定义验证
+                validation: function(e) {
+                    var cover = $('.file-item').length;
+                    console.log(cover);
+                    if (cover === 0) {
+                        layer.msg('封面图不能为空');
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
+        <?php else : ?>
+            $('#my-form').superForm();
+
+        <?php endif; ?>
 
     });
 </script>

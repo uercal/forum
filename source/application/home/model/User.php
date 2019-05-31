@@ -112,7 +112,7 @@ class User extends UserModel
                 'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
-                'last_login' => date('Y/m/d H:i:s', $user['last_login'])
+                'last_login' => $user['last_login'] ? date('Y/m/d H:i:s', $user['last_login']) : date('Y/m/d H:i:s', time())
             ],
             'is_login' => true,
         ]);

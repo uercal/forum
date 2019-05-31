@@ -18,25 +18,16 @@
                                             <strong class="footer_main--column_title" <?php if ($item['is_show'] == 1) : ?> onclick="category(<?= $item['category_id'] ?>)" <?php endif; ?>>
                                                 <?= $item['name'] ?></strong>
                                             <ul class="footer_navigation">
-                                                <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : ?>
-                                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?= $child['category_id'] ?>)">
-                                                                <?= $child['name'] ?></a></li>
-                                                    <?php endforeach;
+                                                <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : if ($child['name'] != '联系我们') : ?>
+                                                            <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?= $child['category_id'] ?>)">
+                                                                    <?= $child['name'] ?></a></li>
+                                                        <?php endif;
+                                                endforeach;
                                             endif; ?>
                                             </ul>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
-                            </div>
-                            <div class="footer-friend">
-                                <div class="friend-div">
-                                    <strong class="friend-title">友情链接</strong>
-                                    <div class="friend-info">
-                                        <?php foreach ($index_data['company']['data'] as $f) : ?>
-                                            <a href="<?= $f['jumpUrl'] ?>"><?= $f['name'] ?></a>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="f-contact">
@@ -47,13 +38,19 @@
                                     <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
                                 <?php endforeach; ?>
                             </div>
-
-                            <div class="f-logo">
-                                <img src="assets/home/images/logo.png" alt="">
-                            </div>
                         </div>
                     </div>
 
+                    <div class="footer-friend">
+                        <div class="friend-div">
+                            <strong class="friend-title">友情链接</strong>
+                            <div class="friend-info">
+                                <?php foreach ($index_data['company']['data'] as $f) : ?>
+                                    <a href="<?= isset($f['jumpUrl']) ? $f['jumpUrl'] : '' ?>"><?= $f['name'] ?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

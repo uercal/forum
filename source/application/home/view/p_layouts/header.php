@@ -34,7 +34,10 @@
     <header>
         <nav class="header-nav">
             <div class="header-logo">
-                <img src="assets/home/images/logo.png" alt="">
+                <ul>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                </ul>
             </div>
             <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>

@@ -2,13 +2,13 @@
 <html lang="cn">
 
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>海南省全过程工程咨询研究会</title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/home/css/index.css" />
-    <!-- <link rel="stylesheet" href="assets/home/css/amazeui.css" /> -->
+    <link rel="stylesheet" href="assets/home/css/amazeui.css" />
     <link rel="stylesheet" href="assets/home/css/common.min.css" />
     <link rel="stylesheet" href="assets/home/css/forum.css" />
     <link rel="stylesheet" href="assets/home/css/forum-list.css" />
@@ -24,7 +24,11 @@
     <header>
         <nav class="header-nav">
             <div class="header-logo">
-                <img src="assets/home/images/logo.png" alt="">
+                <ul>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>                    
+                </ul>
+            </div>
             </div>
             <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
@@ -63,7 +67,7 @@
                 <?php else : ?>
                     <div class="user-header">
                         <div class="u-header">
-                            <img src="<?= $login_user['avatar']?$login_user['avatar']:'assets/home/images/about/003.jpg' ?>" alt="">
+                            <img src="<?= $login_user['avatar'] ? $login_user['avatar'] : 'assets/home/images/about/003.jpg' ?>" alt="">
                             <div>
                                 <p>用户名：<?= $login_user['user_name'] ?></p>
 
@@ -83,7 +87,7 @@
     </header>
     <!--  -->
     <section class="slider" style="display:<?= isset($model) ? 'none;' : 'block;' ?>">
-        <div class="am-slider am-slider-default" data-am-flexslider="{animation: 'slider',slideshowSpeed: 2000,controlNav: false,directionNav: false}" id="demo-slider-0">
+        <div class="am-slider am-slider-default" data-am-flexslider="{animation: 'slider',slideshowSpeed: 2000,controlNav: true,directionNav: false}" id="demo-slider-0">
             <ul class="am-slides">
                 <?php foreach ($index_data['banner']['data'] as $banner) : ?>
                     <li><img src="<?= $banner['imgUrl'] ?>" /></li>

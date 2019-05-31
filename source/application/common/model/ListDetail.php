@@ -99,7 +99,7 @@ class ListDetail extends BaseModel
 
     public static function detail($id)
     {
-        return self::get($id, ['list' => ['mode', 'userNewsOption']]);
+        return self::get($id, ['user' => ['person', 'company'], 'list' => ['mode', 'userNewsOption']]);
     }
 
 

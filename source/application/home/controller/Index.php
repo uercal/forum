@@ -115,7 +115,7 @@ class Index extends Controller
                 $list_detail_model = new ListDetail;
                 $key_word = $model['list']['mode']['key_word'];
                 $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];
-                if ($key_word == 'user_project') {
+                if ($key_word == 'user_project') {                    
                     $project = new Projects;
                     $data = $project->getListData();
                 } else {
@@ -156,7 +156,7 @@ class Index extends Controller
 
                 break;
         }
-        // halt($model['list']['cate_exist']);
+        // halt($data['list']->toArray());
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 

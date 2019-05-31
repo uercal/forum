@@ -85,17 +85,19 @@
             <?php foreach ($data as $cate) : ?>
                 <div class="job-list-item">
                     <div class="job-list-head">
-                        <p><?= $cate['name'] ?></p>
-                        <?php if (!empty($cate['content'])) : ?>
-                            <small onclick="job_sort('<?= $cate['content'] ?>')">(点击查看职位详情))</small>
+                        <?php if (empty($cate['content'])) : ?>
+                            <p><?= $cate['name'] ?></p>
+                        <?php else : ?>
+                            <p style="cursor:pointer;" onclick="job_sort('<?= $cate['content'] ?>')"><?= $cate['name'] ?></p>
                         <?php endif; ?>
                     </div>
                     <div class="job-list-info">
                         <?php foreach ($cate['data'] as $member) : ?>
                             <div class="job-list-info-item" onclick="job_sort('<?= $member['content'] ?>')">
-                                <img src="<?= $member['cover']['file_path'] ?>" alt="">
+                                <img src="<?= !empty($member['cover']) ? $member['cover']['file_path'] : '/assets/home/images/o_avatar.png' ?>" alt="">
                                 <a><?= $member['title'] ?></a>
                             </div>
+
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -185,6 +187,7 @@
 
         </div>
 
+
     <?php elseif ($key_word == 'list_news') : ?>
         <div class="list-body">
             <form action="" id="pro_list" class="list-body" style="margin-bottom:30px;">
@@ -243,6 +246,64 @@
 
         </div>
 
+    <?php elseif ($key_word == 'news' && $model['list']['cover_exist'] == 0) : ?>
+
+        <div class="list-body">
+            <form action="" id="pro_list" class="list-body" style="margin-bottom:30px;">
+                <input type="hidden" name="sort" value="<?= input('sort') ?>">
+                <div class="list-head">
+                    <div class="list-head-title">
+                        <div class="list-head-before"></div>
+                        <strong><?= $model['list']['name'] ?></strong>
+                        <?php if (input('title')) : ?>
+                            <small>（搜索标题：“<?= input('title') ?>” 结果）</small>
+                        <?php endif; ?>
+                    </div>
+                    <div class="list-filter">
+
+                        <div class="list-filter-order" onclick="list_sort('<?= input('sort') ? input('sort') : 'asc' ?>')">
+                            <p>按公布日期</p>
+                            <span class="<?= input('sort') ? (input('sort') == 'asc' ? 'am-icon-sort-amount-asc' : 'am-icon-sort-amount-desc') : 'am-icon-sort-amount-asc' ?>" style="color:#44874B;"></span>
+                        </div>
+
+                        <div class="am-u-lg-12" style="display:flex;align-items:center;width:346px;">
+                            <div class="am-input-group">
+                                <input type="text" class="am-form-field" name="title" placeholder="请输入搜索内容" value="<?= input('title') ?>">
+                                <span class="am-input-group-btn">
+                                    <button class="am-btn am-btn-default" style="background-color:#44874B;color:#fff;" type="button" onclick="search()">
+                                        <span class="am-icon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <?php foreach ($data['list'] as $item) : ?>
+                <div class="list-mag-item" onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
+                    <div class="list-mag-body">
+                        <div class="list-mag-head">
+                            <div class="list-mag-head-l">
+                                <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
+                            </div>
+                            <div class="list-mag-head-r">
+                                <p>查看更多 》</p>
+                            </div>
+                        </div>
+                        <strong><?= $item['title'] ?></strong>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+
+
+            <div class="list-page">
+                <?= $data['list']->render() ?>
+            </div>
+
+        </div>
+
     <?php elseif ($key_word == 'user_project') : ?>
 
         <div class="list-body">
@@ -259,7 +320,7 @@
                     <div class="list-filter">
                         <div class="list-filter-order" onclick="pro_filter()" style="background: #44874B;">
                             <p style="color:#fff;">更多筛选</p>
-                            <span class="am-icon-chevron-up" style="color:#fff;"></span>
+                            <span class="am-icon-chevron-down" style="color:#fff;"></span>
                         </div>
                         <div class="list-filter-order" onclick="list_sort('<?= input('sort') ? input('sort') : 'asc' ?>')">
                             <p>按合同日期</p>
@@ -280,7 +341,7 @@
                 <!--  -->
                 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
                 <!--  -->
-                <div class="pro-filter-container">
+                <div class="pro-filter-container" style="display:none;">
                     <?php if (!empty($data['filter'])) : ?>
                         <div class="pro-filter">
                             <p style="color: #333333;">已选条件：</p>
@@ -429,6 +490,7 @@
             <script src="https://unpkg.com/vue/dist/vue.js"></script>
             <script src="https://unpkg.com/element-ui/lib/index.js"></script>
             <script>
+                var is_login = "<?= session('forum_user') ? 1 : 0 ?>";
                 var region_data = JSON.parse('<?= json_encode($data['regionData']) ?>');
                 var region_option = JSON.parse("[<?= input('region_option') ?>]");
                 var assignment_money = "<?= input('assignment_money') ?>";
@@ -498,7 +560,7 @@
                             <div class="pro-item-detail">
                                 <div class="pro-item-detail-l">
                                     <div>
-                                        <strong><?= bcdiv($item['total_invest'], 10000, 2) . '万/' . bcdiv($item['assignment_money'], 10000, 2) . '万' ?></strong>
+                                        <strong><?= bcdiv($item['total_invest'], 10000, 0) . '万/' . bcdiv($item['assignment_money'], 10000, 0) . '万' ?></strong>
                                     </div>
                                     <p>总投资/合同金额</p>
                                 </div>
@@ -598,7 +660,7 @@
                             <div class="user-news-head">
                                 <div class="user-news-head-info" style="cursor:pointer;" onclick="userDetail(<?= $item['user']['user_id'] ?>,0)">
                                     <img src="<?= !empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'] ?>" alt="">
-                                    <p>编辑：<?= !empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name'] ?></p>
+                                    <p>作者：<?= !empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name'] ?></p>
                                 </div>
                                 <p><?= implode('/', $item['option']) ?></p>
                             </div>
@@ -621,7 +683,7 @@
             endif; ?>
             </div>
 
-            <?php if ($key_word == 'news' || ($model['list']['cover_exist'] == 1 && $key_word == 'user_news')) : foreach ($data['list'] as $item) : ?>
+            <?php if ($model['list']['cover_exist'] == 1 && ($key_word == 'news' || $key_word == 'user_news')) : foreach ($data['list'] as $item) : ?>
                     <div class="list-news-item" onclick="listDetail(<?= $item['id'] ?>,<?= $model['category_id'] ?>)">
                         <div class="list-news-item">
                             <div class="list-news-img">

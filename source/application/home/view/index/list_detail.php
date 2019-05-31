@@ -14,6 +14,7 @@
                 <strong><?= $detail['title'] ?></strong>
                 <div>
                     <p>
+                        <?= $detail['user_id'] != 0 ? ($detail['user']['person'] ? '作者:' . $detail['user']['person']['name'] . '&nbsp;&nbsp;&nbsp;' : '作者:' . $detail['user']['company']['company_name']) . '&nbsp;&nbsp;&nbsp;' : '' ?>
                         发布时间：<?= date('Y-m-d', strtotime($detail['create_time'])) ?>
                         <?= $model['list']['cate_exist'] == 1 ? '&nbsp;&nbsp;&nbsp;类别：' . implode(', ', $detail['option']) : '' ?>
                     </p>

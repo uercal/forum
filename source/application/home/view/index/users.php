@@ -40,19 +40,19 @@
     </div>
 
     <!--  -->
-    <div class="list-body">
+    <div class="list-body" id="filter">
         <form action="" id="pro_list" class="list-body" style="margin-bottom:30px;">
             <input type="hidden" name="sort" value="<?= input('sort') ?>">
             <input type="hidden" name="type" value="<?= input('type') ?>">
             <div class="list-head">
                 <div class="list-head-title">
                     <div class="list-head-before"></div>
-                    <strong><?= $model['name'] ?></strong>
+                    <strong v-html="options.find(function(e){ return e.value== type }).name"></strong>
                     <?php if (input('title')) : ?>
                         <small>（搜索标题：“<?= input('title') ?>” 结果）</small>
                     <?php endif; ?>
                 </div>
-                <div class="list-filter" id="filter">
+                <div class="list-filter">
                     <?php if ($data['mode_data'] != 'expert' && $data['mode_data'] != 'supplier') : ?>
                         <el-select v-model="type" @change="changeType" placeholder="会员类型">
                             <el-option v-for="item in options" :key="item.value" :label="item.name" :value="item.value">
@@ -91,17 +91,13 @@
                             <div class="users-item-info">
                                 <strong><?= $item['company_name'] ?></strong>
                                 <div>
-                                    <!-- <div>
-                                        <span class="am-icon-building-o"></span>
-                                        <p><?= $item['company_name'] ?></p>
-                                    </div> -->
                                     <div>
-                                        <span class="am-icon-file-text-o"></span>
-                                        <p><?= $item['company_type'] ?></p>
+                                        <span class="am-icon-users"></span>
+                                        <p><?= $item['memberLevel'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-phone"></span>
-                                        <p><?= $item['company_tel'] ?></p>
+                                        <p><?= $item['server_level'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-at"></span>
@@ -109,7 +105,7 @@
                                     </div>
                                     <div>
                                         <span class="am-icon-send-o"></span>
-                                        <p><?= $item['address'] ?></p>
+                                        <p><?= $item['company_tel'] ?></p>
                                     </div>
                                 </div>
                                 <div class="users-item-arrow">
@@ -129,16 +125,16 @@
                                 <strong><?= $item['name'] ?></strong>
                                 <div>
                                     <div>
-                                        <span class="am-icon-building-o"></span>
-                                        <p><?= $item['education_major'] ?></p>
+                                        <span class="am-icon-users"></span>
+                                        <p><?= $item['memberLevel'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-file-text-o"></span>
-                                        <p><?= $item['education_degree'] ?></p>
+                                        <p><?= $item['education_major'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-briefcase"></span>
-                                        <p><?= $item['job'] ?></p>
+                                        <p><?= $item['education_degree'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-book"></span>
@@ -146,7 +142,7 @@
                                     </div>
                                     <div>
                                         <span class="am-icon-send-o"></span>
-                                        <p><?= $item['person_address'] ?></p>
+                                        <p><?= $item['job'] ?></p>
                                     </div>
                                 </div>
                                 <div class="users-item-arrow">
@@ -206,11 +202,27 @@
                             </div>
                             <div class="users-item-info">
                                 <strong><?= $item['sup_company_name'] ?></strong>
-                                <div>                                    
-                                    <div>
-                                        <span class="am-icon-file-text-o"></span>
-                                        <p><?= $item['sup_company_type'] ?></p>
-                                    </div>
+                                <div>
+                                    <?php if (!empty($item['sup_eng_cate_name'])) : ?>
+                                        <div>
+                                            <span class="am-icon-file-text-o"></span>
+                                            <p><?= $item['sup_eng_cate_name'][0] . ':' . $item['sup_eng_cate_name'][1] ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($item['sup_goods_cate_name'])) : ?>
+                                        <div>
+                                            <span class="am-icon-file-text-o"></span>
+                                            <p><?= $item['sup_goods_cate_name'][0] . ':' . $item['sup_goods_cate_name'][1] ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($item['sup_server_cate_name'])) : ?>
+                                        <div>
+                                            <span class="am-icon-file-text-o"></span>
+                                            <p><?= $item['sup_server_cate_name'][0] . ':' . $item['sup_server_cate_name'][1] ?></p>
+                                        </div>
+                                    <?php endif; ?>
+
+
                                     <div>
                                         <span class="am-icon-phone"></span>
                                         <p><?= $item['sup_company_tel'] ?></p>
@@ -221,7 +233,7 @@
                                     </div>
                                     <div>
                                         <span class="am-icon-send-o"></span>
-                                        <p><?= $item['sup_company_address'] ?></p>
+                                        <p><?= $item['sup_company_type'] ?></p>
                                     </div>
                                 </div>
                                 <div class="users-item-arrow">
@@ -241,35 +253,35 @@
             <?= $data['list']->render() ?>
         </div>
 
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        <script>
-            var type = "<?= input('type') ?>";
-            var vue = new Vue({
-                el: '#filter',
-                data: {
-                    options: [{
-                            name: '个人会员',
-                            value: 'person'
-                        },
-                        {
-                            name: '单位会员',
-                            value: 'company'
-                        }
-                    ],
-                    type: type ? type : 'person'
-                },
-                methods: {
-                    changeType: function(e) {
-                        $('input[name="type"]').val(this.type);
-                        $form = $('#pro_list').serialize();
-                        window.filter_jump($form);
-                    }
-                },
-                mounted: function() {}
-            })
-        </script>
-    </div>
 
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        var type = "<?= input('type') ?>";
+        var vue = new Vue({
+            el: '#filter',
+            data: {
+                options: [{
+                        name: '个人会员',
+                        value: 'person'
+                    },
+                    {
+                        name: '单位会员',
+                        value: 'company'
+                    }
+                ],
+                type: type ? type : 'person'
+            },
+            methods: {
+                changeType: function(e) {
+                    $('input[name="type"]').val(this.type);
+                    $form = $('#pro_list').serialize();
+                    window.filter_jump($form);
+                }
+            },
+            mounted: function() {}
+        })
+    </script>
 
 </section>

@@ -47,6 +47,7 @@ class Exam extends ExamModel
             'company_logo' => '单位logo',
             'license_file' => '单位证件附件',
             'company_intro' => '单位简介',
+            'memberLevel' => '会员等级',
             // person
             'name' => '姓名',
             'id_card' => '身份证',
@@ -218,7 +219,7 @@ class Exam extends ExamModel
                 if (empty($value)) unset($content[$key]);
             }
         }
-
+        // halt($data);
         // 开启事务
         Db::startTrans();
         try {
@@ -239,6 +240,8 @@ class Exam extends ExamModel
                             //              
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
+                            // 
+                            $content['memberLevel'] = $data['level'];
                             if ($_obj) {
                                 $_obj->save($content);
                             } else {
@@ -255,6 +258,8 @@ class Exam extends ExamModel
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             // 
                             $content['build_time'] = strtotime($content['build_time']);
+                            // 
+                            $content['memberLevel'] = $data['level'];
                             if ($_obj) {
                                 $_obj->save($content);
                             } else {

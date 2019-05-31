@@ -58,13 +58,8 @@
                         </div>
                         <div class="act-info">
                             <strong class="info-title">
-                                <strong><?= $item['title'] ?></strong>
-                            </strong>
-                            <div class="info-name">
-                                <p>
-                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
-                                </p>
-                            </div>
+                                <strong title="<?= $item['title'] ?>"><?= $item['title'] ?></strong>
+                            </strong>                          
                             <div class="act-reg">
                                 <div class="reg-detail">
                                     <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?= date('Y/m/d', $item['sign_end']) ?></p>
@@ -126,7 +121,7 @@
                 </div>
                 <div class="exp-right">
                     <div class="eright-title">
-                        <p>实践范例</p>
+                        <p>理论实践</p>
                     </div>
 
                     <?php foreach ($index_data['projects']['data'] as $item) : ?>
@@ -139,7 +134,7 @@
                             <div class="eright-item-body">
                                 <div class="eright-item-name">
                                     <p style="font-weight:bold;width:60%;" onclick="userProject(<?= $item['id'] ?>,0)"><?= $item['title'] ?></p>
-                                    <p style="font-weight:bold;color: #FF8670;font-size: 28px;"><?= bcdiv($item['total_invest'], 10000, 2) . '万' ?></p>
+                                    <p style="font-weight:bold;color: #FF8670;font-size: 28px;"><?= bcdiv($item['total_invest'], 10000, 0) . '万' ?></p>
                                 </div>
                                 <div class="eright-item-b">
                                     <p><?= date('Y/m/d', strtotime($item['assignment_date_time'])) ?></p>

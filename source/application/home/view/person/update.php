@@ -245,7 +245,6 @@
                                         <el-input v-model="form_person.area" placeholder=""></el-input>
                                     </el-form-item>
                                 </el-col>
-
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="24">
@@ -304,6 +303,20 @@
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
                                 </el-col>
                             </el-row>
+
+                            <div class="divider" style="margin-top:25px;">会员等级</div>
+
+                            <el-row>
+                                <el-col :span="24" style="position:relative;">
+                                    <el-form-item label="会员等级：" prop="memberLevel">
+                                        <el-select v-model="form_person.memberLevel" placeholder="请选择">
+                                            <el-option v-for="item in levelOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
 
                             <el-col :span="24" style="margin-top:30px;">
                                 <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
@@ -723,6 +736,19 @@
                 personFileUrl: '',
                 supIdPhotoUrl: '',
                 supFileUrl: '',
+                levelOptions: [
+                    '会长单位',
+                    '常务副会长单位',
+                    '副会长单位',
+                    '常务理事单位',
+                    '理事单位',
+                    '监事长单位',
+                    '常务副监事长单位',
+                    '副监事长单位',
+                    '常务监事单位',
+                    '监事单位',
+                    '会员单位'
+                ],
                 // 个人
                 form_person: {
                     name: '',
@@ -745,7 +771,8 @@
                     area: '',
                     id_photo: '',
                     person_file: '',
-                    introduce: ''
+                    introduce: '',
+                    memberLevel: ''
                 },
                 person_rules: {
                     name: [{
@@ -849,6 +876,11 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
+                    }],
+                    memberLevel: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
                     }]
                 },
                 // 单位
@@ -868,7 +900,8 @@
                     manager_wechat: '',
                     company_logo: '',
                     license_file: '',
-                    company_intro: ''
+                    company_intro: '',
+                    memberLevel: ''
                 },
                 company_rules: {
                     company_name: [{
@@ -951,6 +984,11 @@
                         message: '请输入公司简介',
                         trigger: 'blur'
                     }],
+                    memberLevel: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }]
                 },
                 // 供应商
                 form_sup: {

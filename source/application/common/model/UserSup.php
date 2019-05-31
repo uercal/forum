@@ -14,7 +14,12 @@ use function Qiniu\json_decode;
 class UserSup extends BaseModel
 {
     protected $name = 'users_sup';
-    protected $append = ['id_photo_path', 'person_file_path', 'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text', 'sup_build_time_text'];
+    protected $append = [
+        'id_photo_path', 'person_file_path',
+        'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
+        'sup_eng_cate_name', 'sup_goods_cate_name', 'sup_server_cate_name',
+        'sup_build_time_text'
+    ];
 
     public static function detail($where)
     {
@@ -38,6 +43,26 @@ class UserSup extends BaseModel
         return implode(' | ', $res);
     }
 
+    public function getSupEngCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['sup_eng_cate'], true);
+        if (empty($arr)) {
+            return [];
+        }
+        $res = [];
+        $cates = [];
+        $values = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['cate'];
+            $values[] = $value['level'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
+    }
+
+
     public function getSupGoodsCateTextAttr($value, $data)
     {
         $arr = json_decode($data['sup_goods_cate'], true);
@@ -49,6 +74,25 @@ class UserSup extends BaseModel
         return implode(' | ', $res);
     }
 
+    public function getSupGoodsCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['sup_goods_cate'], true);
+        if (empty($arr)) {
+            return [];
+        }
+        $res = [];
+        $cates = [];
+        $values = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['permit'];
+            $values[] = $value['content'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
+    }
+
     public function getSupServerCateTextAttr($value, $data)
     {
         $arr = json_decode($data['sup_server_cate'], true);
@@ -58,6 +102,22 @@ class UserSup extends BaseModel
             $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级' . $index . ':' . $value['level'];
         }
         return implode(' | ', $res);
+    }
+
+    public function getSupServerCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['sup_server_cate'], true);
+        $res = [];
+        $cates = [];
+        $values = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['major'];
+            $values[] = $value['level'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
     }
 
     public function getSupBuildTimeTextAttr($value, $data)
