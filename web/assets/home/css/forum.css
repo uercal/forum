@@ -728,6 +728,7 @@
     width: 25%;
     align-items: center;
 
+
 }
 
 .eleft-item-author>img {
@@ -742,6 +743,7 @@
     font-size: 14px;
     color: #999999;
     letter-spacing: 0.88px;
+    white-space: nowrap;
 }
 
 
