@@ -192,13 +192,7 @@
                                         <input type="text" class="tpl-form-input" name="detail[title]" value="" required>
                                     </div>
                                 </div>
-
-                                <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">期数 </label>
-                                    <div class="am-u-sm-9 am-u-end">
-                                        <input type="number" class="tpl-form-input" name="detail[mag_num]" value="" required>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>

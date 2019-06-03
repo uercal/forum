@@ -165,8 +165,7 @@
                                 <thead>
                                     <tr>
                                         <th>详情ID</th>
-                                        <th>名称</th>
-                                        <th>期数</th>
+                                        <th>名称</th>                                        
                                         <th>排序</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
@@ -182,12 +181,7 @@
                                                     <p class="item-title">
                                                         <?= $item['title'] ?>
                                                     </p>
-                                                </td>
-                                                <td class="am-text-middle">
-                                                    <p class="item-title">
-                                                        <?= $item['mag_num'] ?>
-                                                    </p>
-                                                </td>
+                                                </td>                                               
                                                 <td class="am-text-middle">
                                                     <?= $item['sort'] ?>
                                                 </td>

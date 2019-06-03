@@ -166,9 +166,9 @@
                         <div class="list-mag-head">
                             <div class="list-mag-head-l">
                                 <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
-                                <div>
+                                <!-- <div>
                                     <p>第<?= $item['mag_num'] ?>期</p>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="list-mag-head-r">
                                 <p>查看更多 》</p>
