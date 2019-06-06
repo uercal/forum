@@ -83,7 +83,7 @@
         <div class="index-news">
             <div class="index-head">
                 <div class="index-title">
-                    <strong>实践活动</strong>
+                    <strong>理论实践</strong>
                 </div>
                 <p class="item-more">查看更多 》</p>
             </div>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="exp-right">
                     <div class="eright-title">
-                        <p>理论实践</p>
+                        <p>实践范例</p>
                     </div>
 
                     <?php foreach ($index_data['projects']['data'] as $item) : ?>
