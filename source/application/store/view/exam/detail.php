@@ -185,7 +185,7 @@
                                 </div>
                             </div>
 
-                            <?php if ($info['type'] == 10 && ($info['type_bonus'] == 'person' || 'company')) : ?>
+                            <?php if ($info['type'] == 10 && ($info['type_bonus'] == 'person' || $info['type_bonus'] == 'company')) : ?>
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label">确认会员等级</label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">

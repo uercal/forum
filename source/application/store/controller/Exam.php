@@ -153,6 +153,7 @@ class Exam extends Controller
                 $data['input'][$key] = $value;
             }
         }
+        
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }
 
