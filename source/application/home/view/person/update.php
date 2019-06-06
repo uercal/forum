@@ -471,6 +471,16 @@
                                 </el-col>
                             </el-row>
 
+                            <el-row>
+                                <el-col :span="24" style="position:relative;">
+                                    <el-form-item label="会员等级：" prop="memberLevel">
+                                        <el-select v-model="form_company.memberLevel" placeholder="请选择">
+                                            <el-option v-for="item in levelOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
 
 
                             <el-col :span="24" style="margin-top:30px;">
