@@ -139,7 +139,7 @@
 
     <div class="person-my-act-body" style="margin-top:35px;">
         <template>
-            <el-tabs v-model="activeName" type="card" class="">
+            <el-tabs v-model="activeName" type="card" class="" @tab-click="handleClick">
                 <el-tab-pane label="密码修改" name="password">
                     <el-form ref="password" :model="form_pass" :rules="form_pass_rules" label-width="80px" label-position="left" style="margin:10px 0px;">
                         <!--  -->
@@ -167,6 +167,21 @@
                         </el-col>
                     </el-form>
                 </el-tab-pane>
+
+                <el-tab-pane label="证书下载" name="profile" :exist="<?= !empty($attachment_id) ? 1 : 0 ?>">
+                    <el-form ref="password" :model="form_pass" :rules="form_pass_rules" label-width="80px" label-position="left" style="margin:10px 0px;">
+                        <!--  -->
+                        <?php if (!empty($attachment_id)) : ?>
+                            <el-col :span="24">
+                                <el-button type="primary" @click="downAttach()">下载</el-button>
+                            </el-col>
+                        <?php else : ?>
+                            <el-col :span="24">
+
+                            </el-col>
+                        <?php endif; ?>
+                    </el-form>
+                </el-tab-pane>
             </el-tabs>
         </template>
     </div>
@@ -188,6 +203,7 @@
         data: {
             loading: true,
             posting: false,
+            activeName: '',
             form_pass: {
                 password: '',
                 new_password: ''
@@ -227,7 +243,14 @@
 
                 }
             },
-            onSubmit(type) {
+            handleClick(e) {
+                if (e.name == 'profile') {
+                    if (e.$attrs.exist == 0) {
+                        this.$message.error('工会暂时未颁发证书');
+                    }
+                }
+            },
+            onSubmit(type, id = 0) {
 
                 switch (type) {
                     case 'pass':
@@ -248,6 +271,11 @@
                 }
 
             },
+
+            downAttach() {
+                var href = '<?= url('getAttachment') ?>';
+                window.location.href = href;
+            }
         },
         mounted: function() {
             this.loading = false;

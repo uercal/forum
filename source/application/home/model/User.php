@@ -132,6 +132,14 @@ class User extends UserModel
             $this->error = '密码过短，请重新设置';
             return false;
         }
+        if (empty($data['question_id'])) {
+            $this->error = '请选择密保问题';
+            return false;
+        }
+        if (empty($data['answer'])) {
+            $this->error = '请填写密保答案';
+            return false;
+        }
         $user_name = $data['user_name'];
         $password = yoshop_hash($data['password']);
 
@@ -148,6 +156,8 @@ class User extends UserModel
             $this->allowField(true)->save([
                 'user_name' => $user_name,
                 'password' => $password,
+                'question_id' => $data['question_id'],
+                'answer' => $data['answer'],
                 'role' => '0'
             ]);
             Db::commit();
@@ -254,6 +264,55 @@ class User extends UserModel
         try {
             $this->save([
                 'password' => $new_password
+            ]);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    public function isPassProtect($data)
+    {
+        $obj = $this->where([
+            'user_name' => $data['username']
+        ])->find();
+
+        if (!$obj) {
+            $this->error = '用户名不存在';
+            return false;
+        }
+
+        if ($obj['question_id'] == $data['question_id'] && $obj['answer'] == $data['answer']) {
+            return true;
+        } else {
+            $this->error = '密保或答案错误';
+            return false;
+        }
+    }
+
+    /**
+     * 
+     */
+    public function editPass($data)
+    {
+        // 开启事务
+        Db::startTrans();
+        try {
+            // 
+            $this->where([
+                'user_name' => $data['user_name'],
+                'question_id' => $data['question_id'],
+                'answer' => $data['answer']
+            ])->update([
+                'password' => yoshop_hash($data['password'])
             ]);
             Db::commit();
             return true;

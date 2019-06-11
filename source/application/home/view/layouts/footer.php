@@ -402,7 +402,7 @@
                 scrollbar: false,
                 resize: false,
                 shadeClose: true, //点击遮罩关闭层
-                area: ['500px', '450px'],
+                area: ['500px', '580px'],
                 content: 'index/register_index', //弹框显示的url
                 success: function(layero, index) {
 

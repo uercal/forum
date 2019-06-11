@@ -26,7 +26,8 @@
         margin-bottom: 10px;
     }
 
-    .myapp-login-form .myapp-login-input-text {
+    .myapp-login-form .myapp-login-input-text,
+    .am-selected>button {
         font-size: 14px !important;
         padding-left: 48px !important;
         line-height: 1.8 !important;
@@ -34,10 +35,30 @@
         margin-top: 8px;
     }
 
+    .am-selected>button>span {
+        color: #555555;
+    }
+
+    .am-btn-default:active,
+    .am-btn-default.am-active,
+    .am-dropdown.am-active .am-btn-default.am-dropdown-toggle {
+        background-color: #fff;
+    }
+
+    .am-btn-default:visited {
+        border: 1px solid #ccc;
+    }
+
+
     .myapp-login-form .myapp-login-input-text:focus {
         border-color: #c9c9c9 !important;
         -webkit-box-shadow: inset 0 1px 1px #c9c9c9, 0 0 5px #c9c9c9 !important;
         box-shadow: inset 0 1px 1px #c9c9c9, 0 0 5px #c9c9c9 !important;
+    }
+
+    .am-btn-default {
+        color: #ccc !important;
+        border-color: #c9c9c9 !important;
     }
 
     .am-form-set>input:first-child {
@@ -67,12 +88,14 @@
 
     }
 
+    .am-selected {
+        width: 100%;
+    }
+
     input::-webkit-input-placeholder {
         color: #d8d8d8 !important;
         font-size: 14px !important;
     }
-
-
 
     .myapp-login-form-shortcut {
         position: relative;
@@ -125,6 +148,27 @@
     .login-form {
         padding: 48px 72px;
     }
+
+    .am-form-group-select>i {
+        position: absolute;
+        left: 22px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 9999;
+        color: #ccc !important;
+        display: flex;
+        align-items: center;
+        padding-top: 8px;
+    }
+
+    .am-form-group-select:hover>i {
+        color: #999999 !important;
+    }
+
+    .am-form-group {
+        position: relative;
+    }
 </style>
 
 <body>
@@ -142,6 +186,19 @@
                 <div class="am-form-group am-form-icon">
                     <i class="am-icon-lock"></i>
                     <input type="password" class="myapp-login-input-text am-form-field" name="user[_password]" data-equal-to="#pwd" data-foolish-msg="密码不一致" placeholder="请再次输入密码" required />
+                </div>
+                <div class="am-form-group am-form-group-select">
+                    <i class="am-icon-lock"></i>
+                    <select data-am-selected="{maxHeight:'160px'}" name="user[question_id]" required placeholder="请选择密保问题">
+                        <option value=""></option>
+                        <?php foreach ($question as $item) : ?>
+                            <option value="<?= $item['id'] ?>"><?= $item['question'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="am-form-group am-form-icon">
+                    <i class="am-icon-lock"></i>
+                    <input type="text" class="myapp-login-input-text am-form-field" name="user[answer]" placeholder="请输入密保答案" required />
                 </div>
                 <div class="am-form-group am-form-icon">
                     <i class="am-icon-lock"></i>
@@ -180,11 +237,11 @@
                 layer.msg(res.msg);
                 if (res.code == 1) {
                     // 先获取窗口索引，才能关闭窗口
-                    var index = parent.layer.getFrameIndex(window.name);                    
+                    var index = parent.layer.getFrameIndex(window.name);
                     setTimeout(function() {
                         parent.window.location.reload();
                     }, 1000);
-                } else {                    
+                } else {
                     setTimeout(function() {
                         $('#cap_img').click();
                     }, 800);

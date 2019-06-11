@@ -125,6 +125,16 @@
     .login-form {
         padding: 48px 72px;
     }
+
+    .reverse{
+        display:flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .reverse{
+        font-size: 12px;
+    }
 </style>
 
 <body>
@@ -146,6 +156,10 @@
         border-bottom-right-radius: 4px;">
                         <img id="cap_img" style="height:100%;width:100%;border-top-right-radius: 4px;border-bottom-right-radius: 4px;" src="<?= captcha_src() ?>" onclick="this.src='/captcha'" alt="验证码" title="点击刷新" />
                     </div>
+                </div>
+
+                <div class="reverse">                    
+                    <a href="<?= url('forget_pass') ?>">忘记密码?</a>
                 </div>
             </fieldset>
 

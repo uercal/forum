@@ -38,6 +38,11 @@ class User extends BaseModel
         return $this->hasOne('UserSup', 'user_id', 'user_id');
     }
 
+    public function attachment()
+    {
+        return $this->hasOne('UploadFile', 'file_id', 'attachment_id');
+    }
+
 
     public function avatar()
     {
@@ -89,7 +94,7 @@ class User extends BaseModel
     public function getList()
     {
         $request = Request::instance();
-        return $this->order(['create_time' => 'desc'])
+        return $this->with(['attachment'])->order(['create_time' => 'desc'])
             ->paginate(15, false, ['query' => $request->request()]);
     }
 

@@ -127,7 +127,7 @@
                 <div class="h-rigth am-fr">
                     <div class="j-upload upload-image">
                         <i class="iconfont icon-add1"></i>
-                        上传图片
+                        上传文件
                     </div>
                 </div>
             </div>

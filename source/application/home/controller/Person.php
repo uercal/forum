@@ -116,7 +116,7 @@ class Person extends Controller
             } else {
                 // 
                 return $this->redirect('/index/index');
-            }            
+            }
             // 
             return $this->fetch('sign_act', compact('act_id', 'role', 'info'));
         } else {
@@ -474,7 +474,7 @@ class Person extends Controller
     public function delPaper($id, $type)
     {
         $model = new Exam;
-        $res = $model->deleteExamPaper($id,$type);                
+        $res = $model->deleteExamPaper($id, $type);
         if ($res) {
             return $this->renderSuccess('删除成功');
         } else {
@@ -488,7 +488,7 @@ class Person extends Controller
      */
     public function personConfig()
     {
-
+        $this->assign('attachment_id', $this->user['attachment_id']);
         return $this->fetch('config');
     }
 
@@ -505,8 +505,22 @@ class Person extends Controller
     }
 
 
-
-
+    public function getAttachment()
+    {
+        ob_clean();
+        // 
+        $attachment = $this->user['attachment'];
+        if (!empty($attachment)) {
+            header("Content-type:application/octet-stream");
+            $file = $attachment['file_path'];
+            $filename = basename($file);
+            header("Content-Disposition:attachment;filename = " . $filename);
+            header("Accept-ranges:bytes");            
+            readfile($file);
+        } else {
+            echo '证书不存在';
+        }
+    }
 
 
 

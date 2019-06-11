@@ -108,7 +108,7 @@
                         return options.done(data, $touch);
                     }
                     // 新增图片列表
-                    var $html = $(template('tpl-file-item', {list: list, name: options.name}))
+                    var $html = $(template('tpl-file-item', { list: list, name: options.name }))
                         , $imagesList = $this.next(options.imagesList);
                     // 注册删除事件
                     $html.find(options.imageDelete).click(function () {
@@ -124,7 +124,7 @@
          * 选择附件
          * @param option
          */
-        selectAttachment: function (option) {
+        selectAttachment: function (option, user_id = null, callback = null) {
             var $this = this
                 // 配置项
                 , defaults = {
@@ -141,21 +141,25 @@
                 layerId: 'file-library',
                 layerSkin: 'file-library',
                 done: function (data, $touch) {
-                    var list = options.multiple ? data : [data[0]];
-                    // 判断回调参数是否存在, 否则执行默认
-                    if (typeof options.done === 'function') {
-                        return options.done(data, $touch);
+                    if (user_id) {                        
+                        callback(user_id,data[0].file_id);
+                    } else {
+                        var list = options.multiple ? data : [data[0]];
+                        // 判断回调参数是否存在, 否则执行默认
+                        if (typeof options.done === 'function') {
+                            return options.done(data, $touch);
+                        }
+                        console.log(data);
+                        // 新增图片列表
+                        var $html = $(template('tpl-file-item-attachment', { list: list, name: options.name }))
+                            , $imagesList = $this.next(options.imagesList);
+                        // 注册删除事件
+                        $html.find(options.imageDelete).click(function () {
+                            $(this).parent().remove();
+                        });
+                        // 渲染html
+                        options.multiple ? $imagesList.append($html) : $imagesList.html($html);
                     }
-                    console.log(data);
-                    // 新增图片列表
-                    var $html = $(template('tpl-file-item-attachment', {list: list, name: options.name}))
-                        , $imagesList = $this.next(options.imagesList);
-                    // 注册删除事件
-                    $html.find(options.imageDelete).click(function () {
-                        $(this).parent().remove();
-                    });
-                    // 渲染html
-                    options.multiple ? $imagesList.append($html) : $imagesList.html($html);
                 }
             });
         }
@@ -267,11 +271,11 @@
                 var $uploadFile = $('#rt_' + file.source.ruid).parent()
                     , $list = $uploadFile.next(option.list)
                     , $li = $(
-                    '<div id="' + file.id + '" class="file-item thumbnail">' +
-                    '<img>' +
-                    '<input type="hidden" name="' + $uploadFile.data('name') + '" value="">' +
-                    '<i class="iconfont icon-shanchu file-item-delete"></i>' +
-                    '</div>'
+                        '<div id="' + file.id + '" class="file-item thumbnail">' +
+                        '<img>' +
+                        '<input type="hidden" name="' + $uploadFile.data('name') + '" value="">' +
+                        '<i class="iconfont icon-shanchu file-item-delete"></i>' +
+                        '</div>'
                     ),
                     $img = $li.find('img'),
                     $delete = $li.find('.file-item-delete');
@@ -409,7 +413,7 @@ $(function () {
                         })
                             .append(
                                 $('<label/>', {})
-                                // 全选框
+                                    // 全选框
                                     .append(
                                         $('<input/>', {
                                             type: 'checkbox',
@@ -587,7 +591,7 @@ $(function () {
                 // 遍历城市
                 if (cityTotal !== $cityInputChecked.length) {
                     $cityInputChecked.each(function (index, item) {
-                        cityData.push({id: item.id, name: $(this).next().text()});
+                        cityData.push({ id: item.id, name: $(this).next().text() });
                     });
                 }
                 data.push({

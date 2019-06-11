@@ -15,6 +15,7 @@
                                     <th>用户名</th>
                                     <th>用户头像</th>
                                     <th>角色</th>
+                                    <th>资质证书</th>
                                     <th>注册时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -30,6 +31,22 @@
                                                 </a>
                                             </td>
                                             <td class="am-text-middle"><?= $item['role_name'] ?></td>
+                                            <td class="am-text-middle">
+                                                <div class="tpl-table-black-operation">
+                                                    <?php if (empty($item['attachment'])) : ?>
+                                                        <a href="javascript:;" data-id="<?= $item['user_id'] ?>" class="upload-attachment">
+                                                            <i class="am-icon-file"></i> 上传
+                                                        </a>
+                                                    <?php else : ?>
+                                                        <a href="<?= $item['attachment']['file_path'] ?>" class="item-green tpl-table-black-operation-green">
+                                                            <i class="am-icon-file"></i> 查看
+                                                        </a>
+                                                        <a href="javascript:;" class="item-delete-attach tpl-table-black-operation-del" data-id="<?= $item['user_id'] ?>">
+                                                            <i class="am-icon-file"></i> 删除
+                                                        </a>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </td>
                                             <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                             <td class="am-text-middle">
                                                 <div class="tpl-table-black-operation">
@@ -38,6 +55,9 @@
                                                                     ['user_id' => $item['user_id']]
                                                                 ) ?>">
                                                         <i class="am-icon-pencil"></i> 角色详情
+                                                    </a>
+                                                    <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['user_id'] ?>">
+                                                        <i class="am-icon-trash"></i> 删除
                                                     </a>
                                                 </div>
                                             </td>
@@ -62,8 +82,48 @@
         </div>
     </div>
 </div>
+
+<!-- 图片文件列表模板 -->
+{{include file="layouts/_template/tpl_file_item" /}}
+
+<!-- 文件库弹窗 -->
+{{include file="layouts/_template/file_library" /}}
+<script src="assets/store/js/ddsort.js"></script>
+<script src="assets/store/js/file.library.js"></script>
 <script>
     $(function() {
+        // 删除元素
+        var url = "<?= url('user/delete') ?>";
+        $('.item-delete').delete('id', url);
 
+
+        $('.item-delete-attach').delete('id',"<?= url('deleteAttach') ?>");
+
+
+        // 
+        $('.upload-attachment').each(function(e, v) {
+            $(this).selectAttachment({
+                multiple: false
+            }, $(this).attr('data-id'), function(user_id, file_id) {
+                uploadAttachementUser(user_id, file_id);
+            });
+        });
+
+
+        function uploadAttachementUser(user_id, file_id) {
+            $.post('<?= url('uploadAttachment') ?>', {
+                user_id: user_id,
+                file_id: file_id
+            }, function(res) {
+                layer.msg(res.msg);
+                if (res.code == 1) {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+
+                }
+            })
+        }
     });
 </script>

@@ -142,7 +142,7 @@
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
                     <div class="update-user" onclick="window.location.href='<?= url('updateGrade') ?>';">
-                        <p>升级会员</p>
+                        <p>申请会员</p>
                     </div>
                     <div class="last-login">
                         <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?= $login_user['last_login'] ?></p>

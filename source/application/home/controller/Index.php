@@ -17,6 +17,7 @@ use app\home\model\Crop;
 use app\home\model\Recruit;
 use app\common\model\ActivitySupport;
 use app\home\model\ActivityUserLog;
+use app\common\model\UserQuestion;
 
 /**
  * 后台首页
@@ -71,12 +72,50 @@ class Index extends Controller
         }
     }
 
+    // 
+    public function forget_pass()
+    {
+        $user = new User;
+
+        if (!$this->request->isAjax()) {
+            // 取消模板
+            $this->view->engine->layout(false);
+            //                         
+            if (!input('username')) {
+                $question = UserQuestion::all();
+                $this->assign('question', $question);
+            } else {
+                $res = $user->isPassProtect(input());
+                if (!$res) {
+                    $this->assign('error', $user->error);
+                } else {
+                    $this->assign('param', [
+                        'user_name' => input('username'),
+                        'question_id' => input('question_id'),
+                        'answer' => input('answer')
+                    ]);
+                }
+            }
+            // 
+            return $this->fetch();
+        } else {
+            $data = input();
+            if ($user->editPass($data)) {
+                return $this->renderJson(1, '密码修改成功');
+            } else {
+                return $this->renderJson(0, $user->error);
+            }
+        }
+    }
 
     public function register_index()
     {
         if (!$this->request->isAjax()) {
             // 取消模板
             $this->view->engine->layout(false);
+            //             
+            $question = UserQuestion::all();
+            $this->assign('question', $question);
             // 
             return $this->fetch();
         } else {
@@ -115,7 +154,7 @@ class Index extends Controller
                 $list_detail_model = new ListDetail;
                 $key_word = $model['list']['mode']['key_word'];
                 $key_word = $key_word ? $key_word : $model['list_mode']['key_word'];
-                if ($key_word == 'user_project') {                    
+                if ($key_word == 'user_project') {
                     $project = new Projects;
                     $data = $project->getListData();
                 } else {
@@ -241,7 +280,7 @@ class Index extends Controller
         if ($category_id != 0) {
             $model = Category::get($category_id);
         } else {
-            $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');            
+            $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
             $category_id = Category::with(['listMode', 'list'])->where(['list_mode_id' => $list_mode_id])->value('category_id');
             $model = Category::get($category_id);
         }
