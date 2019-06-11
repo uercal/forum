@@ -370,8 +370,11 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位类型：" class="" prop="company_type">
-                                        <el-input v-model="form_company.company_type" placeholder="请填写单位类型"></el-input>
+                                    <el-form-item label="单位类型：" class="" prop="company_type">                                        
+                                        <el-select v-model="form_company.company_type" placeholder="请选择单位类型" style="width:100%;">
+                                            <el-option v-for="item in companyTypeOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -508,7 +511,11 @@
                             </el-col>
                             <el-col :span="12">
                                 <el-form-item label="单位类型：" class="" prop="sup_company_type">
-                                    <el-input v-model="form_sup.sup_company_type" placeholder="请填写单位类型"></el-input>
+                                    <!-- <el-input v-model="form_sup.sup_company_type" placeholder="请选择单位类型"></el-input> -->
+                                    <el-select v-model="form_sup.sup_company_type" placeholder="请选择单位类型" style="width:100%;">
+                                        <el-option v-for="item in companyTypeOptions" :key="item" :label="item" :value="item">
+                                        </el-option>
+                                    </el-select>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -758,6 +765,12 @@
                     '常务监事单位',
                     '监事单位',
                     '会员单位'
+                ],
+                companyTypeOptions: [
+                    '海南全内资独立法人',
+                    '外省全内资独立法人驻琼机构',
+                    '国内内资控股或主导独立法人',
+                    '其他机构'
                 ],
                 // 个人
                 form_person: {

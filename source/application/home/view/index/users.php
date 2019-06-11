@@ -85,9 +85,9 @@
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
                         <img style="object-fit:cover;" src="<?= $item['company_logo_path'] ?>" alt="">
                         <div>
-                            <div class="users-level">
+                            <!-- <div class="users-level">
                                 <p>单位会员</p>
-                            </div>
+                            </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['company_name'] ?></strong>
                                 <div>
@@ -118,9 +118,9 @@
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
                         <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
                         <div>
-                            <div class="users-level">
+                            <!-- <div class="users-level">
                                 <p>个人会员</p>
-                            </div>
+                            </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['name'] ?></strong>
                                 <div>
@@ -157,9 +157,9 @@
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
                         <img style="object-fit:cover;" src="<?= $item['person']['id_photo_path'] ?>" alt="">
                         <div>
-                            <div class="users-level">
+                            <!-- <div class="users-level">
                                 <p>专家会员</p>
-                            </div>
+                            </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['person']['name'] ?></strong>
                                 <div>
@@ -197,9 +197,9 @@
                     <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>,1)">
                         <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
                         <div>
-                            <div class="users-level">
+                            <!-- <div class="users-level">
                                 <p>供应商</p>
-                            </div>
+                            </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['sup_company_name'] ?></strong>
                                 <div>

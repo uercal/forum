@@ -19,9 +19,9 @@
     font-family: PingFangSC-Medium;
     font-size: 14px;
     color: #666666;
-    letter-spacing: 0;    
+    letter-spacing: 0;
     font-weight: 600;
-    margin: 0;    
+    margin: 0;
     margin-left: 10px;
 }
 
@@ -318,16 +318,36 @@
 
 /*  */
 .users-list {
-    width: 62.5%;
+    width: 67.5%;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
+@media screen and (max-width: 1640px) {
+    .users-list-item {
+        width: 380px !important;
+    }
+
+    .users-list {
+        width: 1200px !important;
+    }
+
+    .list-head {
+        width: 80% !important;
+    }
+
+    .nav-info {
+        width: 90% !important;
+    }
+}
+
+
 .users-list-item {
-    width: 49%;
+    margin: 0px 5px;
+    width: 32%;
     height: 240px;
     display: flex;
     align-items: center;
@@ -339,9 +359,9 @@
 
 .users-list-item>img {
     position: absolute;
-    left: 0;
-    width: 30%;
-    height: 70%;
+    left: 20px;
+    width: 120px;
+    height: 160px;
     bottom: 40px;
     border-radius: 5px;
     z-index: 9;
@@ -594,7 +614,7 @@
 }
 
 .recruit-item:hover {
-    background: #E5EBE0;    
+    background: #E5EBE0;
 }
 
 
@@ -609,11 +629,11 @@
     align-items: center !important;
 }
 
-.recruit-l{
-    width:200px;
+.recruit-l {
+    width: 200px;
 }
 
-.recruit-m{
+.recruit-m {
     width: 300px;
 }
 

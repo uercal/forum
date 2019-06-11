@@ -144,10 +144,8 @@
                     <el-tab-pane label="申请子站" name="apply">
                         <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
                             <div style="width:100%;display:flex;">
-                                <p style="font-size:16px;text-indent:2rem;">申请专家会员需经过主管理员审核个人会员信息资料，若资质符合专家会员要求，将成为海南省全过程工程咨询专家库专家。</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">高级专家：高级工程师、副教授、副研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">资深专家：正高级工程师、教师、研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">顶级专家：院士、长江学者、百人计划、杰青优青、千人计划、万人计划、双一流学术带头人、其他高层次人才</p>
+                                <p style="font-size:16px;text-indent:2rem;">子站申请将需经过协会审核会员信息资料，若资质符合要求，将开放单位子站功能。</p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">请务必保证：（会员动态、学术天地、实践范例、招聘发布）文章各有5篇，否则子站展示将不完整。</p>
                             </div>
                         </div>
                         <el-col :span="24" style="margin-top:30px;">
@@ -159,7 +157,7 @@
                         <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
                             <div style="width:100%;display:flex;">
                                 <p style="font-size:14px;text-indent:2rem;color:#999999;">子站标识码：<?= $detail['site_code'] ?></p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">直接访问：<a href="<?= base_url().'/'.$detail['site_code'] ?>" target="view_window">点击访问</a> </p>                                
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">直接访问：<a href="<?= base_url() . '/' . $detail['site_code'] ?>" target="view_window">点击访问</a> </p>
                             </div>
                         </div>
                     </el-tab-pane>

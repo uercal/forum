@@ -24,47 +24,19 @@
         margin-top: 0;
     }
 
-    12.5% {
-        margin-top: 0;
-    }
-
-    25% {
-        margin-top: -54px;
-    }
-
-    37.5% {
-        margin-top: -54px;
-    }
-
-    50% {
-        margin-top: 0px;
-    }
-
-    62.5% {
-        margin-top: 0px;
-    }
-
-    75% {
-        margin-top: -54px;
-    }
-
-    87.5% {
-        margin-top: -54px;
-    }
-
     100% {
-        margin-top: 0px;
-        /*最后是一个，这样可以打断动画*/
+        margin-top: -218px;
     }
+
 }
 
 
-.header-logo>ul{
+.header-logo>ul {
     list-style: none;
-    animation: rowup 20s linear infinite;
+    animation: rowup 10s linear infinite normal;
 }
 
-.header-logo>ul>li>img{
+.header-logo>ul>li>img {
     width: auto;
     height: 54px;
 }

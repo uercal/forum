@@ -26,7 +26,14 @@
             <div class="header-logo">
                 <ul>
                     <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>                    
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
                 </ul>
             </div>
             </div>

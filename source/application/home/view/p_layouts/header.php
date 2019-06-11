@@ -37,6 +37,13 @@
                 <ul>
                     <li><img src="assets/home/images/logo.png" alt=""></li>
                     <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo.png" alt=""></li>
                 </ul>
             </div>
             <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">

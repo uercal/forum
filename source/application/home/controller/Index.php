@@ -49,6 +49,11 @@ class Index extends Controller
         return $this->fetch('index/index');
     }
 
+    public function test(){
+        // 取消模板
+        $this->view->engine->layout(false);
+        return $this->fetch();
+    }
 
     public function login_index()
     {
