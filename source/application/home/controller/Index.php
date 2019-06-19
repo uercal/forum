@@ -49,7 +49,8 @@ class Index extends Controller
         return $this->fetch('index/index');
     }
 
-    public function test(){
+    public function test()
+    {
         // 取消模板
         $this->view->engine->layout(false);
         return $this->fetch();
@@ -258,6 +259,14 @@ class Index extends Controller
     public function activityMore()
     {
         $category_id = Category::get(['mode' => 'activity'])['category_id'];
+        return $this->redirect('category', ['category_id' => $category_id]);
+    }
+
+
+    public function userNewsMore()
+    {
+        $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
+        $category_id = Category::get(['list_mode_id' => $list_mode_id, 'mode' => 'list'])['category_id'];
         return $this->redirect('category', ['category_id' => $category_id]);
     }
 

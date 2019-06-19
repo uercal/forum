@@ -85,7 +85,7 @@
                 <div class="index-title">
                     <strong>理论实践</strong>
                 </div>
-                <p class="item-more">查看更多 》</p>
+                <p class="item-more" onclick="userNewsMore()">查看更多 》</p>
             </div>
             <div class="exp-body">
                 <div class="exp-left">

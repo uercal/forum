@@ -342,6 +342,26 @@
     .nav-info {
         width: 90% !important;
     }
+
+
+    .recruit-item,
+    .user-news-list,
+    .act-list,
+    .job-list-item,
+    .pro-item-body,
+    .list-mag-body,
+    .pro-filter-container {
+        width: 80% !important;
+    }
+
+    .list-news-item{
+        width: 100% !important;
+    }
+
+    .list-news-item>.list-news-item{
+        width: 80% !important;
+    }
+
 }
 
 
@@ -534,7 +554,7 @@
     margin: 0px 28px;
     background: rgba(9, 86, 17, 0.1);
     height: 40px;
-    width: 150px;
+    width: 250px;    
     text-align: center;
     border-top-right-radius: 40px;
     position: relative;
@@ -565,8 +585,8 @@
 
 .job-list-head>p {
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 10px;
+    transform: translate(0%, -50%);
     position: absolute;
     white-space: nowrap;
     margin: 0;
@@ -585,14 +605,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 12.5%;
+    width: 10%;
     cursor: pointer;
     /* height: 300px; */
 }
 
 .job-list-info-item>img {
     width: 100%;
-    height: 140px;
+    height: 100px;
     border-radius: 4px;
     object-fit: cover;
 }

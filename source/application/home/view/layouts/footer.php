@@ -7,7 +7,7 @@
             <div class="container foot-container">
                 <div class="footer_main">
 
-                    <div class="am-g">
+                    <div class="am-g" style="width:96%;">
                         <div class="am-g-nav">
                             <!--  -->
                             <?php foreach ($menus as $k => $item) : ?>
@@ -26,21 +26,33 @@
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+
+                            <div style="width:30%;">
+                                <div class="footer_main--column">
+                                    <strong class="footer_main--column_title footer_main--column_title_last">
+                                        联系我们</strong>
+                                    <ul class="footer_navigation">
+                                        <?php foreach ($index_data['concat']['data'] as $concat) : ?>
+                                            <li class="footer_navigation--item">
+                                                <a href="#" class="footer_navigation--link">
+                                                    <?= $concat['title'] ?>：<?= $concat['value'] ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="f-contact">
+                    <!-- <div class="f-contact">
                         <strong class="f-contact-title">联系我们</strong>
 
                         <div class="concat-info">
                             <?php foreach ($index_data['concat']['data'] as $concat) : ?>
                                 <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
                             <?php endforeach; ?>
-                        </div>
-
-                        <!-- <div class="f-logo">
-                                <img src="assets/home/images/logo.png" alt="">
-                            </div> -->
-                    </div>
+                        </div>                        
+                    </div> -->
                 </div>
                 <div class="footer-friend">
                     <div class="friend-div">
@@ -296,6 +308,9 @@
         window.location.href = "<?= url('/index/activityMore') ?>";
     }
 
+    function userNewsMore() {
+        window.location.href = "<?= url('/index/userNewsMore') ?>";
+    }
 
 
     function news(id) {

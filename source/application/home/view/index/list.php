@@ -96,8 +96,7 @@
                             <div class="job-list-info-item" onclick="job_sort('<?= $member['content'] ?>')">
                                 <img src="<?= !empty($member['cover']) ? $member['cover']['file_path'] : '/assets/home/images/o_avatar.png' ?>" alt="">
                                 <a><?= $member['title'] ?></a>
-                            </div>
-
+                            </div>                           
                         <?php endforeach; ?>
                     </div>
                 </div>
