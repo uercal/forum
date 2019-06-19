@@ -100,6 +100,13 @@
                 </div>
 
                 <div class="am-form-group">
+                    <label class="form-require am-u-sm-2 am-form-label">邮箱</label>
+                    <div class="am-u-sm-10">
+                        <input type="email" name="sign[concat_email]" placeholder="输入联系人邮箱" value="">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
                     <div class="am-u-sm-12" style="display:flex;align-items:center;justify-content:center;">
                         <button type="button" id="btn-submit" class="sub am-btn am-btn-default">提交</button>
                         <button type="button" class="cel am-btn am-btn-default">取消</button>
@@ -120,7 +127,13 @@
                     <div class="am-u-sm-10">
                         <input type="tel" name="sign[phone]" placeholder="输入联系人手机号码" value="<?= $info['phone'] ?>">
                     </div>
-                </div>                
+                </div>
+                <div class="am-form-group">
+                    <label class="form-require am-u-sm-2 am-form-label">邮箱</label>
+                    <div class="am-u-sm-10">
+                        <input type="email" name="sign[concat_email]" placeholder="输入联系人邮箱" value="">
+                    </div>
+                </div>
 
                 <div class="am-form-group">
                     <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">学历学位</label>
@@ -214,7 +227,14 @@
 
         $('#btn-submit').on('click', function() {
             var data = $('#loginForm').serializeArray();
-            var url = "<?= url("sign_act") ?>&act_id=<?= $act_id ?>";
+            var url = "<?= url("sign_act") ?>&act_id=<?= $act_id ?>";            
+            var empty = data.find(function(e) {
+                return e.value == '';
+            });            
+            if(empty){
+                parent.layer.msg('必填项不能为空');
+                return false;
+            }
             if (!doing) {
                 doing = true;
                 $.post(url, data, function(res) {
@@ -238,6 +258,10 @@
         });
 
         $('#cancel').on('click', function() {
+            parent.layer.closeAll();
+        })
+
+        $('.cel').on('click', function() {
             parent.layer.closeAll();
         })
     })

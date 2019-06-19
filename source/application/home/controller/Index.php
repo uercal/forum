@@ -201,7 +201,7 @@ class Index extends Controller
 
                 break;
         }
-        // halt($data['list']->toArray());
+        // halt($data['list']->toArray());        
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 

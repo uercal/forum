@@ -14,6 +14,8 @@ use app\home\model\ListDetail;
 use app\home\model\Projects;
 use app\common\model\UserNewsOption;
 use app\home\model\User;
+use app\home\model\UserCompany;
+use app\home\model\UserPerson;
 use app\home\model\UserSite;
 use app\home\model\Activity;
 use app\home\model\Crop;
@@ -22,6 +24,7 @@ use app\home\model\ActivitySupport;
 use app\home\model\ActivityUserLog;
 use app\home\model\UploadApiFile;
 use app\home\model\Exam;
+use app\home\model\UserSup;
 
 /**
  * 个人中心
@@ -47,7 +50,7 @@ class Person extends Controller
             } else {
                 $this->getResExamMsg('reject');
             }
-
+            $this->assign('role_arr', $this->user['role']);
             //             
             $this->view->engine->layout('p_layouts/layout');
         }
@@ -221,9 +224,29 @@ class Person extends Controller
             if ($fullPerson || $fullCompany) {
                 $fullRole = 1;
             }
+            // 
             return $this->fetch('update', compact('levelOption', 'roleArr', 'fullRole'));
         }
     }
+
+
+    public function updateExistAjax()
+    {
+        // 
+        $user_id = $this->user['user_id'];
+        $exam_model = new Exam;
+        $personInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'person', 'status' => 20])->order('create_time desc')->find();
+        $personInfo = $personInfo ? json_decode($personInfo['content'], true) : null;
+        $companyInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'company', 'status' => 20])->order('create_time desc')->find();
+        $companyInfo = $companyInfo ? json_decode($companyInfo['content'], true) : null;
+        $supInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'supplier', 'status' => 20])->order('create_time desc')->find();
+        $supInfo = $supInfo ? json_decode($supInfo['content'], true) : null;
+        settype($supInfo['sup_company_tel'], 'integer');
+        $existInfo = compact('personInfo', 'companyInfo', 'supInfo');
+        return $this->renderSuccess('读取成功', '', $existInfo);
+    }
+
+
 
 
 
@@ -515,7 +538,7 @@ class Person extends Controller
             $file = $attachment['file_path'];
             $filename = basename($file);
             header("Content-Disposition:attachment;filename = " . $filename);
-            header("Accept-ranges:bytes");            
+            header("Accept-ranges:bytes");
             readfile($file);
         } else {
             echo '证书不存在';

@@ -19,25 +19,30 @@
     <!-- 引入样式 -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
 </head>
+<style>
+.layui-layer-iframe{
+    top: 150px !important;
+}
 
+</style>
 <body>
     <header>
         <nav class="header-nav">
             <div class="header-logo">
-                <ul>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                <ul class="logo-ul">
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
 
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
                 </ul>
             </div>
             </div>
-            <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
+            <ul class="header-ul" style="white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
                 <?php foreach ($menus as $item) : ?>
                     <li>

@@ -49,7 +49,7 @@
 
                         <div class="concat-info">
                             <?php foreach ($index_data['concat']['data'] as $concat) : ?>
-                                <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
+                                                                        <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
                             <?php endforeach; ?>
                         </div>                        
                     </div> -->
@@ -200,36 +200,33 @@
         }
 
         function supportAct(act_id) {
-            <?php if ($login_user) : if (in_array(3, explode(',', $login_user['role']))) : ?>
-                    <?php if (isset($is_support)) : if (!$is_support) : ?>
-                            layer.open({
-                                id: 'support',
-                                type: 2,
-                                title: '赞助活动',
-                                maxmin: false,
-                                scrollbar: false,
-                                resize: false,
-                                shadeClose: true, //点击遮罩关闭层
-                                area: ['600px', '480px'],
-                                content: '/person/support_act?act_id=' + act_id, //弹框显示的url
-                                success: function(layero, index) {
+            <?php if ($login_user) : ?>
+                <?php if (isset($is_support)) : if (!$is_support) : ?>
+                        layer.open({
+                            id: 'support',
+                            type: 2,
+                            title: '赞助活动',
+                            maxmin: false,
+                            scrollbar: false,
+                            resize: false,
+                            shadeClose: true, //点击遮罩关闭层
+                            area: '600px',
+                            content: '/person/support_act?act_id=' + act_id, //弹框显示的url
+                            success: function(layero, index) {
+                                layer.iframeAuto(index);
+                            },
+                            cancel: function(index) {
+                                layer.close(index);
+                            },
+                            end: function() {
 
-                                },
-                                cancel: function(index) {
-                                    layer.close(index);
-                                },
-                                end: function() {
-
-                                }
-                            });
-                        <?php else : ?>
-                            layer.msg('你已赞助过该活动');
-                        <?php endif;
-                endif; ?>
-                <?php else : ?>
-                    layer.msg('你还不是单位会员');
-                <?php endif;
-        else : ?>
+                            }
+                        });
+                    <?php else : ?>
+                        layer.msg('你已赞助过该活动');
+                    <?php endif;
+            endif; ?>
+            <?php else :  ?>
                 layer.msg('你还没未登录');
             <?php endif; ?>
 
@@ -246,10 +243,10 @@
                             resize: false,
                             scrollbar: false,
                             shadeClose: true, //点击遮罩关闭层
-                            area: ['600px', '520px'],
+                            area: '600px',
                             content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
                             success: function(layero, index) {
-
+                                layer.iframeAuto(index);
                             },
                             cancel: function(index) {
                                 layer.close(index);
@@ -283,10 +280,11 @@
 
     function userProject(id, category_id) {
         var is_login = "<?= session('forum_user') ? 1 : 0 ?>";
-        if (is_login == 1) {
+        var role_valid = "<?= session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') ? 0 : 1) : 0 ?>"
+        if (is_login == 1 && role_valid == 1) {
             window.location.href = "<?= url('/index/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
         } else {
-            layer.msg('只有会员才可以查看');
+            layer.msg('只有个人会员或以上才可以查看');
         }
     }
 
@@ -295,7 +293,17 @@
     }
 
     function listDetail(id, category_id) {
-        window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
+        <?php if (isset($key_word)  && $key_word == 'user_news') : ?>
+            var is_login = "<?= session('forum_user') ? 1 : 0 ?>";
+            var role_valid = "<?= session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') ? 0 : 1) : 0 ?>"
+            if (is_login == 1 && role_valid == 1) {
+                window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
+            } else {
+                layer.msg('只有个人会员或以上才可以查看');
+            }
+        <?php else : ?>
+            window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
+        <?php endif; ?>
     }
 
 

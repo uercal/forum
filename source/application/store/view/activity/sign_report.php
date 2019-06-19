@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>联系人</th>
                                     <th>联系电话</th>
+                                    <th>联系邮箱</th>
                                     <th>报名人数</th>
                                     <th>学历学位</th>
                                     <th>职位</th>
@@ -46,6 +47,9 @@
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['phone'] ?>
+                                            </td>
+                                            <td class="am-text-middle">
+                                                <?= $item['concat_email'] ?>
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['member_count'] ?>

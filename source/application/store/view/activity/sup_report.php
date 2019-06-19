@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>联系人</th>
                                     <th>联系电话</th>
+                                    <th>联系邮箱</th>
                                     <th>单位名称</th>
                                     <th>单位电话</th>
                                     <th>邮箱</th>
@@ -42,6 +43,9 @@
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['phone'] ?>
+                                            </td>
+                                            <td class="am-text-middle">
+                                                <?= $item['concat_email'] ?>
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['user']['company'] ? $item['user']['company']['company_name'] : '' ?>

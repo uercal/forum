@@ -47,7 +47,11 @@
             <div class="list-head">
                 <div class="list-head-title">
                     <div class="list-head-before"></div>
-                    <strong v-html="options.find(function(e){ return e.value== type }).name"></strong>
+                    <?php if (in_array($model['mode_data'], ['expert', 'supplier'])) : ?>
+                        <strong><?= $model['name'] ?></strong>
+                    <?php else : ?>
+                        <strong v-html="options.find(function(e){ return e.value== type }).name"></strong>
+                    <?php endif; ?>
                     <?php if (input('title')) : ?>
                         <small>（搜索标题：“<?= input('title') ?>” 结果）</small>
                     <?php endif; ?>
@@ -86,8 +90,8 @@
                         <img style="object-fit:cover;" src="<?= $item['company_logo_path'] ?>" alt="">
                         <div>
                             <!-- <div class="users-level">
-                                <p>单位会员</p>
-                            </div> -->
+                                                        <p>单位会员</p>
+                                                    </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['company_name'] ?></strong>
                                 <div>
@@ -108,9 +112,9 @@
                                         <p><?= $item['company_tel'] ?></p>
                                     </div>
                                 </div>
-                                <div class="users-item-arrow">
+                                <!-- <div class="users-item-arrow">
 
-                                </div>
+                                                        </div> -->
                             </div>
                         </div>
                     </div>
@@ -119,8 +123,8 @@
                         <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
                         <div>
                             <!-- <div class="users-level">
-                                <p>个人会员</p>
-                            </div> -->
+                                                        <p>个人会员</p>
+                                                    </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['name'] ?></strong>
                                 <div>
@@ -145,9 +149,9 @@
                                         <p><?= $item['job'] ?></p>
                                     </div>
                                 </div>
-                                <div class="users-item-arrow">
+                                <!-- <div class="users-item-arrow">
 
-                                </div>
+                                                        </div> -->
                             </div>
                         </div>
                     </div>
@@ -158,14 +162,14 @@
                         <img style="object-fit:cover;" src="<?= $item['person']['id_photo_path'] ?>" alt="">
                         <div>
                             <!-- <div class="users-level">
-                                <p>专家会员</p>
-                            </div> -->
+                                                        <p>专家会员</p>
+                                                    </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['person']['name'] ?></strong>
                                 <div>
                                     <div>
-                                        <span class="am-icon-building-o"></span>
-                                        <p><?= $item['person']['education_major'] ?></p>
+                                        <span class="am-icon-users"></span>
+                                        <p><?= $item['person']['memberLevel'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-file-text-o"></span>
@@ -184,9 +188,9 @@
                                         <p><?= $item['person']['person_address'] ?></p>
                                     </div>
                                 </div>
-                                <div class="users-item-arrow">
+                                <!-- <div class="users-item-arrow">
 
-                                </div>
+                                                        </div> -->
                             </div>
                         </div>
                     </div>
@@ -198,8 +202,8 @@
                         <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
                         <div>
                             <!-- <div class="users-level">
-                                <p>供应商</p>
-                            </div> -->
+                                                        <p>供应商</p>
+                                                    </div> -->
                             <div class="users-item-info">
                                 <strong><?= $item['sup_company_name'] ?></strong>
                                 <div>
@@ -236,9 +240,9 @@
                                         <p><?= $item['sup_company_type'] ?></p>
                                     </div>
                                 </div>
-                                <div class="users-item-arrow">
+                                <!-- <div class="users-item-arrow">
 
-                                </div>
+                                                        </div> -->
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ class ActivityUserLog extends ActivityUserLogModel
             $this->error = '你已赞助过该活动！';
             return false;
         } else {
-            $data['user_id'] = $user_id;
+            $data['user_id'] = $user_id;            
             return $this->allowField(true)->save($data);
         }
     }

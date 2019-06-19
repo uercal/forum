@@ -139,7 +139,7 @@
         <template>
             <el-tabs v-model="activeName" type="card" class="">
                 <?php if ($levelOption == 1 || $levelOption == 2) : ?>
-                    <el-tab-pane label="<?= $levelOption == 2 ? '重新提交个人会员' : '个人会员' ?>" name="person">
+                    <el-tab-pane label="<?= $levelOption == 2 ? '修改个人会员信息' : '个人会员' ?>" name="person">
                         <el-form ref="person" :model="form_person" :rules="person_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">个人基本信息</div>
@@ -170,7 +170,7 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="手机号" prop="phone">
+                                    <el-form-item label="手机号：" prop="phone">
                                         <el-input v-model="form_person.phone" placeholder="请填写手机号"></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -181,9 +181,38 @@
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
-                                <el-col :span="24">
+                                <el-col :span="12">
+                                    <el-form-item label="国籍：" prop="nationality">
+                                        <el-input v-model="form_person.nationality" placeholder="请填写国籍"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="政治面貌：" prop="political_face">
+                                        <el-input v-model="form_person.political_face" placeholder="请填写政治面貌"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="籍贯：" prop="native_place">
+                                        <el-input v-model="form_person.native_place" placeholder="请填写籍贯"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="民族：" prop="minzu">
+                                        <el-input v-model="form_person.minzu" placeholder="请填写民族"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
                                     <el-form-item label="住址：" prop="person_address">
                                         <el-input v-model="form_person.person_address" placeholder="请填写住址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="微信号：" prop="wechat">
+                                        <el-input v-model="form_person.wechat" placeholder="请填写微信号"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -340,7 +369,7 @@
                     </el-tab-pane>
                 <?php endif; ?>
                 <?php if ($levelOption == 1 || $levelOption == 3) : ?>
-                    <el-tab-pane label="<?= $levelOption == 3 ? '重新提交单位会员' : '单位会员' ?>" name="company">
+                    <el-tab-pane label="<?= $levelOption == 3 ? '修改单位会员信息' : '单位会员' ?>" name="company">
                         <el-form ref="company" :model="form_company" :rules="company_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">单位基本信息</div>
@@ -370,7 +399,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="单位类型：" class="" prop="company_type">                                        
+                                    <el-form-item label="单位类型：" class="" prop="company_type">
                                         <el-select v-model="form_company.company_type" placeholder="请选择单位类型" style="width:100%;">
                                             <el-option v-for="item in companyTypeOptions" :key="item" :label="item" :value="item">
                                             </el-option>
@@ -492,7 +521,7 @@
                         </el-form>
                     </el-tab-pane>
                 <?php endif; ?>
-                <el-tab-pane label="<?= in_array(4, $roleArr) ? '重新提交供应商' : '供应商' ?>" name="supplier">
+                <el-tab-pane label="<?= in_array(4, $roleArr) ? '修改供应商信息' : '供应商' ?>" name="supplier">
                     <el-form ref="sup" :model="form_sup" :rules="supplier_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                         <!--  -->
                         <div class="divider">供应商单位基本信息</div>
@@ -552,6 +581,25 @@
                             <el-col :span="12">
                                 <el-form-item label="邮编：" prop="sup_post_code">
                                     <el-input v-model="form_sup.sup_post_code" placeholder="请填写邮编"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row type="flex" class="row-bg">
+                            <el-col :span="12">
+                                <el-form-item label="注册资金：" prop="sup_regist_money">
+                                    <el-input v-model="form_sup.sup_regist_money" placeholder="请填写注册资金"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="门户网站：" prop="sup_company_site">
+                                    <el-input v-model="form_sup.sup_company_site" placeholder="请填写门户网站"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row type="flex" class="row-bg">
+                            <el-col :span="24">
+                                <el-form-item label="传真" prop="sup_company_fax">
+                                    <el-input v-model="form_sup.sup_company_fax" placeholder="请填写供应商传真"></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -738,9 +786,11 @@
 
 <!--  -->
 <script>
-    $.get('<?= url('supportAjax') ?>', function(res) {
+    $.get('<?= url('updateExistAjax') ?>', function(res) {
         //         
         var data = res.data;
+
+        console.log(data);
         // 
         window.vue = new Vue({
             el: '#app',
@@ -795,7 +845,12 @@
                     id_photo: '',
                     person_file: '',
                     introduce: '',
-                    memberLevel: ''
+                    memberLevel: '',
+                    nationality: '',
+                    political_face: '',
+                    native_place: '',
+                    minzu: '',
+                    wechat: ''
                 },
                 person_rules: {
                     name: [{
@@ -901,6 +956,31 @@
                         trigger: 'blur'
                     }],
                     memberLevel: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    nationality: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    political_face: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    native_place: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    minzu: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    wechat: [{
                         required: true,
                         message: '请选择内容',
                         trigger: 'blur'
@@ -1042,7 +1122,10 @@
                     }],
                     id_photo: '',
                     person_file: '',
-                    sup_intro: ''
+                    sup_intro: '',
+                    sup_regist_money: '',
+                    sup_company_site: '',
+                    sup_company_fax: ''
                 },
                 supplier_rules: {
                     sup_company_name: [{
@@ -1120,6 +1203,21 @@
                         trigger: 'blur'
                     }],
                     sup_intro: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_regist_money: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_company_site: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    sup_company_fax: [{
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
@@ -1379,7 +1477,15 @@
                 }
             },
             mounted: function() {
-
+                if (data.personInfo) {
+                    this.form_person = data.personInfo;
+                }
+                if (data.companyInfo) {
+                    this.form_company = data.companyInfo;
+                }
+                if (data.supInfo) {
+                    this.form_sup = data.supInfo;
+                }
             }
 
         })

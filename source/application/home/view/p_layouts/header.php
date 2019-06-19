@@ -34,19 +34,19 @@
     <header>
         <nav class="header-nav">
             <div class="header-logo">
-                <ul>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                <ul class="logo-ul">
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
 
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
-                    <li><img src="assets/home/images/logo.png" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
                 </ul>
             </div>
-            <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
+            <ul class="header-ul" style="white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
                 <?php foreach ($menus as $item) : ?>
                     <li>
@@ -149,7 +149,7 @@
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
                     <div class="update-user" onclick="window.location.href='<?= url('updateGrade') ?>';">
-                        <p>申请会员</p>
+                        <p><?= strpos($role_arr, '0') ? '申请会员' : '会员管理' ?></p>
                     </div>
                     <div class="last-login">
                         <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?= $login_user['last_login'] ?></p>

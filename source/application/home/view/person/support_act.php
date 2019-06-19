@@ -90,27 +90,37 @@
                     <input type="tel" name="sup[phone]" placeholder="输入联系人手机号码" value="<?= $company['manager_phone'] ?>">
                 </div>
             </div>
-
             <div class="am-form-group">
-                <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位名称</label>
+                <label class="form-require am-u-sm-2 am-form-label">邮箱</label>
                 <div class="am-u-sm-10">
-                    <input type="text" value="<?= $company['company_name'] ?>" disabled="disabled">
+                    <input type="email" name="sup[concat_email]" placeholder="输入邮箱" value="">
                 </div>
             </div>
 
-            <div class="am-form-group">
-                <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位电话</label>
-                <div class="am-u-sm-10">
-                    <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
+            <?php if (!empty($company)) : ?>
+                <div class="am-form-group">
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位名称</label>
+                    <div class="am-u-sm-10">
+                        <input type="text" value="<?= $company['company_name'] ?>" disabled="disabled">
+                    </div>
                 </div>
-            </div>
 
-            <div class="am-form-group">
-                <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
-                <div class="am-u-sm-10">
-                    <input type="email" value="<?= $company['email'] ?>" disabled="disabled">
+                <div class="am-form-group">
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位电话</label>
+                    <div class="am-u-sm-10">
+                        <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
+                    </div>
                 </div>
-            </div>
+
+                <div class="am-form-group">
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+                    <div class="am-u-sm-10">
+                        <input type="email" value="<?= $company['email'] ?>" disabled="disabled">
+                    </div>
+                </div>
+
+            <?php endif; ?>
+
 
             <div class="am-form-group">
                 <div class="am-u-sm-12" style="display:flex;align-items:center;justify-content:center;">
@@ -130,6 +140,13 @@
         $('#btn-submit').on('click', function() {
             var data = $('#loginForm').serializeArray();
             var url = "<?= url("support_act") ?>&act_id=<?= $act_id ?>";
+            var empty = data.find(function(e) {
+                return e.value == '';
+            });            
+            if(empty){
+                parent.layer.msg('必填项不能为空');
+                return false;
+            }
             if (!doing) {
                 doing = true;
                 $.post(url, data, function(res) {
@@ -147,12 +164,12 @@
                     }
                 });
             } else {
-                
+
             }
 
         });
 
-        $('#cancel').on('click',function(){
+        $('#cancel').on('click', function() {
             parent.layer.closeAll();
         })
     })
