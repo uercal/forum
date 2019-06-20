@@ -22,6 +22,13 @@ class UserCompany extends BaseModel
         return self::get($where);
     }
 
+    public static function detailDate($where)
+    {
+        $obj = self::get($where);
+        
+        return $obj;
+    }
+
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');

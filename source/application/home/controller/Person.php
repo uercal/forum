@@ -234,14 +234,9 @@ class Person extends Controller
     {
         // 
         $user_id = $this->user['user_id'];
-        $exam_model = new Exam;
-        $personInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'person', 'status' => 20])->order('create_time desc')->find();
-        $personInfo = $personInfo ? json_decode($personInfo['content'], true) : null;
-        $companyInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'company', 'status' => 20])->order('create_time desc')->find();
-        $companyInfo = $companyInfo ? json_decode($companyInfo['content'], true) : null;
-        $supInfo = $exam_model->where(['user_id' => $user_id, 'type' => 10, 'type_bonus' => 'supplier', 'status' => 20])->order('create_time desc')->find();
-        $supInfo = $supInfo ? json_decode($supInfo['content'], true) : null;
-        settype($supInfo['sup_company_tel'], 'integer');
+        $personInfo = UserPerson::detailDate(['user_id' => $user_id]);        
+        $companyInfo = UserCompany::detailDate(['user_id' => $user_id]);
+        $supInfo = UserSup::detailDate(['user_id' => $user_id]);
         $existInfo = compact('personInfo', 'companyInfo', 'supInfo');
         return $this->renderSuccess('读取成功', '', $existInfo);
     }

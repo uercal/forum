@@ -191,17 +191,32 @@
                                     <div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">
                                         <select id="memberLevel" data-am-selected="{btnSize: 'sm',maxHeight: 200}">
                                             <option value=""></option>
-                                            <option value="会长单位" <?= $data['input']['memberLevel'] == '会长单位' ? 'selected' : '' ?>>会长单位</option>
-                                            <option value="常务副会长单位" <?= $data['input']['memberLevel'] == '常务副会长单位' ? 'selected' : '' ?>>常务副会长单位</option>
-                                            <option value="副会长单位" <?= $data['input']['memberLevel'] == '副会长单位' ? 'selected' : '' ?>>副会长单位</option>
-                                            <option value="常务理事单位" <?= $data['input']['memberLevel'] == '常务理事单位' ? 'selected' : '' ?>>常务理事单位</option>
-                                            <option value="理事单位" <?= $data['input']['memberLevel'] == '理事单位' ? 'selected' : '' ?>>理事单位</option>
-                                            <option value="监事长单位" <?= $data['input']['memberLevel'] == '监事长单位' ? 'selected' : '' ?>>监事长单位</option>
-                                            <option value="常务副监事长单位" <?= $data['input']['memberLevel'] == '常务副监事长单位' ? 'selected' : '' ?>>常务副监事长单位</option>
-                                            <option value="副监事长单位" <?= $data['input']['memberLevel'] == '副监事长单位' ? 'selected' : '' ?>>副监事长单位</option>
-                                            <option value="常务监事单位" <?= $data['input']['memberLevel'] == '常务监事单位' ? 'selected' : '' ?>>常务监事单位</option>
-                                            <option value="监事单位" <?= $data['input']['memberLevel'] == '监事单位' ? 'selected' : '' ?>>监事单位</option>
-                                            <option value="会员单位" <?= $data['input']['memberLevel'] == '会员单位' ? 'selected' : '' ?>>会员单位</option>
+                                            <?php if (isset($data['input']['memberLevel'])) : ?>
+                                                <option value="会长单位" <?= $data['input']['memberLevel'] == '会长单位' ? 'selected' : '' ?>>会长单位</option>
+                                                <option value="常务副会长单位" <?= $data['input']['memberLevel'] == '常务副会长单位' ? 'selected' : '' ?>>常务副会长单位</option>
+                                                <option value="副会长单位" <?= $data['input']['memberLevel'] == '副会长单位' ? 'selected' : '' ?>>副会长单位</option>
+                                                <option value="常务理事单位" <?= $data['input']['memberLevel'] == '常务理事单位' ? 'selected' : '' ?>>常务理事单位</option>
+                                                <option value="理事单位" <?= $data['input']['memberLevel'] == '理事单位' ? 'selected' : '' ?>>理事单位</option>
+                                                <option value="监事长单位" <?= $data['input']['memberLevel'] == '监事长单位' ? 'selected' : '' ?>>监事长单位</option>
+                                                <option value="常务副监事长单位" <?= $data['input']['memberLevel'] == '常务副监事长单位' ? 'selected' : '' ?>>常务副监事长单位</option>
+                                                <option value="副监事长单位" <?= $data['input']['memberLevel'] == '副监事长单位' ? 'selected' : '' ?>>副监事长单位</option>
+                                                <option value="常务监事单位" <?= $data['input']['memberLevel'] == '常务监事单位' ? 'selected' : '' ?>>常务监事单位</option>
+                                                <option value="监事单位" <?= $data['input']['memberLevel'] == '监事单位' ? 'selected' : '' ?>>监事单位</option>
+                                                <option value="会员单位" <?= $data['input']['memberLevel'] == '会员单位' ? 'selected' : '' ?>>会员单位</option>
+                                            <?php else : ?>
+                                                <option value="会长单位">会长单位</option>
+                                                <option value="常务副会长单位">常务副会长单位</option>
+                                                <option value="副会长单位">副会长单位</option>
+                                                <option value="常务理事单位">常务理事单位</option>
+                                                <option value="理事单位">理事单位</option>
+                                                <option value="监事长单位">监事长单位</option>
+                                                <option value="常务副监事长单位">常务副监事长单位</option>
+                                                <option value="副监事长单位">副监事长单位</option>
+                                                <option value="常务监事单位">常务监事单位</option>
+                                                <option value="监事单位">监事单位</option>
+                                                <option value="会员单位">会员单位</option>
+                                            <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>

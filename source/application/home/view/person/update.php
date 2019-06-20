@@ -1476,15 +1476,19 @@
                     console.log(file);
                 }
             },
-            mounted: function() {
+            created: function() {
                 if (data.personInfo) {
                     this.form_person = data.personInfo;
+                    this.idPhotoUrl = data.personInfo.id_photo_path;
+                    this.personFileUrl = 'assets/home/images/pdf-icon.png';
                 }
-                if (data.companyInfo) {
-                    this.form_company = data.companyInfo;
-                }
+                // if (data.companyInfo) {
+                //     this.form_company = data.companyInfo;
+                // }
                 if (data.supInfo) {
                     this.form_sup = data.supInfo;
+                    this.supIdPhotoUrl = data.supInfo.id_photo_path;
+                    this.supFileUrl = 'assets/home/images/pdf-icon.png';
                 }
             }
 

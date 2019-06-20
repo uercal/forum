@@ -20,6 +20,16 @@ class UserPerson extends BaseModel
         return self::get($where);
     }
 
+    public static function detailDate($where)
+    {
+        $obj =  self::get($where)->toArray();        
+        $obj['positio_time'] = date('Y-m-d', $obj['positio_time']);
+        $obj['education_time'] = date('Y-m-d', $obj['education_time']);
+        $obj['work_limit'] = explode(',', $obj['work_limit']);
+        settype($obj['gender'], 'string');
+        return $obj;
+    }
+
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');

@@ -26,6 +26,20 @@ class UserSup extends BaseModel
         return self::get($where);
     }
 
+    public static function detailDate($where)
+    {
+        $obj = self::get($where)->toArray();
+        $obj['sup_eng_cate'] = json_decode($obj['sup_eng_cate'], true);
+        $obj['sup_goods_cate'] = json_decode($obj['sup_goods_cate'], true);
+        $obj['sup_server_cate'] = json_decode($obj['sup_server_cate'], true);
+        $obj['sup_build_time'] = $obj['sup_build_time_text'];
+        // 
+        settype($obj['sup_company_tel'], 'integer');
+        settype($obj['sup_manager_phone'], 'integer');
+        return $obj;
+    }
+
+
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');

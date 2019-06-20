@@ -36,6 +36,9 @@ class Exam extends Controller
         switch ($info['type']) {
             case 10:
                 $map = ExamModel::attrTextMap();
+                // 判断审批部分内容  去重
+                $this->checkOverParts($info);
+                // 
                 break;
             case 20:
                 $map = ExamModel::attrPaperTextMap();
@@ -104,7 +107,7 @@ class Exam extends Controller
                 $data_arr['job_address'] = Region::getMergeNameById($data_arr['job_address'][2]);
                 $data_arr['job_experience'] = $recruit->getJobExperienceNameAttr('', $data_arr);
                 $data_arr['job_education'] = $recruit->getJobEducationNameAttr('', $data_arr);
-                $data_arr['job_price'] = implode('-', $data_arr['job_price']);                
+                $data_arr['job_price'] = implode('-', $data_arr['job_price']);
 
             default:
                 # code...
@@ -153,7 +156,7 @@ class Exam extends Controller
                 $data['input'][$key] = $value;
             }
         }
-        
+
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }
 
@@ -166,5 +169,34 @@ class Exam extends Controller
             return $this->renderError('审批失败,' . $model->error);
         }
         return $this->renderSuccess('审批成功');
+    }
+
+
+
+    /**
+     * 去重
+     */
+    public function checkOverParts(&$info)
+    {
+        $last_info = ExamModel::where([
+            'user_id' => $info['user_id'],
+            'type' => 10,
+            'status' => 20,
+            'type_bonus' => $info['type_bonus']
+        ])->where(['id' => ['<', $info['id']]])->order('id desc')->find();
+        // 
+        $last_content = json_decode($last_info['content'], true);
+        $content = json_decode($info['content'], true);
+        foreach ($content as $key => $value) {
+            if (isset($last_content[$key])) {
+                if ($value == $last_content[$key]) {
+                    unset($content[$key]);
+                }
+            }
+        }
+        //         
+        if (!empty($content)) {
+            $info['content'] = json_encode($content);
+        }
     }
 }

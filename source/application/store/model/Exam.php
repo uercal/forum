@@ -70,6 +70,11 @@ class Exam extends ExamModel
             'id_photo' => '个人证件照',
             'person_file' => '个人证件附件',
             'introduce' => '个人简介',
+            'nationality' => '国籍',
+            'political_face' => '政治面貌',
+            'native_place' => '籍贯',
+            'minzu' => '民族',
+            'wechat' => '微信号',
             // supplier
             'sup_company_name' => '单位名称',
             'sup_build_time' => '单位成立时间',
@@ -89,7 +94,10 @@ class Exam extends ExamModel
             'sup_server_cate' => '服务类供应',
             'id_photo' => '个人证件照',
             'person_file' => '个人证件附件',
-            'sup_intro' => '供应商简介'
+            'sup_intro' => '供应商简介',
+            'sup_regist_money' => '注册资金',
+            'sup_company_site' => '门户网站',
+            'sup_company_fax' => '传真',
         ];
 
         return $data;
@@ -243,10 +251,10 @@ class Exam extends ExamModel
                             // 
                             $content['memberLevel'] = $data['level'];
                             if ($_obj) {
-                                $_obj->save($content);
+                                $_obj->allowField(true)->save($content);
                             } else {
                                 $content['user_id'] = $obj['user_id'];
-                                $user_model->save($content);
+                                $user_model->allowField(true)->save($content);
                             }
                             break;
 
@@ -285,10 +293,10 @@ class Exam extends ExamModel
                             $content['sup_server_cate'] = json_encode($content['sup_server_cate']);
                             $content['sup_build_time'] = strtotime($content['sup_build_time']);
                             if ($_obj) {
-                                $_obj->save($content);
+                                $_obj->allowField(true)->save($content);
                             } else {
                                 $content['user_id'] = $obj['user_id'];
-                                $user_model->save($content);
+                                $user_model->allowField(true)->save($content);
                             }
                             break;
                     }
