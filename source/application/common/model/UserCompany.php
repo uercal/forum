@@ -25,7 +25,16 @@ class UserCompany extends BaseModel
     public static function detailDate($where)
     {
         $obj = self::get($where);
-        
+        if (!$obj) {
+            return null;
+        }
+        $obj = $obj->toArray();
+        $obj['build_time'] = date('Y-m-d', $obj['build_time']);
+        unset($obj['create_time']);
+        unset($obj['update_time']);
+        // 
+        settype($obj['manager_phone'], 'integer');
+        // 
         return $obj;
     }
 

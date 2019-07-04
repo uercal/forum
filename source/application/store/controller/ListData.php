@@ -175,7 +175,7 @@ class ListData extends Controller
         $list = ListModel::get($list_id, ['mode']);
         if (!$this->request->isAjax()) {
             $key_word = $list['mode']['key_word'];
-            if (($key_word == 'user_news' || $key_word == 'news') && $list['cate_exist'] == 1) {
+            if (($key_word == 'user_news' || $key_word == 'news' || $key_word == 'mag') && $list['cate_exist'] == 1) {
                 $option = UserNewsOption::where('list_id', $list_id)->select();
                 return $this->fetch('detail_add', compact('list', 'option'));
             } else {

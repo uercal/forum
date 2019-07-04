@@ -2,6 +2,16 @@
     .am-btn {
         font-size: 1.4rem;
     }
+
+    .new {}
+
+    .new::before {
+        content: '(修)';
+        color: red;
+        width: 15px;
+        height: 15px;
+        right: 0;
+    }
 </style>
 <link rel="stylesheet" href="assets/store/plugins/umeditor/themes/default/css/umeditor.css">
 <div class="row-content am-cf">
@@ -57,20 +67,20 @@
                                 <?php if ($key == 'input') : ?>
                                     <?php foreach ($item as $k => $v) : if (isset($map[$k])) : ?>
                                             <div class="am-form-group">
-                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['input'][$k]) ? 'new' : '') : '' ?>"> <?= $map[$k] ?> :</label>
                                                 <div class="am-u-sm-9 am-u-end">
                                                     <input type="text" class="tpl-form-input" name="<?= $k ?>" value="<?= $k == 'gender' ? ($v == 0 ? '男' : '女') : $v ?>" disabled="disabled">
                                                 </div>
                                             </div>
                                         <?php endif;
-                                endforeach; ?>
+                                    endforeach; ?>
                                 <?php elseif ($key == "text") : ?>
                                     <div class="widget-head am-cf">
                                         <div class="widget-title am-fl">详细信息</div>
                                     </div>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['text'][$k]) ? 'new' : '') : '' ?>"> <?= $map[$k] ?> :</label>
                                             <div class="am-u-sm-9 am-u-end">
                                                 <textarea name="<?= $k ?>" disabled="disabled" rows="10"><?= $v ?></textarea>
                                             </div>
@@ -79,7 +89,7 @@
                                 <?php elseif ($key == "image") : ?>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['image'][$k]) ? 'new' : '') : '' ?>"> <?= $map[$k] ?> :</label>
                                             <?php if ($k == 'order_id') : ?>
                                                 <div class="tpl-table-black-operation" style="padding-top: .8rem;">
                                                     <a href="<?= url('order/detail', ['order_id' => $v]) ?>" style="margin-left: 10px;" class="tpl-table-black-operation">点击跳转</a>
@@ -91,7 +101,7 @@
                                                                 <img name="<?= $k ?>" src="<?= $c ?>" width="72" height="72" alt="">
                                                             </a>
                                                         <?php endforeach;
-                                                else : ?>
+                                                    else : ?>
                                                         <a href="<?= $v ?>" title="点击查看大图" target="_blank">
                                                             <img name="<?= $k ?>" src="<?= $v ?>" width="72" height="72" alt="">
                                                         </a>
@@ -105,7 +115,9 @@
                                 <?php elseif ($key == 'array') : ?>
                                     <?php foreach ($item as $k => $v) :  ?>
                                         <div class="widget-head am-cf">
-                                            <div class="widget-title am-fl"><?= $map[$k] ?></div>
+                                            <div class="widget-title am-fl">
+                                                <span class="<?= isset($new_data) ? (!empty($new_data['array']) ? 'new' : '') : '' ?>"> <?= $map[$k] ?></span>
+                                            </div>
                                         </div>
                                         <div class="am-form-group">
                                             <?php foreach ($v as $_k => $_v) : foreach ($_v as $i => $value) : ?>
@@ -114,7 +126,7 @@
                                                         <input type="text" class="tpl-form-input" value="<?= $value['value'] ?>" disabled="disabled">
                                                     </div>
                                                 <?php endforeach;
-                                        endforeach; ?>
+                                            endforeach; ?>
                                             <!-- todo -->
                                         </div>
                                     <?php endforeach; ?>
@@ -122,7 +134,7 @@
                                 <?php elseif ($key == "file") : ?>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['file'][$k]) ? 'new' : '') : '' ?>"> <?= $map[$k] ?> :</label>
                                             <div class="am-u-sm-1 am-u-end am-form-label">
                                                 <a href="<?= $v ?>" title="点击查看" target="_blank">
                                                     <?= explode('/', $v)[count(explode('/', $v)) - 1] ?>
@@ -136,7 +148,7 @@
                                 <?php elseif ($key == "cover") : ?>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?= $map[$k] ?> :</label>
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['cover'][$k]) ? 'new' : '') : '' ?>"> <?= $map[$k] ?> :</label>
                                             <div class="am-u-sm-9 am-u-end">
                                                 <a href="<?= $item[$k] ?>" title="点击查看大图" target="_blank">
                                                     <img name="<?= $k ?>" src="<?= $v ?>" width="144" height="144" alt="">
@@ -148,7 +160,7 @@
                                 <?php elseif ($key == 'content') : ?>
                                     <?php foreach ($item as $k => $v) : ?>
                                         <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label"><?= $map[$k] ?></label>
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?= isset($new_data) ? (isset($new_data['content'][$k]) ? 'new' : '') : '' ?>"><?= $map[$k] ?></label>
                                             <div class="am-u-sm-9 am-u-end">
                                                 <textarea id="container" type="text/plain" style="width:1000px;height:600px;"><?= $v ?></textarea>
                                             </div>

@@ -9,10 +9,10 @@
                 </div>
             </div>
         </div>
-        <div class="btn-edit-del">
+        <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
             <div class="btn-del">删除</div>
-        </div>
+        </div> -->
     </div>
 </script>
 
@@ -88,10 +88,10 @@
             {{/each}}             -->
             <strong>新闻模块</strong>            
         </div>
-        <div class="btn-edit-del">
+        <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
             <div class="btn-del">删除</div>
-        </div>
+        </div> -->
     </div>
 </script>
 
@@ -102,10 +102,10 @@
         <div class="diy-news" style="display:flex;align-items:center;padding:20px;height:120px;justify-content:center;">           
             <strong>活动模块</strong>            
         </div>
-        <div class="btn-edit-del">
+        <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
             <div class="btn-del">删除</div>
-        </div>
+        </div> -->
     </div>
 </script>
 

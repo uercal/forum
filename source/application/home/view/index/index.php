@@ -59,7 +59,7 @@
                         <div class="act-info">
                             <strong class="info-title">
                                 <strong title="<?= $item['title'] ?>"><?= $item['title'] ?></strong>
-                            </strong>                          
+                            </strong>
                             <div class="act-reg">
                                 <div class="reg-detail">
                                     <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?= date('Y/m/d', $item['sign_end']) ?></p>
@@ -96,7 +96,6 @@
                         <div class="eleft-item" onclick="listDetail(<?= $item['id'] ?>,0)">
                             <div class="eleft-item-title">
                                 <div class="eleft-item-author">
-                                    <img src="<?= !empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'] ?>" alt="">
                                     <p>作者：<?= !empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name'] ?></p>
                                 </div>
                                 <p style="font-family: HelveticaNeue;font-size: 14px;color: #666666;letter-spacing: 0.88px;"><?= $item['option'][0] ?></p>
@@ -105,10 +104,15 @@
                             <hr style="height:1px;border:none;border-top:1px dashed #DEE0DC;margin:2px 0px;" />
 
                             <div class="eleft-item-content">
-                                <strong><?= $item['title'] ?></strong>
-                                <p>
-                                    <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
-                                </p>
+                                <div style="width:20%;height:120px;border-radius:4px;">
+                                    <img style="object-fit:cover;width:100%;height:100%;border-radius: 4px;" src="<?= !empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'] ?>" alt="">
+                                </div>
+                                <div style="width:75%;height:120px;">
+                                    <strong><?= $item['title'] ?></strong>
+                                    <p>
+                                        <?= strip_tags(htmlspecialchars_decode($item['content'])) ?>
+                                    </p>
+                                </div>
                             </div>
 
                             <div class="eleft-item-bottom">
@@ -133,12 +137,17 @@
                             <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
                             <div class="eright-item-body">
                                 <div class="eright-item-name">
-                                    <p style="font-weight:bold;width:60%;" onclick="userProject(<?= $item['id'] ?>,0)"><?= $item['title'] ?></p>
-                                    <p style="font-weight:bold;color: #FF8670;font-size: 28px;"><?= bcdiv($item['total_invest'], 10000, 0) . '万' ?></p>
+                                    <div style="width:40%;height:120px;">
+                                        <img style="width:100%;height:120px;object-fit:cover;" src="<?= $item['cover']['file_path'] ?>" alt="">
+                                    </div>
+                                    <div style="width:56%;height:120px;">
+                                        <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?= $item['id'] ?>,0)"><?= $item['title'] ?><?= $item['title'] ?><?= $item['title'] ?><?= $item['title'] ?></p>
+                                        <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?= bcdiv($item['total_invest'], 10000, 0) . '万/' . bcdiv($item['assignment_money'], 10000, 0) . '万' ?></p>
+                                    </div>
                                 </div>
                                 <div class="eright-item-b">
                                     <p><?= date('Y/m/d', strtotime($item['assignment_date_time'])) ?></p>
-                                    <p>总投资</p>
+                                    <p>总投资/合同金额</p>
                                 </div>
                             </div>
                         </div>

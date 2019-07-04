@@ -56,30 +56,30 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                                                <div class="am-u-sm-9 am-u-end">
-                                                                                    <div class="am-form-file">
-                                                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                                            <i class="am-icon-cloud-upload"></i> 选择
-                                                                                        </button>
-                                                                                        <div class="uploader-list am-cf">
-                                                                                            <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
-                                                                                                                                                                                    <div>
-                                                                                                                                                                                        <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
-                                                                                                                                                                                        <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                                                                                                                                                            <?= $item['origin_name'] ?>
-                                                                                                                                                                                        </a>
-                                                                                                                                                                                        <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                                                                                                                                                    </div>
-                                                                                                                                        <?php endforeach;
-                                                                                                                                endif; ?>
+                                                                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                                    <div class="am-u-sm-9 am-u-end">
+                                                                                        <div class="am-form-file">
+                                                                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                                <i class="am-icon-cloud-upload"></i> 选择
+                                                                                            </button>
+                                                                                            <div class="uploader-list am-cf">
+                                                                                                <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
+                                                                                                                                                                                                <div>
+                                                                                                                                                                                                    <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
+                                                                                                                                                                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                                                                                                                                                        <?= $item['origin_name'] ?>
+                                                                                                                                                                                                    </a>
+                                                                                                                                                                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                                                                                                                                                                </div>
+                                                                                                                                                <?php endforeach;
+                                                                                                                                            endif; ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="help-block am-margin-top-sm">
+                                                                                            <small>大小2M以下</small>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="help-block am-margin-top-sm">
-                                                                                        <small>大小2M以下</small>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> -->
+                                                                                </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -159,30 +159,30 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                                                                <div class="am-u-sm-9 am-u-end">
-                                                                                                    <div class="am-form-file">
-                                                                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                                                            <i class="am-icon-cloud-upload"></i> 选择
-                                                                                                        </button>
-                                                                                                        <div class="uploader-list am-cf">
-                                                                                                            <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
-                                                                                                                                                                                                                                    <div>
-                                                                                                                                                                                                                                        <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
-                                                                                                                                                                                                                                        <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                                                                                                                                                                                                            <?= $item['origin_name'] ?>
-                                                                                                                                                                                                                                        </a>
-                                                                                                                                                                                                                                        <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                        <?php endforeach;
-                                                                                                                                                                endif; ?>
+                                                                                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                                                    <div class="am-u-sm-9 am-u-end">
+                                                                                                        <div class="am-form-file">
+                                                                                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                                                <i class="am-icon-cloud-upload"></i> 选择
+                                                                                                            </button>
+                                                                                                            <div class="uploader-list am-cf">
+                                                                                                                <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
+                                                                                                                                                                                                                                                <div>
+                                                                                                                                                                                                                                                    <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
+                                                                                                                                                                                                                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                                                                                                                                                                                                        <?= $item['origin_name'] ?>
+                                                                                                                                                                                                                                                    </a>
+                                                                                                                                                                                                                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                <?php endforeach;
+                                                                                                                                                                            endif; ?>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="help-block am-margin-top-sm">
+                                                                                                            <small>大小2M以下</small>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <div class="help-block am-margin-top-sm">
-                                                                                                        <small>大小2M以下</small>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div> -->
+                                                                                                </div> -->
                                 </div>
 
                                 <div class="am-form-group">
@@ -216,7 +216,19 @@
                                     </div>
                                 </div>
 
-                               
+                                <?php if ($model['list']['cate_exist'] == 1) : ?>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">类别 </label>
+                                        <div class="am-u-sm-9 am-u-end">
+                                            <?php foreach ($model['list']['user_news_option'] as $first) : ?>
+                                                <label class="am-checkbox-inline">
+                                                    <input type="checkbox" name="detail[option_id][]" value="<?= $first['id'] ?>" data-am-ucheck <?= in_array($first['id'], explode(',', $model['option_id'])) ? 'checked' : '' ?>><?= $first['name'] ?>
+                                                </label>
+                                            <?php endforeach; ?>
+                                        </div>
+
+                                    </div>
+                                <?php endif; ?>
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">跳转链接 </label>
@@ -313,30 +325,30 @@
                                     </div>
 
                                     <!-- <div class="am-form-group">
-                                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
-                                                                <div class="am-u-sm-9 am-u-end">
-                                                                    <div class="am-form-file">
-                                                                        <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
-                                                                            <i class="am-icon-cloud-upload"></i> 选择
-                                                                        </button>
-                                                                        <div class="uploader-list am-cf">
-                                                                            <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
-                                                                                                                                    <div>
-                                                                                                                                        <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
-                                                                                                                                        <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
-                                                                                                                                            <?= $item['origin_name'] ?>
-                                                                                                                                        </a>
-                                                                                                                                        <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                                                                                                    </div>
-                                                                                                        <?php endforeach;
-                                                                                                endif; ?>
+                                                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">附件 </label>
+                                                                    <div class="am-u-sm-9 am-u-end">
+                                                                        <div class="am-form-file">
+                                                                            <button type="button" class="upload-attachment am-btn am-btn-secondary am-radius">
+                                                                                <i class="am-icon-cloud-upload"></i> 选择
+                                                                            </button>
+                                                                            <div class="uploader-list am-cf">
+                                                                                <?php if (!empty($model['attachment'])) : foreach ($model['attachment'] as $item) : ?>
+                                                                                                                                                <div>
+                                                                                                                                                    <input type="hidden" name="detail[attachment][]" value="<?= $item['file_id'] ?>">
+                                                                                                                                                    <a href="<?= $item['file_path'] ?>" style="margin-right:10px;">
+                                                                                                                                                        <?= $item['origin_name'] ?>
+                                                                                                                                                    </a>
+                                                                                                                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
+                                                                                                                                                </div>
+                                                                                                                <?php endforeach;
+                                                                                                            endif; ?>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="help-block am-margin-top-sm">
+                                                                            <small>大小2M以下</small>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="help-block am-margin-top-sm">
-                                                                        <small>大小2M以下</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
+                                                                </div> -->
 
                                 </div>
 
@@ -400,7 +412,7 @@
          * 表单验证提交
          * @type {*}
          */
-        <?php if (($model['list']['mode']['key_word'] == 'user_news' || $model['list']['mode']['key_word'] == 'news') && $model['list']['cover_exist'] == 1) : ?>
+        <?php if (($model['list']['mode']['key_word'] == 'user_news' || $model['list']['mode']['key_word'] == 'news') && $model['list']['cover_exist'] == 1): ?>
             $('#my-form').superForm({
                 // 自定义验证
                 validation: function(e) {

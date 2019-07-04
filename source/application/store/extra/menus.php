@@ -30,7 +30,7 @@ return [
     //     'index' => 'data/index',
     // ],
     'list_data' => [
-        'name' => '文章管理',
+        'name' => '资讯管理',
         'icon' => 'icon-order',
         'index' => 'list_data/index&mode=news',
         'submenu' => [
@@ -72,7 +72,7 @@ return [
         'index' => 'recruit/index',
     ],
     'user' => [
-        'name' => '会员管理',
+        'name' => '注册用户',
         'icon' => 'icon-user',
         'index' => 'user/index',
         'submenu' => [
@@ -129,7 +129,7 @@ return [
         ],
     ],
     'exam' => [
-        'name' => '审批管理',
+        'name' => '入库管理',
         'icon' => 'icon-order',
         'index' => 'exam/index',
         // 'submenu' => [

@@ -156,6 +156,58 @@ class Exam extends Controller
                 $data['input'][$key] = $value;
             }
         }
+        // 
+        if (isset($info['old_content'])) {
+            $old_arr = $info['old_content'];
+            $old_data = [];
+            $old_data['input'] = [];
+            $old_data['image'] = [];
+            $old_data['file'] = [];
+            // 
+            foreach ($old_arr as $key => $value) {
+                if (in_array($key, $imgMap)) {
+                    $old_data['image'][$key] = UploadApiFile::getFilePath($value);
+                } elseif (in_array($key, $fileMap)) {
+                    $old_data['file'][$key] = UploadApiFile::getFilePath($value);
+                } elseif (in_array($key, $coverMap)) {
+                    $old_data['cover'][$key] = UploadFile::get($value)['file_path'];
+                } elseif (in_array($key, $textareaMap)) {
+                    $old_data['text'][$key] = $value;
+                } elseif (in_array($key, $contentArrMap)) {
+                    $old_data['content'][$key] = $value;
+                } elseif (array_key_exists($key, $cateArrMap)) {
+                    $_arr = [];
+                    foreach ($value as $k => $v) {
+                        if (reset($v) == '' && end($v) == '') {
+                            continue;
+                        }
+                        $__arr = [];
+                        $__arr[] = [
+                            'name' => reset($cateArrMap[$key]),
+                            'value' => reset($v)
+                        ];
+                        $__arr[] = [
+                            'name' => end($cateArrMap[$key]),
+                            'value' => end($v)
+                        ];
+                        $_arr[] = $__arr;
+                    }
+                    if (empty($_arr)) continue;
+                    $old_data['array'][$key] = $_arr;
+                } else {
+                    $old_data['input'][$key] = $value;
+                }
+            }
+
+            $_arr = [$data, $old_data];
+            $data = $_arr[1];
+            $new_data = $_arr[0];
+            // halt([$data,$new_data]);
+            $this->assign('new_data', $new_data);
+        }
+
+
+
 
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }
@@ -185,8 +237,11 @@ class Exam extends Controller
             'type_bonus' => $info['type_bonus']
         ])->where(['id' => ['<', $info['id']]])->order('id desc')->find();
         // 
+        if (!$last_info) return true;
+        // 
         $last_content = json_decode($last_info['content'], true);
         $content = json_decode($info['content'], true);
+        $info['old_content'] = $content;
         foreach ($content as $key => $value) {
             if (isset($last_content[$key])) {
                 if ($value == $last_content[$key]) {
@@ -194,7 +249,7 @@ class Exam extends Controller
                 }
             }
         }
-        //         
+        //                 
         if (!empty($content)) {
             $info['content'] = json_encode($content);
         }

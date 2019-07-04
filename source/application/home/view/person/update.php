@@ -130,8 +130,8 @@
 <div class="person-my-act" id="app">
     <div class="person-my-act-head">
         <div>
-            <p>升级会员</p>
-            <small style="margin-left:20px;color:#999999;">(请选择升级的角色)</small>
+            <p>会员类型</p>
+            <small style="margin-left:20px;color:#999999;">(请选择相应的角色)</small>
         </div>
     </div>
 
@@ -225,8 +225,11 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="学历学位：" prop="education_degree">
-                                        <el-input v-model="form_person.education_degree" placeholder=""></el-input>
+                                    <el-form-item label="学历学位：" prop="education_degree">                                        
+                                        <el-select v-model="form_person.education_degree" placeholder="请选择">
+                                            <el-option v-for="item in education_degree_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -259,7 +262,11 @@
                                 </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="职称等级：" prop="positio">
-                                        <el-input v-model="form_person.positio" placeholder=""></el-input>
+                                        <el-select v-model="form_person.positio" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in positio_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                        <!-- <el-input v-model="form_person.positio" placeholder=""></el-input> -->
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -270,8 +277,11 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="业务领域：" prop="area">
-                                        <el-input v-model="form_person.area" placeholder=""></el-input>
+                                    <el-form-item label="业务领域：" prop="area">                                        
+                                        <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in area_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -821,6 +831,18 @@
                     '外省全内资独立法人驻琼机构',
                     '国内内资控股或主导独立法人',
                     '其他机构'
+                ],
+                education_degree_options:[
+                    '中等专科',
+                    '大学专科',
+                    '大学本科',
+                    '研究生'
+                ],
+                positio_options:[
+                    '正高级工程师','教授','研究员','高级工程师','副教授','副研究员'
+                ],
+                area_options:[
+                    '投资咨询','招标代理','勘察测量','规划设计','工程监理','造价咨询','项目管理','其他工程服务'
                 ],
                 // 个人
                 form_person: {
@@ -1482,9 +1504,11 @@
                     this.idPhotoUrl = data.personInfo.id_photo_path;
                     this.personFileUrl = 'assets/home/images/pdf-icon.png';
                 }
-                // if (data.companyInfo) {
-                //     this.form_company = data.companyInfo;
-                // }
+                if (data.companyInfo) {
+                    this.form_company = data.companyInfo;
+                    this.imageUrl = data.companyInfo.company_logo_path;
+                    this.fileUrl = 'assets/home/images/pdf-icon.png';
+                }
                 if (data.supInfo) {
                     this.form_sup = data.supInfo;
                     this.supIdPhotoUrl = data.supInfo.id_photo_path;

@@ -40,7 +40,7 @@
                                         <th>标题</th>
                                         <th>封面</th>
                                         <th>排序</th>
-                                        <th>访问数</th>
+                                        <!-- <th>访问数</th> -->
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -64,9 +64,9 @@
                                                 <td class="am-text-middle">
                                                     <?= $item['sort'] ?>
                                                 </td>
-                                                <td class="am-text-middle">
+                                                <!-- <td class="am-text-middle">
                                                     <?= $item['read_count'] ?>
-                                                </td>
+                                                </td> -->
                                                 <td class="am-text-middle">
                                                     <?= $item['create_time'] ?>
                                                 </td>

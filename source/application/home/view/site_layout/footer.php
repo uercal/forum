@@ -71,6 +71,9 @@
         window.location.href = '<?= url('person/personCenter') ?>';
     })
 
+    function userProject(id){
+        window.location.href = "<?= url('projectDetail') ?>&id=" + id;
+    }
 
     // footer
 </script>

@@ -155,6 +155,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="users-list-item" onclick="userDetail(<?= $item['user_id'] ?>,<?= $model['category_id'] ?>)">
+                        <img style="object-fit:cover;" src="<?= $item['id_photo_path'] ?>" alt="">
+                        <div>
+                            <!-- <div class="users-level">
+                                                        <p>个人会员</p>
+                                                    </div> -->
+                            <div class="users-item-info">
+                                <strong><?= $item['name'] ?></strong>
+                                <div>
+                                    <div>
+                                        <span class="am-icon-users"></span>
+                                        <p><?= $item['memberLevel'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-file-text-o"></span>
+                                        <p><?= $item['education_major'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-briefcase"></span>
+                                        <p><?= $item['education_degree'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-book"></span>
+                                        <p><?= $item['positio'] ?></p>
+                                    </div>
+                                    <div>
+                                        <span class="am-icon-send-o"></span>
+                                        <p><?= $item['job'] ?></p>
+                                    </div>
+                                </div>
+                                <!-- <div class="users-item-arrow">
+
+                                                        </div> -->
+                            </div>
+                        </div>
+                    </div>
 
 
                 <?php elseif ($data['mode_data'] == 'expert') : ?>

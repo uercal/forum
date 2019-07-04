@@ -96,7 +96,7 @@
                             <div class="job-list-info-item" onclick="job_sort('<?= $member['content'] ?>')">
                                 <img src="<?= !empty($member['cover']) ? $member['cover']['file_path'] : '/assets/home/images/o_avatar.png' ?>" alt="">
                                 <a><?= $member['title'] ?></a>
-                            </div>                           
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
 
             }
         </script>
-    <?php elseif ($key_word == 'mag') : ?>
+    <?php elseif ($key_word == '_mag') : ?>
 
         <div class="list-body">
             <form action="" id="pro_list" class="list-body" style="margin-bottom:30px;">
@@ -166,8 +166,8 @@
                             <div class="list-mag-head-l">
                                 <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
                                 <!-- <div>
-                                    <p>第<?= $item['mag_num'] ?>期</p>
-                                </div> -->
+                                                                                            <p>第<?= $item['mag_num'] ?>期</p>
+                                                                                        </div> -->
                             </div>
                             <div class="list-mag-head-r">
                                 <p>查看更多 》</p>
@@ -582,7 +582,7 @@
 
         </div>
 
-    <?php elseif ($key_word == 'user_news' || $key_word == 'news') : ?>
+    <?php elseif ($key_word == 'user_news' || $key_word == 'news' || $key_word == 'mag') : ?>
         <!--  -->
         <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <style>
@@ -679,7 +679,7 @@
                         </div>
                         <!--  -->
                     <?php endforeach;
-            endif; ?>
+                endif; ?>
             </div>
 
             <?php if ($model['list']['cover_exist'] == 1 && ($key_word == 'news' || $key_word == 'user_news')) : foreach ($data['list'] as $item) : ?>
@@ -703,10 +703,30 @@
                         </div>
                     </div>
                 <?php endforeach;
-        endif; ?>
+            endif; ?>
 
-
-
+            <?php if ($key_word == 'mag') : foreach ($data['list'] as $item) : ?>
+                    <div class="list-mag-item" onclick="mag_detail('<?= $item['data']['jumpUrl'] ?>')">
+                        <div class="list-mag-body">
+                            <div class="list-mag-head">
+                                <div class="list-mag-head-l">
+                                    <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
+                                    
+                                        <?php foreach($item['option'] as $option):?>
+                                            <div>
+                                                <p><?= $option ?></p>
+                                            </div>
+                                        <?php endforeach;?>                                    
+                                </div>
+                                <div class="list-mag-head-r">
+                                    <p>查看更多 》</p>
+                                </div>
+                            </div>
+                            <strong><?= $item['title'] ?></strong>
+                        </div>
+                    </div>
+                <?php endforeach;
+            endif; ?>
 
             <div class="list-page">
                 <?= $data['list']->render() ?>

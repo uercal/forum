@@ -1,4 +1,5 @@
 <?php
+
 namespace app\home\controller;
 
 use app\common\model\Article;
@@ -50,7 +51,7 @@ class Person extends Controller
             } else {
                 $this->getResExamMsg('reject');
             }
-            $this->assign('role_arr', $this->user['role']);
+            $this->assign('role_arr', $this->user['role']);            
             //             
             $this->view->engine->layout('p_layouts/layout');
         }
@@ -234,10 +235,10 @@ class Person extends Controller
     {
         // 
         $user_id = $this->user['user_id'];
-        $personInfo = UserPerson::detailDate(['user_id' => $user_id]);        
+        $personInfo = UserPerson::detailDate(['user_id' => $user_id]);
         $companyInfo = UserCompany::detailDate(['user_id' => $user_id]);
         $supInfo = UserSup::detailDate(['user_id' => $user_id]);
-        $existInfo = compact('personInfo', 'companyInfo', 'supInfo');
+        $existInfo = compact('personInfo', 'companyInfo', 'supInfo');        
         return $this->renderSuccess('读取成功', '', $existInfo);
     }
 

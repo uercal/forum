@@ -31,7 +31,8 @@ class UploadApiFile extends UploadApiFileModel
         $uplodDir = WEB_PATH . 'uploads/api';
         $salt = md5('yugu' . $user_id . $param);
         $salt = substr($salt, 0, 8);
-        if ($param == 'paperCover' || $param == 'projectCover') $salt = time();
+        // if ($param == 'paperCover' || $param == 'projectCover')
+        $salt = time();
         $fileName = 'u' . $user_id . $param . $salt . '.' . pathinfo($this->fileInfo['name'], PATHINFO_EXTENSION);
         // 验证文件并上传
         $info = $this->file->validate([

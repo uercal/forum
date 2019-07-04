@@ -141,6 +141,15 @@ class ListDetail extends ListDetailModel
 
                     // 
                 case 'mag':
+
+                    if (isset($data['cover_id'])) {
+                        $data['cover_id'] = array_values($data['cover_id'])[0];
+                    }
+
+                    if (isset($data['option_id'])) {
+                        $data['option_id'] = implode(',', $data['option_id']);
+                    }
+
                     $data['data'] = json_encode(['jumpUrl' => $data['data']]);
                     $this->allowField(true)->save($data);
                     break;

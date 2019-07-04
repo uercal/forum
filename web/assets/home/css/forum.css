@@ -17,7 +17,7 @@
 
 
 
-.logo-ul>li{
+.logo-ul>li {
     width: 320px;
 }
 
@@ -179,8 +179,8 @@
 }
 
 
-.footer_main--column_title_last::after{    
-    width: 22% !important;    
+.footer_main--column_title_last::after {
+    width: 22% !important;
 }
 
 
@@ -686,7 +686,7 @@
     width: 55%;
     display: flex;
     flex-direction: column;
-    background: #F0F3ED;
+    background: #Fff;
     border-radius: 2px;
 }
 
@@ -714,13 +714,13 @@
 }
 
 .eleft-item:hover {
-    background: #E5EBE0;
+    background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
 
 .eleft-item-title {
-    height: 25%;
+    height: 20%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -741,7 +741,7 @@
 }
 
 .eleft-item-author>p {
-    margin-left: 5px;
+    margin: 0;
     font-family: PingFangSC-Regular;
     font-size: 14px;
     color: #999999;
@@ -749,13 +749,18 @@
     white-space: nowrap;
 }
 
-
 .eleft-item-content {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.eleft-item-content>div {
     display: flex;
     flex-direction: column;
 }
 
-.eleft-item-content>strong {
+.eleft-item-content>div>strong {
     margin: 10px 0px;
     font-family: PingFangSC-Medium;
     font-size: 16px;
@@ -769,7 +774,7 @@
     white-space: nowrap;
 }
 
-.eleft-item-content>p {
+.eleft-item-content>div>p {
     margin: 0;
     font-family: PingFangSC-Regular;
     font-size: 12px;
@@ -857,11 +862,18 @@
     /* width: 100%; */
     height: 70%;
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     justify-content: space-between;
 }
 
-.eright-item-name>p {
+.eright-item-name>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.eright-item-name>div>p {
     margin: 0;
     font-family: PingFangSC-Medium;
     font-size: 18px;
@@ -876,7 +888,16 @@
     -webkit-line-clamp: 2;
 }
 
-.eright-item-name>p:first-child:hover {
+.eright-pro-title {
+    font-size: 24px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.eright-pro-title:hover {
     color: #FF8670;
     cursor: pointer;
 }

@@ -24,7 +24,8 @@
     <script>
         BASE_URL = '<?= isset($base_url) ? $base_url : '
         ' ?>';
-        STORE_URL = '<?= isset($store_url) ? $store_url : '' ?>';
+        STORE_URL = '<?= isset($store_url) ? $store_url : '
+        ' ?>';
     </script>
     <!--  -->
     <script src="assets/store/js/jquery.min.js"></script>
@@ -128,7 +129,7 @@
                     <div class="el-alert__content"><span class="el-alert__title">你的升级审批已通过！</span><i class="el-alert__closebtn el-icon-close"></i></div>
                 </div>
             <?php endif;
-    endif; ?>
+        endif; ?>
 
 
 
@@ -149,7 +150,7 @@
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
                     <div class="update-user" onclick="window.location.href='<?= url('updateGrade') ?>';">
-                        <p><?= strpos($role_arr, '0') ? '申请会员' : '会员管理' ?></p>
+                        <p><?= strpos($role_arr, '0') !== false ? '申请会员' : '会员管理' ?></p>
                     </div>
                     <div class="last-login">
                         <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?= $login_user['last_login'] ?></p>

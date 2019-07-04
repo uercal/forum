@@ -28,12 +28,18 @@ class UserSup extends BaseModel
 
     public static function detailDate($where)
     {
-        $obj = self::get($where)->toArray();
+        $obj = self::get($where);
+        if (!$obj) {
+            return null;
+        }
+        $obj = $obj->toArray();
         $obj['sup_eng_cate'] = json_decode($obj['sup_eng_cate'], true);
         $obj['sup_goods_cate'] = json_decode($obj['sup_goods_cate'], true);
         $obj['sup_server_cate'] = json_decode($obj['sup_server_cate'], true);
         $obj['sup_build_time'] = $obj['sup_build_time_text'];
         // 
+        unset($obj['create_time']);
+        unset($obj['update_time']);
         settype($obj['sup_company_tel'], 'integer');
         settype($obj['sup_manager_phone'], 'integer');
         return $obj;

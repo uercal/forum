@@ -18,7 +18,7 @@
                                 </div>
                             </div>
 
-                            <?php if ($model['mode']['key_word'] == 'user_news' || $model['mode']['key_word'] == 'news') : ?>
+                            <?php if ($model['mode']['key_word'] == 'user_news' || $model['mode']['key_word'] == 'news' || $model['mode']['key_word'] == 'mag') : ?>
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否含类别 </label>
                                     <div class="am-u-sm-9 am-u-end" id="radio_show">

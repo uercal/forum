@@ -61,7 +61,7 @@ class Controller extends \think\Controller
         // 当前路由信息
         $this->getRouteinfo();
         // 全局layout
-        $this->layout();
+        $this->layout();        
     }
 
     public function _empty()

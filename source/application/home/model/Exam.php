@@ -3,6 +3,7 @@
 namespace app\home\model;
 
 use app\common\model\Exam as ExamModel;
+use app\store\model\Exam as ExamStoreModel;
 use app\home\model\ListMode;
 use app\home\model\ListModel;
 use app\home\model\ListDetail;
@@ -10,6 +11,7 @@ use app\home\model\Projects;
 use app\home\model\Recruit;
 use think\Request;
 use think\Db;
+use function Qiniu\json_decode;
 
 /**
  * 模型 
@@ -17,7 +19,7 @@ use think\Db;
  */
 class Exam extends ExamModel
 {
-    protected $error;
+    public $error;
 
     /**
      * 
@@ -36,7 +38,7 @@ class Exam extends ExamModel
             $new_status = $this->order('update_time desc')->value('status');
             //
             if ($new_status == 30) {
-                $map['update_time'] = ['between', [strtotime('-3 days'), time()]];
+                $map['update_time'] = ['between', [strtotime('-1 day'), time()]];
                 $map['status'] = ['=', 30];
                 // $r = $this->where($map)->order('update_time desc')->fetchSql(true)->find();            
                 $obj = $this->where($map)->order('update_time desc')->find();
@@ -109,6 +111,9 @@ class Exam extends ExamModel
         //         
         if ($form_type == 'person') {
             $form['work_limit'] = implode(',', $form['work_limit']);
+            // 
+            $form['positio'] = implode(',', $form['positio']);
+            $form['area'] = implode(',', $form['area']);
         }
         // 
         switch ($form_type) {
@@ -174,6 +179,34 @@ class Exam extends ExamModel
                 break;
         }
 
+        // 修改会员信息 做判断是否有修改
+        if ($post['type'] == 10) {
+            $last_info = $this->where([
+                'user_id' => $user_id,
+                'type' => 10,
+                'status' => 20,
+                'type_bonus' => $form_type
+            ])->order('id desc')->find();
+            //            
+            if ($last_info) {
+                $old_content = json_decode($last_info['content'], true);
+                $content_arr = json_decode($content, true);
+                $equal = true;
+                foreach ($old_content as $key => $value) {
+                    if (in_array($key, $this::getInvalidArr())) {
+                        continue;
+                    }
+                    if ($value != $content_arr[$key]) {
+                        $equal = false;
+                    }
+                }
+                if ($equal) {
+                    $this->error = '无修改信息不予提交';
+                    return false;
+                }
+            }
+        }
+
         // 开启事务
         Db::startTrans();
         try {
@@ -225,5 +258,28 @@ class Exam extends ExamModel
             Db::rollback();
             return false;
         }
+    }
+
+
+
+    public static function getInvalidArr()
+    {
+        $keys = [
+            'create_time',
+            'update_time',
+            // person
+            'id_photo_path', 'gender_name', 'person_file_path', 'education_date',
+            // company
+            'company_logo_path', 'license_file_path', 'build_time_text',
+            // sup
+            'id_photo_path', 'person_file_path',
+            'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
+            'sup_eng_cate_name', 'sup_goods_cate_name', 'sup_server_cate_name',
+            'sup_build_time_text',
+            // 
+            'memberLevel',
+
+        ];
+        return $keys;
     }
 }

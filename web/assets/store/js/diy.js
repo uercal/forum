@@ -98,7 +98,8 @@
             user_news: {
                 data: [
                     { id: 0 },
-                    { id: 0 }                  
+                    { id: 0 },
+                    { id: 0 }
                 ]
             },
             projects: {
@@ -402,7 +403,27 @@
                         // 选择图片
                         method.editor.event.selectImages($html);
                         $items.append($html);
-                    }
+                    },
+
+                    /**
+                     * 添加newsid
+                     */
+                    user_news: function (itemId, $items) {
+                        var data = method.diyData.additemData(itemId, 'user_news'),
+                            $html = $(
+                                '<div class="item" data-key="' + data.dataId + '">' +
+                                '<div class="container">' +
+                                '<div class="item-form am-form-file">' +
+                                '<div class="input-group">' +
+                                '<label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>' +
+                                '<div class="am-u-sm-9 am-u-end">' +
+                                '<input class="" type="text" name="id"' +
+                                'data-bind="data.' + data.dataId + '.id" value="0">' +
+                                '</div></div></div></div></div>');
+                        // 选择图片
+                        method.editor.event.selectImages($html);
+                        $items.append($html);
+                    },
 
                 },
 

@@ -269,10 +269,10 @@ class Exam extends ExamModel
                             // 
                             $content['memberLevel'] = $data['level'];
                             if ($_obj) {
-                                $_obj->save($content);
+                                $_obj->allowField(true)->save($content);
                             } else {
                                 $content['user_id'] = $obj['user_id'];
-                                $user_model->save($content);
+                                $user_model->allowField(true)->save($content);
                             }
 
                             break;

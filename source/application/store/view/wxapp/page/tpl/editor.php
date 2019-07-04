@@ -191,12 +191,13 @@
                             </div>                                                        
                         </div>                                                                                                                                                  
                     </div>
-                </div>
-                <!-- <i class="iconfont icon-shanchu item-delete"></i> -->
-
+                </div>                
             </div>
             {{/each}}
         </div>      
+        <!-- <div class="form-item-add">
+            <i class="fa fa-plus"></i> 添加一个
+        </div> -->
     </form>
 </script>
 

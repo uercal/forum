@@ -1,4 +1,5 @@
 <?php
+
 namespace app\home\controller;
 
 use app\common\model\Article;
@@ -165,10 +166,11 @@ class Index extends Controller
                     $data = $project->getListData();
                 } else {
                     $data = $list_detail_model->getListDetail($model['list']['id'], $key_word);
-                    if ($key_word == 'user_news' || $key_word == 'news') {
+                    if ($key_word == 'user_news' || $key_word == 'news' || $key_word == 'mag') {
                         $options = UserNewsOption::where('list_id', $model['list']['id'])->select()->toArray();
                         $_data = [];
                         $_data['list'] = $data;
+                        array_unshift($options, ['id' => 0, 'name' => '全部']);
                         $_data['options'] = $options;
                         $data = $_data;
                     }

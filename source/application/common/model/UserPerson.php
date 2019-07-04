@@ -22,10 +22,18 @@ class UserPerson extends BaseModel
 
     public static function detailDate($where)
     {
-        $obj =  self::get($where)->toArray();        
+        $obj =  self::get($where);
+        if(!$obj){
+            return null;
+        }
+        $obj = $obj->toArray();        
         $obj['positio_time'] = date('Y-m-d', $obj['positio_time']);
         $obj['education_time'] = date('Y-m-d', $obj['education_time']);
         $obj['work_limit'] = explode(',', $obj['work_limit']);
+        $obj['area'] = explode(',',$obj['area']);
+        $obj['positio'] = explode(',',$obj['positio']);        
+        unset($obj['create_time']);
+        unset($obj['update_time']);
         settype($obj['gender'], 'string');
         return $obj;
     }
