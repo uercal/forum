@@ -195,9 +195,9 @@
             </div>
             {{/each}}
         </div>      
-        <!-- <div class="form-item-add">
+        <div class="form-item-add">
             <i class="fa fa-plus"></i> 添加一个
-        </div> -->
+        </div>
     </form>
 </script>
 
