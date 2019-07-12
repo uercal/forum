@@ -10,35 +10,35 @@
                     <div class="am-g" style="width:96%;">
                         <div class="am-g-nav">
                             <!--  -->
-                            <?php foreach ($menus as $k => $item) : ?>
+                            <?php foreach ($menus as $k => $item): ?>
                                 <div style="width:15%;">
                                     <div class="footer_main--column">
-                                        <strong class="footer_main--column_title" <?php if ($item['is_show'] == 1) : ?> onclick="category(<?= $item['category_id'] ?>)" <?php endif; ?>>
-                                            <?= $item['name'] ?></strong>
+                                        <strong class="footer_main--column_title" <?php if ($item['is_show'] == 1): ?> onclick="category(<?=$item['category_id']?>)" <?php endif;?>>
+                                            <?=$item['name']?></strong>
                                         <ul class="footer_navigation">
-                                            <?php if (!empty($item['child'])) : foreach ($item['child'] as $child) : if ($child['name'] != '联系我们') : ?>
-                                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?= $child['category_id'] ?>)">
-                                                                <?= $child['name'] ?></a></li>
-                                                    <?php endif;
-                                            endforeach;
-                                        endif; ?>
+                                            <?php if (!empty($item['child'])): foreach ($item['child'] as $child): if ($child['name'] != '联系我们'): ?>
+								                                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?=$child['category_id']?>)">
+								                                                                <?=$child['name']?></a></li>
+								                                                    <?php endif;
+endforeach;
+endif;?>
                                         </ul>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php endforeach;?>
 
                             <div style="width:30%;">
                                 <div class="footer_main--column">
                                     <strong class="footer_main--column_title footer_main--column_title_last">
                                         联系我们</strong>
                                     <ul class="footer_navigation">
-                                        <?php foreach ($index_data['concat']['data'] as $concat) : ?>
+                                        <?php foreach ($index_data['concat']['data'] as $concat): ?>
                                             <li class="footer_navigation--item">
                                                 <a href="#" class="footer_navigation--link">
-                                                    <?= $concat['title'] ?>：<?= $concat['value'] ?>
+                                                    <?=$concat['title']?>：<?=$concat['value']?>
                                                 </a>
                                             </li>
-                                        <?php endforeach; ?>
+                                        <?php endforeach;?>
                                     </ul>
                                 </div>
                             </div>
@@ -48,19 +48,19 @@
                         <strong class="f-contact-title">联系我们</strong>
 
                         <div class="concat-info">
-                            <?php foreach ($index_data['concat']['data'] as $concat) : ?>
-                                                                        <p><?= $concat['title'] ?>：<?= $concat['value'] ?></p>
-                            <?php endforeach; ?>
-                        </div>                        
+                            <?php foreach ($index_data['concat']['data'] as $concat): ?>
+                                                                        <p><?=$concat['title']?>：<?=$concat['value']?></p>
+                            <?php endforeach;?>
+                        </div>
                     </div> -->
                 </div>
                 <div class="footer-friend">
                     <div class="friend-div">
                         <strong class="friend-title">友情链接</strong>
                         <div class="friend-info">
-                            <?php foreach ($index_data['company']['data'] as $f) : ?>
-                                <a href="<?= isset($f['jumpUrl']) ? $f['jumpUrl'] : '' ?>"><?= $f['name'] ?></a>
-                            <?php endforeach; ?>
+                            <?php foreach ($index_data['company']['data'] as $f): ?>
+                                <a href="<?=isset($f['jumpUrl']) ? $f['jumpUrl'] : ''?>"><?=$f['name']?></a>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
@@ -87,24 +87,24 @@
             title: '确认',
             btn: ['确定', '取消'] //按钮
         }, function() {
-            $.get('<?= url('/index/quitUser') ?>', function(res) {
+            $.get('<?=url('/index/quitUser')?>', function(res) {
                 window.location.reload();
             })
         }, function() {
             layer.closeAll();
         });
     }
-    //  
+    //
 
 
     function category(id) {
         console.log(id);
         if (id == 0) return false;
-        var url = "<?= url('/index/category') ?>/category_id/" + id;
+        var url = "<?=url('/index/category')?>/category_id/" + id;
         window.location.href = url;
     }
 
-    <?php if (isset($model)) : ?>
+    <?php if (isset($model)): ?>
 
         function search() {
             var title = $('input[name="title"]').val();
@@ -139,18 +139,18 @@
             window.location.href = url;
         }
 
-        // 
+        //
         function server_cate(val) {
             $('input[name="server_cate"]').val(val);
             $form = $('#pro_list').serialize();
-            // 
+            //
             filter_jump($form);
         }
 
         function eng_cate(val) {
             $('input[name="eng_cate"]').val(val);
             $form = $('#pro_list').serialize();
-            // 
+            //
             filter_jump($form);
         }
 
@@ -174,21 +174,21 @@
         }
 
 
-        // 
+        //
         function pro_filter_rm(val) {
             console.log(val);
             $('input[name=' + val + ']').val(0);
             $form = $('#pro_list').serialize();
-            //             
+            //
             filter_jump($form);
         }
 
 
 
         function filter_jump($form) {
-            var html = "<?= url('/index/category', [
-                            'category_id' => $model['category_id']
-                        ]) ?>";
+            var html = "<?=url('/index/category', [
+    'category_id' => $model['category_id'],
+])?>";
 
             html = html + '&' + $form;
             window.location.href = html;
@@ -200,139 +200,139 @@
         }
 
         function supportAct(act_id) {
-            <?php if ($login_user) : ?>
-                <?php if (isset($is_support)) : if (!$is_support) : ?>
-                        layer.open({
-                            id: 'support',
-                            type: 2,
-                            title: '赞助活动',
-                            maxmin: false,
-                            scrollbar: false,
-                            resize: false,
-                            shadeClose: true, //点击遮罩关闭层
-                            area: '600px',
-                            content: '/person/support_act?act_id=' + act_id, //弹框显示的url
-                            success: function(layero, index) {
-                                layer.iframeAuto(index);
-                            },
-                            cancel: function(index) {
-                                layer.close(index);
-                            },
-                            end: function() {
+            <?php if ($login_user): ?>
+                <?php if (isset($is_support)): if (!$is_support): ?>
+				                        layer.open({
+				                            id: 'support',
+				                            type: 2,
+				                            title: '赞助活动',
+				                            maxmin: false,
+				                            scrollbar: false,
+				                            resize: false,
+				                            shadeClose: true, //点击遮罩关闭层
+				                            area: '600px',
+				                            content: '/person/support_act?act_id=' + act_id, //弹框显示的url
+				                            success: function(layero, index) {
+				                                layer.iframeAuto(index);
+				                            },
+				                            cancel: function(index) {
+				                                layer.close(index);
+				                            },
+				                            end: function() {
 
-                            }
-                        });
-                    <?php else : ?>
+				                            }
+				                        });
+				                    <?php else: ?>
                         layer.msg('你已赞助过该活动');
                     <?php endif;
-            endif; ?>
-            <?php else :  ?>
+endif;?>
+            <?php else: ?>
                 layer.msg('你还没未登录');
-            <?php endif; ?>
+            <?php endif;?>
 
         }
 
         function signAct(act_id) {
-            <?php if ($login_user) : ?>
-                <?php if (isset($is_sign)) : if (!$is_sign) : ?>
-                        layer.open({
-                            id: 'sign',
-                            type: 2,
-                            title: '报名活动',
-                            maxmin: false,
-                            resize: false,
-                            scrollbar: false,
-                            shadeClose: true, //点击遮罩关闭层
-                            area: '600px',
-                            content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
-                            success: function(layero, index) {
-                                layer.iframeAuto(index);
-                            },
-                            cancel: function(index) {
-                                layer.close(index);
-                            },
-                            end: function() {
+            <?php if ($login_user): ?>
+                <?php if (isset($is_sign)): if (!$is_sign): ?>
+				                        layer.open({
+				                            id: 'sign',
+				                            type: 2,
+				                            title: '报名活动',
+				                            maxmin: false,
+				                            resize: false,
+				                            scrollbar: false,
+				                            shadeClose: true, //点击遮罩关闭层
+				                            area: '600px',
+				                            content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
+				                            success: function(layero, index) {
+				                                layer.iframeAuto(index);
+				                            },
+				                            cancel: function(index) {
+				                                layer.close(index);
+				                            },
+				                            end: function() {
 
-                            }
-                        });
-                    <?php else : ?>
+				                            }
+				                        });
+				                    <?php else: ?>
                         layer.msg('你已报名过该活动');
                     <?php endif;
-            endif; ?>
-            <?php else : ?>
+endif;?>
+            <?php else: ?>
                 layer.msg('你还没未登录');
-            <?php endif; ?>
+            <?php endif;?>
         }
 
-    <?php endif; ?>
+    <?php endif;?>
 
 
 
     function home() {
-        var url = "<?= url('/index/index') ?>";
+        var url = "<?=url('/index/index')?>";
         window.location.href = url;
     }
 
     // detail
     function activity(id) {
-        window.location.href = "<?= url('/index/activity') ?>/id/" + id;
+        window.location.href = "<?=url('/index/activity')?>/id/" + id;
     }
 
     function userProject(id, category_id) {
-        var is_login = "<?= session('forum_user') ? 1 : 0 ?>";
-        var role_valid = "<?= session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') ? 0 : 1) : 0 ?>"
+        var is_login = "<?=session('forum_user') ? 1 : 0?>";
+        var role_valid = "<?=session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') !== false ? 0 : 1) : 0?>";
         if (is_login == 1 && role_valid == 1) {
-            window.location.href = "<?= url('/index/projectDetail') ?>&id=" + id + "&category_id=" + category_id;
+            window.location.href = "<?=url('/index/projectDetail')?>&id=" + id + "&category_id=" + category_id;
         } else {
             layer.msg('只有个人会员或以上才可以查看');
         }
     }
 
     function userDetail(id, category_id, is_sup = 0) {
-        window.location.href = "<?= url('/index/userDetail') ?>&user_id=" + id + "&category_id=" + category_id + '&is_sup=' + is_sup;
+        window.location.href = "<?=url('/index/userDetail')?>&user_id=" + id + "&category_id=" + category_id + '&is_sup=' + is_sup;
     }
 
     function listDetail(id, category_id) {
-        <?php if (isset($key_word)  && $key_word == 'user_news') : ?>
-            var is_login = "<?= session('forum_user') ? 1 : 0 ?>";
-            var role_valid = "<?= session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') ? 0 : 1) : 0 ?>"
-            if (is_login == 1 && role_valid == 1) {
-                window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
+        <?php if (isset($key_word) && $key_word == 'user_news'): ?>
+            var is_login = "<?=session('forum_user') ? 1 : 0?>";
+            var role_valid = "<?=session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') !== false ? 0 : 1) : 0?>"
+            if (is_login === '1' && role_valid === '1') {
+                window.location.href = "<?=url('/index/listDetail')?>&id=" + id + "&category_id=" + category_id;
             } else {
                 layer.msg('只有个人会员或以上才可以查看');
             }
-        <?php else : ?>
-            window.location.href = "<?= url('/index/listDetail') ?>&id=" + id + "&category_id=" + category_id;
-        <?php endif; ?>
+        <?php else: ?>
+            window.location.href = "<?=url('/index/listDetail')?>&id=" + id + "&category_id=" + category_id;
+        <?php endif;?>
     }
 
 
     // more
     function newsMore(list_id) {
-        window.location.href = "<?= url('/index/listJumpCate') ?>/list_id/" + list_id;
+        window.location.href = "<?=url('/index/listJumpCate')?>/list_id/" + list_id;
     }
 
     function activityMore() {
-        window.location.href = "<?= url('/index/activityMore') ?>";
+        window.location.href = "<?=url('/index/activityMore')?>";
     }
 
     function userNewsMore() {
-        window.location.href = "<?= url('/index/userNewsMore') ?>";
+        window.location.href = "<?=url('/index/userNewsMore')?>";
     }
 
 
     function news(id) {
-        var url = "<?= url('/index/news') ?>/id/" + id;
+        var url = "<?=url('/index/news')?>/id/" + id;
         window.location.href = url;
     }
 
     function recruit(id, category_id) {
-        var url = "<?= url('/index/recruit') ?>&id=" + id + "&category_id=" + category_id;
+        var url = "<?=url('/index/recruit')?>&id=" + id + "&category_id=" + category_id;
         window.location.href = url;
     }
 
     function project(id) {
-        var url = "<?= url('/index/project') ?>/id/" + id;
+        var url = "<?=url('/index/project')?>/id/" + id;
         window.location.href = url;
     }
 
@@ -364,7 +364,7 @@
             });
 
 
-            // 
+            //
 
             setTimeout(function() {
                 setBackground();
@@ -394,7 +394,7 @@
 <script src="assets/layer/layer.js"></script>
 <script>
     $(function() {
-        // 
+        //
         $('#u_login').on('click', function() {
             layer.open({
                 id: 'login',

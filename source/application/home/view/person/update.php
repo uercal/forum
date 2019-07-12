@@ -138,8 +138,8 @@
     <div class="person-my-act-body" style="margin-top:35px;">
         <template>
             <el-tabs v-model="activeName" type="card" class="">
-                <?php if ($levelOption == 1 || $levelOption == 2) : ?>
-                    <el-tab-pane label="<?= $levelOption == 2 ? '修改个人会员信息' : '个人会员' ?>" name="person">
+                <?php if ($levelOption == 1 || $levelOption == 2): ?>
+                    <el-tab-pane label="<?=$levelOption == 2 ? '修改个人会员信息' : '个人会员'?>" name="person">
                         <el-form ref="person" :model="form_person" :rules="person_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">个人基本信息</div>
@@ -225,7 +225,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="学历学位：" prop="education_degree">                                        
+                                    <el-form-item label="学历学位：" prop="education_degree">
                                         <el-select v-model="form_person.education_degree" placeholder="请选择">
                                             <el-option v-for="item in education_degree_options" :key="item" :label="item" :value="item">
                                             </el-option>
@@ -277,7 +277,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="业务领域：" prop="area">                                        
+                                    <el-form-item label="业务领域：" prop="area">
                                         <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in area_options" :key="index" :label="item" :value="item">
                                             </el-option>
@@ -310,7 +310,7 @@
                             </el-row>
 
                             <div style="padding:20px 0px;">
-                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=idcard" ref="idcard" :show-file-list="false" :on-success="handleIdcardSuccess" :before-upload="beforeAvatarUpload">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=idcard" ref="idcard" :show-file-list="false" :on-success="handleIdcardSuccess" :before-upload="beforeAvatarUpload">
                                     <img v-if="idPhotoUrl" :src="idPhotoUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
@@ -325,7 +325,7 @@
                             </el-row>
 
                             <div style="padding:20px 0px;">
-                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=personfile" ref="personFile" accept=".pdf" :show-file-list="false" :on-success="handlePersonFileSuccess" :before-upload="beforeFileUpload">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=personfile" ref="personFile" accept=".pdf" :show-file-list="false" :on-success="handlePersonFileSuccess" :before-upload="beforeFileUpload">
                                     <img v-if="personFileUrl" :src="personFileUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
@@ -362,8 +362,8 @@
                             </el-col>
                         </el-form>
                     </el-tab-pane>
-                <?php endif; ?>
-                <?php if ($levelOption == 2 && !in_array(2, $roleArr)) : ?>
+                <?php endif;?>
+                <?php if ($levelOption == 2 && !in_array(2, $roleArr)): ?>
                     <el-tab-pane label="专家会员" name="expert">
                         <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
                             <div style="width:100%;display:flex;">
@@ -377,9 +377,9 @@
                             <el-button type="primary" @click="onSubmit('expert')">提交申请</el-button>
                         </el-col>
                     </el-tab-pane>
-                <?php endif; ?>
-                <?php if ($levelOption == 1 || $levelOption == 3) : ?>
-                    <el-tab-pane label="<?= $levelOption == 3 ? '修改单位会员信息' : '单位会员' ?>" name="company">
+                <?php endif;?>
+                <?php if ($levelOption == 1 || $levelOption == 3): ?>
+                    <el-tab-pane label="<?=$levelOption == 3 ? '修改单位会员信息' : '单位会员'?>" name="company">
                         <el-form ref="company" :model="form_company" :rules="company_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">单位基本信息</div>
@@ -444,6 +444,26 @@
                                 </el-col>
                             </el-row>
 
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="注册资金：" prop="regist_money">
+                                        <el-input v-model="form_company.regist_money" placeholder="请填写注册资金"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="门户网站：" prop="company_site">
+                                        <el-input v-model="form_company.company_site" placeholder="请填写门户网站"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="传真" prop="company_fax">
+                                        <el-input v-model="form_company.company_fax" placeholder="请填写供应商传真"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">联系人基本信息</div>
                             <el-row type="flex" class="row-bg">
@@ -480,7 +500,7 @@
                             </el-row>
 
                             <div style="padding:20px 0px;">
-                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=logo" ref="avatar" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=logo" ref="avatar" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                                     <img v-if="imageUrl" :src="imageUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
@@ -495,7 +515,7 @@
                             </el-row>
 
                             <div style="padding:20px 0px;">
-                                <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=companyFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleFileSuccess" :before-upload="beforeFileUpload">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=companyFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleFileSuccess" :before-upload="beforeFileUpload">
                                     <img v-if="fileUrl" :src="fileUrl" class="avatar">
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
@@ -530,8 +550,8 @@
                             </el-col>
                         </el-form>
                     </el-tab-pane>
-                <?php endif; ?>
-                <el-tab-pane label="<?= in_array(4, $roleArr) ? '修改供应商信息' : '供应商' ?>" name="supplier">
+                <?php endif;?>
+                <el-tab-pane label="<?=in_array(4, $roleArr) ? '修改供应商信息' : '供应商'?>" name="supplier">
                     <el-form ref="sup" :model="form_sup" :rules="supplier_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                         <!--  -->
                         <div class="divider">供应商单位基本信息</div>
@@ -738,7 +758,7 @@
                         </el-row>
 
                         <div style="padding:20px 0px;">
-                            <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=supIdFile" ref="avatar" :show-file-list="false" :on-success="handleSupIdPhotoSuccess" :before-upload="beforeAvatarUpload">
+                            <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=supIdFile" ref="avatar" :show-file-list="false" :on-success="handleSupIdPhotoSuccess" :before-upload="beforeAvatarUpload">
                                 <img v-if="supIdPhotoUrl" :src="supIdPhotoUrl" class="avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
@@ -753,7 +773,7 @@
                         </el-row>
 
                         <div style="padding:20px 0px;">
-                            <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=supFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleSupFileSuccess" :before-upload="beforeFileUpload">
+                            <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=supFile" ref="upload" accept=".pdf" :show-file-list="false" :on-success="handleSupFileSuccess" :before-upload="beforeFileUpload">
                                 <img v-if="supFileUrl" :src="supFileUrl" class="avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
@@ -796,12 +816,12 @@
 
 <!--  -->
 <script>
-    $.get('<?= url('updateExistAjax') ?>', function(res) {
-        //         
+    $.get('<?=url('updateExistAjax')?>', function(res) {
+        //
         var data = res.data;
 
         console.log(data);
-        // 
+        //
         window.vue = new Vue({
             el: '#app',
             data: {
@@ -1026,7 +1046,10 @@
                     company_logo: '',
                     license_file: '',
                     company_intro: '',
-                    memberLevel: ''
+                    memberLevel: '',
+                    regist_money: '',
+                    company_site: '',
+                    company_fax: ''
                 },
                 company_rules: {
                     company_name: [{
@@ -1113,7 +1136,22 @@
                         required: true,
                         message: '请选择内容',
                         trigger: 'blur'
-                    }]
+                    }],
+                    regist_money: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    company_site: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    company_fax: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
                 },
                 // 供应商
                 form_sup: {
@@ -1251,7 +1289,7 @@
                     if (!this.posting) {
                         this.posting = true;
                         var _this = this;
-                        $.post('<?= url('updateAjax') ?>', {
+                        $.post('<?=url('updateAjax')?>', {
                             form: form,
                             form_type: _this.activeName
                         }, function(res) {
@@ -1259,9 +1297,9 @@
                             if (res.code == 1) {
                                 _this.$message.success(res.msg);
                                 setTimeout(function() {
-                                    window.location.href = '<?= url('personcenter') ?>'
+                                    window.location.href = '<?=url('personcenter')?>'
                                 }, 1000);
-                                // 
+                                //
                             } else {
                                 _this.$message.error(res.msg);
                                 _this.posting = false;
@@ -1332,7 +1370,7 @@
                         this.supIdPhotoUrl = URL.createObjectURL(file.raw);
                         this.$message.success(res.msg);
                         this.form_sup.id_photo = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1342,7 +1380,7 @@
                         this.idPhotoUrl = URL.createObjectURL(file.raw);
                         this.$message.success(res.msg);
                         this.form_person.id_photo = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1352,7 +1390,7 @@
                         this.imageUrl = URL.createObjectURL(file.raw);
                         this.$message.success(res.msg);
                         this.form_company.company_logo = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1362,7 +1400,7 @@
                         this.supFileUrl = 'assets/home/images/pdf-icon.png';
                         this.$message.success(res.msg);
                         this.form_sup.person_file = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1372,7 +1410,7 @@
                         this.personFileUrl = 'assets/home/images/pdf-icon.png';
                         this.$message.success(res.msg);
                         this.form_person.person_file = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1382,7 +1420,7 @@
                         this.fileUrl = 'assets/home/images/pdf-icon.png';
                         this.$message.success(res.msg);
                         this.form_company.license_file = res.data.file_id;
-                        // 
+                        //
                     } else {
                         this.$message.error(res.msg);
                     }
@@ -1411,7 +1449,7 @@
                     return isPDF && isLt2M;
                 },
                 intro_limit(type) {
-                    // 
+                    //
                     if (type == 'company') {
                         if (this.form_company.company_intro.length >= 800) {
                             this.form_company.company_intro = this.form_company.company_intro.substring(0, 800);

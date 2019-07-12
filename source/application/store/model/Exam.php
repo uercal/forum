@@ -75,6 +75,9 @@ class Exam extends ExamModel
             'native_place' => '籍贯',
             'minzu' => '民族',
             'wechat' => '微信号',
+            'regist_money' => '注册资金',
+            'company_site' => '门户网站',
+            'company_fax' => '传真',
             // supplier
             'sup_company_name' => '单位名称',
             'sup_build_time' => '单位成立时间',
