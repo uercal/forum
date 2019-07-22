@@ -7,7 +7,7 @@ use think\Request;
 
 /**
  * 模型
- * 
+ *
  */
 class Recruit extends RecruitModel
 {
@@ -30,11 +30,11 @@ class Recruit extends RecruitModel
         if (input('sort')) {
             $order = 'create_time ' . input('sort');
         } else {
-            $order = 'create_time asc';
+            $order = 'create_time desc';
         }
-        //                               
-        $list =  $this->where($_map)->order($order)->paginate(10, false, [
-            'query' => Request::instance()->request()
+        //
+        $list = $this->where($_map)->order($order)->paginate(10, false, [
+            'query' => Request::instance()->request(),
         ]);
 
         return compact('map', 'list');

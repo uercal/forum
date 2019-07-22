@@ -4,8 +4,8 @@ namespace app\home\model;
 
 use app\common\model\Projects as ProjectsModel;
 use app\common\model\Region;
-use think\Request;
 use think\Db;
+use think\Request;
 
 /**
  * 项目模型
@@ -27,21 +27,21 @@ class Projects extends ProjectsModel
         if (input('sort')) {
             $order = 'assignment_date ' . input('sort');
         } else {
-            $order = 'assignment_date asc';
+            $order = 'assignment_date desc';
         }
 
-        // 
+        //
         $filter_arr = [
             'server_cate',
             'eng_cate',
             'region_option',
             'assignment_money',
             'total_invest',
-            'assignment_date'
+            'assignment_date',
         ];
         $filter = $map;
         foreach ($filter as $key => $value) {
-            if (!in_array($key, $filter_arr) ||  empty($value)) {
+            if (!in_array($key, $filter_arr) || empty($value)) {
                 unset($filter[$key]);
             } else {
                 if ($key == 'assignment_money') {
@@ -65,10 +65,10 @@ class Projects extends ProjectsModel
             $filter['region_option'] = $region_name;
         }
 
-        // 
+        //
 
         $cates = $this->getCates();
-        // 
+        //
         if (!empty($map['server_cate'])) {
             $_map['server_cate'] = ['like', '%' . $map['server_cate'] . '%'];
             $filter['server_cate'] = $cates['server_cate'][$map['server_cate']];
@@ -77,7 +77,7 @@ class Projects extends ProjectsModel
             $_map['eng_cate'] = ['like', '%' . $map['eng_cate'] . '%'];
             $filter['eng_cate'] = $cates['eng_cate'][$map['eng_cate']];
         }
-        // 
+        //
         if (!empty($map['assignment_money'])) {
             $_assignment_money = explode('-', $map['assignment_money']);
             $_map['assignment_money'] = ['between', $_assignment_money];
@@ -87,8 +87,6 @@ class Projects extends ProjectsModel
             $_map['total_invest'] = ['between', $_total_invest];
         }
 
-
-
         if (!empty($map['assignment_date'])) {
             $_t = explode(',', $map['assignment_date']);
             $_map['assignment_date'] = ['between', strtotime($_t[0]) . ',' . strtotime($_t[1])];
@@ -97,14 +95,14 @@ class Projects extends ProjectsModel
         // $r = $this->where($_map)->fetchSql(true)->select();
         // halt($r);
 
-        $list =  $this->where($_map)->order($order)->paginate(10, false, [
-            'query' => Request::instance()->request()
+        $list = $this->where($_map)->order($order)->paginate(10, false, [
+            'query' => Request::instance()->request(),
         ]);
 
         // $list =  $this->where($_map)->order($order)->select()->toArray();
 
         // halt($list[0]);
-        // 
+        //
         $regionData = Region::getCacheTree();
 
         foreach ($regionData as $key => $value) {
@@ -125,7 +123,6 @@ class Projects extends ProjectsModel
         }
         $regionData = array_values($regionData);
 
-
         return compact('map', 'list', 'cates', 'filter', 'regionData');
     }
 
@@ -138,7 +135,7 @@ class Projects extends ProjectsModel
             $this->where(['id' => $project_id])->delete();
             $model = new Exam;
             $model->where(['id' => $exam_id])->update([
-                'status' => 40
+                'status' => 40,
             ]);
             Db::commit();
             return true;

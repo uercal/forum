@@ -2,14 +2,11 @@
 
 namespace app\home\model;
 
-use app\common\model\ListDetail as ListDetailModel;
-use app\home\model\ListMode;
-use app\home\model\ListModel;
-use think\Cache;
-use think\Request;
-use think\Db;
-use app\home\model\Exam;
 use app\common\model\JobSort;
+use app\common\model\ListDetail as ListDetailModel;
+use app\home\model\Exam;
+use think\Db;
+use think\Request;
 
 /**
  * 商品分类模型
@@ -21,7 +18,7 @@ class ListDetail extends ListDetailModel
     public function getListDetail($list_id, $key_word, $user_id = null)
     {
         if ($key_word == 'job') {
-            // 
+            //
             $job_sort = JobSort::where('list_id', $list_id)->value('data');
             $job_sort = array_column(json_decode($job_sort, true), null, 'name');
             $list = $this->with(['cover'])->where('list_id', $list_id)->select()->toArray();
@@ -33,7 +30,7 @@ class ListDetail extends ListDetailModel
             });
             // halt(end($job_sort)['data'][0]['cover']);
             return $job_sort;
-            // 
+            //
         } else {
             $map = [];
             $mapRaw = '';
@@ -50,10 +47,10 @@ class ListDetail extends ListDetailModel
             if (input('sort')) {
                 $order = 'create_time ' . input('sort');
             } else {
-                $order = 'create_time asc';
+                $order = 'create_time desc';
             }
             $map['list_id'] = ['=', $list_id];
-            // 
+            //
             switch ($key_word) {
                 case 'news':
                     $pageNum = 6;
@@ -71,17 +68,16 @@ class ListDetail extends ListDetailModel
 
             if (empty($mapRaw)) {
                 return $this->with(['cover', 'user' => ['person', 'company']])->where($map)->order($order)->paginate($pageNum, false, [
-                    'query' => Request::instance()->request()
+                    'query' => Request::instance()->request(),
                 ]);
             }
             return $this->with(['cover', 'user' => ['person', 'company']])->where($map)->whereRaw($mapRaw)->order($order)->paginate($pageNum, false, [
-                'query' => Request::instance()->request()
+                'query' => Request::instance()->request(),
             ]);
-            // 
+            //
 
         }
     }
-
 
     public function deleteExamPaper($detail_id)
     {
@@ -92,7 +88,7 @@ class ListDetail extends ListDetailModel
             $this->where(['id' => $detail_id])->delete();
             $model = new Exam;
             $model->where(['id' => $exam_id])->update([
-                'status' => 40
+                'status' => 40,
             ]);
             Db::commit();
             return true;

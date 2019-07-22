@@ -5,11 +5,11 @@ namespace app\home\model;
 use app\common\model\User as UserModel;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
-use app\home\model\UserSup;
 use app\home\model\ActivityUserLog;
-use think\Session;
-use think\Request;
+use app\home\model\UserSup;
 use think\Db;
+use think\Request;
+use think\Session;
 
 /**
  * 用户模型
@@ -23,20 +23,20 @@ class User extends UserModel
 
     public function getUsersList($mode_data)
     {
-        // 
+        //
         $request = Request::instance();
 
         $map = [];
         if (input('sort')) {
             $order = 'create_time ' . input('sort');
         } else {
-            $order = 'create_time asc';
+            $order = 'create_time desc';
         }
 
         if (input('type')) {
             $mode_data = input('type');
         }
-        // 
+        //
         switch ($mode_data) {
             case 'normal':
                 if (input('title')) {
@@ -45,7 +45,7 @@ class User extends UserModel
                 $model = new UserPerson;
                 $list = $model->where($map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
-                // 
+                //
                 $mode_data = 'person';
                 break;
             case 'person':
@@ -85,15 +85,13 @@ class User extends UserModel
         return compact('list', 'mode_data');
     }
 
-
-
     // login
     public function login($data)
     {
         // 验证用户名密码是否正确
         if (!$user = $this->with(['avatar'])->where([
             'user_name' => $data['user_name'],
-            'password' => yoshop_hash($data['password'])
+            'password' => yoshop_hash($data['password']),
         ])->find()) {
             $this->error = '登录失败, 用户名或密码错误';
             return false;
@@ -112,14 +110,12 @@ class User extends UserModel
                 'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
-                'last_login' => $user['last_login'] ? date('Y/m/d H:i:s', $user['last_login']) : date('Y/m/d H:i:s', time())
+                'last_login' => $user['last_login'] ? date('Y/m/d H:i:s', $user['last_login']) : date('Y/m/d H:i:s', time()),
             ],
             'is_login' => true,
         ]);
         return true;
     }
-
-
 
     // register
     public function register($data)
@@ -158,7 +154,7 @@ class User extends UserModel
                 'password' => $password,
                 'question_id' => $data['question_id'],
                 'answer' => $data['answer'],
-                'role' => '0'
+                'role' => '0',
             ]);
             Db::commit();
             return true;
@@ -169,13 +165,12 @@ class User extends UserModel
         }
     }
 
-
     public function accessLogin($data)
     {
         // 验证用户名密码是否正确
         if (!$user = $this->with(['avatar'])->where([
             'user_name' => $data['user_name'],
-            'password' => yoshop_hash($data['password'])
+            'password' => yoshop_hash($data['password']),
         ])->find()) {
             return false;
         }
@@ -190,14 +185,12 @@ class User extends UserModel
                 'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
-                'last_login' => date('Y/m/d H:i:s', $user['last_login'])
+                'last_login' => date('Y/m/d H:i:s', $user['last_login']),
             ],
             'is_login' => true,
         ]);
         return true;
     }
-
-
 
     public static function freshUserSession()
     {
@@ -210,31 +203,24 @@ class User extends UserModel
                 'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
-                'last_login' => date('Y/m/d H:i:s', $user['last_login'])
+                'last_login' => date('Y/m/d H:i:s', $user['last_login']),
             ],
             'is_login' => true,
         ]);
     }
 
-
-    // 
+    //
     public function lastLogin($user_id)
     {
         $this->where('user_id', $user_id)->update([
-            'last_login' => time()
+            'last_login' => time(),
         ]);
     }
 
-
-
-
-
-
-
-    // 
+    //
     public function getActLog($num = null)
     {
-        // 
+        //
         $act_log = new ActivityUserLog;
         if ($num) {
             $my_act = $act_log->getAllListByUser($this->user_id, $num);
@@ -244,9 +230,6 @@ class User extends UserModel
 
         return compact('my_act');
     }
-
-
-
 
     /**
      * 修改密码
@@ -263,7 +246,7 @@ class User extends UserModel
         Db::startTrans();
         try {
             $this->save([
-                'password' => $new_password
+                'password' => $new_password,
             ]);
             Db::commit();
             return true;
@@ -274,15 +257,13 @@ class User extends UserModel
         }
     }
 
-
-
     /**
-     * 
+     *
      */
     public function isPassProtect($data)
     {
         $obj = $this->where([
-            'user_name' => $data['username']
+            'user_name' => $data['username'],
         ])->find();
 
         if (!$obj) {
@@ -299,20 +280,20 @@ class User extends UserModel
     }
 
     /**
-     * 
+     *
      */
     public function editPass($data)
     {
         // 开启事务
         Db::startTrans();
         try {
-            // 
+            //
             $this->where([
                 'user_name' => $data['user_name'],
                 'question_id' => $data['question_id'],
-                'answer' => $data['answer']
+                'answer' => $data['answer'],
             ])->update([
-                'password' => yoshop_hash($data['password'])
+                'password' => yoshop_hash($data['password']),
             ]);
             Db::commit();
             return true;
