@@ -3,15 +3,14 @@
 namespace app\store\model;
 
 use app\common\model\User as UserModel;
-use app\store\model\UserCompany;
-use app\store\model\UserPerson;
-use app\store\model\UserSup;
 use app\store\model\Exam;
 use app\store\model\ListDetail;
 use app\store\model\Projects;
 use app\store\model\Recruit;
+use app\store\model\UserCompany;
+use app\store\model\UserPerson;
+use app\store\model\UserSup;
 use think\Db;
-
 
 /**
  * 用户模型
@@ -28,7 +27,7 @@ class User extends UserModel
         // 开启事务
         Db::startTrans();
         try {
-            //             
+            //
             UserPerson::where('user_id', $this->user_id)->delete();
             UserCompany::where('user_id', $this->user_id)->delete();
             UserSup::where('user_id', $this->user_id)->delete();
@@ -36,9 +35,9 @@ class User extends UserModel
             ListDetail::where('user_id', $this->user_id)->delete();
             Projects::where('user_id', $this->user_id)->delete();
             Recruit::where('user_id', $this->user_id)->delete();
-            // 
+            //
             $this->delete();
-            // 
+            //
             Db::commit();
             return true;
         } catch (\Exception $e) {
@@ -54,9 +53,9 @@ class User extends UserModel
         Db::startTrans();
         try {
             $this->save([
-                'attachment_id' => 0
+                'attachment_id' => 0,
             ]);
-            // 
+            //
             Db::commit();
             return true;
         } catch (\Exception $e) {
@@ -72,9 +71,27 @@ class User extends UserModel
         Db::startTrans();
         try {
             $this->save([
-                'attachment_id' => $file_id
+                'attachment_id' => $file_id,
             ]);
-            // 
+            //
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
+    }
+
+    public function resetPass()
+    {
+        // 开启事务
+        Db::startTrans();
+        try {
+            $this->save([
+                'password' => yoshop_hash('123456'),
+            ]);
+            //
             Db::commit();
             return true;
         } catch (\Exception $e) {
