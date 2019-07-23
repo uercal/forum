@@ -205,6 +205,17 @@ class Index extends Controller
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
 
+    public function jobList($id)
+    {
+        $list_detail_model = new ListDetail;
+        $list = ListModel::get($id);
+        $data = $list_detail_model->getListDetail($id, 'job');
+        $pre_lists = ListModel::where(['id' => ['in', $list['pre_lists']]])->select()->toArray();
+        $this->assign('pre_lists', $pre_lists);
+        $this->assign('pre_name', $list['pre_name']);
+        return $this->fetch('job_list', compact('data', 'list'));
+    }
+
     public function article()
     {
         $id = input('id');

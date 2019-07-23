@@ -679,8 +679,7 @@
     padding: 20px 10px 0px 38px;
     display: flex;    
     align-items: center;    
-    justify-content: space-between;
-    cursor: pointer;    
+    justify-content: space-between;     
 }
 
 .pre-item>p{

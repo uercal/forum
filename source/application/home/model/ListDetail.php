@@ -20,7 +20,7 @@ class ListDetail extends ListDetailModel
         if ($key_word == 'job') {
             //
             $job_sort = JobSort::where('list_id', $list_id)->value('data');
-            $job_sort = array_column(json_decode($job_sort, true), null, 'name');
+            $job_sort = !empty($job_sort) ? array_column(json_decode($job_sort, true), null, 'name') : [];
             $list = $this->with(['cover'])->where('list_id', $list_id)->select()->toArray();
             foreach ($list as $key => $value) {
                 $job_sort[$value['job']]['data'][] = $value;

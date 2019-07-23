@@ -108,9 +108,9 @@
                 <strong style="margin-left:28px;margin-top:20px;"><?=$pre_name?></strong>
                 <div class="job-list-info" style="flex-direction:column;">
                     <?php foreach ($pre_lists as $pre): ?>
-                        <div class="pre-item" onclick="">
+                        <div class="pre-item">
                             <p><?=$pre['name']?></p>
-                            <a>查看详情<i class="am-icon-angle-double-right"></i></a>
+                            <a href="javascript:jobList(<?= $pre['id'] ?>)">查看详情<i class="am-icon-angle-double-right"></i></a>
                         </div>
                     <?php endforeach;?>
                 </div>
