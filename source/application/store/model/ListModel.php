@@ -68,7 +68,7 @@ class ListModel extends ListModelModel
                 $options_data[] = $_options_data;
             }
         }
-
+        
         Db::startTrans();
         try {
             // 

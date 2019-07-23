@@ -2,23 +2,20 @@
 
 namespace app\home\controller;
 
+use app\common\model\ActivitySupport;
 use app\common\model\Article;
-use app\common\model\News;
-use app\common\model\Project;
-use app\store\model\Category;
-use think\Request;
-use function Qiniu\json_decode;
+use app\common\model\UserNewsOption;
+use app\common\model\UserQuestion;
+use app\home\model\Activity;
+use app\home\model\ActivityUserLog;
 use app\home\model\ListDetail;
 use app\home\model\ListMode;
+use app\home\model\ListModel;
 use app\home\model\Projects;
-use app\common\model\UserNewsOption;
-use app\home\model\User;
-use app\home\model\Activity;
-use app\home\model\Crop;
 use app\home\model\Recruit;
-use app\common\model\ActivitySupport;
-use app\home\model\ActivityUserLog;
-use app\common\model\UserQuestion;
+use app\home\model\User;
+use app\store\model\Category;
+use think\Request;
 
 /**
  * 后台首页
@@ -34,7 +31,6 @@ class Index extends Controller
     public function checkChildSite()
     {
 
-
         // 验证规则
         // return $this->redirect('index/index');
     }
@@ -43,7 +39,6 @@ class Index extends Controller
     {
         return $this->fetch('404');
     }
-
 
     public function index()
     {
@@ -63,7 +58,7 @@ class Index extends Controller
 
             // 取消模板
             $this->view->engine->layout(false);
-            // 
+            //
             return $this->fetch();
         } else {
             if (!captcha_check(input('code'))) {
@@ -79,7 +74,7 @@ class Index extends Controller
         }
     }
 
-    // 
+    //
     public function forget_pass()
     {
         $user = new User;
@@ -87,7 +82,7 @@ class Index extends Controller
         if (!$this->request->isAjax()) {
             // 取消模板
             $this->view->engine->layout(false);
-            //                         
+            //
             if (!input('username')) {
                 $question = UserQuestion::all();
                 $this->assign('question', $question);
@@ -99,11 +94,11 @@ class Index extends Controller
                     $this->assign('param', [
                         'user_name' => input('username'),
                         'question_id' => input('question_id'),
-                        'answer' => input('answer')
+                        'answer' => input('answer'),
                     ]);
                 }
             }
-            // 
+            //
             return $this->fetch();
         } else {
             $data = input();
@@ -120,10 +115,10 @@ class Index extends Controller
         if (!$this->request->isAjax()) {
             // 取消模板
             $this->view->engine->layout(false);
-            //             
+            //
             $question = UserQuestion::all();
             $this->assign('question', $question);
-            // 
+            //
             return $this->fetch();
         } else {
             if (!captcha_check(input('code'))) {
@@ -140,12 +135,10 @@ class Index extends Controller
         }
     }
 
-
     public function quitUser()
     {
         session('forum_user', null);
     }
-
 
     // 页面跳转
     public function category($category_id)
@@ -153,7 +146,7 @@ class Index extends Controller
         $model = Category::get($category_id, [
             'parent',
             'listMode',
-            'list' => ['list_detail' => ['cover']]
+            'list' => ['list_detail' => ['cover']],
         ]);
         $mode = $model['mode'];
         switch ($mode) {
@@ -173,6 +166,11 @@ class Index extends Controller
                         array_unshift($options, ['id' => 0, 'name' => '全部']);
                         $_data['options'] = $options;
                         $data = $_data;
+                    }
+                    if ($key_word == 'job') {
+                        $pre_lists = ListModel::where(['id' => ['in', $model['list']['pre_lists']]])->select()->toArray();
+                        $this->assign('pre_lists', $pre_lists);
+                        $this->assign('pre_name', $model['list']['pre_name']);
                     }
                 }
                 break;
@@ -203,10 +201,9 @@ class Index extends Controller
 
                 break;
         }
-        // halt($data['list']->toArray());        
+        // halt($data['list']->toArray());
         return $this->fetch($mode, compact('model', 'data', 'key_word'));
     }
-
 
     public function article()
     {
@@ -225,8 +222,6 @@ class Index extends Controller
         return $this->fetch('article', compact('detail'));
     }
 
-
-
     public function activity($id)
     {
         $Category = new Category;
@@ -240,7 +235,7 @@ class Index extends Controller
     public function recruit($id, $category_id = 0)
     {
         $detail = Recruit::detail($id);
-        // 
+        //
         if ($category_id != 0) {
             $model = Category::get($category_id, ['listMode', 'list']);
         } else {
@@ -249,8 +244,6 @@ class Index extends Controller
 
         return $this->fetch('recruit_detail', compact('detail', 'model'));
     }
-
-
 
     public function listJumpCate($list_id)
     {
@@ -264,7 +257,6 @@ class Index extends Controller
         return $this->redirect('category', ['category_id' => $category_id]);
     }
 
-
     public function userNewsMore()
     {
         $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
@@ -272,11 +264,10 @@ class Index extends Controller
         return $this->redirect('category', ['category_id' => $category_id]);
     }
 
-
     public function listDetail($id, $category_id = 0)
     {
         $detail = ListDetail::detail($id);
-        // 
+        //
         if ($category_id != 0) {
             $model = Category::get($category_id, ['listMode', 'list']);
         } else {
@@ -284,15 +275,14 @@ class Index extends Controller
             $category_id = $detail['list']['category']['category_id'];
             $model = Category::get($category_id, ['listMode', 'list']);
         }
-        //         
+        //
         return $this->fetch('list_detail', compact('detail', 'model'));
     }
-
 
     public function projectDetail($id, $category_id = 0)
     {
         $detail = Projects::detail($id);
-        // 
+        //
         if ($category_id != 0) {
             $model = Category::get($category_id);
         } else {
@@ -300,7 +290,7 @@ class Index extends Controller
             $category_id = Category::with(['listMode', 'list'])->where(['list_mode_id' => $list_mode_id])->value('category_id');
             $model = Category::get($category_id);
         }
-        //         
+        //
         return $this->fetch('project', compact('detail', 'model'));
     }
 
@@ -317,7 +307,7 @@ class Index extends Controller
         } else {
             $is_sup = 0;
         }
-        //         
+        //
         return $this->fetch('user_detail', compact('detail', 'model', 'is_sup'));
     }
 }

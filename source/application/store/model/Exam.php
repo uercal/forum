@@ -2,14 +2,12 @@
 
 namespace app\store\model;
 
-use app\common\model\AccountMoney;
 use app\common\model\Exam as ExamModel;
-use app\common\model\PayLog;
 use app\common\model\User;
 use app\common\model\UserCompany;
 use app\common\model\UserPerson;
 use app\common\model\UserSup;
-// 
+//
 use app\store\model\ListDetail;
 use app\store\model\Projects;
 use app\store\model\Recruit;
@@ -24,7 +22,6 @@ class Exam extends ExamModel
 {
 
     public $error;
-
 
     public static function attrTextMap()
     {
@@ -85,7 +82,7 @@ class Exam extends ExamModel
             'sup_company_code' => '统一社会信用代码',
             'sup_legal_person' => '单位法人',
             'sup_company_tel' => '单位电话',
-            'sup_company_email' =>  '单位邮箱',
+            'sup_company_email' => '单位邮箱',
             'sup_company_address' => '地址',
             'sup_post_code' => '邮编',
             'sup_manager_name' => '联系人姓名',
@@ -113,7 +110,7 @@ class Exam extends ExamModel
             'cover_id' => '封面图',
             'option_id' => '类别',
             'title' => '文章标题',
-            'content' => '文章内容'
+            'content' => '文章内容',
         ];
         return $data;
     }
@@ -142,13 +139,9 @@ class Exam extends ExamModel
             'job_price' => '工作薪资',
             'job_experience' => '工作经验',
             'job_education' => '学历',
-            'content' => '招聘详细内容'
+            'content' => '招聘详细内容',
         ];
     }
-
-
-
-
 
     public static function attrImgMap()
     {
@@ -156,7 +149,7 @@ class Exam extends ExamModel
             // company
             'company_logo',
             // person & supplier
-            'id_photo'
+            'id_photo',
         ];
     }
 
@@ -164,7 +157,7 @@ class Exam extends ExamModel
     {
         return [
             // paper
-            'cover_id'
+            'cover_id',
         ];
     }
 
@@ -174,7 +167,7 @@ class Exam extends ExamModel
             // company
             'license_file',
             // person & supplier
-            'person_file'
+            'person_file',
         ];
     }
 
@@ -186,11 +179,9 @@ class Exam extends ExamModel
             // person
             'introduce',
             // supplier
-            'sup_intro'
+            'sup_intro',
         ];
     }
-
-
 
     public static function attrCateArrMap()
     {
@@ -198,26 +189,25 @@ class Exam extends ExamModel
             // supplier
             'sup_eng_cate' => [
                 'cate' => '资质标准类别',
-                'level' => '资质类别等级'
+                'level' => '资质类别等级',
             ],
             'sup_goods_cate' => [
                 'permit' => '生产销售许可',
-                'content' => '供应内容'
+                'content' => '供应内容',
             ],
             'sup_server_cate' => [
                 'major' => '资质资格资信专业',
-                'level' => '资质类别等级'
-            ]
+                'level' => '资质类别等级',
+            ],
         ];
     }
 
     public static function attrContentArrMap()
     {
         return [
-            'content'
+            'content',
         ];
     }
-
 
     public function updateStatus($data)
     {
@@ -227,7 +217,10 @@ class Exam extends ExamModel
 
         if (!empty($content)) {
             foreach ($content as $key => $value) {
-                if (empty($value)) unset($content[$key]);
+                if (empty($value)) {
+                    unset($content[$key]);
+                }
+
             }
         }
         // halt($data);
@@ -239,7 +232,7 @@ class Exam extends ExamModel
                 $user = User::get($obj['user_id']);
                 $role_str = $user['role'];
                 $type_bonus = $obj['type_bonus'];
-                // 
+                //
                 if ($data['status'] == 20) {
                     switch ($type_bonus) {
                         case 'person':
@@ -248,10 +241,10 @@ class Exam extends ExamModel
                             $new_role = strtr($role_str, 0, $role);
                             $user_model = new UserPerson();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
-                            //              
+                            //
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
-                            // 
+                            //
                             $content['memberLevel'] = $data['level'];
                             if ($_obj) {
                                 $_obj->allowField(true)->save($content);
@@ -267,9 +260,9 @@ class Exam extends ExamModel
                             $new_role = strtr($role_str, 0, $role);
                             $user_model = new UserCompany();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
-                            // 
+                            //
                             $content['build_time'] = strtotime($content['build_time']);
-                            // 
+                            //
                             $content['memberLevel'] = $data['level'];
                             if ($_obj) {
                                 $_obj->allowField(true)->save($content);
@@ -282,15 +275,15 @@ class Exam extends ExamModel
 
                         case 'expert':
                             $role = 2;
-                            $new_role = $role_str . ',2';
+                            $new_role = strpos($role_str, '2') !== false ? $role_str : $role_str . ',2';
                             break;
 
                         case 'supplier':
                             $role = 4;
-                            $new_role = $role_str . ',4';
+                            $new_role = strpos($role_str, '4') !== false ? $role_str : $role_str . ',4';
                             $user_model = new UserSup();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
-                            //                             
+                            //
                             $content['sup_eng_cate'] = json_encode($content['sup_eng_cate']);
                             $content['sup_goods_cate'] = json_encode($content['sup_goods_cate']);
                             $content['sup_server_cate'] = json_encode($content['sup_server_cate']);
@@ -303,8 +296,8 @@ class Exam extends ExamModel
                             }
                             break;
                     }
-                    // 
-                    // 用户认证 更新用户资料                    
+                    //
+                    // 用户认证 更新用户资料
                     $user->save([
                         'role' => $new_role,
                     ]);
@@ -312,14 +305,14 @@ class Exam extends ExamModel
 
                 $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
-                    'bonus' => $data['bonus']
+                    'bonus' => $data['bonus'],
                 ]);
             }
             // type==20 论文提交
             if ($obj['type'] == 20) {
-                // 
+                //
                 if ($data['status'] == 20) {
-                    //                     
+                    //
                     $detail = new ListDetail;
                     $detail_data = [
                         'list_id' => $content['list_id'],
@@ -328,7 +321,7 @@ class Exam extends ExamModel
                         'cover_id' => isset($content['cover_id']) ? $content['cover_id'] : null,
                         'content' => $content['content'],
                         'user_id' => $obj['user_id'],
-                        'exam_id' => $obj['id']
+                        'exam_id' => $obj['id'],
                     ];
 
                     $detail->save($detail_data);
@@ -336,13 +329,13 @@ class Exam extends ExamModel
 
                 $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
-                    'bonus' => $data['bonus']
+                    'bonus' => $data['bonus'],
                 ]);
             }
             // $type==30 项目提交
             if ($obj['type'] == 30) {
                 if ($data['status'] == 20) {
-                    //                     
+                    //
                     $project = new Projects;
                     $pro_data = [
                         'title' => $content['title'],
@@ -357,7 +350,7 @@ class Exam extends ExamModel
                         'assignment_date' => strtotime($content['assignment_date']),
                         'total_invest' => $content['total_invest'],
                         'user_id' => $obj['user_id'],
-                        'exam_id' => $obj['id']
+                        'exam_id' => $obj['id'],
                     ];
 
                     $project->save($pro_data);
@@ -365,13 +358,13 @@ class Exam extends ExamModel
 
                 $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
-                    'bonus' => $data['bonus']
+                    'bonus' => $data['bonus'],
                 ]);
             }
             // $type==40 招聘提交
             if ($obj['type'] == 40) {
                 if ($data['status'] == 20) {
-                    //                     
+                    //
                     $recruit = new Recruit;
                     $recruit_data = [
                         'job_name' => $content['job_name'],
@@ -380,7 +373,7 @@ class Exam extends ExamModel
                         'job_experience' => $content['job_experience'],
                         'job_price' => implode(',', $content['job_price']),
                         'user_id' => $obj['user_id'],
-                        'exam_id' => $obj['id']
+                        'exam_id' => $obj['id'],
                     ];
 
                     $recruit->save($recruit_data);
@@ -388,17 +381,17 @@ class Exam extends ExamModel
 
                 $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
-                    'bonus' => $data['bonus']
+                    'bonus' => $data['bonus'],
                 ]);
             }
             // $type==50 子站申请
             if ($obj['type'] == 50) {
                 if ($data['status'] == 20) {
-                    //                   
+                    //
                     $company_id = UserCompany::where(['user_id' => $obj['user_id']])->value('id');
                     $siteObj = UserSite::where([
                         'user_id' => $obj['user_id'],
-                        'user_company_id' => $company_id
+                        'user_company_id' => $company_id,
                     ])->find();
                     $site_code = substr(strtoupper(yoshop_hash('wsz' . $obj['user_id'])), 0, 5) . $obj['user_id'];
                     $re = array();
@@ -411,10 +404,13 @@ class Exam extends ExamModel
                         }
                     }
                     $re = implode('', $re);
+                    $company_code = UserCompany::where(['user_id' => $obj['user_id']])->value('company_code');
+                    //
                     $site_data = [
                         'user_id' => $obj['user_id'],
                         'user_company_id' => $company_id,
-                        'site_code' => $re
+                        // 'site_code' => $re,
+                        'site_code' => $company_code,
                     ];
                     if (!$siteObj) {
                         $siteObj = new UserSite;
@@ -424,7 +420,7 @@ class Exam extends ExamModel
 
                 $this::get(['id', $data['id']])->save([
                     'status' => $data['status'],
-                    'bonus' => $data['bonus']
+                    'bonus' => $data['bonus'],
                 ]);
             }
             Db::commit();

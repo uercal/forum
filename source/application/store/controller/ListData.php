@@ -2,13 +2,12 @@
 
 namespace app\store\controller;
 
-use app\store\model\ListMode;
-use app\common\model\DetailMode;
-use app\store\model\ListDetail;
-use app\store\model\ListModel;
 use app\common\model\JobSort;
-use app\store\model\UserNewsOption;
+use app\store\model\ListDetail;
+use app\store\model\ListMode;
+use app\store\model\ListModel;
 use app\store\model\Projects;
+use app\store\model\UserNewsOption;
 
 /**
  * 列表数据控制器
@@ -44,6 +43,12 @@ class ListData extends Controller
     {
         $model = ListModel::get($id, ['mode']);
         if (!$this->request->isAjax()) {
+            if ($model['mode']['key_word'] == 'job') {
+                $all_list = ListModel::field('id,id as value,name as title')->where(['id' => ['<>', $id], 'list_mode_id' => $model['list_mode_id']])->select()->toArray();
+                $pre_lists = explode(',', $model['pre_lists']);
+                $this->assign('all_list', $all_list);
+                $this->assign('pre_lists', $pre_lists);
+            }
             return $this->fetch('list_edit', compact('model'));
         }
         // 更新记录
@@ -54,7 +59,6 @@ class ListData extends Controller
         return $this->renderError($error);
     }
 
-
     // 列表下详情
     public function list_detail($id)
     {
@@ -63,8 +67,6 @@ class ListData extends Controller
         $list = $list_detail_model->getList(['list_id' => $model['id']]);
         return $this->fetch('list_detail', compact('model', 'list'));
     }
-
-
 
     /**
      * 导出列表清单
@@ -76,7 +78,7 @@ class ListData extends Controller
         $model = new ListDetail;
         $data = $model->with(['person', 'company'])->where(['list_id' => $id])->select();
         //设置表头：
-        $head = ['序号', '标题', '发布时间', '发布人个人姓名', '发布人个人电话', '发布人单位名称',  '发布人单位电话'];
+        $head = ['序号', '标题', '发布时间', '发布人个人姓名', '发布人个人电话', '发布人单位名称', '发布人单位电话'];
 
         //数据中对应的字段，用于读取相应数据：
         $keys = ['index', 'title', 'create_time', 'person_name', 'person_phone', 'company_name', 'company_tel'];
@@ -84,30 +86,18 @@ class ListData extends Controller
         $excel->outdata($detail['name'] . '清单', $data, $head, $keys);
     }
 
-
     public function exportProject()
     {
         $excel = new Office;
         $data = Projects::all(null, ['company'])->toArray();
         //设置表头：
-        $head = ['序号', '项目标题', '服务类别', '工程类别', '合同金额', '总投资额',  '合同签订日期', '项目公司名称'];
+        $head = ['序号', '项目标题', '服务类别', '工程类别', '合同金额', '总投资额', '合同签订日期', '项目公司名称'];
 
         //数据中对应的字段，用于读取相应数据：
         $keys = ['index', 'title', 'server_cate_span', 'eng_cate_span', 'assignment_money', 'total_invest', 'assignment_date_time', 'company_name'];
 
         $excel->outdata('会员项目清单', $data, $head, $keys);
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public function user_project()
     {
@@ -127,11 +117,6 @@ class ListData extends Controller
         return $this->fetch('project_detail', compact('model'));
     }
 
-
-
-
-
-
     //职务列表模式的职位排序
     public function job_sort($list_id)
     {
@@ -149,8 +134,6 @@ class ListData extends Controller
         return $this->renderError($error);
     }
 
-
-
     // 会员文章列表下 是否详情有类别 以及类别选项
     // public function list_detail_category($list_id)
     // {
@@ -167,7 +150,6 @@ class ListData extends Controller
     //     $error = $jobModel->getError() ?: '更新失败';
     //     return $this->renderError($error);
     // }
-
 
     // 详情操作
     public function detail_add($list_id)
@@ -204,7 +186,6 @@ class ListData extends Controller
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
     }
-
 
     public function detail_delete($id)
     {

@@ -6,7 +6,7 @@
                 <div class="index-title">
                     <strong>本会要闻</strong>
                 </div>
-                <p class="item-more" onclick="newsMore(<?= $index_data['news']['list']['list_id'] ?>)">查看更多 》</p>
+                <p class="item-more" onclick="newsMore(<?= $index_data['news']['list']['list_id'] ?>)">查看更多 <i class="am-icon-angle-double-right"></i></p>
             </div>
             <div class="news-body">
                 <div class="news-slider">
@@ -45,7 +45,7 @@
                 <div class="index-title">
                     <strong>社团活动</strong>
                 </div>
-                <p class="item-more" onclick="activityMore()">查看更多 》</p>
+                <p class="item-more" onclick="activityMore()">查看更多 <i class="am-icon-angle-double-right"></i></p>
             </div>
             <div class="activity-body">
                 <?php foreach ($index_data['activity']['data'] as $item) : ?>
@@ -85,7 +85,7 @@
                 <div class="index-title">
                     <strong>理论实践</strong>
                 </div>
-                <p class="item-more" onclick="userNewsMore()">查看更多 》</p>
+                <p class="item-more" onclick="userNewsMore()">查看更多 <i class="am-icon-angle-double-right"></i></p>
             </div>
             <div class="exp-body">
                 <div class="exp-left">

@@ -57,12 +57,15 @@ class User extends UserModel
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
+                $_map = [];
                 if (input('title')) {
-                    $map['name'] = ['like', '%' . input('title') . '%'];
+                    $_map['name'] = ['like', '%' . input('title') . '%'];
                 }
                 $map['role'] = ['like', '%2%'];
-                $list = $this->with(['person'])->where($map)->order($order)
-                    ->paginate(10, false, ['query' => $request->request()]);
+                $all_ids = $this->where($map)->column('user_id');                
+                $_map['user_id'] = ['in', $all_ids];
+                $model = new UserPerson;
+                $list = $model->where($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);                
                 break;
             case 'company':
                 if (input('title')) {
@@ -74,7 +77,7 @@ class User extends UserModel
                 break;
             case 'supplier':
                 if (input('title')) {
-                    $map['name'] = ['like', '%' . input('title') . '%'];
+                    $map['sup_company_name'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserSup;
                 $list = $model->with(['user'])->where($map)->order($order)

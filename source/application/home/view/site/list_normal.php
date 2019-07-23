@@ -95,7 +95,7 @@
                             </div>
                             <div style="color: #B4BEAB;font-size:14px;">
                                 <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
-                                <p>查看更多 》</p>
+                                <p>查看更多 <i class="am-icon-angle-double-right"></i></p>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="list-news-foot">
                                 <p><?= date('Y/m/d', strtotime($item['create_time'])) ?></p>
-                                <p>查看更多》</p>
+                                <p>查看更多<i class="am-icon-angle-double-right"></i></p>
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
                 <div class="index-title">
                     <strong><?= $index_data['img_list']['name'] ?></strong>
                 </div>
-                <p class="item-more" onclick="">查看更多 》</p>
+                <p class="item-more" onclick="">查看更多 <i class="am-icon-angle-double-right"></i></p>
             </div>
             <div class="news-body">
                 <?php if (!empty($index_data['img_list']['list_detail']->toArray())) : ?>

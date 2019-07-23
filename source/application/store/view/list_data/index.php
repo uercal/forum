@@ -52,7 +52,7 @@
                                                                     'list_data/list_edit',
                                                                     ['id' => $item['id']]
                                                                 ) ?>">
-                                                        <i class="am-icon-pencil"></i> 修改名称
+                                                        <i class="am-icon-pencil"></i> 修改
                                                     </a>
                                                     <?php if ($mode['key_word'] == 'user_news') : ?>
                                                         <a class="tpl-table-black-operation-green" href="<?= url(

@@ -673,3 +673,34 @@
 .flex-col {
     flex-direction: column;
 }
+
+
+.pre-item{
+    padding: 20px 10px 0px 38px;
+    display: flex;    
+    align-items: center;    
+    justify-content: space-between;
+    cursor: pointer;    
+}
+
+.pre-item>p{
+    margin: 0;
+    color: #666666;
+}
+
+.pre-item>a{
+    color: #999;
+}
+
+.pre-item>a:hover{
+    color: #444;
+}
+
+.pre-divider{
+    margin: 0px 28px;
+    background: rgba(9, 86, 17, 0.1);
+    height: 10px;
+    width: 100%;
+    text-align: center;    
+    position: relative;
+}

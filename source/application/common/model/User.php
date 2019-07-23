@@ -2,8 +2,8 @@
 
 namespace app\common\model;
 
-use think\Request;
 use app\home\model\UploadApiFile;
+use think\Request;
 
 /**
  * 用户模型类
@@ -16,7 +16,7 @@ class User extends BaseModel
 
     protected $append = ['show_name', 'avatar', 'role_name', 'avatar_path'];
     protected $role_attr = [
-        0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员', 4 => '供应商'
+        0 => '普通会员', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员', 4 => '供应商',
     ];
 
     // 个人关联
@@ -24,8 +24,7 @@ class User extends BaseModel
     {
         return $this->hasOne('UserPerson', 'user_id', 'user_id');
     }
-
-
+    
     // 单位关联
     public function company()
     {
@@ -43,12 +42,10 @@ class User extends BaseModel
         return $this->hasOne('UploadFile', 'file_id', 'attachment_id');
     }
 
-
     public function avatar()
     {
         return $this->hasOne('UploadApiFile', 'file_id', 'avatar');
     }
-
 
     public function getAvatarPathAttr($value, $data)
     {
@@ -74,7 +71,6 @@ class User extends BaseModel
         return $name;
     }
 
-
     public function getRoleNameAttr($valu, $data)
     {
         $role = explode(',', $data['role']);
@@ -97,8 +93,6 @@ class User extends BaseModel
         return $this->with(['attachment'])->order(['create_time' => 'desc'])
             ->paginate(15, false, ['query' => $request->request()]);
     }
-
-
 
     public function getListByRole($role)
     {

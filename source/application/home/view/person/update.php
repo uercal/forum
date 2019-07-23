@@ -304,8 +304,9 @@
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">图片信息</div>
                             <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
-                                <el-col :span="24">
-                                    个人证件照：
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">个人证件照：<small style="color:#999999;font-weight:100;font-size:10px;">（推荐上传1寸&2寸的JPG&PNG图片，且不超过2MB）</small>
+                                    </label>
                                 </el-col>
                             </el-row>
 
@@ -349,7 +350,7 @@
                                 <el-col :span="24" style="position:relative;">
                                     <el-form-item label="会员等级：" prop="memberLevel">
                                         <el-select v-model="form_person.memberLevel" placeholder="请选择">
-                                            <el-option v-for="item in levelOptions" :key="item" :label="item" :value="item">
+                                            <el-option v-for="item in levelPersonOptions" :key="item" :label="item" :value="item">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -494,8 +495,9 @@
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">图片信息</div>
                             <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
-                                <el-col :span="24">
-                                    单位LOGO图片：
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">单位LOGO图片：<small style="color:#999999;font-weight:100;font-size:10px;">（推荐上传1:1的JPG&PNG图片，且不超过2MB）</small>
+                                    </label>
                                 </el-col>
                             </el-row>
 
@@ -752,8 +754,9 @@
                         <!--  -->
                         <div class="divider" style="margin-top:25px;">图片信息</div>
                         <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
-                            <el-col :span="24">
-                                单位LOGO图片：
+                            <el-col :span="20" style="display:flex;align-items:center;">
+                                <label style="margin:0;">单位LOGO图片：<small style="color:#999999;font-weight:100;font-size:10px;">（推荐上传1:1的JPG&PNG图片，且不超过2MB）</small>
+                                </label>
                             </el-col>
                         </el-row>
 
@@ -845,6 +848,19 @@
                     '常务监事单位',
                     '监事单位',
                     '会员单位'
+                ],
+                levelPersonOptions: [
+                    '会长',
+                    '常务副会长',
+                    '副会长',
+                    '常务理事',
+                    '理事',
+                    '监事长',
+                    '常务副监事长',
+                    '副监事长',
+                    '常务监事',
+                    '监事',
+                    '会员'
                 ],
                 companyTypeOptions: [
                     '海南全内资独立法人',
