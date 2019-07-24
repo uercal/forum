@@ -180,7 +180,8 @@ class Member extends Controller
         $model['api_menu_id'] = json_decode($model['api_menu_id'], true);
         if (!$this->request->isAjax()) {
             $menu = $this->menus();
-            $menu = $this->editMenu($menu, $model['api_menu_id']);
+            // halt([$menu,$model['api_menu_id']]);
+            $menu = $this->editMenu($menu, $model['api_menu_id']);            
             return $this->fetch('privilege/edit', compact('model', 'menu'));
         }
         // 更新记录

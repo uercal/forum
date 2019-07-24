@@ -48,13 +48,17 @@ class Privilege extends BaseModel
 
     public function add()
     {
-        $data = input();
+        $data = input();        
         $data = $data['privilege'];
+        foreach ($data['api_menu_id'] as $key => &$value) {
+            $value = htmlspecialchars_decode($value);
+        }
+        // 
         $data['api_menu_id'] = json_encode($data['api_menu_id']);    
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = self::$wxapp_id;        
         // 开启事务
         Db::startTrans();
-        try {
+        try {            
             // 添加商品
             $this->allowField(true)->save($data);
             Db::commit();
