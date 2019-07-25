@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>海南省全过程工程咨询研究会</title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
@@ -43,31 +43,31 @@
             </div>
             </div>
             <ul class="header-ul" style="white-space:nowrap;text-align:center;">
-                <li><a href="/" class="<?= !isset($model) ? 'current' : '' ?>">首页</a></li>
-                <?php foreach ($menus as $item) : ?>
+                <li><a href="/" class="<?=!isset($model) ? 'current' : ''?>">首页</a></li>
+                <?php foreach ($menus as $item): ?>
                     <li>
-                        <a href="javascript:void(0); " class="<?= (isset($model) && $model['parent']['category_id'] == $item['category_id']) ? 'current' : '' ?>" onclick="category(<?= $item['is_show'] == 0 ? '0' : $item['category_id'] ?>)"><?= $item['name'] ?></a>
-                        <?php if (!empty($item['child'])) : ?>
+                        <a href="javascript:void(0); " class="<?=(isset($model) && $model['parent']['category_id'] == $item['category_id']) ? 'current' : ''?>" onclick="category(<?=$item['is_show'] == 0 ? '0' : $item['category_id']?>)"><?=$item['name']?></a>
+                        <?php if (!empty($item['child'])): ?>
                             <ol>
-                                <?php foreach ($item['child'] as $child) : ?>
+                                <?php foreach ($item['child'] as $child): ?>
                                     <li>
-                                        <a href="javascript:void(0); " onclick="category(<?= $child['is_show'] == 0 ? '0' : $child['category_id'] ?>)"><?= $child['name'] ?></a>
-                                        <?php if (!empty($child['child'])) : ?>
+                                        <a href="javascript:void(0); " onclick="category(<?=$child['is_show'] == 0 ? '0' : $child['category_id']?>)"><?=$child['name']?></a>
+                                        <?php if (!empty($child['child'])): ?>
                                             <ol>
-                                                <?php foreach ($child['child'] as $two) : ?>
-                                                    <li><a href="javascript:void(0);" onclick="category(<?= $two['is_show'] == 0 ? '0' : $two['category_id'] ?>)"><?= $two['name'] ?></a></li>
-                                                <?php endforeach; ?>
+                                                <?php foreach ($child['child'] as $two): ?>
+                                                    <li><a href="javascript:void(0);" onclick="category(<?=$two['is_show'] == 0 ? '0' : $two['category_id']?>)"><?=$two['name']?></a></li>
+                                                <?php endforeach;?>
                                             </ol>
-                                        <?php endif; ?>
+                                        <?php endif;?>
                                     </li>
-                                <?php endforeach; ?>
+                                <?php endforeach;?>
                             </ol>
-                        <?php endif; ?>
+                        <?php endif;?>
                     </li>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </ul>
             <div class="member-info">
-                <?php if (!$login_user) : ?>
+                <?php if (!$login_user): ?>
                     <div class="info-item info-reg" id="u_register">
                         <img src="assets/home/images/info-reg.png" alt="">
                         <p>注册</p>
@@ -76,34 +76,34 @@
                         <img src="assets/home/images/info-login.png" alt="">
                         <p>登陆</p>
                     </div>
-                <?php else : ?>
+                <?php else: ?>
                     <div class="user-header">
                         <div class="u-header">
-                            <img src="<?= $login_user['avatar'] ? $login_user['avatar'] : 'assets/home/images/about/003.jpg' ?>" alt="">
+                            <img src="<?=$login_user['avatar'] ? $login_user['avatar'] : 'assets/home/images/about/003.jpg'?>" alt="">
                             <div>
-                                <p>用户名：<?= $login_user['user_name'] ?></p>
+                                <p>用户名：<?=$login_user['user_name']?></p>
 
-                                <p>角色：<?= $login_user['role_name'] ?></p>
+                                <p>角色：<?=$login_user['role_name']?></p>
                             </div>
                         </div>
                         <div class="u-action">
                             <p onclick="quit()">退出登录</p>
-                            <div onclick="window.location.href='<?= url('/person/personCenter') ?>';">
+                            <div onclick="window.location.href='<?=url('/person/personCenter')?>';">
                                 <p>进入个人中心</p>
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php endif;?>
             </div>
         </nav>
     </header>
     <!--  -->
-    <section class="slider" style="display:<?= isset($model) ? 'none;' : 'block;' ?>">
+    <section class="slider" style="display:<?=isset($model) ? 'none;' : 'block;'?>">
         <div class="am-slider am-slider-default" data-am-flexslider="{animation: 'slider',slideshowSpeed: 2000,controlNav: true,directionNav: false}" id="demo-slider-0">
             <ul class="am-slides">
-                <?php foreach ($index_data['banner']['data'] as $banner) : ?>
-                    <li><img src="<?= $banner['imgUrl'] ?>" /></li>
-                <?php endforeach; ?>
+                <?php foreach ($index_data['banner']['data'] as $banner): ?>
+                    <li><img src="<?=$banner['imgUrl']?>" /></li>
+                <?php endforeach;?>
             </ul>
         </div>
         <div class="slider-cover"></div>
