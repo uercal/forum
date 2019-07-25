@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=yes">
+    <meta name="viewport" content="width=1080, initial-scale=0.1 user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>海南省全过程工程咨询研究会</title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
