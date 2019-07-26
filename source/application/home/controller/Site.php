@@ -23,9 +23,9 @@ class Site extends Controller
 
 
     public function _initialize()
-    {
+    {        
         $model = new UserSite;
-        $code = $this->request->path();
+        $code = $this->request->path();        
         $code = strtoupper(explode('/', $code)[0]);
         $obj = $model->with(['user', 'company'])->where(['site_code' => $code])->find();
         if (!$obj) {

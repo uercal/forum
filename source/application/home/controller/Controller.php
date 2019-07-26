@@ -52,8 +52,7 @@ class Controller extends \think\Controller
      * 后台初始化
      */
     public function _initialize()
-    {
-
+    {        
         \think\Url::root('index.php?s=');
 
         // \think\Url::root('/');
@@ -92,9 +91,9 @@ class Controller extends \think\Controller
      * 解析当前路由参数 （分组名称、控制器名称、方法名）
      */
     public function getRouteinfo()
-    {
+    {        
         // 控制器名称
-        $this->controller = toUnderScore($this->request->controller());
+        $this->controller = toUnderScore($this->request->controller());        
         // 方法名称
         $this->action = $this->request->action();
         // 控制器分组 (用于定义所属模块)

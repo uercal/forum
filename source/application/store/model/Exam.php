@@ -410,7 +410,7 @@ class Exam extends ExamModel
                         'user_id' => $obj['user_id'],
                         'user_company_id' => $company_id,
                         // 'site_code' => $re,
-                        'site_code' => $company_code,
+                        'site_code' => 'C'.$company_code,
                     ];
                     if (!$siteObj) {
                         $siteObj = new UserSite;
