@@ -95,27 +95,29 @@
 <script src="assets/layui/layui.js"></script>
 
 <script>
+    <?php if($model['mode']['key_word']=='job'):?>
+    layui.use(['transfer', 'layer', 'util'], function(){
+        var $ = layui.$
+        ,transfer = layui.transfer
+        ,layer = layui.layer
+        ,util = layui.util;
 
-layui.use(['transfer', 'layer', 'util'], function(){
-  var $ = layui.$
-  ,transfer = layui.transfer
-  ,layer = layui.layer
-  ,util = layui.util;
 
-  var $data = JSON.parse('<?=json_encode($all_list)?>');
-  var $data_ed = JSON.parse('<?=json_encode($pre_lists)?>');
-  //模拟数据
-  var data1 = $data;
+        var $data = JSON.parse('<?=json_encode($all_list)?>');
+        var $data_ed = JSON.parse('<?=json_encode($pre_lists)?>');
+        //模拟数据
+        var data1 = $data;
 
-  //基础效果
-  transfer.render({
-    elem: '#pre_lists'
-    ,title: ['所有列表', '往届列表']
-    ,data: data1
-    ,value:$data_ed
-  })
+        //基础效果
+        transfer.render({
+            elem: '#pre_lists'
+            ,title: ['所有列表', '往届列表']
+            ,data: data1
+            ,value:$data_ed
+        })
 
-});
+    });
+    <?php endif;?>
 
     $(function() {
         /**
@@ -125,7 +127,7 @@ layui.use(['transfer', 'layer', 'util'], function(){
         $('#my-form').superForm({
             // 验证
             validation: function() {
-                if('job'=="<?=$model['mode']['key_word']?>"){
+                if("<?=$model['mode']['key_word']?>"=='job'){
                     var input = $('.layui-transfer-box[data-index="1"] ul li>input');
                     var pre_ids = [];
                     input.map(function(e){

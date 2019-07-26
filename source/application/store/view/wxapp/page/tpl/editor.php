@@ -51,7 +51,7 @@
 <!--编辑器: banner-->
 <script id="tpl_editor_banner" type="text/template">
     <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
-        <div class="form-items">BANNER</div>     
+        <div class="form-items">BANNER</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
@@ -87,8 +87,8 @@
 
 <!-- 编辑器：nav -->
 <script id="tpl_editor_nav" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">  
-        <div class="form-items">导航3块</div>           
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">导航3块</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
@@ -100,49 +100,49 @@
                             <div class="am-u-sm-9 am-u-end">
                                 <input style="width:100%;" type="color" name="coverColor"
                                     data-bind="data.{{ $index }}.coverColor" value="{{ $value.coverColor }}">
-                            </div>  
-                        </div> 
+                            </div>
+                        </div>
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">文章ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="artId"
                                     data-bind="data.{{ $index }}.artId" value="{{ $value.artId }}">
-                            </div>     
+                            </div>
                             <label class="am-u-sm-3 am-form-label am-text-xs">透明度 </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="opacity" data-bind="data.{{ $index }}.opacity"
                                         value="{{ $value.opacity }}"
-                                        placeholder="请输入0.1~1">   
-                            </div>                          
-                        </div>                                  
+                                        placeholder="请输入0.1~1">
+                            </div>
+                        </div>
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">标题</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="title" data-bind="data.{{ $index }}.title"
                                         value="{{ $value.title }}"
-                                        placeholder="">   
-                            </div>     
+                                        placeholder="">
+                            </div>
                             <label class="am-u-sm-3 am-form-label am-text-xs">title</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="en" data-bind="data.{{ $index }}.en"
                                         value="{{ $value.en }}"
-                                        placeholder="">   
-                            </div>                 
-                        </div>             
+                                        placeholder="">
+                            </div>
+                        </div>
                         <div class="input-group">
                             <input type="text" name="imgName" data-bind="data.{{ $index }}.imgName"
                                    value="{{ $value.imgName }}" placeholder="请选择图片" readonly>
                             <span class="input-group-addon">选择图片</span>
                             <input type="hidden" name="imgUrl" data-bind="data.{{ $index }}.imgUrl"
                                    value="{{ $value.imgUrl }}">
-                        </div>                                                                                                                                        
+                        </div>
                     </div>
                 </div>
                 <!-- <i class="iconfont icon-shanchu item-delete"></i> -->
 
             </div>
             {{/each}}
-        </div>       
+        </div>
     </form>
 </script>
 
@@ -150,62 +150,65 @@
 
 <!-- 编辑器：projects -->
 <script id="tpl_editor_projects" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
-        <div class="form-items">项目介绍</div>      
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">项目介绍</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">                  
-                    <div class="item-form am-form-file">                       
+                <div class="container">
+                    <div class="item-form am-form-file">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">项目ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="project_id"
                                     data-bind="data.{{ $index }}.project_id" value="{{ $value.project_id }}">
-                            </div>                                                        
-                        </div>                                                                                                                                                  
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <!-- <i class="iconfont icon-shanchu item-delete"></i> -->
-
+                </div>           
             </div>
             {{/each}}
-        </div>      
+        </div>
+        <!--
+        <div class="form-item-add">
+            <i class="fa fa-plus"></i> 添加一个
+        </div>
+        -->
     </form>
 </script>
 
 <!-- 编辑器：userNews -->
 <script id="tpl_editor_user_news" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
-        <div class="form-items">会员类新闻</div>      
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">会员类新闻</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">                  
-                    <div class="item-form am-form-file">                       
+                <div class="container">
+                    <div class="item-form am-form-file">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="id"
                                     data-bind="data.{{ $index }}.id" value="{{ $value.id }}">
-                            </div>                                                        
-                        </div>                                                                                                                                                  
+                            </div>
+                        </div>
                     </div>
                 </div>                
             </div>
             {{/each}}
-        </div>      
-        <div class="form-item-add">
-            <i class="fa fa-plus"></i> 添加一个
         </div>
+        <!--<div class="form-item-add">
+            <i class="fa fa-plus"></i> 添加一个
+        </div>-->
     </form>
 </script>
 
 
 <!-- 编辑器：news -->
 <script id="tpl_editor_news" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
-        <div class="form-items">新闻组件</div>   
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">新闻组件</div>
         <div class="am-form-group">
             <label class="am-u-sm-3 am-form-label am-text-xs">列表ID </label>
             <div class="am-u-sm-9 am-u-end">
@@ -213,34 +216,34 @@
                        data-bind="list.list_id" value="{{ list.list_id }}">
             </div>
         </div>
-        <div class="form-items">           
+        <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
                 <div class="container">
                     <div class="item-image"><img src="{{ $value.imgUrl }}" alt=""></div>
-                    <div class="item-form am-form-file">                       
+                    <div class="item-form am-form-file">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="newId"
                                     data-bind="data.{{ $index }}.newId" value="{{ $value.newId }}">
-                            </div>                                                        
-                        </div>                                  
+                            </div>
+                        </div>
                         <div class="input-group">
                             <label class="am-u-sm-3 am-form-label am-text-xs">标题</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="title" data-bind="data.{{ $index }}.title"
                                         value="{{ $value.title }}"
-                                        placeholder="">   
-                            </div>                                                
+                                        placeholder="">
+                            </div>
                         </div>
                         <div class="input-group">
                             <label class="am-u-sm-3 am-form-label am-text-xs">显示描述</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="content" data-bind="data.{{ $index }}.content"
                                         value="{{ $value.content }}"
-                                        placeholder="">                                        
-                            </div>                                                
+                                        placeholder="">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -248,32 +251,32 @@
 
             </div>
             {{/each}}
-        </div>       
+        </div>
     </form>
 </script>
 
 
 <!-- 编辑器：act -->
 <script id="tpl_editor_activity" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
-        <div class="form-items">社团活动</div>           
-        <div class="form-items">           
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">社团活动</div>
+        <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">                    
-                    <div class="item-form am-form-file">                       
+                <div class="container">
+                    <div class="item-form am-form-file">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">活动ID </label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="id"
                                     data-bind="data.{{ $index }}.id" value="{{ $value.id }}">
-                            </div>                                                        
-                        </div>                                                          
+                            </div>
+                        </div>
                     </div>
-                </div>                
+                </div>
             </div>
             {{/each}}
-        </div>       
+        </div>
     </form>
 </script>
 
@@ -281,38 +284,38 @@
 
 <!-- 编辑器：news -->
 <script id="tpl_editor_company" type="text/template">
-    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">     
-        <div class="form-items">友情公司跳转</div>   
+    <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
+        <div class="form-items">友情公司跳转</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">                    
-                    <div class="item-form am-form-file">                       
+                <div class="container">
+                    <div class="item-form am-form-file">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">名称</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="name"
                                     data-bind="data.{{ $index }}.name" value="{{ $value.name }}">
-                            </div>                                                        
-                        </div>                                  
+                            </div>
+                        </div>
                         <div class="input-group">
                             <label class="am-u-sm-3 am-form-label am-text-xs">跳转地址(加上http://)</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input type="text" name="jumpUrl" data-bind="data.{{ $index }}.jumpUrl"
                                         value="{{ $value.jumpUrl }}"
-                                        placeholder="">   
-                            </div>                                                
-                        </div>                        
+                                        placeholder="">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <i class="iconfont icon-shanchu item-delete"></i>
 
             </div>
             {{/each}}
-        </div>   
+        </div>
         <div class="form-item-add">
             <i class="fa fa-plus"></i> 添加一个
-        </div>    
+        </div>
     </form>
 </script>
 
@@ -321,23 +324,23 @@
 <!-- concat -->
 <script id="tpl_editor_concat" type="text/template">
     <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
-        <div class="form-items">联系我们</div>     
+        <div class="form-items">联系我们</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
-                <div class="container">                    
+                <div class="container">
                     <div class="item-form">
                         <div class="input-group">
                         <label class="am-u-sm-3 am-form-label am-text-xs">{{ $value.title }}</label>
                             <div class="am-u-sm-9 am-u-end">
                                 <input class="" type="text" name="value"
                                     data-bind="data.{{ $index }}.value" value="{{ $value.value }}">
-                            </div>                                                        
-                        </div>                                                
+                            </div>
+                        </div>
                     </div>
-                </div>                
+                </div>
             </div>
             {{/each}}
-        </div>        
+        </div>
     </form>
 </script>

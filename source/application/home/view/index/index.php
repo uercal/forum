@@ -10,7 +10,7 @@
             </div>
             <div class="news-body">
                 <div class="news-slider">
-                    <div class="am-slider am-slider-default" style="height:300px;width:100%;" data-am-flexslider="{ animation: 'slider',slideshowSpeed: 2000}" id="demo-slider-news">
+                    <div class="am-slider am-slider-default" style="height:300px;width:100%;" data-am-flexslider="{ animation: 'slider',slideshowSpeed: 2500}" id="demo-slider-news">
                         <ul class="am-slides">
                             <?php foreach ($index_data['news']['data'] as $item) : ?>
                                 <li>
