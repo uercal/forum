@@ -105,7 +105,7 @@
 
                             <div class="eleft-item-content">
                                 <div style="width:20%;height:120px;border-radius:4px;">
-                                    <img style="object-fit:cover;width:100%;height:100%;border-radius: 4px;" src="<?=empty($item['user']) ? '无' : (!empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'])?>" alt="">
+                                    <img style="object-fit:contain;width:100%;height:100%;border-radius: 4px;" src="<?=empty($item['user']) ? '无' : (!empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path'])?>" alt="">
                                 </div>
                                 <div style="width:75%;height:120px;">
                                     <strong><?=$item['title']?></strong>
