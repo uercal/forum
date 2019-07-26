@@ -172,6 +172,7 @@ class Controller extends \think\Controller
         }
         // halt($items['projects']['data']);
         // halt($items['user_news']['data']);
+        // halt($items);        
         return $items;
     }
 
