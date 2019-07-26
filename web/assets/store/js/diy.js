@@ -423,27 +423,7 @@
                         // 选择图片
                         method.editor.event.selectImages($html);
                         $items.append($html);
-                    },
-
-                    /**
-                     * 添加project
-                     */
-                    projects: function (itemId, $items) {
-                        var data = method.diyData.additemData(itemId, 'projects'),
-                            $html = $(
-                                '<div class="item" data-key="' + data.dataId + '">' +
-                                '<div class="container">' +
-                                '<div class="item-form am-form-file">' +
-                                '<div class="input-group">' +
-                                '<label class="am-u-sm-3 am-form-label am-text-xs">详情ID </label>' +
-                                '<div class="am-u-sm-9 am-u-end">' +
-                                '<input class="" type="text" name="id"' +
-                                'data-bind="data.' + data.dataId + '.id" value="0">' +
-                                '</div></div></div></div></div>');
-                        // 选择图片
-                        method.editor.event.selectImages($html);
-                        $items.append($html);
-                    }
+                    },                   
 
                 },
 
