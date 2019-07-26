@@ -2,19 +2,19 @@
 
 namespace app\store\controller;
 
+use app\common\model\UploadApiFile;
 use app\store\model\Exam as ExamModel;
+use app\store\model\ListModel;
+use app\store\model\Projects;
+use app\store\model\Recruit;
+use app\store\model\Region;
+use app\store\model\UploadFile;
 use app\store\model\User;
 use app\store\model\UserNewsOption;
-use app\store\model\UploadFile;
-use app\common\model\UploadApiFile;
-use app\store\model\Projects;
-use app\store\model\Region;
-use app\store\model\ListModel;
-use app\store\model\Recruit;
 
 /**
  * 审核管理控制器
- * Class 
+ * Class
  * @package app\store\controller
  */
 class Exam extends Controller
@@ -28,7 +28,6 @@ class Exam extends Controller
         return $this->fetch('list', compact('list', 'map'));
     }
 
-
     // 审核
     public function detail($id)
     {
@@ -38,7 +37,7 @@ class Exam extends Controller
                 $map = ExamModel::attrTextMap();
                 // 判断审批部分内容  去重
                 $this->checkOverParts($info);
-                // 
+                //
                 break;
             case 20:
                 $map = ExamModel::attrPaperTextMap();
@@ -59,7 +58,7 @@ class Exam extends Controller
         $textareaMap = ExamModel::attrTextAreaMap();
         $cateArrMap = ExamModel::attrCateArrMap();
         $contentArrMap = ExamModel::attrContentArrMap();
-        // 
+        //
         $type = $info['type'];
         $status = $info['status'];
         $id = $info['id'];
@@ -71,11 +70,10 @@ class Exam extends Controller
         $data['image'] = [];
         $data['file'] = [];
         if (empty($data_arr) && $info['type_bonus'] == 'expert') {
-            // 
+            //
             $user_data = User::get($info['user_id'], ['person'])->toArray();
             $data_arr = $user_data['person'];
         }
-
 
         // 特殊字段处理
         switch ($info['type_bonus']) {
@@ -85,7 +83,7 @@ class Exam extends Controller
                     $options = UserNewsOption::whereIn('id', $data_arr['option_id'])->column('name');
                     $data_arr['option_id'] = implode(',', $options);
                 }
-                $data_arr['list_id'] = ListModel::get($data_arr['list_id'])->value('name');
+                $data_arr['list_id'] = ListModel::where('id', $data_arr['list_id'])->value('name');
                 break;
 
             case 'project':
@@ -98,8 +96,8 @@ class Exam extends Controller
                 foreach ($data_arr['eng_cate'] as $key => $value) {
                     $data_arr['eng_cate'][$key] = $eng_cate[$value];
                 }
-                $data_arr['server_cate'] =  implode(',', $data_arr['server_cate']);
-                $data_arr['eng_cate'] =  implode(',', $data_arr['eng_cate']);
+                $data_arr['server_cate'] = implode(',', $data_arr['server_cate']);
+                $data_arr['eng_cate'] = implode(',', $data_arr['eng_cate']);
                 break;
 
             case 'recruit':
@@ -114,12 +112,12 @@ class Exam extends Controller
                 break;
         }
 
-
         foreach ($data_arr as $key => $value) {
-            if (empty($value)) unset($data_arr[$key]);
+            if (empty($value)) {
+                unset($data_arr[$key]);
+            }
+
         }
-
-
 
         // 组装数据
         foreach ($data_arr as $key => $value) {
@@ -142,28 +140,31 @@ class Exam extends Controller
                     $__arr = [];
                     $__arr[] = [
                         'name' => reset($cateArrMap[$key]),
-                        'value' => reset($v)
+                        'value' => reset($v),
                     ];
                     $__arr[] = [
                         'name' => end($cateArrMap[$key]),
-                        'value' => end($v)
+                        'value' => end($v),
                     ];
                     $_arr[] = $__arr;
                 }
-                if (empty($_arr)) continue;
+                if (empty($_arr)) {
+                    continue;
+                }
+
                 $data['array'][$key] = $_arr;
             } else {
                 $data['input'][$key] = $value;
             }
         }
-        // 
+        //
         if (isset($info['old_content'])) {
             $old_arr = $info['old_content'];
             $old_data = [];
             $old_data['input'] = [];
             $old_data['image'] = [];
             $old_data['file'] = [];
-            // 
+            //
             foreach ($old_arr as $key => $value) {
                 if (in_array($key, $imgMap)) {
                     $old_data['image'][$key] = UploadApiFile::getFilePath($value);
@@ -184,15 +185,18 @@ class Exam extends Controller
                         $__arr = [];
                         $__arr[] = [
                             'name' => reset($cateArrMap[$key]),
-                            'value' => reset($v)
+                            'value' => reset($v),
                         ];
                         $__arr[] = [
                             'name' => end($cateArrMap[$key]),
-                            'value' => end($v)
+                            'value' => end($v),
                         ];
                         $_arr[] = $__arr;
                     }
-                    if (empty($_arr)) continue;
+                    if (empty($_arr)) {
+                        continue;
+                    }
+
                     $old_data['array'][$key] = $_arr;
                 } else {
                     $old_data['input'][$key] = $value;
@@ -205,9 +209,6 @@ class Exam extends Controller
             // halt([$data,$new_data]);
             $this->assign('new_data', $new_data);
         }
-
-
-
 
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }
@@ -223,8 +224,6 @@ class Exam extends Controller
         return $this->renderSuccess('审批成功');
     }
 
-
-
     /**
      * 去重
      */
@@ -234,11 +233,14 @@ class Exam extends Controller
             'user_id' => $info['user_id'],
             'type' => 10,
             'status' => 20,
-            'type_bonus' => $info['type_bonus']
+            'type_bonus' => $info['type_bonus'],
         ])->where(['id' => ['<', $info['id']]])->order('id desc')->find();
-        // 
-        if (!$last_info) return true;
-        // 
+        //
+        if (!$last_info) {
+            return true;
+        }
+
+        //
         $last_content = json_decode($last_info['content'], true);
         $content = json_decode($info['content'], true);
         $info['old_content'] = $content;
@@ -249,7 +251,7 @@ class Exam extends Controller
                 }
             }
         }
-        //                 
+        //
         if (!empty($content)) {
             $info['content'] = json_encode($content);
         }
