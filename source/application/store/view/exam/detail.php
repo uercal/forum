@@ -191,7 +191,7 @@ endforeach;?>
                             </div>
 
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">备注信息</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">备注信息（驳回理由）</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <textarea type="text" id="bonus" class="tpl-form-input"><?=$info['bonus']?></textarea>
                                 </div>

@@ -91,7 +91,7 @@ class ListData extends Controller
         $excel = new Office;
         $data = Projects::all(null, ['company'])->toArray();
         //设置表头：
-        $head = ['序号', '项目标题', '服务类别', '工程类别', '合同金额', '总投资额', '合同签订日期', '项目公司名称'];
+        $head = ['序号', '项目标题', '服务类别', '工程类别', '合同金额（万元）', '总投资额（万元）', '合同签订日期', '项目公司名称'];
 
         //数据中对应的字段，用于读取相应数据：
         $keys = ['index', 'title', 'server_cate_span', 'eng_cate_span', 'assignment_money', 'total_invest', 'assignment_date_time', 'company_name'];

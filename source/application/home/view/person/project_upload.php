@@ -168,13 +168,13 @@
                 </el-row>
                 <el-row type="flex">
                     <el-col :span="12">
-                        <el-form-item label="服务合同金额（元）" prop="assignment_money" label-width="135px">
-                            <el-input v-model.number="form.assignment_money" placeholder=""></el-input>
+                        <el-form-item label="服务合同金额（万元）" prop="assignment_money" label-width="150px">
+                            <el-input v-model.number="form.assignment_money" placeholder="" @keyup.native="proving1"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="总投资金额（元）" prop="total_invest" label-width="140px">
-                            <el-input type="email" v-model.number="form.total_invest" placeholder=""></el-input>
+                        <el-form-item label="总投资金额（万元）" prop="total_invest" label-width="140px">
+                            <el-input type="email" v-model.number="form.total_invest" placeholder="" @keyup.native="proving1"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -192,7 +192,7 @@
                 <el-row type="flex">
                     <el-col :span="12">
                         <el-form-item label="项目封面">
-                            <el-upload class="avatar-uploader" action="<?= url('uploadFile') ?>&param=projectCover" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
+                            <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=projectCover" ref="cover" :show-file-list="false" :on-success="handleCoverSuccess" :before-upload="beforeCoverUpload">
                                 <img v-if="projectCoverUrl" :src="projectCoverUrl" class="avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
@@ -228,11 +228,11 @@
 <script src="assets/store/plugins/umeditor/umeditor.min.js"></script>
 <!--  -->
 <script>
-    var $eng_cate = JSON.parse('<?= json_encode($eng_cate) ?>');
-    var $server_cate = JSON.parse('<?= json_encode($server_cate) ?>');
-    var $region_data = JSON.parse('<?= json_encode($region_data) ?>');
-    //     
-    // 
+    var $eng_cate = JSON.parse('<?=json_encode($eng_cate)?>');
+    var $server_cate = JSON.parse('<?=json_encode($server_cate)?>');
+    var $region_data = JSON.parse('<?=json_encode($region_data)?>');
+    //
+    //
     window.vue = new Vue({
         el: '#app',
         data() {
@@ -322,20 +322,24 @@
             }
         },
         methods: {
+            proving1(){
+                this.single_bet_min.value=this.single_bet_min.value.replace(/[^\.\d]/g,'');
+                this.single_bet_min.value=this.single_bet_min.value.replace('.','');
+            },
             doPost(form) {
                 if (!this.posting) {
                     this.posting = true;
                     var _this = this;
-                    $.post('<?= url('projectUploadAjax') ?>', {
+                    $.post('<?=url('projectUploadAjax')?>', {
                         form: form
                     }, function(res) {
                         console.log(res);
                         if (res.code == 1) {
                             _this.$message.success(res.msg);
                             setTimeout(function() {
-                                window.location.href = '<?= url('personCenter') ?>'
+                                window.location.href = '<?=url('personCenter')?>'
                             }, 1000);
-                            // 
+                            //
                         } else {
                             _this.$message.error(res.msg);
                             _this.posting = false;
@@ -370,7 +374,7 @@
                 this.isCover = false;
                 this.isOption = false;
                 var _this = this;
-                $.post('<?= url('getListInfo') ?>', {
+                $.post('<?=url('getListInfo')?>', {
                     id: v
                 }, function(res) {
                     if (res.cate_exist == 1) {
@@ -388,7 +392,7 @@
                     this.projectCoverUrl = URL.createObjectURL(file.raw);
                     this.$message.success(res.msg);
                     this.form.cover_id = res.data.file_id;
-                    // 
+                    //
                 } else {
                     this.$message.error(res.msg);
                 }

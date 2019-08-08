@@ -46,9 +46,13 @@
         display: flex;
     }
 
-    .cell>.detail,
-    .cell>.del {
+    .cell>.detail{
         color: #666666;
+        cursor: pointer;
+        margin-right: .8rem;
+    }
+    .cell>.del {        
+        color: #AE291F;
         cursor: pointer;
         margin-right: .8rem;
     }
@@ -58,7 +62,7 @@
     }
 
     .cell>.del:hover {
-        color: #AE291F;
+        color: red;
     }
 
     .el-table th,
@@ -113,7 +117,8 @@
                         <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.list_detail.id)">详情</div>
                         <div :class="'del'" v-if="scope.row.status==20" @click="delDetail(scope.row.id)">删除</div>
                         <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(0)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus,1)">查看原因</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus,1)">原因</div>
+                        <div :class="'del'" v-if="scope.row.status==30" @click="delDetail(scope.row.id)">删除</div>
                     </template>
                 </el-table-column>
             </el-table>

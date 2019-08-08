@@ -87,7 +87,7 @@
             <?php foreach ($data['list'] as $item): ?>
                 <?php if ($data['mode_data'] == 'company'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>)">
-                        <img style="object-fit:cover;" src="<?=$item['company_logo_path']?>" alt="">
+                        <img style="object-fit:contain;height:80px;" src="<?=$item['company_logo_path']?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>单位会员</p>
@@ -197,7 +197,7 @@
 
                 <?php elseif ($data['mode_data'] == 'supplier'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>,1)">
-                        <img style="object-fit:cover;" src="<?=$item['id_photo_path']?>" alt="">
+                        <img style="object-fit:contain;height:80px;" src="<?=$item['id_photo_path']?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>供应商</p>
@@ -264,16 +264,16 @@
         var vue = new Vue({
             el: '#filter',
             data: {
-                options: [{
-                        name: '个人会员',
-                        value: 'person'
-                    },
+                options: [
                     {
                         name: '单位会员',
                         value: 'company'
+                    },{
+                        name: '个人会员',
+                        value: 'person'
                     }
                 ],
-                type: type ? type : 'person'
+                type: type ? type : 'company'
             },
             methods: {
                 changeType: function(e) {

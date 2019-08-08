@@ -27,7 +27,7 @@
                         </div>                       
                         <div class="projects-item-option">
                             <p>联系方式：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] . ' | ' . $detail['supplier']['sup_manager_phone'] ?></span>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>供应商邮箱：</p>

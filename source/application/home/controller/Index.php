@@ -41,7 +41,7 @@ class Index extends Controller
     }
 
     public function index()
-    {        
+    {
         return $this->fetch('index/index');
     }
 
@@ -269,6 +269,14 @@ class Index extends Controller
     }
 
     public function userNewsMore()
+    {
+        $list_mode_id = ListMode::where(['key_word' => 'user_news'])->value('id');
+        $list_id = ListModel::where(['list_mode_id' => $list_mode_id, 'name' => '学术天地'])->value('id');
+        $category_id = Category::get(['list_mode_id' => $list_mode_id, 'list_id' => $list_id, 'mode' => 'list'])['category_id'];
+        return $this->redirect('category', ['category_id' => $category_id]);
+    }
+
+    public function userProMore()
     {
         $list_mode_id = ListMode::where(['key_word' => 'user_project'])->value('id');
         $category_id = Category::get(['list_mode_id' => $list_mode_id, 'mode' => 'list'])['category_id'];

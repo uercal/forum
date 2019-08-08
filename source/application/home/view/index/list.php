@@ -428,14 +428,7 @@
                             <div class="pro-filter-item-body">
                                 <div class="<?=empty(input('assignment_money')) ? 'active' : ''?>" onclick="assignment_money(0)">
                                     <p>全部</p>
-                                </div>
-
-                                <div class="<?=input('assignment_money') == '0-60000' ? 'active' : ''?>" onclick="assignment_money('0-60000')">
-                                    <p>￥0-60000元</p>
-                                </div>
-                                <div class="<?=input('assignment_money') == '60001-100000' ? 'active' : ''?>" onclick="assignment_money('60001-100000')">
-                                    <p>￥60001-100000元</p>
-                                </div>
+                                </div>                                
                                 <div style="display:flex;align-items:center;">
                                     <p style="white-space:nowrap;">自定义：</p>
                                     <el-input v-model="assignment_money_s" placeholder="" type="tel" size="mini" @blur='a_money'></el-input>
@@ -472,14 +465,7 @@
                             <div class="pro-filter-item-body">
                                 <div class="<?=empty(input('total_invest')) ? 'active' : ''?>" onclick="total_invest(0)">
                                     <p>全部</p>
-                                </div>
-
-                                <div class="<?=input('total_invest') == '0-60000' ? 'active' : ''?>" onclick="total_invest('0-60000')">
-                                    <p>￥0-60000元</p>
-                                </div>
-                                <div class="<?=input('total_invest') == '60001-100000' ? 'active' : ''?>" onclick="total_invest('60001-100000')">
-                                    <p>￥60001-100000元</p>
-                                </div>
+                                </div>                            
                                 <div style="display:flex;align-items:center;">
                                     <p style="white-space:nowrap;">自定义：</p>
                                     <el-input v-model="total_invest_s" placeholder="" type="tel" size="mini" @blur='total_invest'></el-input>
@@ -514,9 +500,9 @@
                         region_option: region_option,
                         region_data: region_data,
                         assignment_money_s: assignment_money == 0 ? 0 : assignment_money.split('-')[0],
-                        assignment_money_e: assignment_money == 0 ? 999999 : assignment_money.split('-')[1],
+                        assignment_money_e: assignment_money == 0 ? 200 : assignment_money.split('-')[1],
                         total_invest_s: total_invest == 0 ? 0 : total_invest.split('-')[0],
-                        total_invest_e: total_invest == 0 ? 999999 : total_invest.split('-')[1],
+                        total_invest_e: total_invest == 0 ? 5000 : total_invest.split('-')[1],
                         assignment_date: assignment_date == 0 ? [] : assignment_date.split(',')
                     },
                     methods: {
@@ -572,7 +558,7 @@
                             <div class="pro-item-detail">
                                 <div class="pro-item-detail-l">
                                     <div>
-                                        <strong><?=bcdiv($item['total_invest'], 10000, 0) . '万/' . bcdiv($item['assignment_money'], 10000, 0) . '万'?></strong>
+                                        <strong><?=$item['total_invest'] . '万/' . $item['assignment_money'] . '万'?></strong>
                                     </div>
                                     <p>总投资/合同金额</p>
                                 </div>

@@ -28,6 +28,11 @@ class ListDetail extends ListDetailModel
             usort($job_sort, function ($a, $b) {
                 return $a['value'] > $b['value'];
             });
+            foreach ($job_sort as $key => &$value) {
+                usort($value['data'],function($a,$b){
+                    return $a['sort'] > $b['sort'];
+                });
+            }
             // halt(end($job_sort)['data'][0]['cover']);
             return $job_sort;
             //

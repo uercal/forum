@@ -157,7 +157,7 @@
                         <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
                             <div style="width:100%;display:flex;">
                                 <p style="font-size:14px;text-indent:2rem;color:#999999;">子站标识码：<?= $detail['site_code'] ?></p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">直接访问：<a href="<?= base_url() . '/' . $detail['site_code'] ?>" target="view_window">点击访问</a> </p>
+                                <p style="font-size:14px;text-indent:2rem;color:#999999;">直接访问：<a href="<?= base_url() . $detail['site_code'] ?>" target="view_window">点击访问</a> </p>
                             </div>
                         </div>
                     </el-tab-pane>

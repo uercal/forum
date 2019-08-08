@@ -20,8 +20,8 @@
 <body>
     <header>
         <nav class="header-nav">
-            <div class="header-logo" style="width:300px;">
-                <img src="<?= $company['company_logo_path'] ?>" alt="" style="height:90%;object-fit:contain;padding:0;">
+            <div class="header-logo" style="width:300px;height:100px;">
+                <img src="<?= $company['company_logo_path'] ?>" alt="" style="height:80px;width:80px;object-fit:contain;padding:0;">
             </div>
             <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
                 <li><a href="<?= url('index') ?>" class="<?= $action == 'index' ? 'current' : '' ?>">首页</a></li>

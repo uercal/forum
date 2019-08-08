@@ -62,10 +62,10 @@ class User extends UserModel
                     $_map['name'] = ['like', '%' . input('title') . '%'];
                 }
                 $map['role'] = ['like', '%2%'];
-                $all_ids = $this->where($map)->column('user_id');                
+                $all_ids = $this->where($map)->column('user_id');
                 $_map['user_id'] = ['in', $all_ids];
                 $model = new UserPerson;
-                $list = $model->where($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);                
+                $list = $model->where($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
                 if (input('title')) {
@@ -78,9 +78,11 @@ class User extends UserModel
             case 'supplier':
                 if (input('title')) {
                     $map['sup_company_name'] = ['like', '%' . input('title') . '%'];
+                    $map['sup_company_address'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserSup;
-                $list = $model->with(['user'])->where($map)->order($order)
+                // halt($model->fetchSql(true)->WhereOr($map)->select());
+                $list = $model->with(['user'])->whereOr($map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
         }

@@ -17,9 +17,9 @@
                                             <?=$item['name']?></strong>
                                         <ul class="footer_navigation">
                                             <?php if (!empty($item['child'])): foreach ($item['child'] as $child): if ($child['name'] != '联系我们'): ?>
-										                                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?=$child['category_id']?>)">
-										                                                                <?=$child['name']?></a></li>
-										                                                    <?php endif;
+																						                                                        <li class="footer_navigation--item"><a href="#" class="footer_navigation--link" onclick="category(<?=$child['category_id']?>)">
+																						                                                                <?=$child['name']?></a></li>
+																						                                                    <?php endif;
 endforeach;
 endif;?>
                                         </ul>
@@ -82,6 +82,40 @@ endif;?>
 <script src="assets/home/js/amazeui.js"></script>
 </body>
 <script>
+
+    var n = 1;
+
+    function show(){
+        n++;
+        if(n%2==0){
+            $('#logo1').animate({
+                left:'0px',
+                opacity:'1'
+            },1500,function(){
+                $(this).animate({
+                    opacity:'0'
+                },1000,function(){
+                    $(this).css('left','320px');
+                });                
+                $('#logo2').animate({
+                    top:'-38px',
+                    opacity:'1'
+                },1500,function(){
+                    show();
+                })                
+            });            
+        }else{
+            $('#logo2').animate({
+                opacity:'0'
+            },1500,function(){
+                $(this).css('top','38px');
+                show();
+            })
+        }
+    }
+    show();
+
+
     function quit() {
         layer.confirm('是否确定退出', {
             title: '确认',
@@ -202,27 +236,27 @@ endif;?>
         function supportAct(act_id) {
             <?php if ($login_user): ?>
                 <?php if (isset($is_support)): if (!$is_support): ?>
-					                        layer.open({
-					                            id: 'support',
-					                            type: 2,
-					                            title: '赞助活动',
-					                            maxmin: false,
-					                            scrollbar: false,
-					                            resize: false,
-					                            shadeClose: true, //点击遮罩关闭层
-					                            area: '600px',
-					                            content: '/person/support_act?act_id=' + act_id, //弹框显示的url
-					                            success: function(layero, index) {
-					                                layer.iframeAuto(index);
-					                            },
-					                            cancel: function(index) {
-					                                layer.close(index);
-					                            },
-					                            end: function() {
+											                        layer.open({
+											                            id: 'support',
+											                            type: 2,
+											                            title: '赞助活动',
+											                            maxmin: false,
+											                            scrollbar: false,
+											                            resize: false,
+											                            shadeClose: true, //点击遮罩关闭层
+											                            area: '600px',
+											                            content: '/person/support_act?act_id=' + act_id, //弹框显示的url
+											                            success: function(layero, index) {
+											                                layer.iframeAuto(index);
+											                            },
+											                            cancel: function(index) {
+											                                layer.close(index);
+											                            },
+											                            end: function() {
 
-					                            }
-					                        });
-					                    <?php else: ?>
+											                            }
+											                        });
+											                    <?php else: ?>
                         layer.msg('你已赞助过该活动');
                     <?php endif;
 endif;?>
@@ -235,27 +269,27 @@ endif;?>
         function signAct(act_id) {
             <?php if ($login_user): ?>
                 <?php if (isset($is_sign)): if (!$is_sign): ?>
-					                        layer.open({
-					                            id: 'sign',
-					                            type: 2,
-					                            title: '报名活动',
-					                            maxmin: false,
-					                            resize: false,
-					                            scrollbar: false,
-					                            shadeClose: true, //点击遮罩关闭层
-					                            area: '600px',
-					                            content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
-					                            success: function(layero, index) {
-					                                layer.iframeAuto(index);
-					                            },
-					                            cancel: function(index) {
-					                                layer.close(index);
-					                            },
-					                            end: function() {
+											                        layer.open({
+											                            id: 'sign',
+											                            type: 2,
+											                            title: '报名活动',
+											                            maxmin: false,
+											                            resize: false,
+											                            scrollbar: false,
+											                            shadeClose: true, //点击遮罩关闭层
+											                            area: '600px',
+											                            content: '/person/sign_act?act_id=' + act_id, //弹框显示的url
+											                            success: function(layero, index) {
+											                                layer.iframeAuto(index);
+											                            },
+											                            cancel: function(index) {
+											                                layer.close(index);
+											                            },
+											                            end: function() {
 
-					                            }
-					                        });
-					                    <?php else: ?>
+											                            }
+											                        });
+											                    <?php else: ?>
                         layer.msg('你已报名过该活动');
                     <?php endif;
 endif;?>
@@ -328,6 +362,9 @@ endif;?>
         window.location.href = "<?=url('/index/userNewsMore')?>";
     }
 
+    function userProMore() {
+        window.location.href = "<?=url('/index/userProMore')?>";
+    }
 
     function news(id) {
         var url = "<?=url('/index/news')?>/id/" + id;

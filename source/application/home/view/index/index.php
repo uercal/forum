@@ -85,12 +85,13 @@
                 <div class="index-title">
                     <strong>理论实践</strong>
                 </div>
-                <p class="item-more" onclick="userNewsMore()">查看更多 <i class="am-icon-angle-double-right"></i></p>
+                <!-- <p class="item-more" >查看更多 <i class="am-icon-angle-double-right"></i></p> -->
             </div>
             <div class="exp-body">
                 <div class="exp-left">
-                    <div class="eleft-title">
+                    <div class="eleft-title" style="justify-content:space-between;">
                         <p>学术天地</p>
+                        <small style="color:#999;cursor:pointer;" onclick="userNewsMore()">查看更多 <i class="am-icon-angle-double-right"></i></small>
                     </div>
                     <?php foreach ($index_data['user_news']['data'] as $item): ?>
                         <div class="eleft-item" onclick="listDetail(<?=$item['id']?>,0)">
@@ -124,15 +125,20 @@
 
                 </div>
                 <div class="exp-right">
-                    <div class="eright-title">
+                    <div class="eright-title" style="justify-content:space-between;">
                         <p>实践范例</p>
+                        <small style="color:#999;cursor:pointer;" onclick="userProMore()">查看更多 <i class="am-icon-angle-double-right"></i></small>
                     </div>
 
                     <?php foreach ($index_data['projects']['data'] as $item): ?>
                         <div class="eright-item">
                             <div class="eright-item-title">
                                 <p><?=$item['region_span']['city']?></p>
-                                <p><?=explode(',', $item['server_cate_span'])[0] . ' | ' . explode(',', $item['eng_cate_span'])[0]?></p>
+                                <?php 
+                                    $eng_arr = explode(',', $item['eng_cate_span']);
+                                    $ser_arr = explode(',', $item['server_cate_span']);
+                                ?>
+                                <p><?=$eng_arr[0].' | '.$ser_arr[0].(isset($ser_arr[1])?$ser_arr[1].'等等':'') ?></p>
                             </div>
                             <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
                             <div class="eright-item-body">
@@ -141,8 +147,8 @@
                                         <img style="width:100%;height:120px;object-fit:cover;" src="<?=$item['cover']['file_path']?>" alt="">
                                     </div>
                                     <div style="width:56%;height:120px;">
-                                        <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?=$item['id']?>,0)"><?=$item['title']?><?=$item['title']?><?=$item['title']?><?=$item['title']?></p>
-                                        <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?=bcdiv($item['total_invest'], 10000, 0) . '万/' . bcdiv($item['assignment_money'], 10000, 0) . '万'?></p>
+                                        <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?=$item['id']?>,0)"><?=$item['title']?></p>
+                                        <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?=$item['total_invest']. '万/' . $item['assignment_money']. '万'?></p>
                                     </div>
                                 </div>
                                 <div class="eright-item-b">

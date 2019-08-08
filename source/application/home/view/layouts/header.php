@@ -25,23 +25,17 @@
 }
 
 </style>
+
 <body>
     <header>
         <nav class="header-nav">
-            <div class="header-logo">
+            <div class="header-logo">                
                 <ul class="logo-ul">
-                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
-
-                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo1.jpg" alt=""></li>
-                    <li><img src="assets/home/images/logo.jpg" alt=""></li>
+                    <li id="logo1" style="left:320px;opacity:0;"><img src="assets/home/images/logo1.jpg" alt=""></li>
+                    <li id="logo2" style="top:38px;opacity:0;"><img src="assets/home/images/logo.jpg" alt=""></li>
                 </ul>
             </div>
-            </div>
+
             <ul class="header-ul" style="white-space:nowrap;text-align:center;">
                 <li><a href="/" class="<?=!isset($model) ? 'current' : ''?>">首页</a></li>
                 <?php foreach ($menus as $item): ?>

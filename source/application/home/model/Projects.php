@@ -45,10 +45,10 @@ class Projects extends ProjectsModel
                 unset($filter[$key]);
             } else {
                 if ($key == 'assignment_money') {
-                    $filter[$key] .= '元';
+                    $filter[$key] .= '万元';
                 }
                 if ($key == 'total_invest') {
-                    $filter[$key] .= '元';
+                    $filter[$key] .= '万元';
                 }
                 if ($key == 'assignment_date') {
                     $_t = explode(',', $value);

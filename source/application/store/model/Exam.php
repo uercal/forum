@@ -125,9 +125,9 @@ class Exam extends ExamModel
             'eng_cate' => '工程类别',
             'cover_id' => '封面图',
             'region_id' => '项目所在地',
-            'assignment_money' => '服务合同金额（元）',
+            'assignment_money' => '服务合同金额（万元）',
             'assignment_date' => '合同签订日期',
-            'total_invest' => '总投资金额（元）',
+            'total_invest' => '总投资金额（万元）',
         ];
     }
 
