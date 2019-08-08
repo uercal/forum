@@ -129,11 +129,11 @@
 <!-- <script src="https://unpkg.com/element-ui@2.8.2/lib/index.js"></script> -->
 <script src="assets/home/js/element.js"></script>
 <script>
-    //    
-    $.get('<?= url('paperAjax') ?>&type=project', function(res) {
-        //         
+    //
+    $.get('<?=url('paperAjax')?>&type=project', function(res) {
+        //
         var data = res.data;
-        // 
+        //
         window.vue = new Vue({
             el: '#app',
             data: {
@@ -151,7 +151,7 @@
                     this.getList();
                 },
                 handleAddPaper: function() {
-                    window.location.href = '<?= url('projectUpload') ?>';
+                    window.location.href = '<?=url('projectUpload')?>';
                 },
                 handleFilter: function(filters) {
                     for (var i in filters) {
@@ -165,7 +165,7 @@
                     var param = this.filter;
                     var _this = this;
                     console.log(param);
-                    $.post('<?= url('paperAjax') ?>&type=project', param, function(res) {
+                    $.post('<?=url('paperAjax')?>&type=project', param, function(res) {
                         _this.data = res.data;
                         _this.loading = false;
                     })
@@ -174,8 +174,8 @@
                     this.filter.page = e;
                     this.getList();
                 },
-                actDetail: function(id) {
-                    if (isNaN(id)) {
+                actDetail: function(id,reject=0) {
+                    if (reject==1) {
                         this.$alert(id, '驳回理由', {
                             confirmButtonText: '确定'
                         });
@@ -190,7 +190,7 @@
                         type: 'warning'
                     }).then(() => {
                         let _this = this;
-                        $.post('<?= url('delPaper') ?>', {
+                        $.post('<?=url('delPaper')?>', {
                             id: id,
                             type:'project'
                         }, function(res) {

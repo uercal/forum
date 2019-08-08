@@ -173,8 +173,8 @@
                     this.filter.page = e;
                     this.getList();
                 },
-                actDetail: function(id) {
-                    if (isNaN(id)) {
+                actDetail: function(id,reject=0) {
+                    if (reject==1) {
                         this.$alert(id, '驳回理由', {
                             confirmButtonText: '确定'
                         });
