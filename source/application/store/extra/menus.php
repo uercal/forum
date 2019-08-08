@@ -35,17 +35,17 @@ return [
         'index' => 'list_data/index&mode=news',
         'submenu' => [
             [
-                'name' => '富文本/封面/类别',
+                'name' => '新闻列表',
                 'icon' => 'icon-order',
                 'index' => 'list_data/index&mode=news',
             ],
             [
-                'name' => '跳转地址/类别/封面',
+                'name' => '期刊列表',
                 'icon' => 'icon-order',
                 'index' => 'list_data/index&mode=mag',
             ],
             [
-                'name' => '头像/职务/姓名',
+                'name' => '职务列表',
                 'icon' => 'icon-order',
                 'index' => 'list_data/index&mode=job',
             ],
