@@ -56,7 +56,7 @@ class ListModel extends BaseModel
     public static function getList($type)
     {
         $id = ListMode::where(['key_word' => $type])->value('id');
-        return self::where(['list_mode_id' => $id])->order('id')->paginate(15, false, [
+        return self::where(['list_mode_id' => $id])->order('create_time desc')->paginate(15, false, [
             'query' => Request::instance()->request()
         ]);
     }

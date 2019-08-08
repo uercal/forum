@@ -109,7 +109,7 @@
                         <div :class="'detail'" v-if="scope.row.status==20" @click="actDetail(scope.row.project.id)">详情</div>
                         <div :class="'del'" v-if="scope.row.status==20" @click="delDetail(scope.row.id)">删除</div>
                         <div :class="'detail'" v-if="scope.row.status==10" @click="actDetail(0)">/</div>
-                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus)">查看原因</div>
+                        <div :class="'detail'" v-if="scope.row.status==30" @click="actDetail(scope.row.bonus,1)">查看原因</div>
                     </template>
                 </el-table-column>
             </el-table>

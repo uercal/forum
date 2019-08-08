@@ -186,7 +186,7 @@ class ListDetail extends ListDetailModel
 
     public function getList($map = [])
     {
-        return $this->where($map)->paginate(15, false, [
+        return $this->where($map)->order('create_time desc')->paginate(15, false, [
             'query' => Request::instance()->request()
         ]);
     }
