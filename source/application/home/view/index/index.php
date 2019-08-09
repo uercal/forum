@@ -148,7 +148,7 @@
                                     </div>
                                     <div style="width:56%;height:120px;">
                                         <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?=$item['id']?>,0)"><?=$item['title']?></p>
-                                        <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?=$item['total_invest']. '万/' . $item['assignment_money']. '万'?></p>
+                                        <p style="font-weight:bold;color: #FF8670;font-size: 22px;text-align:right;"><?=$item['total_invest']. '万/' . $item['assignment_money']. '万'?></p>
                                     </div>
                                 </div>
                                 <div class="eright-item-b">

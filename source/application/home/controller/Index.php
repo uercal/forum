@@ -83,10 +83,18 @@ class Index extends Controller
             // 取消模板
             $this->view->engine->layout(false);
             //
-            if (!input('username')) {
-                $question = UserQuestion::all();
-                $this->assign('question', $question);
-            } else {
+            if (input('username') && (!input('question_id'))) {
+                $res = $user->getAnswer(input());
+                if ($res !== false) {
+                    $question = UserQuestion::get($res);
+                    $this->assign('question', $question);
+                    $this->assign('username', input('username'));
+                } else {
+                    $this->assign('error', $user->error);
+                }
+            }
+            
+            if(input('answer')) {
                 $res = $user->isPassProtect(input());
                 if (!$res) {
                     $this->assign('error', $user->error);

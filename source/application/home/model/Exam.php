@@ -109,8 +109,7 @@ class Exam extends ExamModel
     public function updateExam($form, $form_type, $user_id, $level_option)
     {
         //         
-        if ($form_type == 'person') {
-            $form['work_limit'] = implode(',', $form['work_limit']);
+        if ($form_type == 'person') {            
             // 
             $form['positio'] = implode(',', $form['positio']);
             $form['area'] = implode(',', $form['area']);

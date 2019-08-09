@@ -3,11 +3,11 @@
 namespace app\store\model;
 
 use app\common\model\Activity as ActivityModel;
-use think\Request;
 use think\Db;
+use think\Request;
 
 /**
- * 模型 
+ * 模型
  * @package app\store\model
  */
 class Activity extends ActivityModel
@@ -15,7 +15,7 @@ class Activity extends ActivityModel
     public function getList()
     {
         return $this->with(['cover'])->where([])->order('create_time desc')->paginate(15, false, [
-            'query' => Request::instance()->request()
+            'query' => Request::instance()->request(),
         ]);
     }
 
@@ -32,7 +32,7 @@ class Activity extends ActivityModel
             $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
             $data['active_begin'] = strtotime($data['active_begin']);
             $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
-            //             
+            //
             if (isset($data['cover_id'])) {
                 $data['cover_id'] = array_values($data['cover_id'])[0];
             }
@@ -54,6 +54,10 @@ class Activity extends ActivityModel
                 $data['cover_id'] = array_values($data['cover_id'])[0]['id'];
             }
         }
+        unset($data['sign_begin']);
+        unset($data['sign_end']);
+        unset($data['active_begin']);
+        unset($data['active_end']);
         return $this->allowField(true)->save($data);
     }
 
@@ -61,7 +65,7 @@ class Activity extends ActivityModel
     {
         // 开启事务
         Db::startTrans();
-        try {            
+        try {
             $this->delete();
             Db::commit();
             return true;

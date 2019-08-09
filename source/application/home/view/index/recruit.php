@@ -49,7 +49,7 @@
                     <p><?= explode(',', $item['job_price'])[0] . '-' . explode(',', $item['job_price'])[1] . '元/月' ?></p>
                 </div>
                 <div class="recruit-m flex-c flex-col">
-                    <p><?= $item['user'] ? $item['user']['company']['company_name'] : '协会' ?></p>
+                    <p><?= $item['user'] ? $item['user']['company']['company_name'] : '海南省全过程工程咨询研究会' ?></p>
                     <p>
                         <?= $item['job_name'] . ' /&nbsp;&nbsp; ' . $item['job_experience_name'] . '工作经验 /&nbsp;&nbsp;' . $item['job_education_name'] ?>
                     </p>

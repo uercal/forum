@@ -47,6 +47,18 @@
     }
     // 
 
+    function pro_filter() {
+        if ($('.list-filter-order span').hasClass('am-icon-chevron-down')) {
+            $('.list-filter-order span').removeClass('am-icon-chevron-down');
+            $('.list-filter-order span').addClass('am-icon-chevron-up');
+        } else {
+            $('.list-filter-order span').removeClass('am-icon-chevron-up');
+            $('.list-filter-order span').addClass('am-icon-chevron-down');
+        }
+        $('.pro-filter-container').toggle(700);
+    }
+
+
     function search() {
         var title = $('input[name="title"]').val();
         console.log(title);

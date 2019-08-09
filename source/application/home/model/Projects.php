@@ -56,13 +56,13 @@ class Projects extends ProjectsModel
                 }
             }
         }
-        if (input('region_option')) {
+        if (input('region_option')) {            
             $region_ids = explode(',', input('region_option'));
             $_map['province_id'] = ['=', $region_ids[0]];
             isset($region_ids[1]) ? $_map['city_id'] = ['=', $region_ids[1]] : '';
             isset($region_ids[2]) ? $_map['region_id'] = ['=', $region_ids[2]] : '';
             $region_name = Region::getMergeNameById(end($region_ids));
-            $filter['region_option'] = $region_name;
+            $filter['region_option'] = $region_name;            
         }
 
         //

@@ -1,0 +1,5 @@
+{
+    "search.followSymlinks": false,
+    "git.autorefresh": false,
+    "git.enabled": false
+}

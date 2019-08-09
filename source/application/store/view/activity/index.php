@@ -82,7 +82,7 @@
                                                                     'activity/edit',
                                                                     ['id' => $item['id']]
                                                                 ) ?>">
-                                                        <i class="am-icon-pencil"></i> 查看
+                                                        <i class="am-icon-pencil"></i> 修改
                                                     </a>
                                                     <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['id'] ?>">
                                                         <i class="am-icon-trash"></i> 删除

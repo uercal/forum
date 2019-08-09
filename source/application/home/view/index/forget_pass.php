@@ -307,26 +307,28 @@
                         <i class="am-icon-user"></i>
                         <input type="text" class="myapp-login-input-text am-form-field" name="username" placeholder="请输入用户名">
                     </div>
+                    
+                </fieldset>
 
+                <button type="button" id="btn-next" class="myapp-login-form-submit am-btn am-btn-block">下一步</button>
+            </form>
+        <?php elseif(input('username')&& (!input('answer'))):?>
+            <form id="loginForm" class="login-form">
+                <fieldset class="myapp-login-form am-form-set">                    
                     <div class="am-form-group am-form-group-select">
                         <i class="am-icon-lock"></i>
-                        <select data-am-selected="{maxHeight:'100px'}" name="question_id" required placeholder="请选择密保问题">
-                            <option value=""></option>
-                            <?php foreach ($question as $item) : ?>
-                                <option value="<?= $item['id'] ?>"><?= $item['question'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="text" class="myapp-login-input-text am-form-field" readonly  value="<?= $question['question'] ?>">
                     </div>
                     <div class="am-form-group am-form-icon">
                         <i class="am-icon-lock"></i>
                         <input type="text" class="myapp-login-input-text am-form-field" name="answer" placeholder="请输入密保答案" required />
                     </div>
-
+                    <input type="hidden" name="question_id" value="<?= $question['id'] ?>">
+                    <input type="hidden" name="username" value="<?= $username ?>">
                 </fieldset>
 
                 <button type="button" id="btn-next" class="myapp-login-form-submit am-btn am-btn-block">下一步</button>
-            </form>
-
+            </form>        
         <?php else :  if (!isset($error)) : ?>
 
                 <form id="loginForm" class="login-form">

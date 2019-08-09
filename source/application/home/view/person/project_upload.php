@@ -187,6 +187,11 @@
                             </el-cascader>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="服务单位:" prop="server_company" label-width="80px">
+                            <el-input v-model="form.server_company"></el-input>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
 
                 <el-row type="flex">
@@ -270,6 +275,11 @@
                     title: [{
                         required: true,
                         message: '请填写标题',
+                        trigger: 'blur'
+                    }],
+                    server_company:[{
+                        required: true,
+                        message: '请填写内容',
                         trigger: 'blur'
                     }],
                     server_cate: [{

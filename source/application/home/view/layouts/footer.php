@@ -313,31 +313,23 @@ endif;?>
     }
 
     function userProject(id, category_id) {
-        var is_login = "<?=session('forum_user') ? 1 : 0?>";
-        var role_valid = "<?=session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') !== false ? 0 : 1) : 0?>";
-        if (is_login == 1 && role_valid == 1) {
-            window.location.href = "<?=url('/index/projectDetail')?>&id=" + id + "&category_id=" + category_id;
-        } else {
-            layer.msg('只有个人会员或以上才可以查看');
-        }
+        // var is_login = "<?=session('forum_user') ? 1 : 0?>";
+        // var role_valid = "<?=session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') !== false ? 0 : 1) : 0?>";
+        // if (is_login == 1 && role_valid == 1) {
+        //     window.location.href = "<?=url('/index/projectDetail')?>&id=" + id + "&category_id=" + category_id;
+        // } else {
+        //     layer.msg('只有个人会员或以上才可以查看');
+        // }
+        
+        window.location.href = "<?=url('/index/projectDetail')?>&id=" + id + "&category_id=" + category_id;
     }
 
     function userDetail(id, category_id, is_sup = 0) {
         window.location.href = "<?=url('/index/userDetail')?>&user_id=" + id + "&category_id=" + category_id + '&is_sup=' + is_sup;
     }
 
-    function listDetail(id, category_id) {
-        <?php if (isset($key_word) && $key_word == 'user_news'): ?>
-            var is_login = "<?=session('forum_user') ? 1 : 0?>";
-            var role_valid = "<?=session('forum_user')['user'] ? (strpos(session('forum_user')['user']['role'], '0') !== false ? 0 : 1) : 0?>"
-            if (is_login === '1' && role_valid === '1') {
-                window.location.href = "<?=url('/index/listDetail')?>&id=" + id + "&category_id=" + category_id;
-            } else {
-                layer.msg('只有个人会员或以上才可以查看');
-            }
-        <?php else: ?>
-            window.location.href = "<?=url('/index/listDetail')?>&id=" + id + "&category_id=" + category_id;
-        <?php endif;?>
+    function listDetail(id, category_id) {        
+        window.location.href = "<?=url('/index/listDetail')?>&id=" + id + "&category_id=" + category_id;        
     }
 
 

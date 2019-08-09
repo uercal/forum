@@ -332,7 +332,7 @@
                     <div class="list-filter">
                         <div class="list-filter-order" onclick="pro_filter()" style="background: #44874B;">
                             <p style="color:#fff;">更多筛选</p>
-                            <span class="am-icon-chevron-down" style="color:#fff;"></span>
+                            <span class="am-icon-chevron-<?= empty($data['filter'])?'down':'up' ?>" style="color:#fff;"></span>
                         </div>
                         <div class="list-filter-order" onclick="list_sort('<?=input('sort') ? input('sort') : 'asc'?>')">
                             <p>按合同日期</p>
@@ -353,7 +353,7 @@
                 <!--  -->
                 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
                 <!--  -->
-                <div class="pro-filter-container" style="display:none;">
+                <div class="pro-filter-container" <?= empty($data['filter'])?'style="display:none;"':'' ?>>
                     <?php if (!empty($data['filter'])): ?>
                         <div class="pro-filter">
                             <p style="color: #333333;">已选条件：</p>
@@ -416,14 +416,14 @@
                                 <p>项目所在地：</p>
                             </div>
                             <div class="pro-filter-item-body" style="padding-left:10px;">
-                                <el-cascader placeholder='请选择或搜索' expand-trigger="hover" change-on-select :options="region_data" v-model="region_option" filterable @visible-change="handleChange">
+                                <el-cascader placeholder='请选择或搜索' expand-trigger="hover"  :options="region_data" v-model="region_option" @change="handleChange">
                                 </el-cascader>
                             </div>
                         </div>
 
                         <div class="pro-filter-list-item">
                             <div class="pro-filter-list-item-head">
-                                <p>服务合同金额：</p>
+                                <p>服务合同金额（万元）：</p>
                             </div>
                             <div class="pro-filter-item-body">
                                 <div class="<?=empty(input('assignment_money')) ? 'active' : ''?>" onclick="assignment_money(0)">
@@ -460,7 +460,7 @@
 
                         <div class="pro-filter-list-item">
                             <div class="pro-filter-list-item-head">
-                                <p>总投资金额：</p>
+                                <p>总投资金额（万元）：</p>
                             </div>
                             <div class="pro-filter-item-body">
                                 <div class="<?=empty(input('total_invest')) ? 'active' : ''?>" onclick="total_invest(0)">
@@ -506,14 +506,12 @@
                         assignment_date: assignment_date == 0 ? [] : assignment_date.split(',')
                     },
                     methods: {
-                        handleChange: function(e) {
-                            if (!e) {
-                                var value = this.region_option;
-                                console.log(value);
-                                $('input[name="region_option"]').val(value);
-                                $form = $('#pro_list').serialize();
-                                window.filter_jump($form);
-                            }
+                        handleChange: function(e) {                                                        
+                            var value = this.region_option;
+                            console.log(value);
+                            $('input[name="region_option"]').val(value);
+                            $form = $('#pro_list').serialize();                                
+                            window.filter_jump($form);                            
                         },
                         a_money: function() {
                             var r = this.assignment_money_s + '-' + this.assignment_money_e;
@@ -546,28 +544,30 @@
 
             <!-- project_item -->
             <div class="pro-item-body">
-                <?php foreach ($data['list'] as $item): ?>
-                    <div class="pro-item" onclick="userProject(<?=$item['id']?>,<?=$model['category_id']?>)">
-                        <div class="pro-item-head">
-                            <p>项目所在地：<?=implode('', $item['region_span'])?></p>
-                            <p><?=date('Y/m/d', $item['assignment_date'])?></p>
+                <?php foreach ($data['list'] as $item): ?>                    
+                    <div class="pro-item">
+                        <div class="eright-item-title" style="padding:10px 20px;">
+                            <p><?=$item['region_span']['city']?></p>       
+                            <?php 
+                                $eng_arr = explode(',', $item['eng_cate_span']);
+                                $ser_arr = explode(',', $item['server_cate_span']);
+                            ?>
+                            <p><?=$eng_arr[0].' | '.$ser_arr[0].(isset($ser_arr[1])?','.$ser_arr[1]:'') ?></p>                         
                         </div>
-                        <hr style="height:1px;border:none;border-top:1px dashed #979797;margin:0;opacity: 0.2;" />
-                        <div class="pro-item-info">
-                            <strong><?=$item['title']?></strong>
-                            <div class="pro-item-detail">
-                                <div class="pro-item-detail-l">
-                                    <div>
-                                        <strong><?=$item['total_invest'] . '万/' . $item['assignment_money'] . '万'?></strong>
-                                    </div>
-                                    <p>总投资/合同金额</p>
+                        <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
+                        <div class="eright-item-body">
+                            <div class="eright-item-name">
+                                <div style="width:40%;height:120px;">
+                                    <img style="width:100%;height:120px;object-fit:cover;" src="<?=$item['cover']['file_path']?>" alt="">
                                 </div>
-                                <div class="pro-item-detail-r">
-                                    <div>
-                                        <strong style="font-weight: 500;"><?=$item['server_cate'][0] . '/' . $item['eng_cate'][0]?></strong>
-                                    </div>
-                                    <p>服务/工程类型</p>
+                                <div style="width:56%;height:120px;">
+                                    <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?=$item['id']?>,0)"><?=$item['title']?></p>
+                                    <p style="font-weight:bold;color: #FF8670;font-size: 22px;text-align:right;"><?=$item['total_invest']. '万/' . $item['assignment_money']. '万'?></p>
                                 </div>
+                            </div>
+                            <div class="eright-item-b">
+                                <p><?=date('Y/m/d', strtotime($item['assignment_date_time']))?></p>
+                                <p>总投资/合同金额</p>
                             </div>
                         </div>
                     </div>

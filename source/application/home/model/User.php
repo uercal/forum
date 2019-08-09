@@ -51,9 +51,14 @@ class User extends UserModel
             case 'person':
                 if (input('title')) {
                     $map['name'] = ['like', '%' . input('title') . '%'];
+                    $map['memberLevel'] = ['like', '%' . input('title') . '%'];
+                    $map['belong_company'] = ['like', '%' . input('title') . '%'];
+                    $map['education_degree'] = ['like', '%' . input('title') . '%'];
+                    $map['education_degree_xw'] = ['like', '%' . input('title') . '%'];
+                    $map['positio'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserPerson;
-                $list = $model->where($map)->order($order)
+                $list = $model->whereOr($map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
@@ -282,6 +287,19 @@ class User extends UserModel
             $this->error = '密保或答案错误';
             return false;
         }
+    }
+
+    public function getAnswer($data)
+    {
+        $obj = $this->where([
+            'user_name' => $data['username'],
+        ])->find();
+
+        if (!$obj) {
+            $this->error = '用户名不存在';
+            return false;
+        }
+        return $obj['question_id'];        
     }
 
     /**

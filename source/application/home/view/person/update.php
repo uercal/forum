@@ -187,8 +187,11 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="政治面貌：" prop="political_face">
-                                        <el-input v-model="form_person.political_face" placeholder="请填写政治面貌"></el-input>
+                                    <el-form-item label="政治面貌：" prop="political_face">                                        
+                                        <el-select v-model="form_person.political_face" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in political_face_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -225,8 +228,8 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="学历学位：" prop="education_degree">
-                                        <el-select v-model="form_person.education_degree" placeholder="请选择">
+                                    <el-form-item label="学历：" prop="education_degree">
+                                        <el-select v-model="form_person.education_degree" placeholder="请选择" style="width:100%;">
                                             <el-option v-for="item in education_degree_options" :key="item" :label="item" :value="item">
                                             </el-option>
                                         </el-select>
@@ -235,10 +238,20 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
+                                    <el-form-item label="学位：" prop="education_degree_xw">
+                                        <el-select v-model="form_person.education_degree_xw" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in education_degree_xw_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
                                     <el-form-item label="专业：" prop="education_major">
                                         <el-input v-model="form_person.education_major" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                                
+                            </el-row>
+                            <el-row type="flex" class="row-bg">                               
                                 <el-col :span="12">
                                     <el-form-item label="毕业时间：" prop="education_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.education_time" style="width: 100%;"></el-date-picker>
@@ -286,20 +299,17 @@
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
-                                <el-col :span="24">
-                                    <el-form-item label="工作年限：" prop="work_limit">
-                                        <el-date-picker v-model="form_person.work_limit" value-format="yyyy-MM" type="monthrange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-                                        </el-date-picker>
+                                <el-col :span="12">
+                                    <el-form-item label="参加工作时间：" label-width="30%" prop="work_limit">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.work_limit" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
                                 </el-col>
-                            </el-row>
-                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="职称取得时间：" label-width="32%" prop="positio_time">
+                                    <el-form-item label="职称取得时间：" label-width="30%" prop="positio_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
                                 </el-col>
-                            </el-row>
+                            </el-row>                            
 
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">图片信息</div>
@@ -874,6 +884,18 @@
                     '大学本科',
                     '研究生'
                 ],
+                education_degree_xw_options:[
+                    '无学位',
+                    '学士',
+                    '硕士',
+                    '博士'
+                ],
+                political_face_options:[
+                    '中共党员',
+                    '民主党派人士',
+                    '无党派人士',
+                    '境外党派人士'
+                ],
                 positio_options:[
                     '正高级工程师','教授','研究员','高级工程师','副教授','副研究员'
                 ],
@@ -959,6 +981,11 @@
                         trigger: 'blur'
                     }],
                     education_degree: [{
+                        required: true,
+                        message: '请填写内容',
+                        trigger: 'blur'
+                    }],
+                    education_degree_xw:[{
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'

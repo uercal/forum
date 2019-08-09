@@ -4,9 +4,9 @@
         <div class="index-news">
             <div class="index-head">
                 <div class="index-title">
-                    <strong><?= $index_data['img_list']['name'] ?></strong>
+                    <strong>单位动态</strong>
                 </div>
-                <p class="item-more" onclick="">查看更多 <i class="am-icon-angle-double-right"></i></p>
+                <p class="item-more" onclick="window.location.href='<?= url('listNews') ?>'">查看更多 <i class="am-icon-angle-double-right"></i></p>
             </div>
             <div class="news-body">
                 <?php if (!empty($index_data['img_list']['list_detail']->toArray())) : ?>
@@ -15,7 +15,7 @@
                             <ul class="am-slides">
                                 <?php foreach ($index_data['img_list']['list_detail'] as $item) : ?>
                                     <li>
-                                        <img src="<?= $item['cover']['file_path'] ?>" />
+                                        <img style="cursor:pointer;" src="<?= $item['cover']['file_path'] ?>" onclick="listDetail(<?=$item['id']?>,0)" />
                                         <div class="news-slider-text">
                                             <p><?= $item['title'] ?></p>
                                         </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="news-list">
                         <?php foreach ($index_data['img_list']['list_detail'] as $item) : ?>
-                            <div class="news-item">
+                            <div class="news-item" onclick="listDetail(<?=$item['id']?>,0)">
                                 <strong>
                                     <strong>
                                         <?= $item['title'] ?>
@@ -56,13 +56,15 @@
             <div class="index-head">
                 <div class="index-title">
                     <strong>学术实践</strong>
-                </div>
-                <!-- <p class="item-more">查看更多 》</p> -->
+                </div>                
             </div>
             <div class="exp-body">
                 <div class="exp-left">
-                    <div class="eleft-title">
+                    <div class="eleft-title" style="justify-content:space-between;">
                         <p><?= $index_data['normal_list']['name'] ?></p>
+                        <?php if(!empty($index_data['normal_list']['list_detail']->toArray())):?>
+                            <small style="color:#999;cursor:pointer;" onclick="window.location.href='<?= url('listNormal') ?>'">查看更多 <i class="am-icon-angle-double-right"></i></small>
+                        <?php endif;?>                        
                     </div>
 
                     <?php if (!empty($index_data['normal_list']['list_detail']->toArray())) : foreach ($index_data['normal_list']['list_detail'] as $item) : ?>
@@ -109,8 +111,11 @@
 
                 </div>
                 <div class="exp-right" <?= empty($index_data['project_list']) ? 'style="background:#EFF2EC;"' : '' ?>>
-                    <div class="eright-title">
+                    <div class="eright-title" style="justify-content:space-between;">
                         <p>实践范例</p>
+                        <?php if (!empty($index_data['project_list'])) :?>
+                        <small style="color:#999;cursor:pointer;" onclick="window.location.href='<?= url('listProject') ?>'">查看更多 <i class="am-icon-angle-double-right"></i></small>
+                        <?php endif;?>
                     </div>
 
                     <?php if (!empty($index_data['project_list'])) : foreach ($index_data['project_list'] as $item) : ?>
@@ -126,8 +131,8 @@
                                             <img style="width:100%;height:120px;object-fit:cover;" src="<?= $item['cover']['file_path'] ?>" alt="">
                                         </div>
                                         <div style="width:56%;height:120px;">
-                                            <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?= $item['id'] ?>)"><?= $item['title'] ?><?= $item['title'] ?><?= $item['title'] ?><?= $item['title'] ?></p>
-                                            <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?= bcdiv($item['total_invest'], 10000, 0) . '万/' . bcdiv($item['assignment_money'], 10000, 0) . '万' ?></p>
+                                            <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?= $item['id'] ?>)"><?= $item['title'] ?></p>
+                                            <p style="font-weight:bold;color: #FF8670;font-size: 26px;text-align:right;"><?= $item['total_invest'] . '万/' . $item['assignment_money'] . '万' ?></p>
                                         </div>
                                     </div>
                                     <div class="eright-item-b">

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <title>工程协会子站-<?= $company['company_name'] ?></title>
+    <title><?= $company['company_name'] ?></title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/home/css/index.css" />
     <link rel="stylesheet" href="assets/home/css/common.min.css" />

@@ -13,7 +13,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" readonly name="activity[title]" value="<?= $model['title'] ?>" required>
+                                    <input type="text" class="tpl-form-input" name="activity[title]" value="<?= $model['title'] ?>" required>
                                 </div>
                             </div>
 
@@ -22,14 +22,14 @@
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-form-file">
                                         <div class="am-form-file">
-                                            <!-- <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
+                                            <button type="button" class="upload-file am-btn am-btn-secondary am-radius">
                                                 <i class="am-icon-cloud-upload"></i> 选择图片
-                                            </button> -->
+                                            </button>
                                             <div class="uploader-list am-cf">
                                                 <?php if (!empty($model['cover'])) : ?>
                                                     <div class="file-item">
                                                         <img src="<?= $model['cover']['file_path'] ?>">
-                                                        <input type="hidden" name="news[cover_id]" value="<?= $model['cover']['file_id'] ?>">
+                                                        <input type="hidden" name="activity[cover_id]" value="<?= $model['cover']['file_id'] ?>">
                                                         <i class="iconfont icon-shanchu file-item-delete"></i>
                                                     </div>
                                                 <?php endif; ?>
@@ -109,7 +109,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动人数 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="activity[member_count]" value="<?= $model['member_count'] ?>" required>
+                                    <input type="number" class="tpl-form-input" readonly name="activity[member_count]" value="<?= $model['member_count'] ?>" required>
                                 </div>
                             </div>
 
@@ -142,12 +142,12 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="am-form-group">
+                            <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                     <button type="submit" class="j-submit am-btn am-btn-secondary">提交
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
                         </fieldset>
                     </div>
                 </form>

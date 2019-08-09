@@ -48,7 +48,11 @@
                             <span><?= implode(',', $detail['region_span']) ?></span>
                         </div>
                         <div class="projects-item-option">
-                            <p>建设单位：</p>
+                            <p>服务单位：</p>
+                            <span><?= $detail['server_company'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>项目提交单位：</p>
                             <span><?= $detail['user']['company']['company_name'] ?></span>
                         </div>
                         <!-- <div class="projects-item-option">

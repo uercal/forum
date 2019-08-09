@@ -28,8 +28,7 @@ class UserPerson extends BaseModel
         }
         $obj = $obj->toArray();        
         $obj['positio_time'] = date('Y-m-d', $obj['positio_time']);
-        $obj['education_time'] = date('Y-m-d', $obj['education_time']);
-        $obj['work_limit'] = explode(',', $obj['work_limit']);
+        $obj['education_time'] = date('Y-m-d', $obj['education_time']);        
         $obj['area'] = explode(',',$obj['area']);
         $obj['positio'] = explode(',',$obj['positio']);        
         unset($obj['create_time']);
