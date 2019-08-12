@@ -3,18 +3,15 @@
 namespace app\home\model;
 
 use app\common\model\Exam as ExamModel;
-use app\store\model\Exam as ExamStoreModel;
-use app\home\model\ListMode;
-use app\home\model\ListModel;
 use app\home\model\ListDetail;
 use app\home\model\Projects;
 use app\home\model\Recruit;
-use think\Request;
-use think\Db;
 use function Qiniu\json_decode;
+use think\Db;
+use think\Request;
 
 /**
- * 模型 
+ * 模型
  * @package app\store\model
  */
 class Exam extends ExamModel
@@ -22,7 +19,7 @@ class Exam extends ExamModel
     public $error;
 
     /**
-     * 
+     *
      */
     public function getResMsg($user_id, $type)
     {
@@ -40,7 +37,7 @@ class Exam extends ExamModel
             if ($new_status == 30) {
                 $map['update_time'] = ['between', [strtotime('-1 day'), time()]];
                 $map['status'] = ['=', 30];
-                // $r = $this->where($map)->order('update_time desc')->fetchSql(true)->find();            
+                // $r = $this->where($map)->order('update_time desc')->fetchSql(true)->find();
                 $obj = $this->where($map)->order('update_time desc')->find();
             }
         }
@@ -49,14 +46,12 @@ class Exam extends ExamModel
         return $obj;
     }
 
-
-
     /**
      * 获取提交的论文
      */
     public function getDataAjax($user_id, $type)
     {
-        //  
+        //
         $input = input();
         $map = [];
         $map['user_id'] = ['=', $user_id];
@@ -83,38 +78,32 @@ class Exam extends ExamModel
         }
         // project
 
-
-
         // common
         if (!empty($input['key_word'])) {
             $map['str_bonus'] = ['like', '%' . $input['key_word'] . '%'];
         }
 
-
         $data = $this->with(['listDetail', 'listDetail.list', 'project', 'recruit'])->where($map)->order('create_time desc')->paginate(5, false, [
-            'query' => Request::instance()->request()
+            'query' => Request::instance()->request(),
         ]);
 
         return $data;
     }
-
-
-
-
-
 
     /**
      * updateExam
      */
     public function updateExam($form, $form_type, $user_id, $level_option)
     {
-        //         
-        if ($form_type == 'person') {            
-            // 
+        //
+        if ($form_type == 'person' || $form_type == 'expert') {
+            //
             $form['positio'] = implode(',', $form['positio']);
             $form['area'] = implode(',', $form['area']);
+            $form['highPeople'] = !empty($form['highPeople']) ? implode(',', $form['highPeople']) : '';
+            $form['pro_qualify'] = !empty($form['pro_qualify']) ? implode(',', $form['pro_qualify']) : '';
         }
-        // 
+        //
         switch ($form_type) {
             case 'paper':
                 $id_bonus = $form['list_id'];
@@ -127,7 +116,7 @@ class Exam extends ExamModel
                     'type' => 20, //论文提交
                     'type_bonus' => 'paper',
                     'id_bonus' => $id_bonus,
-                    'str_bonus' => $str_bonus
+                    'str_bonus' => $str_bonus,
                 ];
                 break;
 
@@ -140,7 +129,7 @@ class Exam extends ExamModel
                     'content' => $content,
                     'type' => 30, //项目提交
                     'type_bonus' => 'project',
-                    'str_bonus' => $str_bonus
+                    'str_bonus' => $str_bonus,
                 ];
                 break;
 
@@ -153,7 +142,7 @@ class Exam extends ExamModel
                     'content' => $content,
                     'type' => 40, //招聘提交
                     'type_bonus' => 'recruit',
-                    'str_bonus' => $str_bonus
+                    'str_bonus' => $str_bonus,
                 ];
                 break;
             case 'site':
@@ -173,7 +162,7 @@ class Exam extends ExamModel
                     'level_option' => $level_option,
                     'content' => $content,
                     'type' => 10, //用户升级
-                    'type_bonus' => $form_type
+                    'type_bonus' => $form_type,
                 ];
                 break;
         }
@@ -184,9 +173,9 @@ class Exam extends ExamModel
                 'user_id' => $user_id,
                 'type' => 10,
                 'status' => 20,
-                'type_bonus' => $form_type
+                'type_bonus' => $form_type,
             ])->order('id desc')->find();
-            //            
+            //
             if ($last_info) {
                 $old_content = json_decode($last_info['content'], true);
                 $content_arr = json_decode($content, true);
@@ -219,10 +208,6 @@ class Exam extends ExamModel
         }
     }
 
-
-
-
-
     public function deleteExamPaper($id, $type)
     {
 
@@ -237,7 +222,6 @@ class Exam extends ExamModel
                 $model = new Projects;
                 break;
 
-
             case 'recruit':
                 $model = new Recruit;
                 break;
@@ -248,7 +232,7 @@ class Exam extends ExamModel
         try {
             $model->where(['exam_id' => $id])->delete();
             $this->where(['id' => $id])->update([
-                'status' => 40
+                'status' => 40,
             ]);
             Db::commit();
             return true;
@@ -258,8 +242,6 @@ class Exam extends ExamModel
             return false;
         }
     }
-
-
 
     public static function getInvalidArr()
     {
@@ -275,7 +257,7 @@ class Exam extends ExamModel
             'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
             'sup_eng_cate_name', 'sup_goods_cate_name', 'sup_server_cate_name',
             'sup_build_time_text',
-            // 
+            //
             'memberLevel',
 
         ];

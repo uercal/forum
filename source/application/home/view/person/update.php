@@ -125,21 +125,38 @@
     .edui-container {
         width: auto !important;
     }
+
+    /*  */
+    .el-tag + .el-tag {
+    margin-left: 10px;
+    }
+    .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
+    }
 </style>
 <!--  -->
 <div class="person-my-act" id="app">
     <div class="person-my-act-head">
         <div>
-            <p>会员类型</p>
-            <small style="margin-left:20px;color:#999999;">(请选择相应的角色)</small>
+            <p>入会/入库类型</p>
+            <small style="margin-left:20px;color:#999999;">(请选择相应的类型)</small>
         </div>
     </div>
 
     <div class="person-my-act-body" style="margin-top:35px;">
         <template>
             <el-tabs v-model="activeName" type="card" class="">
-                <?php if ($levelOption == 1 || $levelOption == 2): ?>
-                    <el-tab-pane label="<?=$levelOption == 2 ? '修改个人会员信息' : '个人会员'?>" name="person">
+                <?php if ($levelOption == 0 || $levelOption == 1): ?>
+                    <el-tab-pane label="<?=$levelOption == 2 ? '修改个人会员+专家信息' : '个人会员+专家'?>" name="person">
                         <el-form ref="person" :model="form_person" :rules="person_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">个人基本信息</div>
@@ -265,30 +282,29 @@
                                     <el-form-item label="所在单位：" prop="belong_company">
                                         <el-input v-model="form_person.belong_company" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                               
                             </el-row>
-                            <el-row type="flex" class="row-bg">
+                            <el-row type="flex" class="row-bg">  
                                 <el-col :span="12">
                                     <el-form-item label="职务：" prop="job">
                                         <el-input v-model="form_person.job" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                              
                                 <el-col :span="12">
                                     <el-form-item label="职称等级：" prop="positio">
                                         <el-select v-model="form_person.positio" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in positio_options" :key="index" :label="item" :value="item">
                                             </el-option>
-                                        </el-select>
-                                        <!-- <el-input v-model="form_person.positio" placeholder=""></el-input> -->
+                                        </el-select>                                        
                                     </el-form-item>
-                                </el-col>
-                            </el-row>
-                            <el-row type="flex" class="row-bg">
+                                </el-col>                                
+                            </el-row>                            
+                            <el-row type="flex" class="row-bg">   
                                 <el-col :span="12">
                                     <el-form-item label="业务行业：" prop="sector">
                                         <el-input v-model="form_person.sector" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                             
                                 <el-col :span="12">
                                     <el-form-item label="业务领域：" prop="area">
                                         <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
@@ -296,21 +312,75 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                                
                             </el-row>
-                            <el-row type="flex" class="row-bg">
+                            <el-row type="flex" class="row-bg">     
                                 <el-col :span="12">
                                     <el-form-item label="参加工作时间：" label-width="30%" prop="work_limit">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.work_limit" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
-                                </el-col>
+                                </el-col>                           
                                 <el-col :span="12">
                                     <el-form-item label="职称取得时间：" label-width="30%" prop="positio_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
+                                </el-col>                                
+                            </el-row>
+                            <el-row type="flex" class="row-bg">                                                                
+                                <el-col :span="12">
+                                    <el-form-item label="高层次人才：" prop="highPeople" label-width="90px">
+                                        <el-select v-model="form_person.highPeople" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in highPeopleOptions" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>                                        
+                                    </el-form-item>
                                 </el-col>
-                            </el-row>                            
-
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="职业资格：" label-width="80px">
+                                        <el-tag
+                                        :key="tag"
+                                        v-for="tag in form_person.pro_qualify"
+                                        closable
+                                        :disable-transitions="false"
+                                        @close="handleClose(tag)">
+                                        {{tag}}
+                                        </el-tag>
+                                        <el-input
+                                            class="input-new-tag"
+                                            v-if="inputVisible"
+                                            v-model="inputValue"
+                                            ref="saveTagInput"
+                                            size="small"
+                                            @keyup.enter.native="handleInputConfirm"
+                                            @blur="handleInputConfirm"
+                                        >
+                                        </el-input>
+                                        <el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>                                                                                                                                                              
+                                    </el-form-item>                                    
+                                </el-col>                                
+                            </el-row>                      
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">等级</div>
+                            <el-row>
+                                <el-col :span="12" style="position:relative;">
+                                    <el-form-item label="会员等级：" prop="memberLevel">
+                                        <el-select v-model="form_person.memberLevel" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in levelPersonOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12" style="position:relative;">
+                                    <el-form-item label="专家等级：" prop="expertLevel">
+                                        <el-select v-model="form_person.expertLevel" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in expertLevelOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">图片信息</div>
                             <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
@@ -352,21 +422,7 @@
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
                                 </el-col>
-                            </el-row>
-
-                            <div class="divider" style="margin-top:25px;">会员等级</div>
-
-                            <el-row>
-                                <el-col :span="24" style="position:relative;">
-                                    <el-form-item label="会员等级：" prop="memberLevel">
-                                        <el-select v-model="form_person.memberLevel" placeholder="请选择">
-                                            <el-option v-for="item in levelPersonOptions" :key="item" :label="item" :value="item">
-                                            </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-
+                            </el-row>                            
 
                             <el-col :span="24" style="margin-top:30px;">
                                 <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
@@ -374,23 +430,275 @@
                         </el-form>
                     </el-tab-pane>
                 <?php endif;?>
-                <?php if ($levelOption == 2 && !in_array(2, $roleArr)): ?>
-                    <el-tab-pane label="专家会员" name="expert">
-                        <div class="my-act-item" style="background-color:#fff;margin-top:0;padding:0;">
-                            <div style="width:100%;display:flex;">
-                                <p style="font-size:16px;text-indent:2rem;">申请专家会员需经过主管理员审核个人会员信息资料，若资质符合专家会员要求，将成为海南省全过程工程咨询专家库专家。</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">高级专家：高级工程师、副教授、副研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">资深专家：正高级工程师、教师、研究员</p>
-                                <p style="font-size:14px;text-indent:2rem;color:#999999;">顶级专家：院士、长江学者、百人计划、杰青优青、千人计划、万人计划、双一流学术带头人、其他高层次人才</p>
+                <?php if ($levelOption == 0 || $levelOption == 2): ?>
+                    <el-tab-pane label="<?=$levelOption == 2 ? '修改专家信息' : '仅专家'?>" name="expert">
+                        <el-form ref="person" :model="form_person" :rules="person_rules" label-width="80px" label-position="left" style="margin-top:30px;">
+                            <!--  -->
+                            <div class="divider">个人基本信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="姓名：" prop="name">
+                                        <el-input v-model="form_person.name" placeholder="请填写姓名 "></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="身份证：" prop="id_card">
+                                        <el-input v-model="form_person.id_card" placeholder="请填写身份证号码 "></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="性别：" prop="gender">
+                                        <el-radio v-model="form_person.gender" label="0">男</el-radio>
+                                        <el-radio v-model="form_person.gender" label="1">女</el-radio>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮箱：" prop="email">
+                                        <el-input v-model="form_person.email" placeholder="请填写邮箱"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="手机号：" prop="phone">
+                                        <el-input v-model="form_person.phone" placeholder="请填写手机号"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮编：" prop="post_code">
+                                        <el-input v-model="form_person.post_code" placeholder="请填写邮编"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="国籍：" prop="nationality">
+                                        <el-input v-model="form_person.nationality" placeholder="请填写国籍"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="政治面貌：" prop="political_face">                                        
+                                        <el-select v-model="form_person.political_face" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in political_face_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="籍贯：" prop="native_place">
+                                        <el-input v-model="form_person.native_place" placeholder="请填写籍贯"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="民族：" prop="minzu">
+                                        <el-input v-model="form_person.minzu" placeholder="请填写民族"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="住址：" prop="person_address">
+                                        <el-input v-model="form_person.person_address" placeholder="请填写住址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="微信号：" prop="wechat">
+                                        <el-input v-model="form_person.wechat" placeholder="请填写微信号"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <div class="divider">学历教育信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="毕业院校：" prop="education_school">
+                                        <el-input v-model="form_person.education_school" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="学历：" prop="education_degree">
+                                        <el-select v-model="form_person.education_degree" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in education_degree_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="12">
+                                    <el-form-item label="学位：" prop="education_degree_xw">
+                                        <el-select v-model="form_person.education_degree_xw" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in education_degree_xw_options" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="专业：" prop="education_major">
+                                        <el-input v-model="form_person.education_major" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>                                
+                            </el-row>
+                            <el-row type="flex" class="row-bg">                               
+                                <el-col :span="12">
+                                    <el-form-item label="毕业时间：" prop="education_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.education_time" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+
+                            <div class="divider">工作信息</div>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="所在单位：" prop="belong_company">
+                                        <el-input v-model="form_person.belong_company" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>                               
+                            </el-row>
+                            <el-row type="flex" class="row-bg">  
+                                <el-col :span="12">
+                                    <el-form-item label="职务：" prop="job">
+                                        <el-input v-model="form_person.job" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>                              
+                                <el-col :span="12">
+                                    <el-form-item label="职称等级：" prop="positio">
+                                        <el-select v-model="form_person.positio" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in positio_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>                                        
+                                    </el-form-item>
+                                </el-col>                                
+                            </el-row>                            
+                            <el-row type="flex" class="row-bg">   
+                                <el-col :span="12">
+                                    <el-form-item label="业务行业：" prop="sector">
+                                        <el-input v-model="form_person.sector" placeholder=""></el-input>
+                                    </el-form-item>
+                                </el-col>                             
+                                <el-col :span="12">
+                                    <el-form-item label="业务领域：" prop="area">
+                                        <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in area_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>                                
+                            </el-row>
+                            <el-row type="flex" class="row-bg">     
+                                <el-col :span="12">
+                                    <el-form-item label="参加工作时间：" label-width="30%" prop="work_limit">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.work_limit" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>                           
+                                <el-col :span="12">
+                                    <el-form-item label="职称取得时间：" label-width="30%" prop="positio_time">
+                                        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>                                
+                            </el-row>
+                            <el-row type="flex" class="row-bg">                                                                
+                                <el-col :span="12">
+                                    <el-form-item label="高层次人才：" prop="highPeople" label-width="90px">
+                                        <el-select v-model="form_person.highPeople" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in highPeopleOptions" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>                                        
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
+                                <el-col :span="24">
+                                    <el-form-item label="职业资格：" label-width="80px">
+                                        <el-tag
+                                        :key="tag"
+                                        v-for="tag in form_person.pro_qualify"
+                                        closable
+                                        :disable-transitions="false"
+                                        @close="handleClose1(tag)">
+                                        {{tag}}
+                                        </el-tag>
+                                        <el-input
+                                            class="input-new-tag"
+                                            v-if="inputVisible1"
+                                            v-model="inputValue1"
+                                            ref="saveTagInput1"
+                                            size="small"
+                                            @keyup.enter.native="handleInputConfirm1"
+                                            @blur="handleInputConfirm1"
+                                        >
+                                        </el-input>
+                                        <el-button v-else class="button-new-tag" size="small" @click="showInput1">添加</el-button>                                                                                                                                                              
+                                    </el-form-item>                                    
+                                </el-col>                                
+                            </el-row>                      
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">等级</div>
+                            <el-row>                                
+                                <el-col :span="12" style="position:relative;">
+                                    <el-form-item label="专家等级：" prop="expertLevel">
+                                        <el-select v-model="form_person.expertLevel" placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="item in expertLevelOptions" :key="item" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <!--  -->
+                            <div class="divider" style="margin-top:25px;">图片信息</div>
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">个人证件照：<small style="color:#999999;font-weight:100;font-size:10px;">（推荐上传1寸&2寸的JPG&PNG图片，且不超过2MB）</small>
+                                    </label>
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=idcard" ref="idcard" :show-file-list="false" :on-success="handleIdcardSuccess" :before-upload="beforeAvatarUpload">
+                                    <img v-if="idPhotoUrl" :src="idPhotoUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
                             </div>
-                        </div>
-                        <el-col :span="24" style="margin-top:30px;">
-                            <el-button type="primary" @click="onSubmit('expert')">提交申请</el-button>
-                        </el-col>
+
+                            <!-- PDF -->
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="20" style="display:flex;align-items:center;">
+                                    <label style="margin:0;">个人证件附件：<small style="color:#999999;font-weight:100;font-size:10px;">（学历和学位、职称、职业资格、高层次人才等证书制成一个PDF文件上传，且不超过2MB）</small>
+                                    </label>
+                                </el-col>
+                            </el-row>
+
+                            <div style="padding:20px 0px;">
+                                <el-upload class="avatar-uploader" action="<?=url('uploadFile')?>&param=personfile" ref="personFile" accept=".pdf" :show-file-list="false" :on-success="handlePersonFileSuccess" :before-upload="beforeFileUpload">
+                                    <img v-if="personFileUrl" :src="personFileUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+
+                            <div class="divider" style="margin-top:25px;">个人简介</div>
+
+                            <el-row>
+                                <el-col :span="24" style="position:relative;">
+                                    <el-form-item label="简介描述" prop="introduce">
+                                        <el-input type="textarea" maxlength="800" rows=8 placeholder="请输入内容" @input="intro_limit('expert')" v-model="form_person.introduce">
+                                        </el-input>
+                                    </el-form-item>
+                                    <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
+                                </el-col>
+                            </el-row>                            
+
+                            <el-col :span="24" style="margin-top:30px;">
+                                <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
+                            </el-col>
+                        </el-form>
                     </el-tab-pane>
                 <?php endif;?>
-                <?php if ($levelOption == 1 || $levelOption == 3): ?>
-                    <el-tab-pane label="<?=$levelOption == 3 ? '修改单位会员信息' : '单位会员'?>" name="company">
+                <?php if ($levelOption == 0 || $levelOption == 3): ?>
+                    <el-tab-pane label="<?=$levelOption == 3 ? '修改单位会员+供应商信息' : '单位会员+供应商'?>" name="company">
                         <el-form ref="company" :model="form_company" :rules="company_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                             <!--  -->
                             <div class="divider">单位基本信息</div>
@@ -563,7 +871,8 @@
                         </el-form>
                     </el-tab-pane>
                 <?php endif;?>
-                <el-tab-pane label="<?=in_array(4, $roleArr) ? '修改供应商信息' : '供应商'?>" name="supplier">
+                <?php if ($levelOption == 0 || $levelOption == 4): ?>
+                <el-tab-pane label="<?=in_array(4, $roleArr) ? '修改供应商信息' : '仅供应商'?>" name="supplier">
                     <el-form ref="sup" :model="form_sup" :rules="supplier_rules" label-width="80px" label-position="left" style="margin-top:30px;">
                         <!--  -->
                         <div class="divider">供应商单位基本信息</div>
@@ -811,6 +1120,7 @@
                         </el-col>
                     </el-form>
                 </el-tab-pane>
+                <?php endif;?>
             </el-tabs>
         </template>
     </div>
@@ -837,7 +1147,12 @@
         //
         window.vue = new Vue({
             el: '#app',
-            data: {
+            data: {                
+                inputVisible: false,
+                inputValue: '',
+                inputVisible1: false,
+                inputValue1: '',
+                // 
                 posting: false,
                 activeName: '',
                 imageUrl: '',
@@ -861,22 +1176,39 @@
                 ],
                 levelPersonOptions: [
                     '会长',
-                    '常务副会长',
-                    '副会长',
-                    '常务理事',
-                    '理事',
                     '监事长',
+                    '常务副会长',
                     '常务副监事长',
+                    '副会长',
                     '副监事长',
+                    '秘书长',
+                    '副秘书长',
+                    '常务理事',
                     '常务监事',
+                    '理事',
                     '监事',
-                    '会员'
+                    '会员'                    
+                ],
+                expertLevelOptions:[
+                    '高级专家',
+                    '资深专家',
+                    '顶级专家'
                 ],
                 companyTypeOptions: [
                     '海南全内资独立法人',
                     '外省全内资独立法人驻琼机构',
                     '国内内资控股或主导独立法人',
                     '其他机构'
+                ],
+                highPeopleOptions:[
+                    '院士',
+                    '长江学者',
+                    '百人计划',
+                    '杰青优青',
+                    '千人计划',
+                    '万人计划',
+                    '双一流学术带头人',
+                    '其他顶尖人才'
                 ],
                 education_degree_options:[
                     '中等专科',
@@ -895,7 +1227,7 @@
                     '民主党派人士',
                     '无党派人士',
                     '境外党派人士'
-                ],
+                ],                
                 positio_options:[
                     '正高级工程师','教授','研究员','高级工程师','副教授','副研究员'
                 ],
@@ -926,11 +1258,14 @@
                     person_file: '',
                     introduce: '',
                     memberLevel: '',
+                    expertLevel:'',
+                    highPeople:'',
+                    pro_qualify:[],
                     nationality: '',
                     political_face: '',
                     native_place: '',
                     minzu: '',
-                    wechat: ''
+                    wechat: '',
                 },
                 person_rules: {
                     name: [{
@@ -1041,6 +1376,11 @@
                         trigger: 'blur'
                     }],
                     memberLevel: [{
+                        required: true,
+                        message: '请选择内容',
+                        trigger: 'blur'
+                    }],
+                    expertLevel: [{
                         required: true,
                         message: '请选择内容',
                         trigger: 'blur'
@@ -1328,6 +1668,41 @@
                 }
             },
             methods: {
+                handleClose(tag) {
+                    this.form_person.pro_qualify.splice(this.form_person.pro_qualify.indexOf(tag), 1);
+                },
+                handleClose1(tag) {
+                    this.form_person.pro_qualify.splice(this.form_person.pro_qualify.indexOf(tag), 1);
+                },
+                showInput() {
+                    this.inputVisible = true;
+                    this.$nextTick(_ => {                                               
+                        this.$refs.saveTagInput.$refs.input.focus();
+                    });
+                },
+                showInput1() {
+                    this.inputVisible1 = true;
+                    this.$nextTick(_ => {                                               
+                        this.$refs.saveTagInput1.$refs.input.focus();
+                    });
+                },
+                handleInputConfirm() {
+                    let inputValue = this.inputValue;
+                    if (inputValue) {
+                    this.form_person.pro_qualify.push(inputValue);
+                    }
+                    this.inputVisible = false;
+                    this.inputValue = '';
+                },
+                handleInputConfirm1() {
+                    let inputValue = this.inputValue1;
+                    if (inputValue) {
+                    this.form_person.pro_qualify.push(inputValue);
+                    }
+                    this.inputVisible1 = false;
+                    this.inputValue1 = '';
+                },
+                // 
                 doPost(form) {
                     if (!this.posting) {
                         this.posting = true;
@@ -1497,7 +1872,7 @@
                         if (this.form_company.company_intro.length >= 800) {
                             this.form_company.company_intro = this.form_company.company_intro.substring(0, 800);
                         }
-                    } else if (type == 'person') {
+                    } else if (type == 'person' || type == 'expert') {
                         if (this.form_person.introduce.length >= 800) {
                             this.form_person.introduce = this.form_person.introduce.substring(0, 800);
                         }

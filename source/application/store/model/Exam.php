@@ -76,6 +76,9 @@ class Exam extends ExamModel
             'regist_money' => '注册资金',
             'company_site' => '门户网站',
             'company_fax' => '传真',
+            'highPeople' => '高层次人才',
+            'pro_qualify' => '职业资格',
+            'expertLevel' => '专家等级',
             // supplier
             'sup_company_name' => '单位名称',
             'sup_build_time' => '单位成立时间',
@@ -126,7 +129,7 @@ class Exam extends ExamModel
             'eng_cate' => '工程类别',
             'cover_id' => '封面图',
             'region_id' => '项目所在地',
-            'server_company'=>'服务单位',
+            'server_company' => '服务单位',
             'assignment_money' => '服务合同金额（万元）',
             'assignment_date' => '合同签订日期',
             'total_invest' => '总投资金额（万元）',
@@ -216,16 +219,7 @@ class Exam extends ExamModel
         $obj = $this->where('id', $data['id'])->find();
 
         $content = json_decode($obj['content'], true);
-
-        if (!empty($content)) {
-            foreach ($content as $key => $value) {
-                if (empty($value)) {
-                    unset($content[$key]);
-                }
-
-            }
-        }
-        // halt($data);
+                            
         // 开启事务
         Db::startTrans();
         try {
@@ -238,16 +232,32 @@ class Exam extends ExamModel
                 if ($data['status'] == 20) {
                     switch ($type_bonus) {
                         case 'person':
-                            // 个人会员
-                            $role = 1;
-                            $new_role = strtr($role_str, 0, $role);
+                            // 个人会员+专家                            
+                            $new_role = 1;
                             $user_model = new UserPerson();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             //
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
-                            //
+                            //                            
                             $content['memberLevel'] = $data['level'];
+                            if ($_obj) {
+                                $_obj->allowField(true)->save($content);
+                            } else {
+                                $content['user_id'] = $obj['user_id'];
+                                $user_model->allowField(true)->save($content);
+                            }
+                            break;
+                        
+                        case 'expert':
+                            // 仅专家                            
+                            $new_role = 2;
+                            $user_model = new UserPerson();
+                            $_obj = $user_model::get(['user_id' => $obj['user_id']]);
+                            //
+                            $content['education_time'] = strtotime($content['education_time']);
+                            $content['positio_time'] = strtotime($content['positio_time']);
+                            //                                                        
                             if ($_obj) {
                                 $_obj->allowField(true)->save($content);
                             } else {
@@ -257,9 +267,8 @@ class Exam extends ExamModel
                             break;
 
                         case 'company':
-                            // 单位会员
-                            $role = 3;
-                            $new_role = strtr($role_str, 0, $role);
+                            // 单位会员+供应商                            
+                            $new_role = 3;
                             $user_model = new UserCompany();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             //
@@ -273,16 +282,11 @@ class Exam extends ExamModel
                                 $user_model->allowField(true)->save($content);
                             }
 
-                            break;
-
-                        case 'expert':
-                            $role = 2;
-                            $new_role = strpos($role_str, '2') !== false ? $role_str : $role_str . ',2';
-                            break;
+                            break;                        
 
                         case 'supplier':
-                            $role = 4;
-                            $new_role = strpos($role_str, '4') !== false ? $role_str : $role_str . ',4';
+                            // 供应商                            
+                            $new_role = 4;
                             $user_model = new UserSup();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             //
@@ -348,7 +352,7 @@ class Exam extends ExamModel
                         'city_id' => $content['city_id'],
                         'province_id' => $content['province_id'],
                         'region_id' => $content['region_id'],
-                        'server_company'=>$content['server_company'],
+                        'server_company' => $content['server_company'],
                         'assignment_money' => $content['assignment_money'],
                         'assignment_date' => strtotime($content['assignment_date']),
                         'total_invest' => $content['total_invest'],
@@ -413,7 +417,7 @@ class Exam extends ExamModel
                         'user_id' => $obj['user_id'],
                         'user_company_id' => $company_id,
                         // 'site_code' => $re,
-                        'site_code' => 'C'.$company_code,
+                        'site_code' => 'C' . $company_code,
                     ];
                     if (!$siteObj) {
                         $siteObj = new UserSite;

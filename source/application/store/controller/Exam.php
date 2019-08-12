@@ -63,7 +63,7 @@ class Exam extends Controller
         $status = $info['status'];
         $id = $info['id'];
         $content = $info['content'];
-        $data_arr = json_decode($content, true);
+        $data_arr = json_decode($content, true);                
         // 包含图片更换 属性更替
         $data = [];
         $data['input'] = [];
@@ -116,7 +116,6 @@ class Exam extends Controller
             if (empty($value)) {
                 unset($data_arr[$key]);
             }
-
         }
 
         // 组装数据
@@ -205,8 +204,7 @@ class Exam extends Controller
 
             $_arr = [$data, $old_data];
             $data = $_arr[1];
-            $new_data = $_arr[0];
-            // halt([$data,$new_data]);
+            $new_data = $_arr[0];            
             $this->assign('new_data', $new_data);
         }
 

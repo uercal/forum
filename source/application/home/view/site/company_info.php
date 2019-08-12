@@ -11,10 +11,10 @@
         <div class="detail-container">
 
             <div class="users-detail-head">
-                <div class="users-detail-avatar">
+                <!-- <div class="users-detail-avatar">
                     <img src="<?= $detail['company']['company_logo_path'] ?>" style="object-fit:cover;" alt="">
-                </div>
-                <div class="users-detail-info">
+                </div> -->
+                <div class="users-detail-info" style="width:100%;">
                     <div class="info-bonus"></div>
                     <strong><?= $detail['company']['company_name'] ?></strong>                    
                     <div class="projects-item-option">
@@ -47,7 +47,7 @@
 
             <strong style="margin-left:30px;margin-top:35px;">单位简介</strong>
 
-            <div class="detail-body">
+            <div class="detail-body" style="font-size:20px;">
                 <?= htmlspecialchars_decode($detail['company']['company_intro']) ?>
             </div>
 

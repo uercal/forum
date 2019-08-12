@@ -3,7 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\UploadApiFile;
-use think\Request;
 
 /**
  * 用户模型类
@@ -22,15 +21,17 @@ class UserPerson extends BaseModel
 
     public static function detailDate($where)
     {
-        $obj =  self::get($where);
-        if(!$obj){
+        $obj = self::get($where);
+        if (!$obj) {
             return null;
         }
-        $obj = $obj->toArray();        
+        $obj = $obj->toArray();
+        $obj['highPeople'] = !empty($obj['highPeople']) ? explode(',', $obj['highPeople']) : [];
+        $obj['pro_qualify'] = !empty($obj['pro_qualify']) ? explode(',', $obj['pro_qualify']) : [];
         $obj['positio_time'] = date('Y-m-d', $obj['positio_time']);
-        $obj['education_time'] = date('Y-m-d', $obj['education_time']);        
-        $obj['area'] = explode(',',$obj['area']);
-        $obj['positio'] = explode(',',$obj['positio']);        
+        $obj['education_time'] = date('Y-m-d', $obj['education_time']);
+        $obj['area'] = explode(',', $obj['area']);
+        $obj['positio'] = explode(',', $obj['positio']);
         unset($obj['create_time']);
         unset($obj['update_time']);
         settype($obj['gender'], 'string');

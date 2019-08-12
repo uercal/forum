@@ -177,13 +177,19 @@ class Person extends Controller
         $levelOption = $role_arr;
         if (in_array(0, $role_arr)) {
             // 普通会员
-            $levelOption = 1;
+            $levelOption = 0;
         } elseif (in_array(1, $role_arr)) {
             // 个人会员
+            $levelOption = 1;
+        } elseif (in_array(2, $role_arr)) {
+            // 专家会员
             $levelOption = 2;
-        } elseif (in_array(3, $role_arr)) {
+        } elseif (in_array(3,$role_arr)){
             // 单位会员
             $levelOption = 3;
+        } elseif(in_array(4,$role_arr)){
+            // 供应商
+            $levelOption = 4;
         }
         return $levelOption;
     }
