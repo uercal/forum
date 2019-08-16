@@ -255,6 +255,8 @@ class Exam extends ExamModel
             'id_photo_path', 'gender_name', 'person_file_path', 'education_date',
             // company
             'company_logo_path', 'license_file_path', 'build_time_text',
+            'eng_cate_text', 'goods_cate_text', 'server_cate_text',
+            'eng_cate_name', 'goods_cate_name', 'server_cate_name',
             // sup
             'id_photo_path', 'person_file_path',
             'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',

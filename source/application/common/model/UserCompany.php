@@ -3,7 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\UploadApiFile;
-use think\Request;
 
 /**
  * 用户模型类
@@ -13,9 +12,10 @@ use think\Request;
 class UserCompany extends BaseModel
 {
     protected $name = 'users_company';
-    protected $append = ['company_logo_path', 'license_file_path', 'build_time_text'];
-
-
+    protected $append = ['company_logo_path', 'license_file_path', 'build_time_text',
+        'eng_cate_text', 'goods_cate_text', 'server_cate_text',
+        'eng_cate_name', 'goods_cate_name', 'server_cate_name',
+    ];
 
     public static function detail($where)
     {
@@ -35,9 +35,9 @@ class UserCompany extends BaseModel
         $obj['server_cate'] = json_decode($obj['server_cate'], true);
         unset($obj['create_time']);
         unset($obj['update_time']);
-        // 
+        //
         settype($obj['manager_phone'], 'integer');
-        // 
+        //
         return $obj;
     }
 
@@ -59,5 +59,96 @@ class UserCompany extends BaseModel
     public function getLicenseFilePathAttr($value, $data)
     {
         return UploadApiFile::getFilePath($data['license_file']);
+    }
+
+    //
+    public function getEngCateTextAttr($value, $data)
+    {
+        $arr = json_decode($data['eng_cate'], true);
+        $res = [];
+        foreach ($arr as $key => $value) {
+            $index = $key + 1;
+            $res[] = '资质标准类别' . $index . ':' . $value['cate'] . ' , ' . '资质类别等级' . $index . ':' . $value['level'];
+        }
+        return implode(' | ', $res);
+    }
+
+    public function getEngCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['eng_cate'], true);
+        if (empty($arr)) {
+            return [];
+        }
+        $res = [];
+        $cates = [];
+        $values = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['cate'];
+            $values[] = $value['level'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
+    }
+
+    public function getGoodsCateTextAttr($value, $data)
+    {
+        $arr = json_decode($data['goods_cate'], true);
+        $res = [];
+        foreach ($arr as $key => $value) {
+            $index = $key + 1;
+            $res[] = '生产销售许可' . $index . ':' . $value['permit'] . ' , ' . '供应内容' . $index . ':' . $value['content'];
+        }
+        return implode(' | ', $res);
+    }
+
+    public function getGoodsCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['goods_cate'], true);
+        if (empty($arr)) {
+            return [];
+        }
+        $res = [];
+        $cates = [];
+        $values = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['permit'];
+            $values[] = $value['content'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
+    }
+
+    public function getServerCateTextAttr($value, $data)
+    {
+        $arr = json_decode($data['server_cate'], true);
+        $res = [];
+        foreach ($arr as $key => $value) {
+            $index = $key + 1;
+            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级'
+                . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . implode(',',$value['area']);
+        }        
+        return implode(' | ', $res);
+    }
+
+    public function getServerCateNameAttr($value, $data)
+    {
+        $arr = json_decode($data['server_cate'], true);
+        $res = [];
+        $cates = [];
+        $values = [];
+        $areas = [];
+        foreach ($arr as $key => $value) {
+            $cates[] = $value['major'];
+            $values[] = $value['level'];
+            $area[] = $value['area'];
+        }
+        if (empty($cates[0])) {
+            return [];
+        }
+        return [implode(',', $cates), implode(',', $values)];
     }
 }

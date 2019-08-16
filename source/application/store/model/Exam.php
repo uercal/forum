@@ -271,6 +271,7 @@ class Exam extends ExamModel
                             $user_model = new UserPerson();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             //
+                            $content['memberLevel'] = null;
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
                             //                                                        

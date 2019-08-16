@@ -6,6 +6,23 @@
                     <div class="widget-title am-cf">用户列表</div>
                 </div>
                 <div class="widget-body am-fr">
+
+                    <!-- 搜索栏 -->
+                    <form method="GET" action="" id="form">
+                        <div class="am-form-group">
+                            <div class="am-btn-toolbar">                                                
+                                <div class="am-btn-group am-btn-group-xs" style="display:flex;">
+                                    <a type="button" class="am-btn am-btn-default am-btn-primary am-margin-right">用户ID</a>
+                                    <input type="text" class="am-form-field" style="padding: 3px 5px;" name="user_id" value="<?= input('user_id') ? input('user_id') : "" ?>">                                    
+                                </div>
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-success am-radius" id="search" href="javascript:;">
+                                        <span class="am-icon-search"></span> 搜索
+                                    </a>
+                                </div>                                
+                            </div>
+                        </div>
+                    </form>
                     <div class="am-scrollable-horizontal am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped
                          tpl-table-black am-text-nowrap">
@@ -14,7 +31,9 @@
                                     <th>会员ID</th>
                                     <th>用户名</th>
                                     <th>用户头像</th>
-                                    <th>角色</th>
+                                    <!-- <th>角色</th> -->
+                                    <th>会员等级</th>
+                                    <th>专家等级</th>
                                     <th>资质证书</th>
                                     <th>注册时间</th>
                                     <th>操作</th>
@@ -22,51 +41,53 @@
                             </thead>
                             <tbody>
                                 <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
-																													                                        <tr>
-																													                                            <td class="am-text-middle"><?=$item['user_id']?></td>
-																													                                            <td class="am-text-middle"><?=$item['user_name']?></td>
-																													                                            <td class="am-text-middle">
-																													                                                <a href="<?=$item['avatar_path']?>" title="点击查看大图" target="_blank">
-																													                                                    <img src="<?=$item['avatar_path']?>" width="72" height="72" alt="">
-																													                                                </a>
-																													                                            </td>
-																													                                            <td class="am-text-middle"><?=$item['role_name']?></td>
-																													                                            <td class="am-text-middle">
-																													                                                <div class="tpl-table-black-operation">
-																													                                                    <?php if (empty($item['attachment'])): ?>
-																													                                                        <a href="javascript:;" data-id="<?=$item['user_id']?>" class="upload-attachment">
-																													                                                            <i class="am-icon-file"></i> 上传
-																													                                                        </a>
-																													                                                    <?php else: ?>
-                                                        <a href="<?=$item['attachment']['file_path']?>" class="item-green tpl-table-black-operation-green">
-                                                            <i class="am-icon-file"></i> 查看
-                                                        </a>
-                                                        <a href="javascript:;" class="item-delete-attach tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-                                                            <i class="am-icon-file"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                <?php endif;?>
-                                            </td>
-                                            <td class="am-text-middle"><?=$item['create_time']?></td>
-                                            <td class="am-text-middle">
-                                                <div class="tpl-table-black-operation">
-                                                    <a href="<?=url(
-    'user/show',
-    ['user_id' => $item['user_id']]
-)?>">
-                                                        <i class="am-icon-pencil"></i> 角色详情
-                                                    </a>
-                                                    <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-                                                        <i class="am-icon-trash"></i> 删除
-                                                    </a>
-                                                    <a href="javascript:;" class="item-repass tpl-table-black-operation-primary" data-id="<?=$item['user_id']?>">
-                                                        <i class="am-icon-book"></i> 重置密码
-                                                    </a>
-                                                </div>
-                                            </td>
+                                    <tr>
+                                        <td class="am-text-middle"><?=$item['user_id']?></td>
+                                        <td class="am-text-middle"><?=$item['user_name']?></td>
+                                        <td class="am-text-middle">
+                                            <a href="<?=$item['avatar_path']?>" title="点击查看大图" target="_blank">
+                                                <img src="<?=$item['avatar_path']?>" width="72" height="72" alt="">
+                                            </a>
+                                        </td>
+                                        <!-- <td class="am-text-middle"><?=$item['role_name']?></td> -->
+                                        <td class="am-text-middle"><?=$item['person']?$item['person']['memberLevel']:($item['company']?$item['company']['memberLevel']:'/')?></td>
+                                        <td class="am-text-middle"><?=$item['person']?$item['person']['expertLevel']:'/'?></td>
+                                        <td class="am-text-middle">
+                                            <div class="tpl-table-black-operation">
+                                            <?php if (empty($item['attachment'])): ?>
+                                                <a href="javascript:;" data-id="<?=$item['user_id']?>" class="upload-attachment">
+                                                    <i class="am-icon-file"></i> 上传
+                                                </a>
+                                            <?php else: ?>
+                                                <a href="<?=$item['attachment']['file_path']?>" class="item-green tpl-table-black-operation-green">
+                                                    <i class="am-icon-file"></i> 查看
+                                                </a>
+                                                <a href="javascript:;" class="item-delete-attach tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+                                                    <i class="am-icon-file"></i> 删除
+                                                </a>
+                                            </div>
+                                            <?php endif;?>
+                                        </td>
+                                        <td class="am-text-middle"><?=$item['create_time']?></td>
+                                        <td class="am-text-middle">
+                                            <div class="tpl-table-black-operation">
+                                                <a href="<?=url(
+                                                    'user/show',
+                                                    ['user_id' => $item['user_id']]
+                                                )?>">
+                                                    <i class="am-icon-pencil"></i> 角色详情
+                                                </a>
+                                                <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                                <a href="javascript:;" class="item-repass tpl-table-black-operation-primary" data-id="<?=$item['user_id']?>">
+                                                    <i class="am-icon-book"></i> 重置密码
+                                                </a>
+                                            </div>
+                                        </td>
                                         </tr>
                                     <?php endforeach;
-else: ?>
+                                else: ?>
                                     <tr>
                                         <td colspan="5" class="am-text-center">暂无记录</td>
                                     </tr>
@@ -106,6 +127,17 @@ else: ?>
 {{include file="layouts/_template/file_library" /}}
 <script src="assets/store/js/ddsort.js"></script>
 <script src="assets/store/js/file.library.js"></script>
+<script>
+$(function() {  
+    $('#search').on('click', function(e) {
+        var url = "<?php echo url('user/index') ?>";
+        var param = $('#form').serialize();
+        var html = url + '&' + param;
+        window.location.href = html;
+    });  
+});
+
+</script>
 <script>
     $(function() {
         // 删除元素

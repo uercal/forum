@@ -3,7 +3,6 @@
 namespace app\common\model;
 
 use app\common\model\UploadApiFile;
-use think\Request;
 use function Qiniu\json_decode;
 
 /**
@@ -18,7 +17,7 @@ class UserSup extends BaseModel
         'id_photo_path', 'person_file_path',
         'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
         'sup_eng_cate_name', 'sup_goods_cate_name', 'sup_server_cate_name',
-        'sup_build_time_text'
+        'sup_build_time_text',
     ];
 
     public static function detail($where)
@@ -37,7 +36,7 @@ class UserSup extends BaseModel
         $obj['sup_goods_cate'] = json_decode($obj['sup_goods_cate'], true);
         $obj['sup_server_cate'] = json_decode($obj['sup_server_cate'], true);
         $obj['sup_build_time'] = $obj['sup_build_time_text'];
-        // 
+        //
         unset($obj['create_time']);
         unset($obj['update_time']);
         settype($obj['sup_company_tel'], 'integer');
@@ -45,13 +44,12 @@ class UserSup extends BaseModel
         return $obj;
     }
 
-
     public function user()
     {
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
-    // 
+    //
     public function getSupEngCateTextAttr($value, $data)
     {
         $arr = json_decode($data['sup_eng_cate'], true);
@@ -81,7 +79,6 @@ class UserSup extends BaseModel
         }
         return [implode(',', $cates), implode(',', $values)];
     }
-
 
     public function getSupGoodsCateTextAttr($value, $data)
     {
@@ -119,7 +116,8 @@ class UserSup extends BaseModel
         $res = [];
         foreach ($arr as $key => $value) {
             $index = $key + 1;
-            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级' . $index . ':' . $value['level'];
+            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级' 
+            . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . $value['area'];
         }
         return implode(' | ', $res);
     }
@@ -130,9 +128,11 @@ class UserSup extends BaseModel
         $res = [];
         $cates = [];
         $values = [];
+        $areas = [];
         foreach ($arr as $key => $value) {
             $cates[] = $value['major'];
-            $values[] = $value['level'];
+            $values[] = $value['level'];            
+            $area[] = $value['area'];
         }
         if (empty($cates[0])) {
             return [];
@@ -144,7 +144,7 @@ class UserSup extends BaseModel
     {
         return date('Y-m-d', $data['sup_build_time']);
     }
-    // 
+    //
     public function getIdPhotoPathAttr($value, $data)
     {
         return UploadApiFile::getFilePath($data['id_photo']);

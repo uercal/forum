@@ -100,4 +100,47 @@ class User extends UserModel
             Db::rollback();
         }
     }
+
+    public function updateLevel()
+    {
+        $input = input();
+        switch ($this->role) {
+            case 1:
+                $obj = new UserPerson();
+                $data = [
+                    'memberLevel' => $input['memberLevel'],
+                    'expertLevel' => $input['expertLevel'],
+                ];
+                break;
+            case 2:
+                $obj = new UserPerson();
+                $data = [
+                    'expertLevel' => $input['expertLevel'],
+                ];
+                break;
+
+            case 3:
+                $obj = new UserCompany();
+                $data = [
+                    'memberLevel' => $input['memberLevel'],
+                ];
+                break;
+        }
+
+        // 开启事务
+        Db::startTrans();
+        try {
+            $obj->save($data, [
+                'user_id' => $this->user_id,
+            ]);
+            //
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
+    }
+
 }
