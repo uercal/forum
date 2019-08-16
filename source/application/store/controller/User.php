@@ -33,7 +33,7 @@ class User extends Controller
         $list = $model->getListByRole($role);
         switch ($role) {
             case 0:
-                $name = '普通会员';
+                $name = '普通用户';
                 break;
             case 1:
                 $name = '个人会员';
@@ -99,12 +99,12 @@ class User extends Controller
                 $file_name = '单位会员';
                 $data = UserCompany::all()->toArray();
                 $head = [
-                    '序号', '单位名称', '社会统一信用代码', '单位类型', '单位电话', '单位地址', '成立时间', '服务等级',
+                    '序号', '单位名称', '社会统一信用代码', '单位类型', '单位电话', '单位地址', '成立时间', 
                     '法人', '邮箱', '联系人姓名', '联系人职位', '联系人电话', '联系人微信',
                 ];
                 $keys = [
                     'index', 'company_name', 'company_code', 'company_type', 'company_tel', 'address', 'build_time_text',
-                    'server_level', 'legal_person', 'email', 'manager_name', 'manager_job', 'manager_phone', 'manager_wechat',
+                    'legal_person', 'email', 'manager_name', 'manager_job', 'manager_phone', 'manager_wechat',
                 ];
                 break;
             case 4:

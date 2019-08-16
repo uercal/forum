@@ -246,6 +246,9 @@ class Exam extends ExamModel
     public static function getInvalidArr()
     {
         $keys = [
+            // 
+            'server_level',
+            // 
             'create_time',
             'update_time',
             // person

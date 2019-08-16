@@ -63,7 +63,8 @@ class Exam extends Controller
         $status = $info['status'];
         $id = $info['id'];
         $content = $info['content'];
-        $data_arr = json_decode($content, true);                
+        $data_arr = json_decode($content, true);    
+        // halt($data_arr);
         // 包含图片更换 属性更替
         $data = [];
         $data['input'] = [];
@@ -131,31 +132,30 @@ class Exam extends Controller
             } elseif (in_array($key, $contentArrMap)) {
                 $data['content'][$key] = $value;
             } elseif (array_key_exists($key, $cateArrMap)) {
-                $_arr = [];
+                $_arr = [];                
                 foreach ($value as $k => $v) {
                     if (reset($v) == '' && end($v) == '') {
                         continue;
                     }
+                    // halt([$v,$value,$cateArrMap[$key]]);
                     $__arr = [];
-                    $__arr[] = [
-                        'name' => reset($cateArrMap[$key]),
-                        'value' => reset($v),
-                    ];
-                    $__arr[] = [
-                        'name' => end($cateArrMap[$key]),
-                        'value' => end($v),
-                    ];
+                    foreach ($v as $_k => $_v) {
+                        $__arr[] = [
+                            'name'=>$cateArrMap[$key][$_k],
+                            'value'=> is_array($_v)?implode(',',$_v):$_v
+                        ];
+                    }
+                    // 
                     $_arr[] = $__arr;
                 }
                 if (empty($_arr)) {
                     continue;
-                }
-
+                }                
                 $data['array'][$key] = $_arr;
             } else {
                 $data['input'][$key] = $value;
             }
-        }
+        }        
         //
         if (isset($info['old_content'])) {
             $old_arr = $info['old_content'];
@@ -182,14 +182,12 @@ class Exam extends Controller
                             continue;
                         }
                         $__arr = [];
-                        $__arr[] = [
-                            'name' => reset($cateArrMap[$key]),
-                            'value' => reset($v),
-                        ];
-                        $__arr[] = [
-                            'name' => end($cateArrMap[$key]),
-                            'value' => end($v),
-                        ];
+                        foreach ($v as $_k => $_v) {
+                            $__arr[] = [
+                                'name'=>$cateArrMap[$key][$_k],
+                                'value'=> is_array($_v)?implode(',',$_v):$_v
+                            ];
+                        }
                         $_arr[] = $__arr;
                     }
                     if (empty($_arr)) {
@@ -206,7 +204,8 @@ class Exam extends Controller
             $data = $_arr[1];
             $new_data = $_arr[0];            
             $this->assign('new_data', $new_data);
-        }
+        }                
+        // halt($new_data);
 
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }

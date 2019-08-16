@@ -30,6 +30,9 @@ class UserCompany extends BaseModel
         }
         $obj = $obj->toArray();
         $obj['build_time'] = date('Y-m-d', $obj['build_time']);
+        $obj['eng_cate'] = json_decode($obj['eng_cate'], true);
+        $obj['goods_cate'] = json_decode($obj['goods_cate'], true);
+        $obj['server_cate'] = json_decode($obj['server_cate'], true);
         unset($obj['create_time']);
         unset($obj['update_time']);
         // 

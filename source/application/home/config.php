@@ -12,9 +12,8 @@ return [
     'route_complete_match' => false,
     //
     // 默认输出类型
-    'default_return_type' => 'html',
+    'default_return_type' => 'html',    
     
-
     'template' => [
         // layout布局
         'layout_on' => true,

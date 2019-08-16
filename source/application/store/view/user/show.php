@@ -216,15 +216,9 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">成立时间 </label>
                                     <div class="am-u-sm-9 am-u-end">
-                                        <input type="text" class="tpl-form-input" value="<?= $detail['company']['build_time'] ?>" disabled="disabled">
+                                        <input type="text" class="tpl-form-input" value="<?= date('Y-m-d',$detail['company']['build_time']) ?>" disabled="disabled">
                                     </div>
-                                </div>
-                                <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">服务等级 </label>
-                                    <div class="am-u-sm-9 am-u-end">
-                                        <input type="text" class="tpl-form-input" value="<?= $detail['company']['server_level'] ?>" disabled="disabled">
-                                    </div>
-                                </div>
+                                </div>                                
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">法人 </label>
                                     <div class="am-u-sm-9 am-u-end">

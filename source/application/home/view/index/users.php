@@ -98,11 +98,7 @@
                                     <div>
                                         <span class="am-icon-users"></span>
                                         <p><?=$item['memberLevel']?></p>
-                                    </div>
-                                    <div>
-                                        <span class="am-icon-phone"></span>
-                                        <p><?=$item['server_level']?></p>
-                                    </div>
+                                    </div>                                    
                                     <div>
                                         <span class="am-icon-at"></span>
                                         <p><?=$item['email']?></p>

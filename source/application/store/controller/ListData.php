@@ -187,6 +187,16 @@ class ListData extends Controller
         return $this->renderError($error);
     }
 
+    public function list_delete($id)
+    {
+        $model = ListModel::get($id);
+        if (!$model->remove()) {
+            $error = $model->getError() ?: '删除失败';
+            return $this->renderError($error);
+        }
+        return $this->renderSuccess('删除成功');
+    }
+
     public function detail_delete($id)
     {
         $model = ListDetail::get($id);

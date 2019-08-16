@@ -169,12 +169,12 @@
                 <el-row type="flex">
                     <el-col :span="12">
                         <el-form-item label="服务合同金额（万元）" prop="assignment_money" label-width="150px">
-                            <el-input v-model.number="form.assignment_money" placeholder="" @keyup.native="proving1"></el-input>
+                            <el-input v-model.number="form.assignment_money" placeholder=""></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="总投资金额（万元）" prop="total_invest" label-width="140px">
-                            <el-input type="email" v-model.number="form.total_invest" placeholder="" @keyup.native="proving1"></el-input>
+                            <el-input v-model.number="form.total_invest" placeholder=""></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -331,11 +331,7 @@
                 }
             }
         },
-        methods: {
-            proving1(){
-                this.single_bet_min.value=this.single_bet_min.value.replace(/[^\.\d]/g,'');
-                this.single_bet_min.value=this.single_bet_min.value.replace('.','');
-            },
+        methods: {            
             doPost(form) {
                 if (!this.posting) {
                     this.posting = true;

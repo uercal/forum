@@ -128,7 +128,7 @@
                                     <div class="am-u-sm-9 am-u-end" style="margin-top: 0.5rem;">
                                         <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}">
                                             <?php foreach ([
-                                                'admin' => '协会招聘',
+                                                'admin' => '本会招聘',
                                                 'user' => '单位招聘'
                                             ] as $key => $first) : ?>
                                                 <option value="<?= $key ?>">
@@ -180,7 +180,7 @@
                                         <select name="category[mode_data]" data-am-selected="{btnSize: 'sm',maxHeight: 300}" id="_list_select">
                                             <option value=""></option>
                                             <?php foreach ([
-                                                'normal' => '普通会员',
+                                                'normal' => '普通用户',
                                                 'person' => '个人会员',
                                                 'expert' => '专家会员',
                                                 'company' => '单位会员',

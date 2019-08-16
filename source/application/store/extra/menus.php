@@ -82,7 +82,7 @@ return [
                 'index' => 'user/index'
             ],
             [
-                'name' => '普通会员',
+                'name' => '普通用户',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=0'
             ],
@@ -92,7 +92,7 @@ return [
                 'index' => 'user/role&role=1'
             ],
             [
-                'name' => '专家会员',
+                'name' => '入库专家',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=2'
             ],
@@ -102,7 +102,7 @@ return [
                 'index' => 'user/role&role=3'
             ],
             [
-                'name' => '供应商会员',
+                'name' => '入库供应商',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=4'
             ],

@@ -11,7 +11,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-success am-radius" href="<?= url('recruit/add') ?>">
-                                        <span class="am-icon-plus"></span> 发起协会招聘
+                                        <span class="am-icon-plus"></span> 发起本会招聘
                                     </a>
                                 </div>
                                 <!-- 搜索栏 -->
@@ -23,7 +23,7 @@
                                                     <span class="am-icon-pencil"></span> 招聘类型
                                                 </a>
                                                 <select name="type" class="am-field-valid" id="type" style="font-size:12px;" data-am-selected="{btnSize: 'sm',  placeholder:'请选择审核类型'}">
-                                                    <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>协会招聘</option>
+                                                    <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>本会招聘</option>
                                                     <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>单位招聘</option>
                                                 </select>
                                             </div>

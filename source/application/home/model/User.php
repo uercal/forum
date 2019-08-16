@@ -49,32 +49,38 @@ class User extends UserModel
                 $mode_data = 'person';
                 break;
             case 'person':
+                $_map = [];
                 if (input('title')) {
-                    $map['name'] = ['like', '%' . input('title') . '%'];
-                    $map['memberLevel'] = ['like', '%' . input('title') . '%'];
-                    $map['belong_company'] = ['like', '%' . input('title') . '%'];
-                    $map['education_degree'] = ['like', '%' . input('title') . '%'];
-                    $map['education_degree_xw'] = ['like', '%' . input('title') . '%'];
-                    $map['positio'] = ['like', '%' . input('title') . '%'];
+                    $_map['name'] = ['like', '%' . input('title') . '%'];
+                    $_map['memberLevel'] = ['like', '%' . input('title') . '%'];
+                    $_map['belong_company'] = ['like', '%' . input('title') . '%'];
+                    $_map['education_degree'] = ['like', '%' . input('title') . '%'];
+                    $_map['education_degree_xw'] = ['like', '%' . input('title') . '%'];
+                    $_map['positio'] = ['like', '%' . input('title') . '%'];
+                    $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserPerson;
-                $list = $model->whereOr($map)->order($order)
+                $list = $model->whereOr($_map)->where('memberLevel', 'not null')->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
                 $_map = [];
                 if (input('title')) {
                     $_map['name'] = ['like', '%' . input('title') . '%'];
+                    $_map['expertLevel'] = ['like', '%' . input('title') . '%'];
+                    $_map['education_major'] = ['like', '%' . input('title') . '%'];
+                    $_map['education_degree'] = ['like', '%' . input('title') . '%'];
+                    $_map['education_degree_xw'] = ['like', '%' . input('title') . '%'];
+                    $_map['positio'] = ['like', '%' . input('title') . '%'];
+                    $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
-                $map['role'] = ['like', '%2%'];
-                $all_ids = $this->where($map)->column('user_id');
-                $_map['user_id'] = ['in', $all_ids];
                 $model = new UserPerson;
                 $list = $model->where($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
                 if (input('title')) {
                     $map['company_name'] = ['like', '%' . input('title') . '%'];
+                    $map['memberLevel'] = ['like', '%' . input('title') . '%'];                   
                 }
                 $model = new UserCompany;
                 $list = $model->with(['user'])->where($map)->order($order)
@@ -120,7 +126,7 @@ class User extends UserModel
                 'role' => $user['role'],
                 'avatar' => $user['avatar']['file_path'],
                 'show_name' => $user['show_name'],
-                'last_login' => $user['last_login'] ? date('Y/m/d H:i:s', $user['last_login']) : date('Y/m/d H:i:s', time()),
+                'last_login' => !empty($user['last_login']) ? date('Y/m/d H:i:s', $user['last_login']) : date('Y/m/d H:i:s', time()),
             ],
             'is_login' => true,
         ]);
@@ -299,7 +305,7 @@ class User extends UserModel
             $this->error = '用户名不存在';
             return false;
         }
-        return $obj['question_id'];        
+        return $obj['question_id'];
     }
 
     /**

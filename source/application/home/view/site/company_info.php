@@ -20,11 +20,7 @@
                     <div class="projects-item-option">
                         <p>会员等级：</p>
                         <span style="color: #333333;"><?= $detail['role_name'] ?></span>
-                    </div>
-                    <div class="projects-item-option">
-                        <p>资质资格：</p>
-                        <span style="color: #333333;"><?= $detail['company']['server_level'] ?></span>
-                    </div>
+                    </div>                    
                     <div class="projects-item-option">
                         <p>服务类别：</p>
                         <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>

@@ -83,7 +83,7 @@ class Exam extends BaseModel
     public function getLevelOptionAttr($value, $data)
     {
         $type = [
-            '0' => '普通会员',
+            '0' => '普通用户',
             '1' => '个人会员+专家',
             '2' => '专家',
             '3' => '单位会员+供应商',

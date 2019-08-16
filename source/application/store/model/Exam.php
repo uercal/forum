@@ -32,10 +32,9 @@ class Exam extends ExamModel
             'build_time' => '成立时间',
             'legal_person' => '单位法人',
             'company_code' => '统一社会信用码',
-            'company_type' => '单位类型',
-            'server_level' => '工程服务资格及等级',
+            'company_type' => '单位类型',            
             'company_tel' => '公司电话',
-            'address' => '公司地址',
+            'address' => '公司地址',            
             'email' => '单位邮箱',
             'manager_name' => '联系人姓名',
             'manager_job' => '联系人职务',
@@ -45,6 +44,9 @@ class Exam extends ExamModel
             'license_file' => '单位证件附件',
             'company_intro' => '单位简介',
             'memberLevel' => '会员等级',
+            'eng_cate' => '工程类供应',
+            'goods_cate' => '货物类供应',
+            'server_cate' => '服务类供应',
             // person
             'name' => '姓名',
             'id_card' => '身份证',
@@ -203,6 +205,21 @@ class Exam extends ExamModel
             'sup_server_cate' => [
                 'major' => '资质资格资信专业',
                 'level' => '资质类别等级',
+                'area' => '资质业务领域'
+            ],
+            // company
+            'eng_cate' => [
+                'cate' => '资质标准类别',
+                'level' => '资质类别等级',
+            ],
+            'goods_cate' => [
+                'permit' => '生产销售许可',
+                'content' => '供应内容',
+            ],
+            'server_cate' => [
+                'major' => '资质资格资信专业',
+                'level' => '资质类别等级',
+                'area' => '资质业务领域'
             ],
         ];
     }
@@ -225,8 +242,7 @@ class Exam extends ExamModel
         try {
             // $type==10 用户升级
             if ($obj['type'] == 10) {
-                $user = User::get($obj['user_id']);
-                $role_str = $user['role'];
+                $user = User::get($obj['user_id']);                
                 $type_bonus = $obj['type_bonus'];
                 //
                 if ($data['status'] == 20) {
@@ -271,7 +287,10 @@ class Exam extends ExamModel
                             $new_role = 3;
                             $user_model = new UserCompany();
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
-                            //
+                            //                 
+                            $content['eng_cate'] = json_encode($content['eng_cate']);
+                            $content['goods_cate'] = json_encode($content['goods_cate']);
+                            $content['server_cate'] = json_encode($content['server_cate']);           
                             $content['build_time'] = strtotime($content['build_time']);
                             //
                             $content['memberLevel'] = $data['level'];

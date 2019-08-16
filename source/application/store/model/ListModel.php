@@ -15,6 +15,7 @@ use think\Db;
  */
 class ListModel extends ListModelModel
 {
+    public $error;
     /**
      * 添加新记录
      * @param $data
@@ -89,10 +90,22 @@ class ListModel extends ListModelModel
     }
 
 
-    // public function remove()
-    // {
-    //     return $this->delete();
-    // }
+    public function remove()
+    {        
+        Db::startTrans();
+        try {            
+            $list_id = $this->id;
+            $detail_model = new ListDetail;
+            $detail_model->where(['list_id' => $list_id])->delete();
+            $this->delete();
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
+    }
 
 
     public function getListByModeId($mode_id)

@@ -66,14 +66,13 @@
                             <?php foreach ($data as $key => $item): ?>
                                 <?php if ($key == 'input'): ?>
                                     <?php foreach ($item as $k => $v): if (isset($map[$k])): ?>
-			                                            <div class="am-form-group">
-			                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label <?=isset($new_data) ? (isset($new_data['input'][$k]) ? 'new' : '') : ''?>"> <?=$map[$k]?> :</label>
-			                                                <div class="am-u-sm-9 am-u-end">
-			                                                    <input type="text" class="tpl-form-input" name="<?=$k?>" value="<?=$k == 'gender' ? ($v == 0 ? '男' : '女') : $v?>" disabled="disabled">
-			                                                </div>
-			                                            </div>
-			                                        <?php endif;
-endforeach;?>
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-u-lg-2 am-form-label <?=isset($new_data) ? (isset($new_data['input'][$k]) ? 'new' : '') : ''?>"> <?=$map[$k]?> :</label>
+                                            <div class="am-u-sm-9 am-u-end">
+                                                <input type="text" class="tpl-form-input" name="<?=$k?>" value="<?=$k == 'gender' ? ($v == 0 ? '男' : '女') : $v?>" disabled="disabled">
+                                            </div>
+                                        </div>
+                                    <?php endif;endforeach;?>
                                 <?php elseif ($key == "text"): ?>
                                     <div class="widget-head am-cf">
                                         <div class="widget-title am-fl">详细信息</div>
@@ -97,11 +96,10 @@ endforeach;?>
                                             <?php else: ?>
                                                 <div class="am-u-sm-9 am-u-end">
                                                     <?php if (is_array($v)): foreach ($v as $c): ?>
-			                                                            <a href="<?=$c?>" title="点击查看大图" target="_blank" style="margin-right:10px;">
-			                                                                <img name="<?=$k?>" src="<?=$c?>" width="72" height="72" alt="">
-			                                                            </a>
-			                                                        <?php endforeach;
-else: ?>
+                                                        <a href="<?=$c?>" title="点击查看大图" target="_blank" style="margin-right:10px;">
+                                                            <img name="<?=$k?>" src="<?=$c?>" width="72" height="72" alt="">
+                                                        </a>
+                                                    <?php endforeach;else: ?>
                                                         <a href="<?=$v?>" title="点击查看大图" target="_blank">
                                                             <img name="<?=$k?>" src="<?=$v?>" width="72" height="72" alt="">
                                                         </a>
@@ -121,12 +119,11 @@ else: ?>
                                         </div>
                                         <div class="am-form-group">
                                             <?php foreach ($v as $_k => $_v): foreach ($_v as $i => $value): ?>
-			                                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?=$value['name'] . ($_k + 1)?>:</label>
-			                                                    <div class="am-u-sm-9 am-u-end">
-			                                                        <input type="text" class="tpl-form-input" value="<?=$value['value']?>" disabled="disabled">
-			                                                    </div>
-			                                                <?php endforeach;
-endforeach;?>
+                                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> <?=$value['name'] . ($_k + 1)?>:</label>
+                                                <div class="am-u-sm-9 am-u-end">
+                                                    <input type="text" class="tpl-form-input" value="<?=$value['value']?>" disabled="disabled">
+                                                </div>
+                                            <?php endforeach;endforeach;?>
                                             <!-- todo -->
                                         </div>
                                     <?php endforeach;?>

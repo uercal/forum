@@ -723,7 +723,7 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="统一社会信用代码：" label-width="42%" prop="company_code">
+                                    <el-form-item label="统一社会信用代码：" label-width="140px" prop="company_code">
                                         <el-input v-model="form_company.company_code" placeholder="请填写单位的统一社会信用代码"></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -735,14 +735,7 @@
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
-                            </el-row>
-                            <el-row type="flex" class="row-bg">
-                                <el-col :span="24">
-                                    <el-form-item label="工程服务资格及等级：" label-width="25%" prop="server_level">
-                                        <el-input v-model="form_company.server_level" placeholder="如：生态建设和环境工程/公共工程/城市轨道交通/综合经济/电影广播电视"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
+                            </el-row>                            
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="公司电话：" prop="company_tel">
@@ -756,17 +749,22 @@
                                 </el-col>
                             </el-row>
                             <el-row type="flex" class="row-bg">
-                                <el-col :span="24">
-                                    <el-form-item label="地址邮编：" prop="address">
+                                <el-col :span="12">
+                                    <el-form-item label="地址：" prop="address">
                                         <el-input v-model="form_company.address" placeholder="请填写公司地址"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-form-item label="邮编：" prop="post_code">
+                                        <el-input v-model="form_company.post_code" placeholder="请填写邮编"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
 
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
-                                    <el-form-item label="注册资金：" prop="regist_money">
-                                        <el-input v-model="form_company.regist_money" placeholder="请填写注册资金"></el-input>
+                                    <el-form-item label="注册资金（万元）：" label-width="140px" prop="regist_money">
+                                        <el-input v-model.number="form_company.regist_money" placeholder="请填写注册资金" @keyup.native="proving1('company')"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
@@ -777,8 +775,8 @@
                             </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="24">
-                                    <el-form-item label="传真" prop="company_fax">
-                                        <el-input v-model="form_company.company_fax" placeholder="请填写供应商传真"></el-input>
+                                    <el-form-item label="传真">
+                                        <el-input v-model="form_company.company_fax" placeholder="请填写单位传真"></el-input>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -809,6 +807,99 @@
                                     </el-form-item>
                                 </el-col>
                             </el-row>
+
+
+                            <!-- cates -->
+                            <div class="divider" style="margin-top:25px;">供应类别</div>
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    工程类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span type="text" @click="addCate('eng','company')" style="cursor:pointer;">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_company.eng_cate" :key="index">
+                                    <el-col :span="12">
+                                        <el-form-item :label="'资质标准类别'+(index+1)" label-width="100px">
+                                            <el-input v-model="item.cate" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="11">
+                                        <el-form-item label="资质类别等级：" label-width="100px">
+                                            <el-input v-model="item.level" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('eng',index,'company')"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    货物类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span type="text" @click="addCate('goods','company')" style="cursor:pointer;">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_company.goods_cate" :key="index">
+                                    <el-col :span="12">
+                                        <el-form-item :label="'生产销售许可'+(index+1)" label-width="100px">
+                                            <el-input v-model="item.permit" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="11">
+                                        <el-form-item label="供应内容：" label-width="80px">
+                                            <el-input v-model="item.content" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('goods',index,'company')"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
+                            <el-row type="flex" class="row-bg" style="background: #F4F6F2;padding:8px;ont-family: PingFangSC-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <el-col :span="22">
+                                    服务类
+                                </el-col>
+                                <el-col :span="2" style="color:#7FBAFF;">
+                                    <i class="el-icon-plus"></i>
+                                    <span @click="addCate('server','company')" style="cursor:pointer;" type="text">新类别</span>
+                                </el-col>
+                            </el-row>
+                            <div style="padding:20px 0px;">
+                                <el-row type="flex" class="row-bg" v-for="(item,index) in form_company.server_cate" :key="index">
+                                    <el-col :span="8">
+                                        <el-form-item :label="'资质资格资信专业'+(index+1)" label-width="130px">
+                                            <el-input v-model="item.major" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="7">
+                                        <el-form-item label="资质类别等级：" label-width="100px">
+                                            <el-input v-model="item.level" placeholder=""></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="8">
+                                        <el-form-item label="业务领域：" label-width="80px">
+                                            <el-select v-model="item.area" multiple placeholder="请选择" style="width:100%;">
+                                                <el-option v-for="(e,i) in area_options" :key="i" :label="e" :value="e">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="1" v-if="index>0">
+                                        <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('server',index,'company')"></el-button>
+                                    </el-col>
+                                </el-row>
+                            </div>
+
 
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">图片信息</div>
@@ -901,7 +992,7 @@
                         </el-row>
                         <el-row type="flex" class="row-bg">
                             <el-col :span="12">
-                                <el-form-item label="统一社会信用代码：" label-width="130px" prop="sup_company_code">
+                                <el-form-item label="统一社会信用代码：" label-width="140px" prop="sup_company_code">
                                     <el-input v-model="form_sup.sup_company_code" placeholder="XXXXXXX"></el-input>
                                 </el-form-item>
                             </el-col>
@@ -937,8 +1028,8 @@
                         </el-row>
                         <el-row type="flex" class="row-bg">
                             <el-col :span="12">
-                                <el-form-item label="注册资金：" prop="sup_regist_money">
-                                    <el-input v-model="form_sup.sup_regist_money" placeholder="请填写注册资金"></el-input>
+                                <el-form-item label="注册资金（万元）：" label-width="140px" prop="sup_regist_money">
+                                    <el-input v-model.number="form_sup.sup_regist_money" placeholder="请填写注册资金" @keyup.native="proving1('sup')"></el-input>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="12">
@@ -990,7 +1081,7 @@
                             </el-col>
                             <el-col :span="2" style="color:#7FBAFF;">
                                 <i class="el-icon-plus"></i>
-                                <span type="text" @click="addCate('eng')" style="cursor:pointer;">新类别</span>
+                                <span type="text" @click="addCate('eng','sup')" style="cursor:pointer;">新类别</span>
                             </el-col>
                         </el-row>
                         <div style="padding:20px 0px;">
@@ -1006,7 +1097,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="1" v-if="index>0">
-                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('eng',index)"></el-button>
+                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('eng',index,'sup')"></el-button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -1017,7 +1108,7 @@
                             </el-col>
                             <el-col :span="2" style="color:#7FBAFF;">
                                 <i class="el-icon-plus"></i>
-                                <span type="text" @click="addCate('goods')" style="cursor:pointer;">新类别</span>
+                                <span type="text" @click="addCate('goods','sup')" style="cursor:pointer;">新类别</span>
                             </el-col>
                         </el-row>
                         <div style="padding:20px 0px;">
@@ -1033,7 +1124,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="1" v-if="index>0">
-                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('goods',index)"></el-button>
+                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('goods',index,'sup')"></el-button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -1044,7 +1135,7 @@
                             </el-col>
                             <el-col :span="2" style="color:#7FBAFF;">
                                 <i class="el-icon-plus"></i>
-                                <span @click="addCate('server')" style="cursor:pointer;" type="text">新类别</span>
+                                <span @click="addCate('server','sup')" style="cursor:pointer;" type="text">新类别</span>
                             </el-col>
                         </el-row>
                         <div style="padding:20px 0px;">
@@ -1060,7 +1151,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="1" v-if="index>0">
-                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('server',index)"></el-button>
+                                    <el-button style="margin-top:.5rem;" type="danger" size="mini" icon="el-icon-close" circle @click="delCate('server',index,'sup')"></el-button>
                                 </el-col>
                             </el-row>
                         </div>
@@ -1417,10 +1508,10 @@
                     build_time: '',
                     legal_person: '',
                     company_code: '',
-                    company_type: '',
-                    server_level: '',
+                    company_type: '',               
                     company_tel: '',
                     address: '',
+                    post_code:'',
                     email: '',
                     manager_name: '',
                     manager_job: '',
@@ -1432,7 +1523,20 @@
                     memberLevel: '',
                     regist_money: '',
                     company_site: '',
-                    company_fax: ''
+                    company_fax: '',
+                    eng_cate: [{
+                        cate: '',
+                        level: ''
+                    }],
+                    goods_cate: [{
+                        permit: '',
+                        content: ''
+                    }],
+                    server_cate: [{
+                        major: '',
+                        level: '',
+                        area:''
+                    }],
                 },
                 company_rules: {
                     company_name: [{
@@ -1459,12 +1563,7 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],
-                    server_level: [{
-                        required: true,
-                        message: '请填写内容',
-                        trigger: 'blur'
-                    }],
+                    }],                    
                     company_tel: [{
                         required: true,
                         message: '请输入公司电话',
@@ -1473,6 +1572,11 @@
                     address: [{
                         required: true,
                         message: '请输入公司地址',
+                        trigger: 'blur'
+                    }],
+                    post_code:[{
+                        required: true,
+                        message: '请输入邮编',
                         trigger: 'blur'
                     }],
                     email: [{
@@ -1524,17 +1628,7 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],
-                    company_site: [{
-                        required: true,
-                        message: '请填写内容',
-                        trigger: 'blur'
-                    }],
-                    company_fax: [{
-                        required: true,
-                        message: '请填写内容',
-                        trigger: 'blur'
-                    }],
+                    }],                                     
                 },
                 // 供应商
                 form_sup: {
@@ -1561,7 +1655,8 @@
                     }],
                     sup_server_cate: [{
                         major: '',
-                        level: ''
+                        level: '',
+                        area:''
                     }],
                     id_photo: '',
                     person_file: '',
@@ -1654,20 +1749,24 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],
-                    sup_company_site: [{
-                        required: true,
-                        message: '请填写内容',
-                        trigger: 'blur'
-                    }],
-                    sup_company_fax: [{
-                        required: true,
-                        message: '请填写内容',
-                        trigger: 'blur'
-                    }],
+                    }],                    
                 }
             },
             methods: {
+                proving1(type){
+                    let obj;
+                    switch (type) {
+                        case 'company':
+                            obj = this.form_company.regist_money;
+                            break;
+                    
+                        case 'sup':
+                            obj = this.form_sup.sup_regist_money;
+                            break;
+                    }                    
+                    obj=String(obj).replace(/[^\.\d]/g,'');
+                    obj=String(obj).replace('.','');
+                },
                 handleClose(tag) {
                     this.form_person.pro_qualify.splice(this.form_person.pro_qualify.indexOf(tag), 1);
                 },
@@ -1748,21 +1847,23 @@
                             });
                             break;
                         case 'company':
-                            this.$refs['company'].validate((valid) => {
-                                if (valid) {
-                                    if (this.form_company.company_logo && this.form_company.license_file) {
-                                        this.doPost(this.form_company);
+                            if (this.cate_valid('company')) {
+                                this.$refs['company'].validate((valid) => {
+                                    if (valid) {
+                                        if (this.form_company.company_logo && this.form_company.license_file) {
+                                            this.doPost(this.form_company);
+                                        } else {
+                                            this.$message.error('请上传相应图片和附件');
+                                        }
                                     } else {
-                                        this.$message.error('请上传相应图片和附件');
+                                        console.log('error submit!!');
+                                        return false;
                                     }
-                                } else {
-                                    console.log('error submit!!');
-                                    return false;
-                                }
-                            });
+                                });
+                            }
                             break;
                         case 'sup':
-                            if (this.sup_cate_valid()) {
+                            if (this.cate_valid('sup')) {
                                 this.$refs['sup'].validate((valid) => {
                                     if (valid) {
                                         if (this.form_sup.id_photo && this.form_sup.person_file) {
@@ -1884,59 +1985,123 @@
 
                 },
                 // supplier
-                addCate(type) {
-                    if (type == 'eng') {
-                        var d = {
-                            cate: '',
-                            level: ''
-                        };
-                        if (this.form_sup.sup_eng_cate.length == 5) {
-                            this.$message.error('最多添加五项');
-                        } else {
-                            this.form_sup.sup_eng_cate.push(d);
-                        }
-                    } else if (type == 'goods') {
-                        var d = {
-                            permit: '',
-                            content: ''
-                        };
-                        if (this.form_sup.sup_goods_cate.length == 5) {
-                            this.$message.error('最多添加五项');
-                        } else {
-                            this.form_sup.sup_goods_cate.push(d);
-                        }
-                    } else if (type == 'server') {
-                        var d = {
-                            major: '',
-                            level: ''
-                        };
-                        if (this.form_sup.sup_server_cate.length == 5) {
-                            this.$message.error('最多添加五项');
-                        } else {
-                            this.form_sup.sup_server_cate.push(d);
-                        }
+                addCate(type,form_type) {
+                    let obj,d;                    
+                    switch (type) {
+                        case 'eng':
+                            d = {
+                                cate: '',
+                                level: ''
+                            };
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.eng_cate;                                   
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_eng_cate;                                   
+                                    break;                        
+                            }
+                            break;
+                        case 'goods':
+                            d = {
+                                permit: '',
+                                content: ''
+                            };
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.goods_cate;                                    
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_goods_cate;                                   
+                                    break;                        
+                            }
+                            break;
+                        case 'server':
+                            d = {
+                                major: '',
+                                level: ''
+                            };
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.server_cate;                                    
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_server_cate;                                    
+                                    break;                        
+                            }
+                            break;                                            
                     }
+                    if (obj.length == 5) {
+                        this.$message.error('最多添加五项');
+                    } else {
+                        obj.push(d);
+                    }                                        
                 },
-                delCate(type, index) {
-                    if (type == 'eng') {
-                        this.form_sup.sup_eng_cate.splice(index, 1);
-                    } else if (type == 'goods') {
-                        this.form_sup.sup_goods_cate.splice(index, 1);
-                    } else if (type == 'server') {
-                        this.form_sup.sup_server_cate.splice(index, 1);
+                delCate(type, index, form_type) {
+                    let obj;
+                    switch (type) {
+                        case 'eng':
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.eng_cate;                                    
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_eng_cate;                                    
+                                    break;
+                            }                            
+                            break;
+                        case 'goods':
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.goods_cate;                                    
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_goods_cate;                                    
+                                    break;
+                            }
+                            break;
+                        case 'server':
+                            switch (form_type) {
+                                case 'company':
+                                    obj = this.form_company.server_cate;                                    
+                                    break;
+                                case 'sup':
+                                    obj = this.form_sup.sup_server_cate;                                    
+                                    break;
+                            }
+                            break;                   
                     }
+                    obj.splice(index,1);                    
                 },
-                sup_cate_valid() {
-                    var result = true;
-                    var a = this.form_sup.sup_eng_cate.findIndex(function(e) {
-                        return e.cate == '' || e.level == '';
-                    });
-                    var b = this.form_sup.sup_goods_cate.findIndex(function(e) {
-                        return e.permit == '' || e.content == '';
-                    });
-                    var c = this.form_sup.sup_server_cate.findIndex(function(e) {
-                        return e.major == '' || e.level == '';
-                    });
+                cate_valid(form_type) {
+                    let result = true;
+                    let a,b,c;
+                    switch (form_type) {
+                        case 'company':
+                            a = this.form_company.eng_cate.findIndex(function(e) {
+                                return e.cate == '' || e.level == '';
+                            });
+                            b = this.form_company.goods_cate.findIndex(function(e) {
+                                return e.permit == '' || e.content == '';
+                            });
+                            c = this.form_company.server_cate.findIndex(function(e) {
+                                return e.major == '' || e.level == '';
+                            });
+                            break;
+                    
+                        case 'sup':
+                            a = this.form_sup.sup_eng_cate.findIndex(function(e) {
+                                return e.cate == '' || e.level == '';
+                            });
+                            b = this.form_sup.sup_goods_cate.findIndex(function(e) {
+                                return e.permit == '' || e.content == '';
+                            });
+                            c = this.form_sup.sup_server_cate.findIndex(function(e) {
+                                return e.major == '' || e.level == '';
+                            });
+                            break;
+                    }
+                    
                     if (a == -1 || b == -1 || c == -1) {
                         return true;
                     } else {
