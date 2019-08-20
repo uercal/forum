@@ -40,7 +40,7 @@ return [
                 'index' => 'list_data/index&mode=news',
             ],
             [
-                'name' => '期刊列表',
+                'name' => '资讯列表',
                 'icon' => 'icon-order',
                 'index' => 'list_data/index&mode=mag',
             ],
