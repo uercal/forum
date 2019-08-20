@@ -75,7 +75,7 @@ class User extends UserModel
                     $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserPerson;
-                $list = $model->where($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
+                $list = $model->whereOr($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
                 if (input('title')) {
@@ -83,7 +83,7 @@ class User extends UserModel
                     $map['memberLevel'] = ['like', '%' . input('title') . '%'];                   
                 }
                 $model = new UserCompany;
-                $list = $model->with(['user'])->where($map)->order($order)
+                $list = $model->with(['user'])->whereOr($map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'supplier':
@@ -91,10 +91,9 @@ class User extends UserModel
                     $map['sup_company_name'] = ['like', '%' . input('title') . '%'];
                     $map['sup_company_address'] = ['like', '%' . input('title') . '%'];
                 }
-                $model = new UserSup;
-                // halt($model->fetchSql(true)->WhereOr($map)->select());
+                $model = new UserSup;                
                 $list = $model->with(['user'])->whereOr($map)->order($order)
-                    ->paginate(10, false, ['query' => $request->request()]);
+                    ->paginate(10, false, ['query' => $request->request()]);                    
                 break;
         }
 
