@@ -60,7 +60,7 @@ class User extends UserModel
                     $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserPerson;
-                $list = $model->whereOr($_map)->where('memberLevel', 'not null')->order($order)
+                $list = $model->where($map)->whereOr($_map)->where('memberLevel', 'not null')->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'expert':
@@ -74,25 +74,27 @@ class User extends UserModel
                     $_map['positio'] = ['like', '%' . input('title') . '%'];
                     $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
-                $model = new UserPerson;
-                $list = $model->whereOr($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
+                $model = new UserPerson;               
+                $list = $model->where($map)->whereOr($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
+                $_map = [];
                 if (input('title')) {
-                    $map['company_name'] = ['like', '%' . input('title') . '%'];
-                    $map['memberLevel'] = ['like', '%' . input('title') . '%'];                   
+                    $_map['company_name'] = ['like', '%' . input('title') . '%'];
+                    $_map['memberLevel'] = ['like', '%' . input('title') . '%'];                   
                 }
                 $model = new UserCompany;
-                $list = $model->with(['user'])->whereOr($map)->order($order)
+                $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'supplier':
+                $_map = [];
                 if (input('title')) {
-                    $map['sup_company_name'] = ['like', '%' . input('title') . '%'];
-                    $map['sup_company_address'] = ['like', '%' . input('title') . '%'];
+                    $_map['sup_company_name'] = ['like', '%' . input('title') . '%'];
+                    $_map['sup_company_address'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserSup;                
-                $list = $model->with(['user'])->whereOr($map)->order($order)
+                $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);                    
                 break;
         }
