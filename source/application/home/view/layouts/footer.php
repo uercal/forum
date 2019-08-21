@@ -143,7 +143,7 @@ endif;?>
         function search() {
             var title = $('input[name="title"]').val();
             console.log(title);
-            if (!title) return false;
+            // if (!title) return false;
             $form = $('#pro_list').serialize();
             filter_jump($form);
         }

@@ -80,6 +80,10 @@
                             <p>公司地址：</p>
                             <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
                         </div>
+						<div class="projects-item-option" style="margin-bottom:40px;">
+						    <p>会员级别：</p>
+						    <span style="color: #333333;"><?= $detail['company']['memberLevel'] ?></span>
+						</div>
 
                     </div>
                 </div>
@@ -110,8 +114,8 @@
                             <span style="color: #333333;"><?= $detail['person']['education_school'] ?></span>
                         </div>
                         <div class="projects-item-option">
-                            <p>学历学位：</p>
-                            <span style="color: #333333;"><?= $detail['person']['education_degree'] ?></span>
+                            <p>学历/学位：</p>
+                            <span style="color: #333333;"><?= $detail['person']['education_degree'].'/'.$detail['person']['education_degree_xw'] ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>专业：</p>
@@ -125,6 +129,16 @@
                             <p>职务&职称：</p>
                             <span style="color: #333333;"><?= $detail['person']['job'] . ' | ' . $detail['person']['positio'] ?></span>
                         </div>
+						<?php if(!empty($detail['person']['memberLevel'])):?>
+						<div class="projects-item-option" style="margin-bottom:40px;">
+						    <p>会员级别</p>
+						    <span style="color: #333333;"><?= $detail['person']['memberLevel'] ?></span>
+						</div>
+						<?php endif;?>
+						<div class="projects-item-option" style="margin-bottom:40px;">
+						    <p>专家级别</p>
+						    <span style="color: #333333;"><?= $detail['person']['expertLevel'] ?></span>
+						</div>
 
                     </div>
                 </div>

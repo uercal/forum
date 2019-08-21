@@ -200,37 +200,17 @@
                                                     </div> -->
                             <div class="users-item-info">
                                 <strong><?=$item['sup_company_name']?></strong>
-                                <div>
-                                    <?php if (!empty($item['sup_eng_cate_name'])): ?>
-                                        <div>
-                                            <span class="am-icon-file-text-o"></span>
-                                            <p><?=$item['sup_eng_cate_name'][0] . ':' . $item['sup_eng_cate_name'][1]?></p>
-                                        </div>
-                                    <?php endif;?>
-                                    <?php if (!empty($item['sup_goods_cate_name'])): ?>
-                                        <div>
-                                            <span class="am-icon-file-text-o"></span>
-                                            <p><?=$item['sup_goods_cate_name'][0] . ':' . $item['sup_goods_cate_name'][1]?></p>
-                                        </div>
-                                    <?php endif;?>
-                                    <?php if (!empty($item['sup_server_cate_name'])): ?>
-                                        <div>
-                                            <span class="am-icon-file-text-o"></span>
-                                            <p><?=$item['sup_server_cate_name'][0] . ':' . $item['sup_server_cate_name'][1]?></p>
-                                        </div>
-                                    <?php endif;?>
-
-
+                                <div>                                    
                                     <div>
                                         <span class="am-icon-phone"></span>
                                         <p><?=$item['sup_company_tel']?></p>
                                     </div>
                                     <div>
-                                        <span class="am-icon-at"></span>
-                                        <p><?=$item['sup_company_email']?></p>
+                                        <span class="am-icon-location-arrow"></span>
+                                        <p><?=$item['sup_company_address']?></p>
                                     </div>
                                     <div>
-                                        <span class="am-icon-send-o"></span>
+                                        <span class="am-icon-globe"></span>
                                         <p><?=$item['sup_company_type']?></p>
                                     </div>
                                 </div>
