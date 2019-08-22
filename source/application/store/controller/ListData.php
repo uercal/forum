@@ -174,7 +174,7 @@ class ListData extends Controller
 
     public function detail_edit($id)
     {
-        // 商品详情
+        // 详情
         $model = ListDetail::detail($id);
         if (!$this->request->isAjax()) {
             return $this->fetch('detail_edit', compact('model'));
