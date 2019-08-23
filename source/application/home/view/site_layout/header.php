@@ -22,7 +22,7 @@
         <nav class="header-nav">
             <div class="header-logo" style="height:100px;flex-direction:row;justify-content:space-between;align-items:center;">
                 <img src="<?= $company['company_logo_path'] ?>" alt="" style="height:80px;width:80px;object-fit:contain;padding:0;">
-                <p style="margin:0;font-size:20px;font-weight:600;margin-left:16px;white-space: nowrap;"><?= $company['company_name'] ?></p>
+                <p style="margin:0;font-size:20px;font-weight:600;margin-left:16px;"><?= $company['company_name'] ?></p>
             </div>
             <ul class="header-ul" style="margin-right:20px;white-space:nowrap;text-align:center;">
                 <li><a href="<?= url('index') ?>" class="<?= $action == 'index' ? 'current' : '' ?>">首页</a></li>

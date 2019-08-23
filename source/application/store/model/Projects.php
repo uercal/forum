@@ -46,4 +46,20 @@ class Projects extends ProjectsModel
             Db::rollback();
         }
     }
+	
+	public function edit($data){		
+		Db::startTrans();
+		try {		    		        		
+			
+		    $this->allowField(true)->save([
+				'content'=>$data['content']
+			]);
+		    Db::commit();
+		    return true;
+		} catch (\Exception $e) {
+		    $this->error = $e->getMessage();
+		    return false;
+		    Db::rollback();
+		}
+	}
 }

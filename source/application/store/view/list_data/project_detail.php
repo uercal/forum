@@ -108,12 +108,12 @@
 
                             </div>
                             
-                            <!-- <div class="am-form-group">
+                            <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                     <button type="submit" class="j-submit am-btn am-btn-secondary">提交
                                     </button>
                                 </div>
-                            </div> -->
+                            </div>
                         </fieldset>
                     </div>
 

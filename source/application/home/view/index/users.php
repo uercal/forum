@@ -193,7 +193,7 @@
 
                 <?php elseif ($data['mode_data'] == 'supplier'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>,1)">
-                        <img style="object-fit:contain;height:80px;" src="<?=$item['id_photo_path']?>" alt="">
+                        <img style="object-fit:contain;height:80px;" src="<?=  getApiFile($item['id_photo']) ?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>供应商</p>

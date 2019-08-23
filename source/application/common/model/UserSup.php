@@ -52,6 +52,9 @@ class UserSup extends BaseModel
     //
     public function getSupEngCateTextAttr($value, $data)
     {
+		if(!isset($data['sup_eng_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_eng_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
@@ -63,6 +66,9 @@ class UserSup extends BaseModel
 
     public function getSupEngCateNameAttr($value, $data)
     {
+		if(!isset($data['sup_eng_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_eng_cate'], true);
         if (empty($arr)) {
             return [];
@@ -82,6 +88,9 @@ class UserSup extends BaseModel
 
     public function getSupGoodsCateTextAttr($value, $data)
     {
+		if(!isset($data['sup_goods_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_goods_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
@@ -93,6 +102,9 @@ class UserSup extends BaseModel
 
     public function getSupGoodsCateNameAttr($value, $data)
     {
+		if(!isset($data['sup_goods_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_goods_cate'], true);
         if (empty($arr)) {
             return [];
@@ -112,11 +124,14 @@ class UserSup extends BaseModel
 
     public function getSupServerCateTextAttr($value, $data)
     {
+		if(!isset($data['sup_server_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_server_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
             $index = $key + 1;
-            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级' 
+            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级'
             . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . $value['area'];
         }
         return implode(' | ', $res);
@@ -124,6 +139,9 @@ class UserSup extends BaseModel
 
     public function getSupServerCateNameAttr($value, $data)
     {
+		if(!isset($data['sup_server_cate'])){
+			return '';
+		}
         $arr = json_decode($data['sup_server_cate'], true);
         $res = [];
         $cates = [];
@@ -131,7 +149,7 @@ class UserSup extends BaseModel
         $areas = [];
         foreach ($arr as $key => $value) {
             $cates[] = $value['major'];
-            $values[] = $value['level'];            
+            $values[] = $value['level'];
             $area[] = $value['area'];
         }
         if (empty($cates[0])) {
@@ -142,16 +160,22 @@ class UserSup extends BaseModel
 
     public function getSupBuildTimeTextAttr($value, $data)
     {
+		if(!isset($data['sup_build_time'])){
+			return '';
+		}
         return date('Y-m-d', $data['sup_build_time']);
     }
     //
     public function getIdPhotoPathAttr($value, $data)
-    {
+    {		
         return UploadApiFile::getFilePath($data['id_photo']);
     }
 
     public function getPersonFilePathAttr($value, $data)
     {
+        if (!isset($data['person_file'])) {
+            return '';
+        }
         return UploadApiFile::getFilePath($data['person_file']);
     }
 }

@@ -27,7 +27,7 @@
                     </div>
                     <div class="projects-item-option">
                         <p>联系方式：</p>
-                        <span style="color: #333333;"><?= $detail['company']['company_tel'] . ' | ' . $detail['company']['manager_phone'] ?></span>
+                        <span style="color: #333333;"><?= $detail['company']['company_tel']  ?></span>
                     </div>
                     <div class="projects-item-option">
                         <p>公司邮箱：</p>

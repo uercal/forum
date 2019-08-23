@@ -83,7 +83,9 @@ class ListDetail extends ListDetailModel
                     break;
 
                 case 'user_news':
-                    $data['option_id'] = implode(',', $data['option_id']);
+					if(isset($data['option_id'])){
+						$data['option_id'] = implode(',', $data['option_id']);
+					}                    
                     if (isset($data['cover_id'])) {
                         $data['cover_id'] = array_values($data['cover_id'])[0];
                     }

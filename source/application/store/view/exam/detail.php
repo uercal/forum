@@ -244,8 +244,8 @@
 												<option value="常务副监事长" <?=$data['input']['memberLevel'] == '常务副监事长' ? 'selected' : ''?>>常务副监事长</option>
                                                 <option value="副会长" <?=$data['input']['memberLevel'] == '副会长' ? 'selected' : ''?>>副会长</option>
 												<option value="副监事长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
-												<option value="秘书长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
-												<option value="副秘书长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
+												<option value="秘书长" <?=$data['input']['memberLevel'] == '秘书长' ? 'selected' : ''?>>秘书长</option>
+												<option value="副秘书长" <?=$data['input']['memberLevel'] == '副秘书长' ? 'selected' : ''?>>副秘书长</option>
                                                 <option value="常务理事" <?=$data['input']['memberLevel'] == '常务理事' ? 'selected' : ''?>>常务理事</option>
 												<option value="常务监事" <?=$data['input']['memberLevel'] == '常务监事' ? 'selected' : ''?>>常务监事</option>
                                                 <option value="理事" <?=$data['input']['memberLevel'] == '理事' ? 'selected' : ''?>>理事</option>                                                                                                                                                                                                
@@ -258,8 +258,8 @@
                                                 <option value="常务副监事长">常务副监事长</option>
                                                 <option value="副会长">副会长</option>
                                                 <option value="副监事长">副监事长</option>
-                                                <option value="秘书长">副监事长</option>
-                                                <option value="副秘书长">副监事长</option>
+                                                <option value="秘书长">秘书长</option>
+                                                <option value="副秘书长">副秘书长</option>
                                                 <option value="常务理事">常务理事</option>
                                                 <option value="常务监事">常务监事</option>
                                                 <option value="理事">理事</option>                                                                                                                                                                                                

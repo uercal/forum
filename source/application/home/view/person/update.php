@@ -1011,7 +1011,7 @@
                         <el-row type="flex" class="row-bg">
                             <el-col :span="12">
                                 <el-form-item label="单位电话：" prop="sup_company_tel">
-                                    <el-input v-model.number="form_sup.sup_company_tel" placeholder="0898-66666666"></el-input>
+                                    <el-input v-model="form_sup.sup_company_tel" placeholder="0898-66666666"></el-input>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="12">

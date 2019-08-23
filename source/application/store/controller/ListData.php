@@ -120,10 +120,21 @@ class ListData extends Controller
     }
 
     public function project_detail($id)
-    {
-        $model = Projects::get($id);
-        // halt($model->toArray());
-        return $this->fetch('project_detail', compact('model'));
+    {       
+		// 详情
+		$model = Projects::get($id);
+		if (!$this->request->isAjax()) {
+		    return $this->fetch('project_detail', compact('model'));
+		}else{
+			// 更新记录
+			if ($model->edit($this->postData('detail'))){
+				return $this->renderSuccess('更新成功', url('list_data/user_project'));	
+			}							
+			$error = $model->getError() ?: '更新失败';
+			return $this->renderError($error);
+		}
+		
+		
     }
 
     //职务列表模式的职位排序

@@ -3,6 +3,8 @@
 // 应用公共函数库文件
 
 use think\Request;
+use app\common\model\UploadApiFile;
+
 
 /**
  * 打印调试函数
@@ -159,6 +161,10 @@ function checkCN($str)
     return $str;
 }
 
+
+function getApiFile($id){
+	return UploadApiFile::getFilePath($id);
+}
 
 
 function hex2rgb($hexColor)

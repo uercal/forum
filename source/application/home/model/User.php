@@ -7,6 +7,7 @@ use app\common\model\UserCompany;
 use app\common\model\UserPerson;
 use app\home\model\ActivityUserLog;
 use app\home\model\UserSup;
+use app\home\model\UploadApiFile;
 use think\Db;
 use think\Request;
 use think\Session;
@@ -18,7 +19,6 @@ use think\Session;
  */
 class User extends UserModel
 {
-
     public $error;
 
     public function getUsersList($mode_data)
@@ -74,28 +74,52 @@ class User extends UserModel
                     $_map['positio'] = ['like', '%' . input('title') . '%'];
                     $_map['pro_qualify'] = ['like', '%' . input('title') . '%'];
                 }
-                $model = new UserPerson;               
+                $model = new UserPerson;
                 $list = $model->where($map)->whereOr($_map)->order($order)->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'company':
                 $_map = [];
                 if (input('title')) {
                     $_map['company_name'] = ['like', '%' . input('title') . '%'];
-                    $_map['memberLevel'] = ['like', '%' . input('title') . '%'];                   
+                    $_map['memberLevel'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserCompany;
                 $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
                     ->paginate(10, false, ['query' => $request->request()]);
                 break;
             case 'supplier':
-                $_map = [];
+                $_map = [];	//sup
+                $__map = []; //company
                 if (input('title')) {
                     $_map['sup_company_name'] = ['like', '%' . input('title') . '%'];
                     $_map['sup_company_address'] = ['like', '%' . input('title') . '%'];
+                    //
+                    $__map['company_name'] = ['like', '%' . input('title') . '%'];
+                    $__map['address'] = ['like', '%' . input('title') . '%'];
                 }
-                $model = new UserSup;                
-                $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
-                    ->paginate(10, false, ['query' => $request->request()]);                    
+                
+                
+                $sql = Db::table('forum_users_company')
+					->field('user_id,create_time,company_logo as id_photo,company_name as sup_company_name,company_tel as sup_company_tel,
+				address as sup_company_address,company_type as sup_company_type')					
+					->where($map)					
+					->whereOr($__map)
+					->buildSql();
+
+				//构建sys表 union 联合
+				$data = Db::table('forum_users_sup')					
+					->field('user_id,create_time,id_photo,sup_company_name,
+				sup_company_tel,sup_company_address,sup_company_type')					
+					->union($sql, true)
+					->where($map)
+					->whereOr($_map)
+					->buildSql();
+
+				//获得查询结果
+				$list = Db::table($data.' as  a')
+					->order('a.create_time desc')
+					->paginate(10, false, ['query'=>request()->param()]);
+                 				                                                                                                      
                 break;
         }
 
