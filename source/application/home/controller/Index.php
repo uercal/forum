@@ -41,7 +41,7 @@ class Index extends Controller
     }
 
     public function index()
-    {        
+    {
         return $this->fetch('index/index');
     }
 
@@ -94,7 +94,7 @@ class Index extends Controller
                 }
             }
             
-            if(input('answer')) {
+            if (input('answer')) {
                 $res = $user->isPassProtect(input());
                 if (!$res) {
                     $this->assign('error', $user->error);
@@ -298,7 +298,6 @@ class Index extends Controller
         if ($category_id != 0) {
             $model = Category::get($category_id, ['listMode', 'list']);
         } else {
-
             $category_id = $detail['list']['category']['category_id'];
             $model = Category::get($category_id, ['listMode', 'list']);
         }
@@ -329,11 +328,12 @@ class Index extends Controller
         } else {
             $model = Category::where(['mode' => 'users', 'mode_data' => 'normal'])->find();
         }
-        if ($is_sup == 1) {
-            $is_sup = 1;
-        } else {
-            $is_sup = 0;
-        }
+        $is_sup = empty($detail['sup'])?0:1;
+        // if ($is_sup == 1) {
+        //     $is_sup = 1;
+        // } else {
+        //     $is_sup = 0;
+        // }
         //
         return $this->fetch('user_detail', compact('detail', 'model', 'is_sup'));
     }
