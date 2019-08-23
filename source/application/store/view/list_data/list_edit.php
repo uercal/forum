@@ -95,7 +95,7 @@
 <script src="assets/layui/layui.js"></script>
 
 <script>
-    <?php if($model['mode']['key_word']=='job'):?>
+    <?php if ($model['mode']['key_word']=='job'):?>
     layui.use(['transfer', 'layer', 'util'], function(){
         var $ = layui.$
         ,transfer = layui.transfer
@@ -105,6 +105,7 @@
 
         var $data = JSON.parse('<?=json_encode($all_list)?>');
         var $data_ed = JSON.parse('<?=json_encode($pre_lists)?>');
+		
         //模拟数据
         var data1 = $data;
 
@@ -112,7 +113,7 @@
         transfer.render({
             elem: '#pre_lists'
             ,title: ['所有列表', '往届列表']
-            ,data: data1
+            ,data: $data
             ,value:$data_ed
         })
 
@@ -134,6 +135,8 @@
                         pre_ids.push($(input[e]).val())
                     })
                     pre_ids = pre_ids.join(',');
+					console.log(pre_ids);
+					// return false;
                     $('input[name="list[pre_lists]"]').val(pre_ids);
                     return true;
                 }else{

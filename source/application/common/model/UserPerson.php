@@ -31,6 +31,7 @@ class UserPerson extends BaseModel
         $obj['positio_time'] = date('Y-m-d', $obj['positio_time']);
         $obj['education_time'] = date('Y-m-d', $obj['education_time']);
         $obj['area'] = explode(',', $obj['area']);
+        $obj['sector'] = explode(',', $obj['sector']);
         $obj['positio'] = explode(',', $obj['positio']);
         unset($obj['create_time']);
         unset($obj['update_time']);

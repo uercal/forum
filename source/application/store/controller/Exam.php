@@ -63,7 +63,7 @@ class Exam extends Controller
         $status = $info['status'];
         $id = $info['id'];
         $content = $info['content'];
-        $data_arr = json_decode($content, true);    
+        $data_arr = json_decode($content, true);
         // halt($data_arr);
         // 包含图片更换 属性更替
         $data = [];
@@ -75,7 +75,6 @@ class Exam extends Controller
             $user_data = User::get($info['user_id'], ['person'])->toArray();
             $data_arr = $user_data['person'];
         }
-
         // 特殊字段处理
         switch ($info['type_bonus']) {
 
@@ -108,6 +107,7 @@ class Exam extends Controller
                 $data_arr['job_education'] = $recruit->getJobEducationNameAttr('', $data_arr);
                 $data_arr['job_price'] = implode('-', $data_arr['job_price']);
 
+                // no break
             default:
                 # code...
                 break;
@@ -118,7 +118,7 @@ class Exam extends Controller
                 unset($data_arr[$key]);
             }
         }
-
+        
         // 组装数据
         foreach ($data_arr as $key => $value) {
             if (in_array($key, $imgMap)) {
@@ -131,8 +131,8 @@ class Exam extends Controller
                 $data['text'][$key] = $value;
             } elseif (in_array($key, $contentArrMap)) {
                 $data['content'][$key] = $value;
-            } elseif (array_key_exists($key, $cateArrMap)) {
-                $_arr = [];                
+            } elseif ($info['type']==10&&array_key_exists($key, $cateArrMap)) {
+                $_arr = [];
                 foreach ($value as $k => $v) {
                     if (reset($v) == '' && end($v) == '') {
                         continue;
@@ -142,20 +142,20 @@ class Exam extends Controller
                     foreach ($v as $_k => $_v) {
                         $__arr[] = [
                             'name'=>$cateArrMap[$key][$_k],
-                            'value'=> is_array($_v)?implode(',',$_v):$_v
+                            'value'=> is_array($_v)?implode(',', $_v):$_v
                         ];
                     }
-                    // 
+                    //
                     $_arr[] = $__arr;
                 }
                 if (empty($_arr)) {
                     continue;
-                }                
+                }
                 $data['array'][$key] = $_arr;
             } else {
                 $data['input'][$key] = $value;
             }
-        }        
+        }
         //
         if (isset($info['old_content'])) {
             $old_arr = $info['old_content'];
@@ -175,7 +175,7 @@ class Exam extends Controller
                     $old_data['text'][$key] = $value;
                 } elseif (in_array($key, $contentArrMap)) {
                     $old_data['content'][$key] = $value;
-                } elseif (array_key_exists($key, $cateArrMap)) {
+                } elseif ($info['type']==10&&array_key_exists($key, $cateArrMap)) {
                     $_arr = [];
                     foreach ($value as $k => $v) {
                         if (reset($v) == '' && end($v) == '') {
@@ -185,7 +185,7 @@ class Exam extends Controller
                         foreach ($v as $_k => $_v) {
                             $__arr[] = [
                                 'name'=>$cateArrMap[$key][$_k],
-                                'value'=> is_array($_v)?implode(',',$_v):$_v
+                                'value'=> is_array($_v)?implode(',', $_v):$_v
                             ];
                         }
                         $_arr[] = $__arr;
@@ -202,10 +202,10 @@ class Exam extends Controller
 
             $_arr = [$data, $old_data];
             $data = $_arr[1];
-            $new_data = $_arr[0];            
+            $new_data = $_arr[0];
             $this->assign('new_data', $new_data);
-        }                
-        // halt($new_data);
+        }
+        
 
         return $this->fetch('detail', compact('data', 'map', 'id', 'type', 'status', 'info', 'content'));
     }

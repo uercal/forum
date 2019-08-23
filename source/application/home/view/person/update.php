@@ -302,7 +302,10 @@
                             <el-row type="flex" class="row-bg">   
                                 <el-col :span="12">
                                     <el-form-item label="业务行业：" prop="sector">
-                                        <el-input v-model="form_person.sector" placeholder=""></el-input>
+                                        <el-select v-model="form_person.sector" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in sector_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>                             
                                 <el-col :span="12">
@@ -577,7 +580,10 @@
                             <el-row type="flex" class="row-bg">   
                                 <el-col :span="12">
                                     <el-form-item label="业务行业：" prop="sector">
-                                        <el-input v-model="form_person.sector" placeholder=""></el-input>
+                                        <el-select v-model="form_person.sector" multiple placeholder="请选择" style="width:100%;">
+                                            <el-option v-for="(item,index) in sector_options" :key="index" :label="item" :value="item">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>                             
                                 <el-col :span="12">
@@ -1322,6 +1328,9 @@
                 positio_options:[
                     '正高级工程师','教授','研究员','高级工程师','副教授','副研究员'
                 ],
+				sector_options:[
+					'农林水利','交通运输','能源','城市基础设施','社会事业','科学','公检法司','高技术','信息化','环保','国防军工','工业','地质','医药','仓储物流','其他'
+				],
                 area_options:[
                     '投资咨询','招标代理','勘察测量','规划设计','工程监理','造价咨询','项目管理','其他工程服务'
                 ],
@@ -1376,7 +1385,7 @@
                     gender: [{
                         required: true,
                         message: '请选择性别',
-                        trigger: 'blur'
+                        trigger: 'change'
                     }],
                     email: [{
                         required: true,
@@ -1834,16 +1843,20 @@
                     switch (type) {
                         case 'person':
                             this.$refs['person'].validate((valid) => {
-                                if (valid) {
-                                    if (this.form_person.id_photo && this.form_person.person_file) {
-                                        this.doPost(this.form_person);
-                                    } else {
-                                        this.$message.error('请上传相应图片和附件');
-                                    }
-                                } else {
-                                    console.log('error submit!!');
-                                    return false;
-                                }
+								if(this.form_person.gender==''){
+									this.$message.error('请选择性别');
+								}else{
+									if (valid) {
+										if (this.form_person.id_photo && this.form_person.person_file) {
+											this.doPost(this.form_person);
+										} else {
+											this.$message.error('请上传相应图片和附件');
+										}	
+									} else {									
+										console.log('error submit!!');
+										return false;
+									}	
+								}
                             });
                             break;
                         case 'company':

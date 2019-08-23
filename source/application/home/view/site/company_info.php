@@ -43,7 +43,7 @@
 
             <strong style="margin-left:30px;margin-top:35px;">单位简介</strong>
 
-            <div class="detail-body" style="font-size:20px;">
+            <div class="detail-body" style="font-size:20px;line-height: 26px;">
                 <?= htmlspecialchars_decode($detail['company']['company_intro']) ?>
             </div>
 

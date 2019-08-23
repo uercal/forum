@@ -231,7 +231,7 @@
                                 </div>
                             <?php endif;?>
 
-                            <?php if ($info['type'] == 10 && $info['type_bonus'] == 'person'): ?>
+                            <?php if ($info['type'] == 10 && $info['type_bonus'] == 'person'&& !empty($data['input']['memberLevel'])): ?>
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label">确认会员等级</label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">
@@ -239,26 +239,30 @@
                                             <option value=""></option>
                                             <?php if (isset($data['input']['memberLevel'])): ?>
                                                 <option value="会长" <?=$data['input']['memberLevel'] == '会长' ? 'selected' : ''?>>会长</option>
+												<option value="监事长" <?=$data['input']['memberLevel'] == '监事长' ? 'selected' : ''?>>监事长</option>
                                                 <option value="常务副会长" <?=$data['input']['memberLevel'] == '常务副会长' ? 'selected' : ''?>>常务副会长</option>
+												<option value="常务副监事长" <?=$data['input']['memberLevel'] == '常务副监事长' ? 'selected' : ''?>>常务副监事长</option>
                                                 <option value="副会长" <?=$data['input']['memberLevel'] == '副会长' ? 'selected' : ''?>>副会长</option>
+												<option value="副监事长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
+												<option value="秘书长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
+												<option value="副秘书长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
                                                 <option value="常务理事" <?=$data['input']['memberLevel'] == '常务理事' ? 'selected' : ''?>>常务理事</option>
-                                                <option value="理事" <?=$data['input']['memberLevel'] == '理事' ? 'selected' : ''?>>理事</option>
-                                                <option value="监事长" <?=$data['input']['memberLevel'] == '监事长' ? 'selected' : ''?>>监事长</option>
-                                                <option value="常务副监事长" <?=$data['input']['memberLevel'] == '常务副监事长' ? 'selected' : ''?>>常务副监事长</option>
-                                                <option value="副监事长" <?=$data['input']['memberLevel'] == '副监事长' ? 'selected' : ''?>>副监事长</option>
-                                                <option value="常务监事" <?=$data['input']['memberLevel'] == '常务监事' ? 'selected' : ''?>>常务监事</option>
+												<option value="常务监事" <?=$data['input']['memberLevel'] == '常务监事' ? 'selected' : ''?>>常务监事</option>
+                                                <option value="理事" <?=$data['input']['memberLevel'] == '理事' ? 'selected' : ''?>>理事</option>                                                                                                                                                                                                
                                                 <option value="监事" <?=$data['input']['memberLevel'] == '监事' ? 'selected' : ''?>>监事</option>
                                                 <option value="会员" <?=$data['input']['memberLevel'] == '会员' ? 'selected' : ''?>>会员</option>
                                             <?php else: ?>
                                                 <option value="会长">会长</option>
-                                                <option value="常务副会长">常务副会长</option>
-                                                <option value="副会长">副会长</option>
-                                                <option value="常务理事">常务理事</option>
-                                                <option value="理事">理事</option>
                                                 <option value="监事长">监事长</option>
+                                                <option value="常务副会长">常务副会长</option>
                                                 <option value="常务副监事长">常务副监事长</option>
+                                                <option value="副会长">副会长</option>
                                                 <option value="副监事长">副监事长</option>
+                                                <option value="秘书长">副监事长</option>
+                                                <option value="副秘书长">副监事长</option>
+                                                <option value="常务理事">常务理事</option>
                                                 <option value="常务监事">常务监事</option>
+                                                <option value="理事">理事</option>                                                                                                                                                                                                
                                                 <option value="监事">监事</option>
                                                 <option value="会员">会员</option>
                                             <?php endif;?>
@@ -267,6 +271,28 @@
                                     </div>
                                 </div>
                             <?php endif;?>
+							
+							
+							<?php if($info['type'] == 10 && $info['type_bonus'] == 'person'):?>
+								<div class="am-form-group">
+									<label class="am-u-sm-3 am-u-lg-2 am-form-label">确认专家等级</label>
+									<div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">
+										<select id="expertLevel" data-am-selected="{btnSize: 'sm',maxHeight: 200}">
+											<option value=""></option>										
+											<?php if (isset($data['input']['expertLevel'])): ?>
+												<option value="高级专家" <?=$data['input']['expertLevel'] == '高级专家' ? 'selected' : ''?>>高级专家</option>												
+												<option value="资深专家" <?=$data['input']['expertLevel'] == '资深专家' ? 'selected' : ''?>>资深专家</option>												
+												<option value="顶级专家" <?=$data['input']['expertLevel'] == '顶级专家' ? 'selected' : ''?>>顶级专家</option>												
+											<?php else: ?>
+												<option value="高级专家">高级专家</option>
+												<option value="资深专家">资深专家</option>
+												<option value="顶级专家">顶级专家</option>												
+											<?php endif;?>
+								
+										</select>
+									</div>
+								</div>																			
+							<?php endif;?>
 
 
                         </form>
@@ -310,6 +336,7 @@
         $('.j-submit').on('click', function() {
             var type = $(this).attr('data-type');
             var level = $('#memberLevel').val();
+			var expertLevel = $('#expertLevel').val();
             var status = 10;
             switch (type) {
                 case 'pass':
@@ -325,6 +352,7 @@
                 id: $('#id').val(),
                 bonus: $('#bonus').val(),
                 level: level,
+				expertLevel:expertLevel,
                 status: status
             }, function(res) {
                 if (res.code == 1) {

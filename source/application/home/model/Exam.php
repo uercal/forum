@@ -100,6 +100,7 @@ class Exam extends ExamModel
             //
             $form['positio'] = implode(',', $form['positio']);
             $form['area'] = implode(',', $form['area']);
+            $form['sector'] = implode(',', $form['sector']);
             $form['highPeople'] = !empty($form['highPeople']) ? implode(',', $form['highPeople']) : '';
             $form['pro_qualify'] = !empty($form['pro_qualify']) ? implode(',', $form['pro_qualify']) : '';
         }

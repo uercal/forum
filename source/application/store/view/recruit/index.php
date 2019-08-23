@@ -26,20 +26,7 @@
                                                     <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>本会招聘</option>
                                                     <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>单位招聘</option>
                                                 </select>
-                                            </div>
-                                            <!--                                 
-                                <div class="am-btn-group am-btn-group-xs" style="display:flex;">
-                                    <a class="am-btn am-btn-default am-radius" href="javascript:;">
-                                        <span class="am-icon-home"></span> 用户id
-                                    </a>
-                                    <input type="text" class="am-form-field" name="user_id" style="padding: 3px 5px;" placeholder="用户id" value="<?= isset($map['user_id']) ? $map['user_id'] : "" ?>">
-                                </div> -->
-
-                                            <!-- <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-success am-radius" id="search" href="javascript:;">
-                                        <span class="am-icon-search"></span> 搜索
-                                    </a>
-                                </div> -->
+                                            </div>                                           
                                         </div>
                                     </div>
                                 </form>
@@ -79,7 +66,7 @@
                                                 <?= explode(',',$item['job_price'])[0].'~'.explode(',',$item['job_price'])[1] ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['user'] ? $item['user']['company']['company_name'] : '协会' ?>
+                                                <?= $item['user'] ? $item['user']['company']['company_name'] : '海南省全过程工程咨询研究会' ?>
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['create_time'] ?>

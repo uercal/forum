@@ -234,9 +234,8 @@ class Exam extends ExamModel
     public function updateStatus($data)
     {
         $obj = $this->where('id', $data['id'])->find();
-
         $content = json_decode($obj['content'], true);
-                            
+		
         // 开启事务
         Db::startTrans();
         try {
@@ -255,8 +254,9 @@ class Exam extends ExamModel
                             //
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
-                            //                            
+                            //							
                             $content['memberLevel'] = $data['level'];
+							$content['expertLevel'] = $data['expertLevel'];
                             if ($_obj) {
                                 $_obj->allowField(true)->save($content);
                             } else {
@@ -272,6 +272,7 @@ class Exam extends ExamModel
                             $_obj = $user_model::get(['user_id' => $obj['user_id']]);
                             //
                             $content['memberLevel'] = null;
+							$content['expertLevel'] = $data['expertLevel'];
                             $content['education_time'] = strtotime($content['education_time']);
                             $content['positio_time'] = strtotime($content['positio_time']);
                             //                                                        

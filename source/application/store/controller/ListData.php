@@ -44,8 +44,17 @@ class ListData extends Controller
         $model = ListModel::get($id, ['mode']);
         if (!$this->request->isAjax()) {
             if ($model['mode']['key_word'] == 'job') {
-                $all_list = ListModel::field('id,id as value,name as title')->where(['id' => ['<>', $id], 'list_mode_id' => $model['list_mode_id']])->select()->toArray();
-                $pre_lists = explode(',', $model['pre_lists']);
+				$pre_lists_ids = $model['pre_lists'];
+				if(!empty($pre_lists_ids)){
+					$exp = new \think\db\Expression('field(id,'.$pre_lists_ids.')');	
+				}else{
+					$exp = 'id';
+				}			
+				// 
+				$pre_lists = explode(',',$pre_lists_ids);				
+                $all_list = ListModel::field('id,id as value,name as title')->where(['id' => ['<>', $id], 'list_mode_id' => $model['list_mode_id']])
+				->order($exp)->select()->toArray();
+								
                 $this->assign('all_list', $all_list);
                 $this->assign('pre_lists', $pre_lists);
             }

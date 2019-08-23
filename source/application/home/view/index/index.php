@@ -138,7 +138,7 @@
                                     $eng_arr = explode(',', $item['eng_cate_span']);
                                     $ser_arr = explode(',', $item['server_cate_span']);
                                 ?>
-                                <p><?=$eng_arr[0].' | '.$ser_arr[0].(isset($ser_arr[1])?$ser_arr[1].'等等':'') ?></p>
+                                <p><?=$eng_arr[0].' | '.$ser_arr[0].(isset($ser_arr[1])?$ser_arr[1].'等':'') ?></p>
                             </div>
                             <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
                             <div class="eright-item-body">
