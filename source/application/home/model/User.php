@@ -82,6 +82,8 @@ class User extends UserModel
                 if (input('title')) {
                     $_map['company_name'] = ['like', '%' . input('title') . '%'];
                     $_map['memberLevel'] = ['like', '%' . input('title') . '%'];
+                    $_map['company_type'] = ['like', '%' . input('title') . '%'];
+                    $_map['address'] = ['like', '%' . input('title') . '%'];
                 }
                 $model = new UserCompany;
                 $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
@@ -101,7 +103,7 @@ class User extends UserModel
                 
                 $sql = Db::table('forum_users_company')
 					->field('user_id,create_time,company_logo as id_photo,company_name as sup_company_name,company_tel as sup_company_tel,
-				address as sup_company_address,company_type as sup_company_type')					
+				address as sup_company_address,company_type as sup_company_type,email as sup_company_email')					
 					->where($map)					
 					->whereOr($__map)
 					->buildSql();
@@ -109,7 +111,7 @@ class User extends UserModel
 				//构建sys表 union 联合
 				$data = Db::table('forum_users_sup')					
 					->field('user_id,create_time,id_photo,sup_company_name,
-				sup_company_tel,sup_company_address,sup_company_type')					
+				sup_company_tel,sup_company_address,sup_company_type,sup_company_email')					
 					->union($sql, true)
 					->where($map)
 					->whereOr($_map)

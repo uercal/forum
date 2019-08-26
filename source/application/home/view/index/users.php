@@ -107,6 +107,10 @@
                                         <span class="am-icon-send-o"></span>
                                         <p><?=$item['company_tel']?></p>
                                     </div>
+									<div>
+									    <span class="am-icon-globe"></span>
+									    <p><?=$item['company_type']?></p>
+									</div>
                                 </div>
                                 <!-- <div class="users-item-arrow">
 
@@ -205,6 +209,10 @@
                                         <span class="am-icon-phone"></span>
                                         <p><?=$item['sup_company_tel']?></p>
                                     </div>
+									<div>
+									    <span class="am-icon-at"></span>
+									    <p><?=$item['sup_company_email']?></p>
+									</div>
                                     <div>
                                         <span class="am-icon-location-arrow"></span>
                                         <p><?=$item['sup_company_address']?></p>

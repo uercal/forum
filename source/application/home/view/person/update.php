@@ -1399,7 +1399,10 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],
+                    },{
+						pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/,
+						message:'手机号码格式错误'
+					}],
                     post_code: [{
                         required: true,
                         message: '请填写内容',
@@ -1616,7 +1619,10 @@
                         {
                             type: 'number',
                             message: '必须为数字'
-                        }
+                        },{
+							pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/,
+							message:'手机号码格式错误'
+						}
                     ],
                     manager_wechat: [{
                         required: true,
@@ -1704,9 +1710,6 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }, {
-                        type: 'number',
-                        message: '必须为数字'
                     }],
                     sup_company_email: [{
                         required: true,
@@ -1743,7 +1746,10 @@
                     }, {
                         type: 'number',
                         message: '必须为数字'
-                    }],
+                    },{
+						pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/,
+						message:'手机号码格式错误'
+					}],
                     sup_manager_wechat: [{
                         required: true,
                         message: '请填写内容',

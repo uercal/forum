@@ -142,11 +142,27 @@
             var url = "<?= url("support_act") ?>&act_id=<?= $act_id ?>";
             var empty = data.find(function(e) {
                 return e.value == '';
-            });            
+            });
             if(empty){
                 parent.layer.msg('必填项不能为空');
                 return false;
-            }
+            }else{				
+				var phone = data.find(function(e,i){					
+					return e.name == 'sup[phone]';
+				}).value;
+				var email = data.find(function(e,i){
+					return e.name == 'sup[concat_email]';
+				}).value;				
+				if(!isPoneAvailable(phone)&&phone){
+					parent.layer.msg('手机号码格式错误');
+					return false;
+				}
+				if(!isEmailAvailable(email)&&email){
+					parent.layer.msg('邮箱格式错误');
+					return false;
+				}								
+			}
+								
             if (!doing) {
                 doing = true;
                 $.post(url, data, function(res) {
@@ -164,7 +180,7 @@
                     }
                 });
             } else {
-
+				parent.layer.msg('请勿重复提交，请刷新页面后提交');
             }
 
         });
@@ -173,6 +189,32 @@
             parent.layer.closeAll();
         })
     })
+	
+	
+	function isEmailAvailable(emailInput) {
+	   var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	   if (!myreg.test(emailInput)) {
+	       return false;
+	   }
+	   else {
+	       return true;
+	   }
+	}
+	
+	
+	// 判断是否为手机号
+	function isPoneAvailable(phone) {
+		var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+		if (!myreg.test(phone)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	
+	
+	
 </script>
 
 </html>

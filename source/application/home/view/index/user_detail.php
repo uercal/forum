@@ -24,7 +24,15 @@
                         <div class="projects-item-option">
                             <p>供应商类型：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_type'] ?></span>
-                        </div>                       
+                        </div>                   
+						<div class="projects-item-option">
+							<p>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</p>
+							<span style="color: #333333;"><?= $detail['supplier']['sup_legal_person'] ?></span>
+						</div>
+						<div class="projects-item-option">
+							<p>注册资金：</p>
+							<span style="color: #333333;"><?= $detail['supplier']['sup_regist_money'].'万元' ?></span>
+						</div>
                         <div class="projects-item-option">
                             <p>联系方式：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] ?></span>
@@ -37,7 +45,7 @@
                             <p>供应商地址：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
                         </div>
-
+						
                     </div>
                 </div>
 
@@ -68,6 +76,14 @@
                             <p>服务类别：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>
                         </div>
+						<div class="projects-item-option">
+						    <p>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</p>
+						    <span style="color: #333333;"><?= $detail['company']['legal_person'] ?></span>
+						</div>
+						<div class="projects-item-option">
+						    <p>注册资金：</p>
+						    <span style="color: #333333;"><?= $detail['company']['regist_money'].'万元' ?></span>
+						</div>
                         <div class="projects-item-option">
                             <p>联系方式：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
@@ -80,6 +96,7 @@
                             <p>公司地址：</p>
                             <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
                         </div>
+																											
 						<!-- <div class="projects-item-option" style="margin-bottom:40px;">
 						    <p>会员级别：</p>
 						    <span style="color: #333333;"><?= $detail['company']['memberLevel'] ?></span>
