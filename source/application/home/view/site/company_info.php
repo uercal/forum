@@ -18,10 +18,6 @@
                     <div class="info-bonus"></div>
                     <strong><?= $detail['company']['company_name'] ?></strong>                    
                     <div class="projects-item-option">
-                        <p>会员等级：</p>
-                        <span style="color: #333333;"><?= $detail['role_name'] ?></span>
-                    </div>                    
-                    <div class="projects-item-option">
                         <p>服务类别：</p>
                         <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>
                     </div>

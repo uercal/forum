@@ -273,7 +273,7 @@
                             <?php endif;?>
 							
 							
-							<?php if($info['type'] == 10 && $info['type_bonus'] == 'person'):?>
+							<?php if($info['type'] == 10 && ($info['type_bonus'] == 'person'||$info['type_bonus'] == 'expert')):?>
 								<div class="am-form-group">
 									<label class="am-u-sm-3 am-u-lg-2 am-form-label">确认专家等级</label>
 									<div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">

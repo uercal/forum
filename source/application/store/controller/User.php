@@ -77,7 +77,7 @@ class User extends Controller
                 break;
             case 2:
                 # 专家会员
-                $file_name = '专家会员';
+                $file_name = '入库专家';
                 $map = [];
                 $map['role'] = ['like', '%2%'];
                 $user_ids = UserModel::where($map)->column('user_id');
@@ -110,7 +110,7 @@ class User extends Controller
                 break;
             case 4:
                 # 供应商
-                $file_name = '供应商';
+                $file_name = '入库供应商';
                 $data = UserSup::all()->toArray();
                 $head = [
                     '序号', '供应商名称', '供应商社会统一信用代码', '供应商类型', '供应商电话', '供应商邮编', '供应商地址',

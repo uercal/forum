@@ -54,8 +54,8 @@ class Exam extends BaseModel
         $type = [
             'person' => '个人会员',
             'company' => '单位会员',
-            'expert' => '专家会员',
-            'supplier' => '供应商',
+            'expert' => '入库专家',
+            'supplier' => '入库供应商',
             //
         ];
 

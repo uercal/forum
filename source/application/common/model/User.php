@@ -19,7 +19,7 @@ class User extends BaseModel
 
     protected $append = ['show_name', 'avatar', 'role_name', 'avatar_path'];
     protected $role_attr = [
-        0 => '普通用户', 1 => '个人会员', 2 => '专家会员', 3 => '单位会员', 4 => '供应商',
+        0 => '普通用户', 1 => '个人会员', 2 => '入库专家', 3 => '单位会员', 4 => '入库供应商',
     ];
 
     //
@@ -162,7 +162,7 @@ class User extends BaseModel
                 break;
             case 2:
                 # 专家会员...
-                $name = '专家会员';
+                $name = '入库专家';
                 $model = new UserPerson();                
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 !empty(input('expertLevel')) ? $map['expertLevel'] = ['=', input('expertLevel')] : '';
@@ -201,7 +201,7 @@ class User extends BaseModel
                 break;
             case 4:
                 # 供应商会员...
-                $name = '供应商会员';
+                $name = '入库供应商';
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 $model = new UserSup();
                 $list = $model->with(['user.attachment'])->where($map)->order(['create_time' => 'desc'])

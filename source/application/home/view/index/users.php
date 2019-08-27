@@ -167,7 +167,7 @@
                                 <div>
                                     <div>
                                         <span class="am-icon-users"></span>
-                                        <p><?=$item['memberLevel']?></p>
+                                        <p><?=$item['expertLevel']?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-file-text-o"></span>

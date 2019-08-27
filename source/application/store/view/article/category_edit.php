@@ -246,9 +246,9 @@
                                             <?php foreach ([
                                                 'normal' => '普通用户',
                                                 'person' => '个人会员',
-                                                'expert' => '专家会员',
+                                                'expert' => '入库专家',
                                                 'company' => '单位会员',
-                                                'supplier' => '供应商'
+                                                'supplier' => '入库供应商'
                                             ] as $key => $first) : ?>
                                                 <option value="<?= $key ?>" <?= $model['mode_data'] == $key ? 'selected' : '' ?>>
                                                     <?= $first ?></option>

@@ -19,7 +19,7 @@
                     <div class="users-detail-info">
                         <div class="info-bonus"></div>
                         <strong><?= $detail['supplier']['sup_company_name'] ?></strong>
-                        <p class="info-role-name"><?= $detail['role_name'] ?></p>
+                        <!-- <p class="info-role-name"><?= $detail['role_name'] ?></p> -->
 
                         <div class="projects-item-option">
                             <p>供应商类型：</p>
@@ -73,7 +73,7 @@
                         <p class="info-role-name"><?= $detail['company']['memberLevel'] ?></p>
                         
                         <div class="projects-item-option">
-                            <p>服务类别：</p>
+                            <p>单位类别：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>
                         </div>
 						<div class="projects-item-option">
