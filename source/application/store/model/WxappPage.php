@@ -30,7 +30,26 @@ class WxappPage extends WxappPageModel
             }
             $_page_data['nav']['data'] = $nav_data;
         }
-
+				
+		
+		// 3rd
+		if (isset($_page_data['projects'])) {
+		    $pro_data = $_page_data['projects']['data'];			
+		    if(count($pro_data)!=3){
+				$pro_data = [
+					'n1'=>[
+						'project_id'=>0
+					],
+					'n2'=>[
+						'project_id'=>0
+					],
+					'n3'=>[
+						'project_id'=>0
+					]
+				];
+				$_page_data['projects']['data'] = $pro_data;
+			}
+		}
 
         if (isset($_page_data['news'])) {
             $news = $_page_data['news'];
