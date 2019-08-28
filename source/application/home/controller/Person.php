@@ -105,22 +105,29 @@ class Person extends Controller
             // 取消模板
             $this->view->engine->layout(false);
             // 
-            if (in_array(3, explode(',', $this->user['role']))) {
-                // 单位
-                $role = 3;
-                $info = $this->user['company'];
-            } elseif (in_array(1, explode(',', $this->user['role']))) {
-                // 个人
-                $role = 1;
-                $info = $this->user['person'];
-            } elseif (in_array(0, explode(',', $this->user['role']))) {
-                // 普通
-                $role = 0;
-                $info = [];
-            } else {
-                // 
-                return $this->redirect('/index/index');
-            }
+			$role = $this->user['role'];
+			switch($role){
+				case '0':
+					// 普通	
+					$info = [];
+					break;
+				case '1':
+					// 个人				
+					$info = $this->user['person'];
+					break;
+				case '2':
+					// 个人				
+					$info = $this->user['person'];
+					break;
+				case '3':
+					//单位
+					$info = $this->user['company'];
+					break;
+				case '4':
+					//仅供应商
+					$info = $this->user['supplier'];
+					break;
+			}           			 
             // 
             return $this->fetch('sign_act', compact('act_id', 'role', 'info'));
         } else {

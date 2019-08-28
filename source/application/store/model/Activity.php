@@ -48,12 +48,10 @@ class Activity extends ActivityModel
     }
 
     public function edit($data)
-    {
-        if (is_array($data['cover_id'])) {
-            if (isset($data['cover_id'])) {
-                $data['cover_id'] = array_values($data['cover_id'])[0]['id'];
-            }
-        }
+    {        
+		if (isset($data['cover_id'])) {
+			$data['cover_id'] = array_values($data['cover_id'])[0];
+		}        
         unset($data['sign_begin']);
         unset($data['sign_end']);
         unset($data['active_begin']);

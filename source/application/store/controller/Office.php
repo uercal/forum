@@ -36,8 +36,14 @@ class Office
             for ($i = 65; $i < $count + 65; $i++) {     //数字转字母从65开始：
                 if ($keys[$i - 65] == 'index') {
                     $sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), ($key + 1));
-                } else {
-                    $sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), $item[$keys[$i - 65]]);
+                } else {					
+					if(strstr($keys[$i - 65],'||')!==false){
+						$_arr = explode('||',$keys[$i - 65]);
+						$_value = $item[$_arr[0]]?$item[$_arr[0]]:$item[$_arr[1]];
+					}else{
+						$_value = $item[$keys[$i - 65]];
+					}
+                    $sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), $_value);
                 }
                 $spreadsheet->getActiveSheet()->getColumnDimension(strtoupper(chr($i)))->setWidth(20); //固定列宽                  
             }            

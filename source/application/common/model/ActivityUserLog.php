@@ -51,6 +51,14 @@ class ActivityUserLog extends BaseModel
             'positio'
         ]);
     }
+	
+	public function supplier(){
+		return $this->hasOne('UserSup','user_id','user_id')->bind([
+			'sup_company_name',
+			'sup_company_tel',
+			'sup_company_email'
+		]);
+	}
 
 
     public static function isExist($user_id, $act_id)

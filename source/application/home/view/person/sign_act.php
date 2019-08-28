@@ -163,6 +163,56 @@
                     </div>
                 </div>
             </form>
+		<?php elseif ($role == 2) : ?>
+		    <form class="am-form am-form-horizontal" id="loginForm">
+		        <input type="hidden" name="sign[act_id]" value="<?= $act_id ?>">
+		        <div class="am-form-group">
+		            <label class="form-require am-u-sm-2 am-form-label">联系人</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" name="sign[concat_person]" placeholder="输入联系人姓名" value="<?= $info['name'] ?>">
+		            </div>
+		        </div>
+		        <div class="am-form-group">
+		            <label class="form-require am-u-sm-2 am-form-label">手机号码</label>
+		            <div class="am-u-sm-10">
+		                <input type="tel" name="sign[phone]" placeholder="输入联系人手机号码" value="<?= $info['phone'] ?>">
+		            </div>
+		        </div>
+		        <div class="am-form-group">
+		            <label class="form-require am-u-sm-2 am-form-label">邮箱</label>
+		            <div class="am-u-sm-10">
+		                <input type="email" name="sign[concat_email]" placeholder="输入联系人邮箱" value="">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">学历学位</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" value="<?= $info['education_degree'].' '.$info['education_degree_xw'] ?>" disabled="disabled">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">职位</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" value="<?= $info['job'] ?>" disabled="disabled">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">职称</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" value="<?= $info['positio'] ?>" disabled="disabled">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <div class="am-u-sm-12" style="display:flex;align-items:center;justify-content:center;">
+		                <button type="button" id="btn-submit" class="sub am-btn am-btn-default">提交</button>
+		                <button type="button" class="cel am-btn am-btn-default">取消</button>
+		            </div>
+		        </div>
+		    </form>
         <?php elseif ($role == 3) : ?>
             <form class="am-form am-form-horizontal" id="loginForm">
                 <input type="hidden" name="sign[act_id]" value="<?= $act_id ?>">
@@ -183,7 +233,7 @@
                     <div class="am-form-group">
                         <label class="form-require am-u-sm-2 am-form-label">报名人数</label>
                         <div class="am-u-sm-10">
-                            <input type="tel" name="sign[member_count]" placeholder="输入联系人手机号码" value="1">
+                            <input type="tel" name="sign[member_count]" placeholder="输入报名人数" value="1">
                         </div>
                     </div>
                 <?php endif; ?>
@@ -216,6 +266,59 @@
                     </div>
                 </div>
             </form>
+		<?php elseif ($role == 4) : ?>
+		    <form class="am-form am-form-horizontal" id="loginForm">
+		        <input type="hidden" name="sign[act_id]" value="<?= $act_id ?>">
+		        <div class="am-form-group">
+		            <label class="form-require am-u-sm-2 am-form-label">联系人</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" name="sign[concat_person]" placeholder="输入联系人姓名" value="<?= $info['sup_manager_name'] ?>">
+		            </div>
+		        </div>
+		        <div class="am-form-group">
+		            <label class="form-require am-u-sm-2 am-form-label">手机号码</label>
+		            <div class="am-u-sm-10">
+		                <input type="tel" name="sign[phone]" placeholder="输入联系人手机号码" value="<?= $info['sup_manager_phone'] ?>">
+		            </div>
+		        </div>
+		
+		        <?php if (in_array(4, explode(',', $login_user['role']))) : ?>
+		            <div class="am-form-group">
+		                <label class="form-require am-u-sm-2 am-form-label">报名人数</label>
+		                <div class="am-u-sm-10">
+		                    <input type="tel" name="sign[member_count]" placeholder="输入报名人数" value="1">
+		                </div>
+		            </div>
+		        <?php endif; ?>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位名称</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" value="<?= $info['sup_company_name'] ?>" disabled="disabled">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位电话</label>
+		            <div class="am-u-sm-10">
+		                <input type="text" value="<?= $info['sup_company_tel'] ?>" disabled="disabled">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+		            <div class="am-u-sm-10">
+		                <input type="email" value="<?= $info['sup_company_email'] ?>" name="sign[concat_email]">
+		            </div>
+		        </div>
+		
+		        <div class="am-form-group">
+		            <div class="am-u-sm-12" style="display:flex;align-items:center;justify-content:center;">
+		                <button type="button" id="btn-submit" class="sub am-btn am-btn-default">提交</button>
+		                <button type="button" id="cancel" class="cel am-btn am-btn-default">取消</button>
+		            </div>
+		        </div>
+		    </form>
         <?php endif; ?>
     </div>
 </body>
@@ -237,15 +340,15 @@
             }else{
 				var phone = data.find(function(e,i){
 					return e.name == 'sign[phone]';
-				}).value;
+				});
 				var email = data.find(function(e,i){
 					return e.name == 'sign[concat_email]';
-				}).value;
-				if(!isPoneAvailable(phone)&&phone){
+				});
+				if(phone&&!isPoneAvailable(phone.value)){
 					parent.layer.msg('手机号码格式错误');
 					return false;
 				}
-				if(!isEmailAvailable(email)&&email){
+				if(email&&!isEmailAvailable(email.value)){
 					parent.layer.msg('邮箱格式错误');
 					return false;
 				}		

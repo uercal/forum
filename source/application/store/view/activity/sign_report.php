@@ -64,13 +64,13 @@
                                                 <?= $item['user']['person'] ? $item['user']['person']['positio'] : '' ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['user']['company'] ? $item['user']['company']['company_name'] : '' ?>
+                                                <?= $item['user']['company'] ? $item['user']['company']['company_name'] : ($item['user']['supplier']?$item['user']['supplier']['sup_company_name']:'') ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['user']['company'] ? $item['user']['company']['company_tel'] : '' ?>
+                                                <?= $item['user']['company'] ? $item['user']['company']['company_tel'] : ($item['user']['supplier']?$item['user']['supplier']['sup_company_tel']:'') ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['user']['company'] ? $item['user']['company']['email'] : '' ?>
+                                                <?= $item['user']['company'] ? $item['user']['company']['email'] : ($item['user']['supplier']?$item['user']['supplier']['sup_company_email']:'') ?>
                                             </td>
                                         </tr>
                                     <?php endforeach;

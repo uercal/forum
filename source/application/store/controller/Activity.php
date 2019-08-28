@@ -93,12 +93,12 @@ class Activity extends Controller
         $excel = new Office;
         $detail = ActivityModel::get($act_id);
         $model = new ActivityUserLog;
-        $data = $model->with(['company', 'person'])->where(['act_id' => $act_id])->select()->toArray();
+        $data = $model->with(['company', 'person','supplier'])->where(['act_id' => $act_id])->select()->toArray();
         //设置表头：
         $head = ['序号', '联系人', '联系电话', '报名人数', '学历学位', '职位', '职称', '单位名称', '单位电话', '邮箱'];
 
         //数据中对应的字段，用于读取相应数据：
-        $keys = ['index', 'concat_person', 'phone', 'member_count', 'education_degree', 'job', 'positio', 'company_name', 'company_tel', 'email'];
+        $keys = ['index', 'concat_person', 'phone', 'member_count', 'education_degree', 'job', 'positio', 'company_name||sup_company_name', 'company_tel||sup_company_tel', 'email||sup_company_email'];
 
         $excel->outdata($detail['title'] . '报名表', $data, $head, $keys);
     }

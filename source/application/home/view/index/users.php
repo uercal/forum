@@ -120,7 +120,7 @@
                     </div>
                 <?php elseif ($data['mode_data'] == 'person'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>)">
-                        <img style="object-fit:cover;" src="<?=$item['id_photo_path']?>" alt="">
+                        <img style="object-fit:contain;" src="<?=$item['id_photo_path']?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>个人会员</p>
@@ -157,7 +157,7 @@
                     </div>
                 <?php elseif ($data['mode_data'] == 'expert'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>)">
-                        <img style="object-fit:cover;" src="<?=$item['id_photo_path']?>" alt="">
+                        <img style="object-fit:contain;" src="<?=$item['id_photo_path']?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>专家会员</p>
