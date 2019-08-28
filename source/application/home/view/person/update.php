@@ -2050,8 +2050,8 @@
                             }
                             break;                                            
                     }
-                    if (obj.length == 5) {
-                        this.$message.error('最多添加五项');
+                    if (obj.length == 20) {
+                        this.$message.error('最多添加20项');
                     } else {
                         obj.push(d);
                     }                                        
