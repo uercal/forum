@@ -3,6 +3,8 @@
 namespace app\store\model;
 
 use app\common\model\Activity as ActivityModel;
+use app\store\model\ActivitySupport;
+use app\store\model\ActivityUserLog;
 use think\Db;
 use think\Request;
 
@@ -48,10 +50,12 @@ class Activity extends ActivityModel
     }
 
     public function edit($data)
-    {        
-		if (isset($data['cover_id'])) {
-			$data['cover_id'] = array_values($data['cover_id'])[0];
-		}        
+    {
+        if (isset($data['cover_id'])) {
+            if (is_array($data['cover_id'])) {
+                $data['cover_id'] = array_values($data['cover_id'])[0];
+            }
+        }
         unset($data['sign_begin']);
         unset($data['sign_end']);
         unset($data['active_begin']);
@@ -65,6 +69,8 @@ class Activity extends ActivityModel
         Db::startTrans();
         try {
             $this->delete();
+            ActivitySupport::where(['act_id' => $this->id])->delete();
+            ActivityUserLog::where(['act_id' => $this->id])->delete();
             Db::commit();
             return true;
         } catch (\Exception $e) {
