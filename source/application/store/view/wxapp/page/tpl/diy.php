@@ -42,8 +42,8 @@
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-nav" style="display:flex;padding:10px;height:80px;justify-content:space-between;">
             {{each data}}
-                <img src="{{ $value.imgUrl }}" style="width:30%;height:100%;">                                                
-            {{/each}}            
+                <img src="{{ $value.imgUrl }}" style="width:30%;height:100%;">
+            {{/each}}
         </div>
         <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
@@ -57,7 +57,7 @@
 <script id="tpl_diy_projects" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-pro" style="display:flex;padding:20px;height:20px;align-items:center;justify-content:center;">
-            <strong>项目模块</strong>            
+            <strong>项目模块</strong>
         </div>
         <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
@@ -70,7 +70,7 @@
 <script id="tpl_diy_user_news" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-pro" style="display:flex;padding:20px;height:20px;align-items:center;justify-content:center;">
-            <strong>会员类新闻</strong>            
+            <strong>论文模块</strong>
         </div>
         <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
@@ -84,9 +84,9 @@
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-news" style="display:flex;padding:20px;height:20px;align-items:center;justify-content:center;">
             <!-- {{each data}}
-                <img src="{{ $value.imgUrl }}" style="width:20%;height:100%;object-fit:cover;">                                                
+                <img src="{{ $value.imgUrl }}" style="width:20%;height:100%;object-fit:cover;">
             {{/each}}             -->
-            <strong>新闻模块</strong>            
+            <strong>新闻模块</strong>
         </div>
         <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
@@ -99,8 +99,8 @@
 <!-- act -->
 <script id="tpl_diy_activity" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
-        <div class="diy-news" style="display:flex;align-items:center;padding:20px;height:120px;justify-content:center;">           
-            <strong>活动模块</strong>            
+        <div class="diy-news" style="display:flex;align-items:center;padding:20px;height:120px;justify-content:center;">
+            <strong>活动模块</strong>
         </div>
         <!-- <div class="btn-edit-del">
             <div class="btn-edit">编辑</div>
@@ -115,10 +115,10 @@
 <script id="tpl_diy_company" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-company" style="display:flex;align-items:center;justify-content: center;">
-            {{each data}}                
-                <span style="padding-right:10px;font-size:10px;">网站</span>                                
-            {{/each}}            
-        </div>      
+            {{each data}}
+                <span style="padding-right:10px;font-size:10px;">网站</span>
+            {{/each}}
+        </div>
     </div>
 </script>
 
@@ -127,9 +127,9 @@
 <script id="tpl_diy_concat" type="text/template">
     <div class="drag" id="diy-{{ id }}" data-itemid="{{ id }}">
         <div class="diy-concat" style="display:flex;align-items:flex-end;flex-direction:column;">
-            {{each data}}                
-                <span style="padding-right:10px;font-size:10px;">{{ $value.title }}:{{ $value.value }}</span>                                
-            {{/each}}            
-        </div>      
+            {{each data}}
+                <span style="padding-right:10px;font-size:10px;">{{ $value.title }}:{{ $value.value }}</span>
+            {{/each}}
+        </div>
     </div>
 </script>

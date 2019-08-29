@@ -165,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                </div>           
+                </div>
             </div>
             {{/each}}
         </div>
@@ -180,7 +180,7 @@
 <!-- 编辑器：userNews -->
 <script id="tpl_editor_user_news" type="text/template">
     <form class="am-form tpl-form-line-form" data-itemid="{{ id }}">
-        <div class="form-items">会员类新闻</div>
+        <div class="form-items">论文模块</div>
         <div class="form-items">
             {{each data}}
             <div class="item" data-key="{{ $index }}">
@@ -194,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
             {{/each}}
         </div>
