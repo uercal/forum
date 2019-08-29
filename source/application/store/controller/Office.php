@@ -22,17 +22,22 @@ class Office
         $count = count($head);  //计算表头数量        
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-
+				
+		$key2 = ord("@"); //64
         for ($i = 65; $i < $count + 65; $i++) {     //数字转字母从65开始，循环设置表头：
-            $sheet->setCellValue(strtoupper(chr($i)) . '1', $head[$i - 65]);
+			if($i>=91){
+				$sheet->setCellValue(strtoupper(chr(ord("A")).chr(++$key2)) . '1', $head[$i - 65]);
+			}else{
+				$sheet->setCellValue(strtoupper(chr($i)) . '1', $head[$i - 65]);
+			}            
         }
 
         /*--------------开始从数据库提取信息插入Excel表中------------------*/
 
 
         foreach ($data as $key => $item) {             //循环设置单元格：
-            //$key+2,因为第一行是表头，所以写到表格时   从第二行开始写
-
+            //$key+2,因为第一行是表头，所以写到表格时   从第二行开始写			
+			$key2 = ord("@"); //64
             for ($i = 65; $i < $count + 65; $i++) {     //数字转字母从65开始：
                 if ($keys[$i - 65] == 'index') {
                     $sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), ($key + 1));
@@ -43,9 +48,25 @@ class Office
 					}else{
 						$_value = $item[$keys[$i - 65]];
 					}
-                    $sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), $_value);
+					
+					if($keys[$i-65]=='id_card'){
+						$_value = "\t$_value\t";
+					}
+					
+					
+					if($i>=91){
+						$sheet->setCellValue(strtoupper(chr(ord("A")).chr(++$key2)) . ($key + 2), $_value);
+					}else{
+						$sheet->setCellValue(strtoupper(chr($i)) . ($key + 2), $_value);
+					}					                   
                 }
-                $spreadsheet->getActiveSheet()->getColumnDimension(strtoupper(chr($i)))->setWidth(20); //固定列宽                  
+				
+				if($i>=91){
+					
+				}else{
+					$spreadsheet->getActiveSheet()->getColumnDimension(strtoupper(chr($i)))->setWidth(20); //固定列宽                  
+				}
+                
             }            
         }
 

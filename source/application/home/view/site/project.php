@@ -3,7 +3,7 @@
         <div class="nav-info">
             <a href="/"><span class="am-icon-home"></span></a>
             <p class="arrow"></p>
-            <p class="current" onclick="">主要业绩</p>
+            <p class="current" onclick="">实践范例</p>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
             <div class="list-head">
                 <div class="list-head-title">
                     <div class="list-head-before"></div>
-                    <strong>主要业绩</strong>
+                    <strong>实践范例</strong>
                     <?php if (input('title')) : ?>
                         <small>（搜索标题：“<?= input('title') ?>” 结果）</small>
                     <?php endif; ?>

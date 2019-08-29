@@ -35,25 +35,25 @@ class User extends Controller
         $data['levelPersonOptions'] = UserModel::$levelPersonOptions;
         $data['levelOptions'] = UserModel::$levelOptions;
         $data['expertLevelOptions'] = UserModel::$expertLevelOptions;
-        // 
+        //
         return $this->fetch('role', $data);
     }
 
     public function show($user_id)
     {
         $detail = UserModel::detail($user_id);
-        if(!$this->request->isAjax()){            
+        if (!$this->request->isAjax()) {
             $levelPersonOptions = UserModel::$levelPersonOptions;
             $levelOptions = UserModel::$levelOptions;
-            $expertLevelOptions = UserModel::$expertLevelOptions;                
-            return $this->fetch('show', compact('detail','levelPersonOptions','levelOptions','expertLevelOptions'));
-        }else{
-            if(!$detail->updateLevel()){
+            $expertLevelOptions = UserModel::$expertLevelOptions;
+            return $this->fetch('show', compact('detail', 'levelPersonOptions', 'levelOptions', 'expertLevelOptions'));
+        } else {
+            if (!$detail->updateLevel()) {
                 return $this->renderError('失败,' . $detail->error);
-            }else{
+            } else {
                 return $this->renderSuccess('成功');
             }
-        }        
+        }
     }
 
     // daochuliebiao
@@ -65,13 +65,13 @@ class User extends Controller
                 $file_name = '个人会员';
                 $data = UserPerson::all()->toArray();
                 $head = [
-                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位',
+                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位','民族','籍贯','政治面貌',
                     '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
                     , '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
-                    'education_school', 'education_degree', 'education_degree_xw', 'education_major', 'education_date', 'belong_company', 'positio',
+                    'education_school', 'education_degree', 'education_degree_xw', 'nationality','native_place','political_face','education_major', 'education_date', 'belong_company', 'positio',
                     'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;
@@ -83,13 +83,13 @@ class User extends Controller
                 $user_ids = UserModel::where($map)->column('user_id');
                 $data = UserPerson::whereIn('user_id', $user_ids)->select()->toArray();
                 $head = [
-                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历学位',
+                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历','学位','民族','籍贯','政治面貌',
                     '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
                     , '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
-                    'education_school', 'education_degree', 'education_major', 'education_date', 'belong_company', 'positio',
+                    'education_school', 'education_degree','education_degree_xw', 'nationality','native_place','political_face','education_major', 'education_date', 'belong_company', 'positio',
                     'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;
@@ -104,7 +104,7 @@ class User extends Controller
                 ];
                 $keys = [
                     'index', 'company_name', 'company_code', 'company_type', 'company_tel', 'address', 'build_time_text',
-                    'legal_person', 'email', 'manager_name', 'manager_job', 'manager_phone', 'manager_wechat', 'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
+                    'legal_person', 'email', 'manager_name', 'manager_job', 'manager_phone', 'manager_wechat', 'eng_cate_text', 'goods_cate_text', 'server_cate_text',
                     'memberLevel', 'regist_money', 'company_site', 'company_fax',
                 ];
                 break;
@@ -122,8 +122,7 @@ class User extends Controller
                     'sup_manager_job', 'sup_manager_phone', 'sup_manager_wechat', 'sup_eng_cate_text', 'sup_goods_cate_text', 'sup_server_cate_text',
                 ];
                 break;
-        }
-
+        }		
         $excel = new Office;
         $excel->outdata($file_name . '列表清单', $data, $head, $keys);
     }

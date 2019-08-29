@@ -72,6 +72,40 @@
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['post_code']?>" disabled="disabled">
                                     </div>
                                 </div>
+								
+								
+								<div class="am-form-group">
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">国籍 </label>
+								    <div class="am-u-sm-9 am-u-end">
+								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['nationality']?>" disabled="disabled">
+								    </div>
+								</div>
+								<div class="am-form-group">
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">政治面貌 </label>
+								    <div class="am-u-sm-9 am-u-end">
+								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['political_face']?>" disabled="disabled">
+								    </div>
+								</div>
+								<div class="am-form-group">
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">籍贯 </label>
+								    <div class="am-u-sm-9 am-u-end">
+								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['native_place']?>" disabled="disabled">
+								    </div>
+								</div>
+								<div class="am-form-group">
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">民族 </label>
+								    <div class="am-u-sm-9 am-u-end">
+								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['minzu']?>" disabled="disabled">
+								    </div>
+								</div>
+								<div class="am-form-group">
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">微信号 </label>
+								    <div class="am-u-sm-9 am-u-end">
+								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['wechat']?>" disabled="disabled">
+								    </div>
+								</div>
+								
+								
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">住址 </label>
                                     <div class="am-u-sm-9 am-u-end">

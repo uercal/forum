@@ -89,7 +89,7 @@
             <!--  -->
             <div class="act-users-button">
 				
-                <div style="background: #BFA46F;" onclick="<?php if (time() > $detail['active_end']) : ?>supportAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
+                <div style="background: #BFA46F;" onclick="<?php if (time() < $detail['active_end']) : ?>supportAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
                     <p>赞助</p>
                 </div>
                 <div style="background: #44874B;" onclick="<?php if (time() > $detail['sign_begin'] && time() < $detail['sign_end']) : ?>signAct(<?= $detail['id'] ?>)<?php else : ?>invalidTime()<?php endif; ?>">
