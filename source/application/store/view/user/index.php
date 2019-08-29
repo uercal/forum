@@ -35,6 +35,7 @@
                                     <th>会员等级</th>
                                     <th>专家等级</th>
                                     <th>资质证书</th>
+									<th>角色</th>
                                     <th>注册时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -68,6 +69,7 @@
                                             </div>
                                             <?php endif;?>
                                         </td>
+										<td class="am-text-middle"><?= $item['role_name'] ?></td>
                                         <td class="am-text-middle"><?=$item['create_time']?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">

@@ -57,6 +57,9 @@
                                                                 ) ?>">
                                                         <i class="am-icon-pencil"></i> 角色详情
                                                     </a>
+													<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+													    <i class="am-icon-file"></i> 删除
+													</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -181,6 +184,9 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
+											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-file"></i> 删除
+											</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -293,6 +299,9 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
+											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-file"></i> 删除
+											</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -396,6 +405,9 @@
                                                             ) ?>">
                                                     <i class="am-icon-pencil"></i> 角色详情
                                                 </a>
+												<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+												    <i class="am-icon-file"></i> 删除
+												</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -511,6 +523,9 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
+											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-file"></i> 删除
+											</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -556,7 +571,12 @@ $(function() {
     $(function() {
         // 删除元素     
         $('.item-delete-attach').delete('id',"<?=url('deleteAttach')?>");
-
+		
+		// 删除元素
+		var url = "<?=url('user/delete')?>";
+		$('.item-delete').delete('id', url);
+		
+		
         //
         $('.upload-attachment').each(function(e, v) {
             $(this).selectAttachment({
