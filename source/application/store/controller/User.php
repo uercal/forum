@@ -65,13 +65,13 @@ class User extends Controller
                 $file_name = '个人会员';
                 $data = UserPerson::all()->toArray();
                 $head = [
-                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位','民族','籍贯','政治面貌',
+                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位','民族','籍贯','政治面貌','微信号',
                     '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
                     , '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
-                    'education_school', 'education_degree', 'education_degree_xw', 'nationality','native_place','political_face','education_major', 'education_date', 'belong_company', 'positio',
+                    'education_school', 'education_degree', 'education_degree_xw', 'nationality','native_place','political_face','wechat','education_major', 'education_date', 'belong_company', 'positio',
                     'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;
@@ -83,13 +83,13 @@ class User extends Controller
                 $user_ids = UserModel::where($map)->column('user_id');
                 $data = UserPerson::whereIn('user_id', $user_ids)->select()->toArray();
                 $head = [
-                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历','学位','民族','籍贯','政治面貌',
+                    '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历','学位','民族','籍贯','政治面貌','微信号',
                     '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
                     , '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
-                    'education_school', 'education_degree','education_degree_xw', 'nationality','native_place','political_face','education_major', 'education_date', 'belong_company', 'positio',
+                    'education_school', 'education_degree','education_degree_xw', 'nationality','native_place','political_face','wechat','education_major', 'education_date', 'belong_company', 'positio',
                     'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;

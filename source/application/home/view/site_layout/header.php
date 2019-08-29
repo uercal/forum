@@ -36,7 +36,7 @@
                     <a href="javascript:void(0); " class="<?= $action == 'listproject' ? 'current' : '' ?>" onclick="window.location.href='<?= url('listProject') ?>'">实践范例</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0); " class="<?= $action == 'listnormal' ? 'current' : '' ?>" onclick="window.location.href='<?= url('listNormal') ?>'">学术天地</a>
+                    <a href="javascript:void(0); " class="<?= $action == 'listnormal' ? 'current' : '' ?>" onclick="window.location.href='<?= url('listNormal') ?>'">学术实践</a>
                 </li>
                 <li>
                     <a href="javascript:void(0); " class="<?= $action == 'listrecruit' ? 'current' : '' ?>" onclick="window.location.href='<?= url('listRecruit') ?>'">招聘英才</a>

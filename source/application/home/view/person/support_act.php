@@ -90,12 +90,13 @@
                     <input type="tel" name="sup[phone]" placeholder="输入联系人手机号码" value="<?= $company['manager_phone'] ?>">
                 </div>
             </div>
-            <div class="am-form-group">
-                <label class="form-require am-u-sm-2 am-form-label">邮箱</label>
-                <div class="am-u-sm-10">
-                    <input type="email" name="sup[concat_email]" placeholder="输入邮箱" value="">
-                </div>
-            </div>
+			
+			<div class="am-form-group">
+			    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+			    <div class="am-u-sm-10">
+			        <input type="email" value="<?= !empty($company)?$company['email']:'' ?>" name="sup[concat_email]" disabled="disabled">
+			    </div>
+			</div>
 
             <?php if (!empty($company)) : ?>
                 <div class="am-form-group">
@@ -110,14 +111,7 @@
                     <div class="am-u-sm-10">
                         <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
                     </div>
-                </div>
-
-                <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
-                    <div class="am-u-sm-10">
-                        <input type="email" value="<?= $company['email'] ?>" disabled="disabled">
-                    </div>
-                </div>
+                </div>               
 
             <?php endif; ?>
 
