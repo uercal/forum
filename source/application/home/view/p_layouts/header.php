@@ -166,7 +166,7 @@ endif;?>
 '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : ''?>
                         </p>
                     </div>
-                    <?php if ($login_user['role']==1||$login_user['role']==2): ?>
+                    <?php if ($login_user['role'] == 1 || $login_user['role'] == 2): ?>
                         <!-- 个人会员 -->
                         <div class="<?=request()->action() == 'personpaper' ? 'active' : ''?>" onclick="window.location.href='<?=url('personPaper')?>';">
                             <p>
