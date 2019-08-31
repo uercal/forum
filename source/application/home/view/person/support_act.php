@@ -92,9 +92,9 @@
             </div>
 			
 			<div class="am-form-group">
-			    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+			    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">邮箱</label>
 			    <div class="am-u-sm-10">
-			        <input type="email" value="<?= !empty($company)?$company['email']:'' ?>" name="sup[concat_email]" disabled="disabled">
+			        <input type="email" value="<?= !empty($company)?$company['email']:'' ?>" name="sup[concat_email]" placeholder="输入邮箱">
 			    </div>
 			</div>
 

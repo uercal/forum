@@ -246,7 +246,7 @@
             handleClick(e) {
                 if (e.name == 'profile') {
                     if (e.$attrs.exist == 0) {
-                        this.$message.error('工会暂时未颁发证书');
+                        this.$message.error('暂无证书');
                     }
                 }
             },
