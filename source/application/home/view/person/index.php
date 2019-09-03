@@ -30,7 +30,41 @@
             </div>
         <?php endif; ?>
     </div>
+</div>
 
+
+<!-- 我的赞助活动 -->
+<div class="person-my-act">
+    <div class="person-my-act-head">
+        <div>
+            <p>我的赞助活动</p>
+        </div>
+        <?php if (!empty($data['my_sup'])) : ?>
+            <p style="cursor:pointer;" onclick='window.location.href = "<?= url("personCenter&sup_more=1") ?>";'>查看更多 <i class="am-icon-angle-double-right"></i> </p>
+        <?php endif; ?>
+    </div>
+
+    <div class="person-my-act-body">
+        <?php if (!empty($data['my_sup'])) : foreach ($data['my_sup'] as $item) : ?>
+                <div class="my-act-item">
+                    <img src="<?= $item['activity']['cover']['file_path'] ?>" alt="">
+                    <div>
+                        <strong><?= $item['activity']['title'] ?></strong>
+                        <p style="font-weight:600;">报名时间：<?= date('Y/m/d H:i', $item['activity']['sign_begin']) . '-' . date('Y/m/d H:i', $item['activity']['sign_end']) ?></p>
+                        <p style="color:#f35437;font-weight:600;">活动时间：<?= date('Y/m/d H:i', $item['activity']['active_begin']) . '-' . date('Y/m/d H:i', $item['activity']['active_end']) ?></p>
+                        <p>活动地点：<?= $item['activity']['address'] ?></p>
+                        <p>活动人数：<?= $item['activity']['member_count'] . '人' ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <div class="my-act-item" style="background-color:#fff;">
+                <div style="width:100%;display:flex;align-items:center;jusity-content:center;">
+                    <strong style="font-size:48px;color:#e8e8e8;">暂无赞助活动</strong>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
 
 <!-- 活动推荐 -->

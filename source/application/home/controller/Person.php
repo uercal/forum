@@ -51,7 +51,32 @@ class Person extends Controller
             } else {
                 $this->getResExamMsg('reject');
             }
-            $this->assign('role_arr', $this->user['role']);            
+			
+			$role = $this->user['role'];
+			switch($role){
+				case 0:
+					// 普通用户
+					$button_name = '申请入会/入库';
+					break;
+				case 1:
+					//个人会员
+					$button_name = '会员管理';
+					break;
+				case 2:
+					// 仅专家
+					$button_name = '专家管理';
+					break;
+				case 3:
+					// 单位会员
+					$button_name = '会员管理';
+					break;
+				case 4:
+					// 仅供应商·
+					$button_name = '供应商管理';
+					break;
+			}
+			
+            $this->assign('button_name', $button_name);            
             //             
             $this->view->engine->layout('p_layouts/layout');
         }
@@ -162,10 +187,16 @@ class Person extends Controller
             $total = $data['my_act']->toArray()['total'];
             // 
             return $this->fetch('sign_more', compact('data', 'total'));
-        } else {
+        }else if(input('sup_more')){
+			$user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
+			$data = $user->getActLog(5);
+			$total = $data['my_act']->toArray()['total'];
+			// 
+			return $this->fetch('sup_more', compact('data', 'total'));
+		}else {
             // 获取角色首页显示的内容
             $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
-            $data = $user->getActLog();
+            $data = $user->getActLog();			
             // 活动推荐
             $activity = new Activity;
             $act_list = $activity->getDataList(4)['list'];
@@ -345,7 +376,15 @@ class Person extends Controller
             $mode_ids = $mode->where(['key_word' => 'user_news'])->column('id');
         }
         $list = new ListModel;
-        $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);
+        $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);	
+			
+		// 
+		if($this->user['role']==2){
+			$_type_list = array_filter($_type_list,function($a){				
+				return $a == '学术天地';
+			});			
+		}
+		
         return $_type_list;
     }
 

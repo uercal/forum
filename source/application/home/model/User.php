@@ -270,9 +270,25 @@ class User extends UserModel
         } else {
             $my_act = $act_log->getListByUser($this->user_id);
         }
-
-        return compact('my_act');
+		
+		// 
+		$sup_log = new ActivitySupport;
+		if ($num) {
+		    $my_sup = $sup_log->getAllListByUser($this->user_id, $num);
+		} else {
+		    $my_sup = $sup_log->getListByUser($this->user_id);
+		}
+						
+        return compact('my_act','my_sup');
     }
+	
+	
+	
+	
+	
+	
+	
+	
 
     /**
      * 修改密码

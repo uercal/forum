@@ -29,11 +29,11 @@
                         </div>
                         <div class="projects-item-option">
                             <p>总投资：</p>
-                            <span style="color: #F35437;"><?= ($detail['total_invest'] / 10000) . '万人民币' ?></span>
+                            <span style="color: #F35437;"><?= $detail['total_invest'] . '万人民币' ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>服务合同金额：</p>
-                            <span style="color: #F35437;"><?= ($detail['assignment_money'] / 10000) . '万人民币' ?></span>
+                            <span style="color: #F35437;"><?= $detail['assignment_money'] . '万人民币' ?></span>
                         </div>
                     </div>
 

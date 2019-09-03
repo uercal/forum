@@ -150,7 +150,7 @@ endif;?>
                     <p style="padding-bottom:12px;color:#7FBAFF;">成为单位/专家等，专享更多特权</p>
 
                     <div class="update-user" onclick="window.location.href='<?=url('updateGrade')?>';">
-                        <p><?=strpos($role_arr, '0') !== false ? '申请入会/入库' : '会员管理'?></p>
+                        <p><?= $button_name ?></p>
                     </div>
                     <div class="last-login">
                         <p style="font-size:12px;color:#8c8c8c;">最近一次登陆时间：<?=$login_user['last_login']?></p>
@@ -162,7 +162,7 @@ endif;?>
                 <div class="person-user-actions">
                     <div class="<?=request()->action() == 'personcenter' ? 'active' : ''?>" onclick="window.location.href='<?=url('personCenter')?>';">
                         <p>
-                            活动报名<?=request()->action() == 'personcenter' ?
+                            社团活动<?=request()->action() == 'personcenter' ?
 '<i style="position:absolute;right:-30px;" class="am-icon-angle-right"></i>' : ''?>
                         </p>
                     </div>

@@ -23,6 +23,13 @@ class ActivitySupport extends ActivitySupportModel
     {
         return $this->with(['activity' => ['cover']])->where(['user_id' => $user_id])->order('create_time desc')->select()->toArray();
     }
+	
+	public function getAllListByUser($user_id, $num)
+	{
+	    return $this->with(['activity' => ['cover']])->where(['user_id' => $user_id])->order('create_time desc')->paginate($num, false, [
+	        'query' => Request::instance()->request()
+	    ]);
+	}
 
     public function support($data, $user_id)
     {
