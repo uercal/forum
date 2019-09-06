@@ -123,19 +123,32 @@ class UserCompany extends BaseModel
     }
 
     public function getServerCateTextAttr($value, $data)
-    {
+    {				
+		if(!isset($data['server_cate'])){
+			return '';
+		}
         $arr = json_decode($data['server_cate'], true);
-        $res = [];
-        foreach ($arr as $key => $value) {
+        $res = [];		
+        foreach ($arr as $key => $value) {	
+			if(empty($value['major'])||empty($value['level'])||empty($value['area'])){
+				continue;
+			}
             $index = $key + 1;
             $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级'
                 . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . implode(',',$value['area']);
-        }        
-        return implode(' | ', $res);
+        }
+		if(empty($res)){
+			return '';
+		}else{
+			return implode(' | ', $res);	
+		}        
     }
 
     public function getServerCateNameAttr($value, $data)
     {
+		if(!isset($data['server_cate'])){
+			return '';
+		}
         $arr = json_decode($data['server_cate'], true);
         $res = [];
         $cates = [];
@@ -143,8 +156,8 @@ class UserCompany extends BaseModel
         $areas = [];
         foreach ($arr as $key => $value) {
             $cates[] = $value['major'];
-            $values[] = $value['level'];
-            $area[] = $value['area'];
+            $values[] = $value['level'];			
+            $area[] = isset($value['area'])?$value['area']:'';
         }
         if (empty($cates[0])) {
             return [];

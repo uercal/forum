@@ -130,11 +130,18 @@ class UserSup extends BaseModel
         $arr = json_decode($data['sup_server_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
+			if(empty($value['major'])||empty($value['level'])||empty($value['area'])){
+				continue;
+			}
             $index = $key + 1;
             $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级'
             . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . $value['area'];
         }
-        return implode(' | ', $res);
+		if(empty($res)){
+			return '';
+		}else{
+			return implode(' | ', $res);	
+		}        
     }
 
     public function getSupServerCateNameAttr($value, $data)
