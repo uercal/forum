@@ -74,7 +74,7 @@ endif;?>
         </div>
 
     </div>
-    <div class="footer-foot">Copyright © 2019-2021 备案号：琼ICP备15012807号-1</div>
+    <div class="footer-foot" style="cursor:pointer;" onclick="window.location.href='http://www.beian.miit.gov.cn';">Copyright © 2019-2021 备案号：琼ICP备19002691号-1</div>
 </div>
 <script src="assets/home/js/jquery-1.8.2.min.js"></script>
 <script src="assets/home/js/banner_move.js"></script>
