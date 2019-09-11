@@ -17,7 +17,7 @@
             地址：<?= $company['address'] ?>
         </p>
     </div>
-    <div class="footer-foot">Copyright © 2013-2019 备案号：闽ICP备15012807号-1</div>
+    <div class="footer-foot">Copyright © 2019-2022 备案号：琼ICP备15012807号-1</div>
 </div>
 <script src="assets/home/js/jquery-1.8.2.min.js"></script>
 <script src="assets/home/js/banner_move.js"></script>
