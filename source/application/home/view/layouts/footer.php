@@ -229,12 +229,8 @@ endif;?>
         }
 
         // act
-        function invalidTime() {
-            <?php if ($login_user): ?>
-            layer.msg('未在有效时间内');
-            <?php else:?>
-            layer.msg('请您注册后报名');
-            <?php endif;?>
+        function invalidTime() {           
+            layer.msg('未在有效时间内');            
         }
 
         function supportAct(act_id) {
@@ -265,7 +261,7 @@ endif;?>
                     <?php endif;
 endif;?>
             <?php else: ?>
-                layer.msg('请您注册后报名');
+                layer.msg('你还没未登录');
             <?php endif;?>
 
         }
@@ -297,7 +293,7 @@ endif;?>
                         layer.msg('你已报名过该活动');
 				<?php endif;endif;?>
             <?php else: ?>
-                layer.msg('你还没未登录');
+                layer.msg('请您注册后报名');
             <?php endif;?>
         }
 
