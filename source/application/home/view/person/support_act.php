@@ -80,42 +80,55 @@
             <input type="hidden" name="sup[act_id]" value="<?= $act_id ?>">
             <div class="am-form-group">
                 <label class="form-require am-u-sm-2 am-form-label">联系人</label>
-                <div class="am-u-sm-10">
+                <div class="am-u-sm-9">
                     <input type="text" name="sup[concat_person]" placeholder="输入联系人姓名" value="<?= $company['manager_name'] ?>">
                 </div>
             </div>
             <div class="am-form-group">
                 <label class="form-require am-u-sm-2 am-form-label">手机号码</label>
-                <div class="am-u-sm-10">
+                <div class="am-u-sm-9">
                     <input type="tel" name="sup[phone]" placeholder="输入联系人手机号码" value="<?= $company['manager_phone'] ?>">
                 </div>
             </div>
 			
 			<div class="am-form-group">
 			    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">邮箱</label>
-			    <div class="am-u-sm-10">
+			    <div class="am-u-sm-9">
 			        <input type="email" value="<?= !empty($company)?$company['email']:'' ?>" name="sup[concat_email]" placeholder="输入邮箱">
 			    </div>
 			</div>
 
             <?php if (!empty($company)) : ?>
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位名称</label>
-                    <div class="am-u-sm-10">
-                        <input type="text" value="<?= $company['company_name'] ?>" disabled="disabled">
+                    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">单位名称</label>
+                    <div class="am-u-sm-9">
+                        <input type="text" value="<?= $company['company_name'] ?>" name="sup[concat_company]" disabled="disabled">
                     </div>
                 </div>
-
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">单位电话</label>
-                    <div class="am-u-sm-10">
+                    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">单位电话</label>
+                    <div class="am-u-sm-9">
                         <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
                     </div>
-                </div>               
-
+                </div>                
+            <?php else:?>
+                <div class="am-form-group">
+                    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">单位名称</label>
+                    <div class="am-u-sm-9">
+                        <input type="text" value="" name="sup[concat_company]">
+                    </div>
+                </div>
             <?php endif; ?>
 
+            <div class="am-form-group">
+                <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">职务/职称</label>
+                <div class="am-u-sm-9">
+                    <input type="text" value="" name="sup[concat_job]">
+                </div>
+            </div>
 
+
+            
             <div class="am-form-group">
                 <div class="am-u-sm-12" style="display:flex;align-items:center;justify-content:center;">
                     <button type="button" id="btn-submit" class="sub am-btn am-btn-default">提交</button>

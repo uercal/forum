@@ -253,9 +253,9 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+                    <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">邮箱</label>
                     <div class="am-u-sm-10">
-                        <input type="email" value="<?= $info['email'] ?>" disabled="disabled">
+                        <input type="email" value="<?= $info['email'] ?>" disabled="disabled" name="sign[concat_email]">
                     </div>
                 </div>
 
@@ -306,7 +306,7 @@
 		        </div>
 		
 		        <div class="am-form-group">
-		            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">邮箱</label>
+		            <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">邮箱</label>
 		            <div class="am-u-sm-10">
 		                <input type="email" value="<?= $info['sup_company_email'] ?>" name="sign[concat_email]">
 		            </div>
