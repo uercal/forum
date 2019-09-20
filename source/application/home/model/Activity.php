@@ -28,7 +28,7 @@ class Activity extends ActivityModel
         if (input('sort')) {
             $order = 'create_time ' . input('sort');
         } else {
-            $order = 'sort desc';
+            $order = 'create_time desc';
         }
         //
         if (input('title')) {

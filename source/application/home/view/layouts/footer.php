@@ -230,7 +230,11 @@ endif;?>
 
         // act
         function invalidTime() {
+            <?php if ($login_user): ?>
             layer.msg('未在有效时间内');
+            <?php else:?>
+            layer.msg('请您注册后报名');
+            <?php endif;?>
         }
 
         function supportAct(act_id) {
