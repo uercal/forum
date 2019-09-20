@@ -108,14 +108,14 @@
                 <div class="am-form-group">
                     <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">单位电话</label>
                     <div class="am-u-sm-9">
-                        <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled">
+                        <input type="text" value="<?= $company['company_tel'] ?>" disabled="disabled" placeholder="输入单位电话">
                     </div>
                 </div>                
             <?php else:?>
                 <div class="am-form-group">
                     <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">单位名称</label>
                     <div class="am-u-sm-9">
-                        <input type="text" value="" name="sup[concat_company]">
+                        <input type="text" value="" name="sup[concat_company]" placeholder="输入单位名称">
                     </div>
                 </div>
             <?php endif; ?>
@@ -123,7 +123,7 @@
             <div class="am-form-group">
                 <label for="doc-ipt-pwd-2" class="form-require am-u-sm-2 am-form-label">职务/职称</label>
                 <div class="am-u-sm-9">
-                    <input type="text" value="" name="sup[concat_job]">
+                    <input type="text" value="" name="sup[concat_job]" placeholder="输入职务/职称">
                 </div>
             </div>
 
