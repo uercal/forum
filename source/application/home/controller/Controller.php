@@ -149,24 +149,27 @@ class Controller extends \think\Controller
         $items = array_column($items, null, 'type');
 
         if (isset($items['activity'])) {
-            $activity = $items['activity']['data'];
-            $activity_ids = array_column($activity, 'id', null);
+            $activity = $items['activity']['data'];            
+            $activity_ids = array_column($activity, 'id', null);                  
+            $activity_order = implode(',',$activity_ids);
             $act_model = new Activity;
-            $_data = $act_model->with(['cover'])->whereIn('id', $activity_ids)->select()->toArray();
+            $_data = $act_model->with(['cover'])->whereIn('id', $activity_ids)->orderRaw("field(id,$activity_order)")->select()->toArray();            
             $items['activity']['data'] = $_data;
         }
         if (isset($items['projects'])) {
             $projects = $items['projects']['data'];
             $projects_ids = array_column($projects, 'project_id', null);
+            $projects_order = implode(',',$projects_ids);
             $pro_model = new Projects;
-            $_data = $pro_model->with(['cover'])->whereIn('id', $projects_ids)->select()->toArray();
+            $_data = $pro_model->with(['cover'])->whereIn('id', $projects_ids)->orderRaw("field(id,$projects_order)")->select()->toArray();
             $items['projects']['data'] = $_data;
         }
         if (isset($items['user_news'])) {
             $user_news = $items['user_news']['data'];
             $user_news_ids = array_column($user_news, 'id', null);
+            $user_news_order = implode(',',$user_news_ids);
             $list_detail = new ListDetail;
-            $_data = $list_detail->with(['user' => ['person', 'company']])->whereIn('id', $user_news_ids)->select()->toArray();
+            $_data = $list_detail->with(['user' => ['person', 'company']])->whereIn('id', $user_news_ids)->orderRaw("field(id,$user_news_order)")->select()->toArray();
             $items['user_news']['data'] = $_data;
         }
         // halt($items['projects']['data']);
