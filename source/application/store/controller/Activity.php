@@ -110,10 +110,10 @@ class Activity extends Controller
         $model = new ActivitySupport;
         $data = $model->with(['company'])->where(['act_id' => $act_id])->select()->toArray();
         //设置表头：
-        $head = ['序号', '联系人', '联系电话', '单位名称', '单位电话', '邮箱'];
+        $head = ['序号', '联系人', '联系电话', '单位名称','职位/职称' ,'单位电话', '邮箱'];
 
         //数据中对应的字段，用于读取相应数据：
-        $keys = ['index', 'concat_person', 'phone', 'company_name', 'company_tel', 'email'];
+        $keys = ['index', 'concat_person', 'phone', 'concat_company','concat_job','company_tel', 'concat_email'];
 
         $excel->outdata($detail['title'] . '赞助表', $data, $head, $keys);
     }

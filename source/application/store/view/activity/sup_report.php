@@ -31,6 +31,7 @@
                                     <th>联系电话</th>
                                     <th>联系邮箱</th>
                                     <th>单位名称</th>
+                                    <th>职位职称</th>
                                     <th>单位电话</th>
                                     <th>邮箱</th>
                                 </tr>
@@ -48,7 +49,10 @@
                                                 <?= $item['concat_email'] ?>
                                             </td>
                                             <td class="am-text-middle">
-                                                <?= $item['user']['company'] ? $item['user']['company']['company_name'] : '' ?>
+                                                <?= $item['concat_company'] ?>
+                                            </td>
+                                            <td class="am-text-middle">
+                                                <?= $item['concat_job'] ?>
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= $item['user']['company'] ? $item['user']['company']['company_tel'] : '' ?>
