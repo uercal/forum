@@ -27,6 +27,7 @@
                                     <th>封面</th>
                                     <th>报名时间</th>
                                     <th>活动时间</th>
+                                    <th>排序</th>
                                     <th>添加时间</th>
                                     <th>报名人员</th>                                    
                                     <th>赞助人员</th>                                    
@@ -52,7 +53,10 @@
                                             </td>
                                             <td class="am-text-middle">
                                                 <?= date('Y/m/d', $item['active_begin']) . '~' . date('Y/m/d', $item['active_end']) ?>
-                                            </td>                                            
+                                            </td>  
+                                            <td class="am-text-middle">
+                                                <?= $item['sort'] ?>
+                                            </td>                                         
                                             <td class="am-text-middle">
                                                 <?= $item['create_time'] ?>
                                             </td>
