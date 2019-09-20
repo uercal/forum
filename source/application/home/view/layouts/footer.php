@@ -265,7 +265,7 @@ endif;?>
                     <?php endif;
 endif;?>
             <?php else: ?>
-                layer.msg('你还没未登录');
+                layer.msg('请您注册后报名');
             <?php endif;?>
 
         }
