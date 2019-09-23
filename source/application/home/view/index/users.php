@@ -109,7 +109,7 @@
                                     </div>
 									<div>
 									    <span class="am-icon-globe"></span>
-									    <p><?=$item['company_type']?></p>
+									    <p><?=$item['address']?></p>
 									</div>
                                 </div>
                                 <!-- <div class="users-item-arrow">
@@ -133,12 +133,12 @@
                                         <p><?=$item['memberLevel']?></p>
                                     </div>
                                     <div>
-                                        <span class="am-icon-file-text-o"></span>
-                                        <p><?=$item['education_major']?></p>
+                                        <span class="am-icon-building"></span>
+                                        <p><?= $item['belong_company'] ?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-briefcase"></span>
-                                        <p><?=$item['education_degree']?></p>
+                                        <p><?=$item['education_degree'].'|'.$item['education_degree_xw']?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-book"></span>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div>
                                         <span class="am-icon-send-o"></span>
-                                        <p><?=$item['job']?></p>
+                                        <p><?=$item['pro_qualify']?></p>
                                     </div>
                                 </div>
                                 <!-- <div class="users-item-arrow">
@@ -168,22 +168,22 @@
                                     <div>
                                         <span class="am-icon-users"></span>
                                         <p><?=$item['expertLevel']?></p>
-                                    </div>
-                                    <div>
-                                        <span class="am-icon-file-text-o"></span>
-                                        <p><?=$item['education_degree']?></p>
-                                    </div>
+                                    </div>   
                                     <div>
                                         <span class="am-icon-briefcase"></span>
-                                        <p><?=$item['job']?></p>
-                                    </div>
+                                        <p><?=$item['education_major']?></p>
+                                    </div>                                 
+                                    <div>
+                                        <span class="am-icon-briefcase"></span>
+                                        <p><?=$item['education_degree'].'|'.$item['education_degree_xw']?></p>
+                                    </div>                                    
                                     <div>
                                         <span class="am-icon-book"></span>
                                         <p><?=$item['positio']?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-send-o"></span>
-                                        <p><?=$item['person_address']?></p>
+                                        <p><?=$item['pro_qualify']?></p>
                                     </div>
                                 </div>
                                 <!-- <div class="users-item-arrow">

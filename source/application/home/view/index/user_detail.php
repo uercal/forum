@@ -18,33 +18,41 @@
                     </div>
                     <div class="users-detail-info">
                         <div class="info-bonus"></div>
-                        <strong><?= $detail['supplier']['sup_company_name'] ?></strong>
-                        <!-- <p class="info-role-name"><?= $detail['role_name'] ?></p> -->
+                        <strong><?= $detail['supplier']['sup_company_name'] ?></strong>                        
 
                         <div class="projects-item-option">
-                            <p>供应商类型：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_type'] ?></span>
+                            <p>社会统一信用代码：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_code'] ?></span>
                         </div>                   
 						<div class="projects-item-option">
-							<p>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</p>
+							<p>法定代表人：</p>
 							<span style="color: #333333;"><?= $detail['supplier']['sup_legal_person'] ?></span>
 						</div>
 						<div class="projects-item-option">
 							<p>注册资金：</p>
 							<span style="color: #333333;"><?= $detail['supplier']['sup_regist_money'].'万元' ?></span>
-						</div>
+                        </div>
                         <div class="projects-item-option">
-                            <p>联系方式：</p>
+                            <p>地址：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>电话：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] ?></span>
                         </div>
                         <div class="projects-item-option">
-                            <p>供应商邮箱：</p>
+                            <p>传真：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_fax'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>邮箱：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_email'] ?></span>
                         </div>
                         <div class="projects-item-option" style="margin-bottom:40px;">
-                            <p>供应商地址：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
+                            <p>网址：</p>
+                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_site'] ?></span>
                         </div>
+                        
 						
                     </div>
                 </div>
@@ -62,7 +70,6 @@
 
         <?php elseif (!empty($detail['company'])) : ?>
             <div class="detail-container">
-
                 <div class="users-detail-head">
                     <div class="users-detail-avatar">
                         <img src="<?= $detail['company']['company_logo_path'] ?>" style="object-fit:contain;" alt="">
@@ -71,32 +78,39 @@
                         <div class="info-bonus"></div>
                         <strong><?= $detail['company']['company_name'] ?></strong>
                         <p class="info-role-name"><?= $detail['company']['memberLevel'] ?></p>
-                        
                         <div class="projects-item-option">
-                            <p>单位类别：</p>
-                            <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>
+                            <p>社会统一信用代码：</p>
+                            <span style="color: #333333;"><?= $detail['company']['company_code'] ?></span>
                         </div>
-						<div class="projects-item-option">
-						    <p>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</p>
+                        <div class="projects-item-option">
+						    <p>法定代表人：</p>
 						    <span style="color: #333333;"><?= $detail['company']['legal_person'] ?></span>
-						</div>
-						<div class="projects-item-option">
+                        </div>
+                        <div class="projects-item-option">
 						    <p>注册资金：</p>
 						    <span style="color: #333333;"><?= $detail['company']['regist_money'].'万元' ?></span>
-						</div>
+                        </div>
                         <div class="projects-item-option">
-                            <p>联系方式：</p>
+                            <p>地址：</p>
+                            <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>电话：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
                         </div>
                         <div class="projects-item-option">
-                            <p>公司邮箱：</p>
+                            <p>传真：</p>
+                            <span style="color: #333333;"><?= $detail['company']['company_fax'] ?></span>
+                        </div>
+                        <div class="projects-item-option">
+                            <p>邮箱：</p>
                             <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
                         </div>
                         <div class="projects-item-option" style="margin-bottom:40px;">
-                            <p>公司地址：</p>
-                            <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
+                            <p>网址：</p>
+                            <span style="color: #333333;"><?= $detail['company']['company_site'] ?></span>
                         </div>
-																											
+												                                                                        																											
 						<!-- <div class="projects-item-option" style="margin-bottom:40px;">
 						    <p>会员级别：</p>
 						    <span style="color: #333333;"><?= $detail['company']['memberLevel'] ?></span>
@@ -143,11 +157,14 @@
                             <p>所在单位：</p>
                             <span style="color: #333333;"><?= $detail['person']['belong_company'] ?></span>
                         </div>
-                        <div class="projects-item-option" style="margin-bottom:40px;">
+                        <div class="projects-item-option">
                             <p>职务&职称：</p>
                             <span style="color: #333333;"><?= $detail['person']['job'] . ' | ' . $detail['person']['positio'] ?></span>
                         </div>
-						
+						<div class="projects-item-option" style="margin-bottom:40px;">
+                            <p>职业资格：</p>
+                            <span style="color: #333333;"><?= $detail['person']['pro_qualify'] ?></span>
+                        </div>
 
                     </div>
                 </div>
