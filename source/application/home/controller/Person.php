@@ -246,16 +246,16 @@ class Person extends Controller
         if ($obj) {
             switch ($obj['type_bonus']) {
                 case 'person':
-                    $obj_type = '个人会员';
+                    $obj_type = '申请入会/入库';
                     break;
                 case 'company':
-                    $obj_type = '单位会员';
+                    $obj_type = '申请入会/入库';
                     break;
                 case 'expert':
-                    $obj_type = '专家会员';
+                    $obj_type = '申请入会/入库';
                     break;
                 case 'supplier':
-                    $obj_type = '供应商';
+                    $obj_type = '申请入会/入库';
                     break;
             }
             return $this->fetch('update_ing', compact('obj_type'));
