@@ -1,7 +1,7 @@
 <div class="person-my-act">
     <div class="person-my-act-head">
         <div>
-            <p>升级会员</p>
+            <p>申请入会/入库</p>
         </div>
     </div>
 
