@@ -11,7 +11,7 @@
                                 <div class="widget-title am-fl">用户信息</div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">用户名 </label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">用户名 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" value="<?=$detail['user_name']?>" disabled="disabled">
                                 </div>
@@ -25,13 +25,13 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">会员等级（角色） </label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">会员等级（角色） </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" value="<?=$detail['role_name']?>" disabled="disabled">
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">上次登录时间 </label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">上次登录时间 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" value="<?=date('Y-m-d H:i:s', $detail['last_login'])?>" disabled="disabled">
                                 </div>
@@ -43,31 +43,31 @@
                                     <div class="widget-title am-fl">个人会员信息</div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">姓名 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">姓名 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">身份证号码 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">身份证号码 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['id_card']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">性别 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">性别 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['gender_name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">邮箱 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">邮箱 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['email']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">邮编 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">邮编 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['post_code']?>" disabled="disabled">
                                     </div>
@@ -75,31 +75,31 @@
 								
 								
 								<div class="am-form-group">
-								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">国籍 </label>
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label">国籍 </label>
 								    <div class="am-u-sm-9 am-u-end">
 								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['nationality']?>" disabled="disabled">
 								    </div>
 								</div>
 								<div class="am-form-group">
-								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">政治面貌 </label>
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label">政治面貌 </label>
 								    <div class="am-u-sm-9 am-u-end">
 								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['political_face']?>" disabled="disabled">
 								    </div>
 								</div>
 								<div class="am-form-group">
-								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">籍贯 </label>
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label">籍贯 </label>
 								    <div class="am-u-sm-9 am-u-end">
 								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['native_place']?>" disabled="disabled">
 								    </div>
 								</div>
 								<div class="am-form-group">
-								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">民族 </label>
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label">民族 </label>
 								    <div class="am-u-sm-9 am-u-end">
 								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['minzu']?>" disabled="disabled">
 								    </div>
 								</div>
 								<div class="am-form-group">
-								    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">微信号 </label>
+								    <label class="am-u-sm-3 am-u-lg-2 am-form-label">微信号 </label>
 								    <div class="am-u-sm-9 am-u-end">
 								        <input type="text" class="tpl-form-input" value="<?=$detail['person']['wechat']?>" disabled="disabled">
 								    </div>
@@ -107,104 +107,104 @@
 								
 								
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">住址 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">住址 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['person_address']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">手机号码 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">手机号码 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['phone']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">毕业学校 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">毕业学校 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['education_school']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">学历 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">学历 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['education_degree']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">学位 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">学位 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['education_degree_xw']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">专业 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">专业 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['education_major']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">毕业时间 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">毕业时间 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=date('Y-m-d', $detail['person']['education_time'])?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">所属单位 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">所属单位 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['belong_company']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职称 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">职称 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['positio']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职位 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">职位 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['job']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">工作时长 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">工作时长 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=str_replace(',', '到', $detail['person']['work_limit'])?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职称获得时间 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">职称获得时间 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['positio_time']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">业务行业 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">业务行业 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['sector']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">业务领域 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">业务领域 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['area']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <!-- -->
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">职业资格 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">职业资格 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['pro_qualify']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">高层次人才 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">高层次人才 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['person']['highPeople']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">证件照 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">证件照 </label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top: .8rem;">
                                         <a href="<?=$detail['person']['id_photo_path']?>" title="点击查看大图" target="_blank">
                                             <img src="<?=$detail['person']['id_photo_path']?>" width="144" height="144" alt="">
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">证件附件 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">证件附件 </label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top: .8rem;">
                                         <a href="<?=$detail['person']['person_file_path']?>" download="证件附件">点击下载</a>
                                     </div>
@@ -231,121 +231,121 @@
                                     <div class="widget-title am-fl">单位会员信息</div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位名称 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位名称 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">社会统一信用代码 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">社会统一信用代码 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_code']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位类型 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位类型 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_type']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位电话 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位电话 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_tel']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位地址 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位地址 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['address']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位logo </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位logo </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_logo']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">成立时间 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">成立时间 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=date('Y-m-d', $detail['company']['build_time'])?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">法人 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">法人 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['legal_person']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">单位邮箱 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单位邮箱 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['email']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">注册资金（万元） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">注册资金（万元） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['regist_money']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">门户网站 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">门户网站 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_site']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">传真 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">传真 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['company_fax']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人姓名 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人姓名 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['manager_name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人职位 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人职位 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['manager_job']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人电话 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人电话 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['manager_phone']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人微信 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人微信 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['manager_wechat']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（工程类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（工程类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['eng_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（货物类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（货物类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['goods_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（服务类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（服务类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['company']['server_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">证件附件 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">证件附件 </label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top:.8rem;">
                                         <a href="<?=$detail['company']['license_file_path']?>" download="证件附件">点击下载</a>
                                     </div>
@@ -365,105 +365,105 @@
                                     <div class="widget-title am-fl">供应商信息</div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商名称 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商名称 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商社会统一信用代码 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商社会统一信用代码 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_code']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商类型 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商类型 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_type']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商电话 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商电话 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_tel']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商邮编 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商邮编 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_post_code']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商地址 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商地址 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_address']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商成立时间 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商成立时间 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_build_time']?>" disabled="disabled">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（工程类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（工程类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_eng_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（货物类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（货物类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_goods_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应类别（服务类） </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应类别（服务类） </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_server_cate_text']?>" disabled="disabled">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商法人 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商法人 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_legal_person']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">供应商邮箱 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">供应商邮箱 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_company_email']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人姓名 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人姓名 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_manager_name']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人职位 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人职位 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_manager_job']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人电话 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人电话 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_manager_phone']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">联系人微信 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">联系人微信 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="text" class="tpl-form-input" value="<?=$detail['supplier']['sup_manager_wechat']?>" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">证件照 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">证件照 </label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top: .8rem;">
                                         <a href="<?=$detail['supplier']['id_photo_path']?>" title="点击查看大图" target="_blank">
                                             <img src="<?=$detail['supplier']['id_photo_path']?>" width="144" height="144" alt="">
@@ -471,7 +471,7 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">证件附件 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">证件附件 </label>
                                     <div class="am-u-sm-9 am-u-end" style="padding-top: .8rem;">
                                         <a href="<?=$detail['supplier']['person_file_path']?>" download="证件附件">点击下载</a>
                                     </div>
