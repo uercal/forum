@@ -18,7 +18,7 @@ class UploadFile extends UploadFileModel
      */
     public function add($data)
     {
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = 10001;
         return $this->save($data);
     }
 

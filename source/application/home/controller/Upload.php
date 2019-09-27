@@ -82,8 +82,7 @@ class Upload extends Controller
             'file_size' => $fileInfo['size'],
             'file_type' => $fileType,
             'origin_name' => $origin_name,
-            'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),
-			'wxapp_id'=>10001
+            'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),			
         ]);
         return $model;
     }
