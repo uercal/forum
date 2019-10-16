@@ -158,7 +158,7 @@
                             <span style="color: #333333;"><?= $detail['person']['belong_company'] ?></span>
                         </div>
                         <div class="projects-item-option">
-                            <p>职务&职称：</p>
+                            <p>职务/职称：</p>
                             <span style="color: #333333;"><?= $detail['person']['job'] . ' | ' . $detail['person']['positio'] ?></span>
                         </div>
 						<div class="projects-item-option" style="margin-bottom:40px;">
