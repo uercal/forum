@@ -86,8 +86,10 @@ class User extends UserModel
                     $_map['address'] = ['like', '%' . input('title') . '%'];
                     //
                     $json_text = str_replace("\\", "_", json_encode(input('title')));
+                    $json_text = str_replace('"', "", $json_text);
+                    $json_text = trim($json_text);
                     $json_text = strval($json_text);
-                    $_map['server_cate'] = ['like', '%' . $json_text . '%'];                    
+                    $_map['server_cate'] = ['like', '%' . $json_text . '%'];
                 }
                 $model = new UserCompany;
                 $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
@@ -99,12 +101,14 @@ class User extends UserModel
                 if (input('title')) {
                     $_map['sup_company_name'] = ['like', '%' . input('title') . '%'];
                     $_map['sup_company_address'] = ['like', '%' . input('title') . '%'];
-					// 					
-					$json_text = str_replace("\\", "_", json_encode(input('title')));
-					$json_text = strval($json_text);
-					$__map['server_cate'] = ['like', '%' . $json_text . '%'];
-					$__map['eng_cate'] = ['like', '%' . $json_text . '%'];
-					$__map['goods_cate'] = ['like', '%' . $json_text . '%'];
+                    //
+                    $json_text = str_replace("\\", "_", json_encode(input('title')));
+                    $json_text = str_replace('"', "", $json_text);
+                    $json_text = trim($json_text);
+                    $json_text = strval($json_text);
+                    $__map['server_cate'] = ['like', '%' . $json_text . '%'];
+                    $__map['eng_cate'] = ['like', '%' . $json_text . '%'];
+                    $__map['goods_cate'] = ['like', '%' . $json_text . '%'];
                     //
                     $__map['company_name'] = ['like', '%' . input('title') . '%'];
                     $__map['address'] = ['like', '%' . input('title') . '%'];
