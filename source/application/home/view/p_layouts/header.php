@@ -33,7 +33,7 @@
 
 <body>
     <header>
-        <nav class="header-nav">
+        <nav class="header-nav" style="padding:0;justify-content: space-between;">
             <div class="header-logo">
                 <ul class="logo-ul">
                     <li><img src="assets/home/images/logo1.jpg" alt=""></li>
