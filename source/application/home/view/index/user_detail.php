@@ -10,27 +10,27 @@
     </div>
 
     <div class="list-body">
-        <?php if (!empty($is_sup)) : ?>
+        <?php if ($is_sup==1) : ?>
             <div class="detail-container">
                 <div class="users-detail-head">
                     <div class="users-detail-avatar">
-                        <img src="<?= $detail['supplier']['id_photo_path'] ?>" style="object-fit:contain;" alt="">
+                        <img src="<?= $detail['company']['company_logo_path'] ?>" style="object-fit:contain;" alt="">
                     </div>
                     <div class="users-detail-info">
                         <div class="info-bonus"></div>
-                        <strong><?= $detail['supplier']['sup_company_name'] ?></strong>                        
+                        <strong><?= $detail['company']['company_name'] ?></strong>                        
 
                         <div class="projects-item-option">
                             <p>社会统一信用代码：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_code'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['company_code'] ?></span>
                         </div>                   
 						<div class="projects-item-option">
 							<p>法定代表人：</p>
-							<span style="color: #333333;"><?= $detail['supplier']['sup_legal_person'] ?></span>
+							<span style="color: #333333;"><?= $detail['company']['legal_person'] ?></span>
 						</div>
 						<div class="projects-item-option">
 							<p>注册资金：</p>
-							<span style="color: #333333;"><?= $detail['supplier']['sup_regist_money'].'万元' ?></span>
+							<span style="color: #333333;"><?= $detail['company']['regist_money'].'万元' ?></span>
                         </div>
 						<!--  -->
 						<?php if (!empty($detail['company']['eng_cate_name'])):?>
@@ -56,23 +56,23 @@
 						<!--  -->
                         <div class="projects-item-option">
                             <p>地址：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>电话：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_tel'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>传真：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_fax'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['company_fax'] ?></span>
                         </div>
                         <div class="projects-item-option">
                             <p>邮箱：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_email'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
                         </div>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
-                            <span style="color: #333333;"><?= $detail['supplier']['sup_company_site'] ?></span>
+                            <span style="color: #333333;"><?= $detail['company']['company_site'] ?></span>
                         </div>
                         
 						
@@ -82,7 +82,7 @@
                 <strong style="margin-left:30px;margin-top:35px;">供应商简介</strong>
 
                 <div class="detail-body">
-                    <?= htmlspecialchars_decode($detail['supplier']['sup_intro']) ?>
+                    <?= htmlspecialchars_decode($detail['company']['company_intro']) ?>
                 </div>
 
             </div>

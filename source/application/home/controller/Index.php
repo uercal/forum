@@ -327,8 +327,8 @@ class Index extends Controller
             $model = Category::get($category_id);
         } else {
             $model = Category::where(['mode' => 'users', 'mode_data' => 'normal'])->find();
-        }		
-        $is_sup = empty($detail['supplier'])?0:1;
+        }
+        $is_sup = empty(input('is_sup'))?0:1;		
         // if ($is_sup == 1) {
         //     $is_sup = 1;
         // } else {
