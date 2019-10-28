@@ -36,7 +36,7 @@ class Person extends Controller
 {
     protected $user;
     protected $msg;
-    // 
+    //
     public function _initialize()
     {
         parent::_initialize();
@@ -44,40 +44,40 @@ class Person extends Controller
             return $this->redirect('/');
         } else {
             $this->user = User::detail(session('forum_user')['user']['user_id']);
-            // 
+            //
             if ($this->user['role'] != session('forum_user')['user']['role']) {
                 $this->getResExamMsg('success');
                 User::freshUserSession();
             } else {
                 $this->getResExamMsg('reject');
             }
-			
-			$role = $this->user['role'];
-			switch($role){
-				case 0:
-					// 普通用户
-					$button_name = '申请入会/入库';
-					break;
-				case 1:
-					//个人会员
-					$button_name = '会员管理';
-					break;
-				case 2:
-					// 仅专家
-					$button_name = '专家管理';
-					break;
-				case 3:
-					// 单位会员
-					$button_name = '会员管理';
-					break;
-				case 4:
-					// 仅供应商·
-					$button_name = '供应商管理';
-					break;
-			}
-			
-            $this->assign('button_name', $button_name);            
-            //             
+            
+            $role = $this->user['role'];
+            switch ($role) {
+                case 0:
+                    // 普通用户
+                    $button_name = '申请入会/入库';
+                    break;
+                case 1:
+                    //个人会员
+                    $button_name = '会员管理';
+                    break;
+                case 2:
+                    // 仅专家
+                    $button_name = '专家管理';
+                    break;
+                case 3:
+                    // 单位会员
+                    $button_name = '会员管理';
+                    break;
+                case 4:
+                    // 仅供应商·
+                    $button_name = '供应商管理';
+                    break;
+            }
+            
+            $this->assign('button_name', $button_name);
+            //
             $this->view->engine->layout('p_layouts/layout');
         }
     }
@@ -97,7 +97,7 @@ class Person extends Controller
 
     /**
      * 活动相关弹窗页面
-     * 
+     *
      */
 
     public function support_act($act_id)
@@ -105,9 +105,9 @@ class Person extends Controller
         if (!$this->request->isAjax()) {
             // 取消模板
             $this->view->engine->layout(false);
-            // 
+            //
             $company = $this->user['company'];
-            // 
+            //
             return $this->fetch('support_act', compact('act_id', 'company'));
         } else {
             if (!$this->isSupport($act_id)) {
@@ -129,31 +129,31 @@ class Person extends Controller
         if (!$this->request->isAjax()) {
             // 取消模板
             $this->view->engine->layout(false);
-            // 
-			$role = $this->user['role'];
-			switch($role){
-				case '0':
-					// 普通	
-					$info = [];
-					break;
-				case '1':
-					// 个人				
-					$info = $this->user['person'];
-					break;
-				case '2':
-					// 个人				
-					$info = $this->user['person'];
-					break;
-				case '3':
-					//单位
-					$info = $this->user['company'];
-					break;
-				case '4':
-					//仅供应商
-					$info = $this->user['supplier'];
-					break;
-			}           			 
-            // 
+            //
+            $role = $this->user['role'];
+            switch ($role) {
+                case '0':
+                    // 普通
+                    $info = [];
+                    break;
+                case '1':
+                    // 个人
+                    $info = $this->user['person'];
+                    break;
+                case '2':
+                    // 个人
+                    $info = $this->user['person'];
+                    break;
+                case '3':
+                    //单位
+                    $info = $this->user['company'];
+                    break;
+                case '4':
+                    //仅供应商
+                    $info = $this->user['supplier'];
+                    break;
+            }
+            //
             return $this->fetch('sign_act', compact('act_id', 'role', 'info'));
         } else {
             if (!$this->isSign($act_id)) {
@@ -185,22 +185,22 @@ class Person extends Controller
             $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
             $data = $user->getActLog(5);
             $total = $data['my_act']->toArray()['total'];
-            // 
+            //
             return $this->fetch('sign_more', compact('data', 'total'));
-        }else if(input('sup_more')){
-			$user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
-			$data = $user->getActLog(5);
-			$total = $data['my_act']->toArray()['total'];
-			// 
-			return $this->fetch('sup_more', compact('data', 'total'));
-		}else {
+        } elseif (input('sup_more')) {
+            $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
+            $data = $user->getActLog(5);
+            $total = $data['my_act']->toArray()['total'];
+            //
+            return $this->fetch('sup_more', compact('data', 'total'));
+        } else {
             // 获取角色首页显示的内容
             $user = User::detail(['user_id' => session('forum_user')['user']['user_id']]);
-            $data = $user->getActLog();			
+            $data = $user->getActLog();
             // 活动推荐
             $activity = new Activity;
             $act_list = $activity->getDataList(4)['list'];
-            // 
+            //
             return $this->fetch('index', compact('act_list', 'data'));
         }
     }
@@ -222,10 +222,10 @@ class Person extends Controller
         } elseif (in_array(2, $role_arr)) {
             // 专家会员
             $levelOption = 2;
-        } elseif (in_array(3,$role_arr)){
+        } elseif (in_array(3, $role_arr)) {
             // 单位会员
             $levelOption = 3;
-        } elseif(in_array(4,$role_arr)){
+        } elseif (in_array(4, $role_arr)) {
             // 供应商
             $levelOption = 4;
         }
@@ -260,7 +260,7 @@ class Person extends Controller
             }
             return $this->fetch('update_ing', compact('obj_type'));
         } else {
-            // 
+            //
             $levelOption = $this->getLevelOption();
             $roleArr = explode(',', $this->user['role']);
             $fullRole = 0;
@@ -269,7 +269,7 @@ class Person extends Controller
             if ($fullPerson || $fullCompany) {
                 $fullRole = 1;
             }
-            // 
+            //
             return $this->fetch('update', compact('levelOption', 'roleArr', 'fullRole'));
         }
     }
@@ -277,12 +277,46 @@ class Person extends Controller
 
     public function updateExistAjax()
     {
-        // 
+        //
         $user_id = $this->user['user_id'];
+        $failInfo = Exam::failOne($user_id);
         $personInfo = UserPerson::detailDate(['user_id' => $user_id]);
         $companyInfo = UserCompany::detailDate(['user_id' => $user_id]);
         $supInfo = UserSup::detailDate(['user_id' => $user_id]);
-        $existInfo = compact('personInfo', 'companyInfo', 'supInfo');        
+        if ($this->user['role']==0) {
+            if (!empty($failInfo)) {
+                switch ($failInfo['type']) {
+                    case 'person':
+                        $personInfo = $failInfo['content'];
+                        $personInfo['id_photo_path'] = UploadApiFile::getFilePath($personInfo['id_photo']);
+                        $personInfo['highPeople'] = !empty($personInfo['highPeople']) ? explode(',', $personInfo['highPeople']) : [];
+                        $personInfo['pro_qualify'] = !empty($personInfo['pro_qualify']) ? explode(',', $personInfo['pro_qualify']) : [];
+                        $personInfo['area'] = explode(',', $personInfo['area']);
+                        $personInfo['sector'] = explode(',', $personInfo['sector']);
+                        $personInfo['positio'] = explode(',', $personInfo['positio']);
+                        break;
+                    case 'company':
+                        $companyInfo = $failInfo['content'];
+                        $companyInfo['company_logo_path'] = UploadApiFile::getFilePath($companyInfo['company_logo']);
+                        break;
+                    case 'expert':
+                        $personInfo = $failInfo['content'];
+                        $personInfo['id_photo_path'] = UploadApiFile::getFilePath($personInfo['id_photo']);
+                        $personInfo['highPeople'] = !empty($personInfo['highPeople']) ? explode(',', $personInfo['highPeople']) : [];
+                        $personInfo['pro_qualify'] = !empty($personInfo['pro_qualify']) ? explode(',', $personInfo['pro_qualify']) : [];
+                        $personInfo['area'] = explode(',', $personInfo['area']);
+                        $personInfo['sector'] = explode(',', $personInfo['sector']);
+                        $personInfo['positio'] = explode(',', $personInfo['positio']);
+                        break;
+                    case 'supplier':
+                        $supInfo = $failInfo['content'];
+                        $supInfo['id_photo_path'] = UploadApiFile::getFilePath($supInfo['id_photo']);
+                        break;
+                }
+            }
+        }
+        // halt($personInfo);
+        $existInfo = compact('personInfo', 'companyInfo', 'supInfo');
         return $this->renderSuccess('读取成功', '', $existInfo);
     }
 
@@ -314,8 +348,8 @@ class Person extends Controller
         $file_type = $file_info['type'];
         $upload_api = new UploadApiFile;
         if ($file_type === 'image/png' || $file_type === 'image/jpg' || $file_type === 'image/jpeg' || $file_type === 'application/pdf') {
-            //            
-            $res = $upload_api->upload($file, $param,  $this->user['user_id']);
+            //
+            $res = $upload_api->upload($file, $param, $this->user['user_id']);
             if ($res['code'] == 1) {
                 // halt($this->renderSuccess('上传成功', '', $res));
                 return $this->renderJsonSuccess('上传成功', '', $res);
@@ -336,8 +370,8 @@ class Person extends Controller
         $form = $this->postData('form');
         $form_type = input('form_type');
         $exam_model = new Exam;
-        // halt([$form,$form_type]);        
-        // 
+        // halt([$form,$form_type]);
+        //
         if ($exam_model->updateExam($form, $form_type, $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
@@ -376,15 +410,15 @@ class Person extends Controller
             $mode_ids = $mode->where(['key_word' => 'user_news'])->column('id');
         }
         $list = new ListModel;
-        $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);	
-			
-		// 
-		if($this->user['role']==2){
-			$_type_list = array_filter($_type_list,function($a){				
-				return $a == '学术天地';
-			});			
-		}
-		
+        $_type_list = $list->whereIn('list_mode_id', $mode_ids)->column(['id', 'name']);
+            
+        //
+        if ($this->user['role']==2) {
+            $_type_list = array_filter($_type_list, function ($a) {
+                return $a == '学术天地';
+            });
+        }
+        
         return $_type_list;
     }
 
@@ -434,7 +468,7 @@ class Person extends Controller
     {
         $form = $this->postData('form');
         $exam_model = new Exam;
-        // 
+        //
         if ($exam_model->updateExam($form, 'paper', $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
@@ -452,10 +486,9 @@ class Person extends Controller
 
     public function projectUpload()
     {
-
         $eng_cate = Projects::$eng_cate;
         $server_cate = Projects::$server_cate;
-        // 
+        //
         $regionData = Region::getCacheTree();
         foreach ($regionData as $key => $value) {
             $regionData[$key]['children'] = [];
@@ -482,7 +515,7 @@ class Person extends Controller
     {
         $form = $this->postData('form');
         $exam_model = new Exam;
-        // 
+        //
         if ($exam_model->updateExam($form, 'project', $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
@@ -528,7 +561,7 @@ class Person extends Controller
     {
         $form = $this->postData('form');
         $exam_model = new Exam;
-        // 
+        //
         if ($exam_model->updateExam($form, 'recruit', $this->user['user_id'], $this->getLevelOption())) {
             return $this->renderSuccess('申请成功');
         } else {
@@ -579,7 +612,7 @@ class Person extends Controller
     public function getAttachment()
     {
         ob_clean();
-        // 
+        //
         $attachment = $this->user['attachment'];
         if (!empty($attachment)) {
             header("Content-type:application/octet-stream");
@@ -619,7 +652,7 @@ class Person extends Controller
     {
         if ($this->request->isPost()) {
             $exam_model = new Exam;
-            // 
+            //
             if ($exam_model->updateExam([], 'site', $this->user['user_id'], $this->getLevelOption())) {
                 return $this->renderSuccess('申请成功');
             } else {

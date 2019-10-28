@@ -3,6 +3,7 @@
 namespace app\home\model;
 
 use app\common\model\Exam as ExamModel;
+use app\common\model\User;
 use app\home\model\ListDetail;
 use app\home\model\Projects;
 use app\home\model\Recruit;
@@ -247,9 +248,9 @@ class Exam extends ExamModel
     public static function getInvalidArr()
     {
         $keys = [
-            // 
+            //
             'server_level',
-            // 
+            //
             'create_time',
             'update_time',
             // person
@@ -268,5 +269,27 @@ class Exam extends ExamModel
 
         ];
         return $keys;
+    }
+
+
+    /**
+     *
+     */
+    public static function failOne($user_id)
+    {
+        $user = User::detail(['user_id'=>$user_id]);
+        if ($user['role']!=0) {
+            return [];
+        } else {
+            $exam_obj = self::where([
+                'user_id'=>$user_id,
+                'status'=>30,
+				'type'=>10
+            ])->order('create_time desc')->find();
+            return [
+                'type'=>$exam_obj['type_bonus'],
+                'content'=>json_decode($exam_obj['content'], true)
+			];
+        }
     }
 }

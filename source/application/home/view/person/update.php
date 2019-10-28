@@ -1854,10 +1854,17 @@
 								}else{
 									if (valid) {
 										if (this.form_person.id_photo && this.form_person.person_file) {
-											this.doPost(this.form_person);
+											
 										} else {
 											this.$message.error('请上传相应图片和附件');
+											return false;
 										}	
+										// 
+										if (!this.form_person.memberLevel) {
+											this.$message.error('请选择会员等级');
+											return false;
+										}
+										this.doPost(this.form_person);
 									} else {									
 										console.log('error submit!!');
 										return false;
@@ -1869,11 +1876,16 @@
                             if (this.cate_valid('company')) {
                                 this.$refs['company'].validate((valid) => {
                                     if (valid) {
-                                        if (this.form_company.company_logo && this.form_company.license_file) {
-                                            this.doPost(this.form_company);
+                                        if (this.form_company.company_logo && this.form_company.license_file) {                                            
                                         } else {
                                             this.$message.error('请上传相应图片和附件');
+											return false;
                                         }
+										if (!this.form_company.memberLevel) {
+											this.$message.error('请选择会员等级');
+											return false;
+										}
+										this.doPost(this.form_company);
                                     } else {
                                         console.log('error submit!!');
                                         return false;
