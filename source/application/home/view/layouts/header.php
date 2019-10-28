@@ -28,7 +28,7 @@
 
 <body>
     <header>
-        <nav class="header-nav">
+        <nav class="header-nav" style="padding:0;justify-content: space-between;">
             <div class="header-logo">                
                 <ul class="logo-ul">
                     <li id="logo1" style="left:320px;opacity:0;"><img src="assets/home/images/logo1.jpg" alt=""></li>
