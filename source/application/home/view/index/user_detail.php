@@ -32,6 +32,28 @@
 							<p>注册资金：</p>
 							<span style="color: #333333;"><?= $detail['supplier']['sup_regist_money'].'万元' ?></span>
                         </div>
+						<!--  -->
+						<?php if (!empty($detail['company']['eng_cate_name'])):?>
+						<div class="projects-item-option">
+						    <p>工程类资质及等级：</p>
+						    <span style="color: #333333;"><?= $detail['company']['eng_cate_name'][0].'&'.$detail['company']['eng_cate_name'][1] ?></span>
+						</div>
+						<?php endif;?>
+						<?php if (!empty($detail['company']['goods_cate_name'])):?>
+						<div class="projects-item-option">
+						    <p>货物类产销许可及内容：</p>
+						    <span style="color: #333333;"><?= $detail['company']['goods_cate_name'][0].'&'.$detail['company']['goods_cate_name'][1] ?></span>
+						</div>
+						<?php endif;?>
+						<?php if (!empty($detail['company']['server_cate_name'])):?>
+						<div class="projects-item-option">
+						    <p>服务类资格及等级：</p>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].'&'.$detail['company']['server_cate_name'][1] ?></span>
+						</div>
+						<?php endif;?>
+						
+						
+						<!--  -->
                         <div class="projects-item-option">
                             <p>地址：</p>
                             <span style="color: #333333;"><?= $detail['supplier']['sup_company_address'] ?></span>
@@ -94,7 +116,7 @@
 						<?php if (!empty($detail['company']['server_cate_name'])):?>
 						<div class="projects-item-option">
 						    <p>资质资格资信专业及等级：</p>
-						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].$detail['company']['server_cate_name'][1] ?></span>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].'&'.$detail['company']['server_cate_name'][1] ?></span>
 						</div>
 						<div class="projects-item-option">
 						    <p>服务领域：</p>
