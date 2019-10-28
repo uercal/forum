@@ -36,19 +36,19 @@
 						<?php if (!empty($detail['company']['eng_cate_name'])):?>
 						<div class="projects-item-option">
 						    <p>工程类资质及等级：</p>
-						    <span style="color: #333333;"><?= $detail['company']['eng_cate_name'][0].'&'.$detail['company']['eng_cate_name'][1] ?></span>
+						    <span style="color: #333333;"><?= $detail['company']['eng_cate_name'][0] ?></span>
 						</div>
 						<?php endif;?>
 						<?php if (!empty($detail['company']['goods_cate_name'])):?>
 						<div class="projects-item-option">
 						    <p>货物类产销许可及内容：</p>
-						    <span style="color: #333333;"><?= $detail['company']['goods_cate_name'][0].'&'.$detail['company']['goods_cate_name'][1] ?></span>
+						    <span style="color: #333333;"><?= $detail['company']['goods_cate_name'][0] ?></span>
 						</div>
 						<?php endif;?>
 						<?php if (!empty($detail['company']['server_cate_name'])):?>
 						<div class="projects-item-option">
 						    <p>服务类资格及等级：</p>
-						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].'&'.$detail['company']['server_cate_name'][1] ?></span>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0] ?></span>
 						</div>
 						<?php endif;?>
 						
@@ -72,7 +72,7 @@
                         </div>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
-                            <span style="color: #333333;"><?= $detail['company']['company_site'] ?></span>
+                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;;"><?= $detail['company']['company_site'] ?></a>
                         </div>
                         
 						
@@ -116,7 +116,7 @@
 						<?php if (!empty($detail['company']['server_cate_name'])):?>
 						<div class="projects-item-option">
 						    <p>资质资格资信专业及等级：</p>
-						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].'&'.$detail['company']['server_cate_name'][1] ?></span>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0] ?></span>
 						</div>
 						<div class="projects-item-option">
 						    <p>服务领域：</p>
@@ -146,7 +146,7 @@
 						<?php if (!empty($detail['company']['company_site'])):?>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
-                            <span style="color: #333333;"><?= $detail['company']['company_site'] ?></span>
+                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;;"><?= $detail['company']['company_site'] ?></a>
                         </div>		
 						<?php endif;?>
 

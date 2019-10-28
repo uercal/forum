@@ -17,22 +17,67 @@
                 <div class="users-detail-info" style="width:100%;">
                     <div class="info-bonus"></div>
                     <strong><?= $detail['company']['company_name'] ?></strong>                    
-                    <div class="projects-item-option">
-                        <p>服务类别：</p>
-                        <span style="color: #333333;"><?= $detail['company']['company_type'] ?></span>
-                    </div>
-                    <div class="projects-item-option">
-                        <p>联系方式：</p>
-                        <span style="color: #333333;"><?= $detail['company']['company_tel']  ?></span>
-                    </div>
-                    <div class="projects-item-option">
-                        <p>公司邮箱：</p>
-                        <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
-                    </div>
-                    <div class="projects-item-option" style="margin-bottom:40px;">
-                        <p>公司地址：</p>
-                        <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
-                    </div>
+				<div class="projects-item-option">
+				   <p>社会统一信用代码：</p>
+				   <span style="color: #333333;"><?= $detail['company']['company_code'] ?></span>
+				</div>
+				<div class="projects-item-option">
+				   <p>法定代表人：</p>
+				   <span style="color: #333333;"><?= $detail['company']['legal_person'] ?></span>
+				</div>
+				<div class="projects-item-option">
+				   <p>注册资金：</p>
+				   <span style="color: #333333;"><?= $detail['company']['regist_money'].'万元' ?></span>
+				</div>
+				<!--  -->			
+				<?php if (!empty($detail['company']['eng_cate_name'])):?>
+				<div class="projects-item-option">
+				    <p>工程类资质及等级：</p>
+				    <span style="color: #333333;"><?= $detail['company']['eng_cate_name'][0] ?></span>
+				</div>
+				<?php endif;?>
+				<?php if (!empty($detail['company']['goods_cate_name'])):?>
+				<div class="projects-item-option">
+				    <p>货物类产销许可及内容：</p>
+				    <span style="color: #333333;"><?= $detail['company']['goods_cate_name'][0] ?></span>
+				</div>
+				<?php endif;?>
+				<?php if (!empty($detail['company']['server_cate_name'])):?>
+				<div class="projects-item-option">
+				    <p>服务类资格及等级：</p>
+				    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0] ?></span>
+				</div>
+				<div class="projects-item-option">
+				   <p>服务领域：</p>
+				   <span style="color: #333333;"><?= $detail['company']['server_cate_name'][2] ?></span>
+				</div>
+				<?php endif;?>
+
+
+				<div class="projects-item-option">
+				   <p>地址：</p>
+				   <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
+				</div>
+				<div class="projects-item-option">
+				   <p>电话：</p>
+				   <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
+				</div>
+				<?php if (!empty($detail['company']['company_fax'])):?>
+				<div class="projects-item-option">
+				   <p>传真：</p>
+				   <span style="color: #333333;"><?= $detail['company']['company_fax'] ?></span>
+				</div>
+				<?php endif;?>
+				<div class="projects-item-option">
+				   <p>邮箱：</p>
+				   <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
+				</div>
+				<?php if (!empty($detail['company']['company_site'])):?>
+				<div class="projects-item-option" style="margin-bottom:40px;">
+				   <p>网址：</p>
+				   <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;;"><?= $detail['company']['company_site'] ?></a>
+				</div>		
+				<?php endif;?>
                 </div>
             </div>
 

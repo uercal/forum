@@ -20,7 +20,7 @@
 <body>
     <header>
         <nav class="header-nav">
-            <div class="header-logo" style="width:400px;height:100px;flex-direction:row;justify-content:space-between;align-items:center;">
+            <div class="header-logo" style="width:400px;height:100px;flex-direction:row;justify-content:space-around;align-items:center;">
                 <img src="<?=$company['company_logo_path']?>" alt="" style="height:80px;width:80px;object-fit:contain;padding:0;">
                 <p style="margin:0;font-size:20px;font-weight:600;margin-left:16px;"><?=$company['company_name']?></p>
             </div>
@@ -42,7 +42,7 @@
                     <a href="javascript:void(0); " class="<?=$action == 'listrecruit' ? 'current' : ''?>" onclick="window.location.href='<?=url('listRecruit')?>'">诚聘英才</a>
                 </li>
             </ul>
-            <div style="width:300px;"></div>
+            <!-- <div style="width:0px;"></div> -->
 
         </nav>
     </header>

@@ -82,11 +82,11 @@ class UserCompany extends BaseModel
         $res = [];
         $cates = [];
         $values = [];
-        foreach ($arr as $key => $value) {
-            $cates[] = $value['cate'];
+        foreach ($arr as $key => $value) {			
+            $cates[] = $value['cate'].'('.$value['level'].')';
             $values[] = $value['level'];
         }
-        if (empty($cates[0])) {
+        if (empty($cates[0])||$cates[0]=='()') {
             return [];
         }
         return [implode(',', $cates), implode(',', $values)];
@@ -113,10 +113,10 @@ class UserCompany extends BaseModel
         $cates = [];
         $values = [];
         foreach ($arr as $key => $value) {
-            $cates[] = $value['permit'];
+            $cates[] = $value['permit'].'('.$value['content'].')';
             $values[] = $value['content'];
         }
-        if (empty($cates[0])) {
+        if (empty($cates[0])||$cates[0]=='()') {
             return [];
         }
         return [implode(',', $cates), implode(',', $values)];
@@ -155,13 +155,13 @@ class UserCompany extends BaseModel
         $values = [];
         $areas = [];
         foreach ($arr as $key => $value) {
-            $cates[] = $value['major'];
+            $cates[] = $value['major'].'('.$value['level'].')';
             $values[] = $value['level'];
             $areas[] = isset($value['area'])?implode(',', $value['area']):'';
         }
-        if (empty($cates[0])) {
+        if (empty($cates[0])||$cates[0]=='()') {
             return [];
-        }        
+        }
         return [implode(',', $cates), implode(',', $values),implode(',', $areas)];
     }
 }
