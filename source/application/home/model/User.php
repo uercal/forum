@@ -84,6 +84,10 @@ class User extends UserModel
                     $_map['memberLevel'] = ['like', '%' . input('title') . '%'];
                     $_map['company_type'] = ['like', '%' . input('title') . '%'];
                     $_map['address'] = ['like', '%' . input('title') . '%'];
+                    //
+                    $json_text = str_replace("\\", "_", json_encode(input('title')));
+                    $json_text = strval($json_text);
+                    $_map['server_cate'] = ['like', '%' . $json_text . '%'];                    
                 }
                 $model = new UserCompany;
                 $list = $model->with(['user'])->where($map)->whereOr($_map)->order($order)
@@ -95,6 +99,10 @@ class User extends UserModel
                 if (input('title')) {
                     $_map['sup_company_name'] = ['like', '%' . input('title') . '%'];
                     $_map['sup_company_address'] = ['like', '%' . input('title') . '%'];
+					// 					
+					$json_text = str_replace("\\", "_", json_encode(input('title')));
+					$json_text = strval($json_text);
+					$__map['server_cate'] = ['like', '%' . $json_text . '%'];  
                     //
                     $__map['company_name'] = ['like', '%' . input('title') . '%'];
                     $__map['address'] = ['like', '%' . input('title') . '%'];
@@ -102,26 +110,26 @@ class User extends UserModel
                 
                 
                 $sql = Db::table('forum_users_company')
-					->field('user_id,create_time,company_logo as id_photo,company_name as sup_company_name,company_tel as sup_company_tel,
-				address as sup_company_address,company_type as sup_company_type,email as sup_company_email')					
-					->where($map)					
-					->whereOr($__map)
-					->buildSql();
+                    ->field('user_id,create_time,company_logo as id_photo,company_name as sup_company_name,company_tel as sup_company_tel,
+				address as sup_company_address,company_type as sup_company_type,email as sup_company_email')
+                    ->where($map)
+                    ->whereOr($__map)
+                    ->buildSql();
 
-				//构建sys表 union 联合
-				$data = Db::table('forum_users_sup')					
-					->field('user_id,create_time,id_photo,sup_company_name,
-				sup_company_tel,sup_company_address,sup_company_type,sup_company_email')					
-					->union($sql, true)
-					->where($map)
-					->whereOr($_map)
-					->buildSql();
+                //构建sys表 union 联合
+                $data = Db::table('forum_users_sup')
+                    ->field('user_id,create_time,id_photo,sup_company_name,
+				sup_company_tel,sup_company_address,sup_company_type,sup_company_email')
+                    ->union($sql, true)
+                    ->where($map)
+                    ->whereOr($_map)
+                    ->buildSql();
 
-				//获得查询结果
-				$list = Db::table($data.' as  a')
-					->order('a.create_time desc')
-					->paginate(10, false, ['query'=>request()->param()]);
-                 				                                                                                                      
+                //获得查询结果
+                $list = Db::table($data.' as  a')
+                    ->order('a.create_time desc')
+                    ->paginate(10, false, ['query'=>request()->param()]);
+                                                                                                                                       
                 break;
         }
 
@@ -270,25 +278,25 @@ class User extends UserModel
         } else {
             $my_act = $act_log->getListByUser($this->user_id);
         }
-		
-		// 
-		$sup_log = new ActivitySupport;
-		if ($num) {
-		    $my_sup = $sup_log->getAllListByUser($this->user_id, $num);
-		} else {
-		    $my_sup = $sup_log->getListByUser($this->user_id);
-		}
-						
-        return compact('my_act','my_sup');
+        
+        //
+        $sup_log = new ActivitySupport;
+        if ($num) {
+            $my_sup = $sup_log->getAllListByUser($this->user_id, $num);
+        } else {
+            $my_sup = $sup_log->getListByUser($this->user_id);
+        }
+                        
+        return compact('my_act', 'my_sup');
     }
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * 修改密码

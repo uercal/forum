@@ -90,6 +90,19 @@
 						    <p>注册资金：</p>
 						    <span style="color: #333333;"><?= $detail['company']['regist_money'].'万元' ?></span>
                         </div>
+						<!--  -->
+						<?php if (!empty($detail['company']['server_cate_name'])):?>
+						<div class="projects-item-option">
+						    <p>资质资格资信专业及等级：</p>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][0].$detail['company']['server_cate_name'][1] ?></span>
+						</div>
+						<div class="projects-item-option">
+						    <p>服务领域：</p>
+						    <span style="color: #333333;"><?= $detail['company']['server_cate_name'][2] ?></span>
+						</div>
+						<?php endif;?>
+						
+						
                         <div class="projects-item-option">
                             <p>地址：</p>
                             <span style="color: #333333;"><?= $detail['company']['address'] ?></span>
@@ -98,23 +111,22 @@
                             <p>电话：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
                         </div>
+						<?php if (!empty($detail['company']['company_fax'])):?>
                         <div class="projects-item-option">
                             <p>传真：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_fax'] ?></span>
                         </div>
+						<?php endif;?>
                         <div class="projects-item-option">
                             <p>邮箱：</p>
                             <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
                         </div>
+						<?php if (!empty($detail['company']['company_site'])):?>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_site'] ?></span>
-                        </div>
-												                                                                        																											
-						<!-- <div class="projects-item-option" style="margin-bottom:40px;">
-						    <p>会员级别：</p>
-						    <span style="color: #333333;"><?= $detail['company']['memberLevel'] ?></span>
-						</div> -->
+                        </div>		
+						<?php endif;?>
 
                     </div>
                 </div>
