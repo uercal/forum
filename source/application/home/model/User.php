@@ -102,7 +102,9 @@ class User extends UserModel
 					// 					
 					$json_text = str_replace("\\", "_", json_encode(input('title')));
 					$json_text = strval($json_text);
-					$__map['server_cate'] = ['like', '%' . $json_text . '%'];  
+					$__map['server_cate'] = ['like', '%' . $json_text . '%'];
+					$__map['eng_cate'] = ['like', '%' . $json_text . '%'];
+					$__map['goods_cate'] = ['like', '%' . $json_text . '%'];
                     //
                     $__map['company_name'] = ['like', '%' . input('title') . '%'];
                     $__map['address'] = ['like', '%' . input('title') . '%'];
