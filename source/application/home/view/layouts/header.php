@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=1080, initial-scale=0.1 user-scalable=yes">
 	<meta name="baidu-site-verification" content="7k5Bs63xmk" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+	<meta name="Description" content="海南省全过程工程咨询研究会">
+	<meta name="Keywords" content="工程咨询研究会,全过程工程咨询,海南省全过程工程咨询研究会">
     <title>海南省全过程工程咨询研究会</title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/home/css/index.css" />
