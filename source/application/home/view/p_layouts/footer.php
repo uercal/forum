@@ -44,9 +44,9 @@ endif;?>
                         <div class="friend-div">
                             <strong class="friend-title">友情链接</strong>
                             <div class="friend-info">
-                                <?php foreach ($index_data['company']['data'] as $f): ?>
+                                <?php if(isset($index_data['company']['data'])):foreach ($index_data['company']['data'] as $f): ?>
                                     <a href="<?=isset($f['jumpUrl']) ? $f['jumpUrl'] : ''?>"><?=$f['name']?></a>
-                                <?php endforeach;?>
+                                <?php endforeach;endif;?>
                             </div>
                         </div>
                     </div>

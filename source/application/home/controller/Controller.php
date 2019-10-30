@@ -137,7 +137,11 @@ class Controller extends \think\Controller
         $company = array_filter($items, function ($a) {
             return $a['type'] == 'company';
         });
-        $company = array_values($company)[0]['data'];
+		if(isset(array_values($company)[0]['data'])){
+			$company = array_values($company)[0]['data'];
+		}else{
+			$company = [];
+		}        		
         return $company;
     }
 
@@ -145,9 +149,8 @@ class Controller extends \think\Controller
     public function getIndexData()
     {
         $model = new WxappPage;
-        $items = $model::detail()['page_data']['array']['items'];
-        $items = array_column($items, null, 'type');
-
+        $items = $model::detail()['page_data']['array']['items'];		
+        $items = array_column($items, null, 'type');		
         if (isset($items['activity'])) {
             $activity = $items['activity']['data'];            
             $activity_ids = array_column($activity, 'id', null);                  
@@ -173,8 +176,7 @@ class Controller extends \think\Controller
             $items['user_news']['data'] = $_data;
         }
         // halt($items['projects']['data']);
-        // halt($items['user_news']['data']);
-        // halt($items);        
+        // halt($items['user_news']['data']);		
         return $items;
     }
 

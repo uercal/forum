@@ -667,7 +667,12 @@
                         data = $.extend(true, {
                             dataId: dataId
                         }, defaultItemData);
-                    diyData.items[itemId].data[dataId] = data;
+                    if(!diyData.items[itemId].data){
+                        diyData.items[itemId].data = new Object;
+                        diyData.items[itemId].data[dataId] = data;
+                    }else{
+                        diyData.items[itemId].data[dataId] = data;
+                    }                    
                     return data;
                 },
 
