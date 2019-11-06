@@ -657,7 +657,7 @@
 					                        <div class="user-news-item">
 					                            <div class="user-news-head">
 					                                <div class="user-news-head-info" style="cursor:pointer;" onclick="userDetail(<?=$item['user']['user_id']?>,0)">
-					                                    <img src="<?=!empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path']?>" alt="">
+					                                    <img src="<?=!empty($item['user']['person']) ? $item['user']['person']['id_photo_path'] : $item['user']['company']['company_logo_path']?>" alt="" style="object-fit:contain;">
 					                                    <p>作者：<?=!empty($item['user']['person']) ? $item['user']['person']['name'] : $item['user']['company']['company_name']?></p>
 					                                </div>
 					                                <p><?=implode('/', $item['option'])?></p>
