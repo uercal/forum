@@ -414,7 +414,7 @@
                                 <?php endforeach;
                         else : ?>
                                 <tr>
-                                    <td colspan="6" class="am-text-center">暂无记录</td>
+                                    <td colspan="11" class="am-text-center">暂无记录</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -532,7 +532,7 @@
                                 <?php endforeach;
                         else : ?>
                                 <tr>
-                                    <td colspan="6" class="am-text-center">暂无记录</td>
+                                    <td colspan="11" class="am-text-center">暂无记录</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
