@@ -274,12 +274,12 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
     .left-sidebar .left-sidebar-second .sidebar-second-title {
       height: 60px;
       line-height: 60px;
-      padding-left: 2.2rem;
+      padding-left: 1.2rem;
       font-size: 1.4rem; }
     .left-sidebar .left-sidebar-second .sidebar-second-item a {
       min-height: 40px;
       line-height: 40px;
-      padding-left: 2.3rem; }
+      padding-left: 1.3rem; }
       .left-sidebar .left-sidebar-second .sidebar-second-item a.active {
         background: #f5f5f5; }
     .left-sidebar .left-sidebar-second .sidebar-second-item .sidebar-third-item > a.active {

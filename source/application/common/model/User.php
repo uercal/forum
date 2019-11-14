@@ -142,7 +142,7 @@ class User extends BaseModel
                 break;
             case 1:
                 # 个人会员...
-                $name = '个人会员';
+                $name = '个人会员+专家';
                 $model = new UserPerson();
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 !empty(input('memberLevel')) ? $map['memberLevel'] = ['=', input('memberLevel')] : '';
@@ -153,16 +153,16 @@ class User extends BaseModel
                     }else{
                         $user_ids = $this->where('attachment_id is null')->column('user_id');
                     }                                        
-                    $list = $model->with(['user.attachment'])->where($map)->whereIn('user_id', $user_ids)->order(['create_time' => 'desc'])
+                    $list = $model->with(['user.attachment'])->where($map)->whereNotNull('memberLevel')->whereIn('user_id', $user_ids)->order(['create_time' => 'desc'])
                         ->paginate(15, false, ['query' => $request->request()]);
                 } else {
-                    $list = $model->with(['user.attachment'])->where($map)->order(['create_time' => 'desc'])
+                    $list = $model->with(['user.attachment'])->where($map)->whereNotNull('memberLevel')->order(['create_time' => 'desc'])
                         ->paginate(15, false, ['query' => $request->request()]);
                 }
                 break;
             case 2:
                 # 专家会员...
-                $name = '入库专家';
+                $name = '仅专家';
                 $model = new UserPerson();                
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 !empty(input('expertLevel')) ? $map['expertLevel'] = ['=', input('expertLevel')] : '';
@@ -181,7 +181,7 @@ class User extends BaseModel
                 break;
             case 3:
                 # 单位会员...
-                $name = '单位会员';
+                $name = '单位会员+供应商';
                 $model = new UserCompany();
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 !empty(input('memberLevel')) ? $map['memberLevel'] = ['=', input('memberLevel')] : '';
@@ -201,7 +201,7 @@ class User extends BaseModel
                 break;
             case 4:
                 # 供应商会员...
-                $name = '入库供应商';
+                $name = '仅供应商';
                 !empty(input('user_id')) ? $map['user_id'] = ['=', input('user_id')] : '';
                 $model = new UserSup();
                 $list = $model->with(['user.attachment'])->where($map)->order(['create_time' => 'desc'])

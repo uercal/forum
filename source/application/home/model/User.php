@@ -199,7 +199,7 @@ class User extends UserModel
         $obj = $this->where('user_name', $user_name)->find();
 
         if ($obj) {
-            $this->error = '用户名已存在！';
+            $this->error = '此用户名已经存在，请您更换其他用户名注册！';
             return false;
         }
 

@@ -87,22 +87,22 @@ return [
                 'index' => 'user/role&role=0'
             ],
             [
-                'name' => '个人会员',
+                'name' => '个人会员+专家',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=1'
             ],
             [
-                'name' => '入库专家',
+                'name' => '仅专家',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=2'
             ],
             [
-                'name' => '单位会员',
+                'name' => '单位会员+供应商',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=3'
             ],
             [
-                'name' => '入库供应商',
+                'name' => '仅供应商',
                 'icon' => 'icon-user',
                 'index' => 'user/role&role=4'
             ],
