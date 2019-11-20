@@ -62,18 +62,22 @@
                             <p>电话：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_tel'] ?></span>
                         </div>
+                        <?php if (!empty($detail['company']['company_fax'])):?>
                         <div class="projects-item-option">
                             <p>传真：</p>
                             <span style="color: #333333;"><?= $detail['company']['company_fax'] ?></span>
                         </div>
+                        <?php endif;?>
                         <div class="projects-item-option">
                             <p>邮箱：</p>
                             <span style="color: #333333;"><?= $detail['company']['email'] ?></span>
                         </div>
+                        <?php if (!empty($detail['company']['company_site'])):?>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
-                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;;"><?= $detail['company']['company_site'] ?></a>
+                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;line-height:21px;"><?= $detail['company']['company_site'] ?></a>
                         </div>
+                        <?php endif;?>
                         
 						
                     </div>
@@ -146,7 +150,7 @@
 						<?php if (!empty($detail['company']['company_site'])):?>
                         <div class="projects-item-option" style="margin-bottom:40px;">
                             <p>网址：</p>
-                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;;"><?= $detail['company']['company_site'] ?></a>
+                            <a href="<?= $detail['company']['company_site'] ?>" target="_blank" style="font-size: 18px;line-height:21px;"><?= $detail['company']['company_site'] ?></a>
                         </div>		
 						<?php endif;?>
 
