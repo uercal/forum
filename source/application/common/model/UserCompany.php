@@ -46,6 +46,16 @@ class UserCompany extends BaseModel
         return $this->hasOne('User', 'user_id', 'user_id');
     }
 
+    // 网址过滤
+    public function getCompanySiteAttr($value,$data){
+        if(!empty($data['company_site'])){
+            if(strpos($data['company_site'],'https://') ===false && strpos($data['company_site'],'http://') ===false){
+                $data['company_site'] = 'http://'.$data['company_site'];
+            }
+        }
+        return $data['company_site'];
+    }
+
     public function getBuildTimeTextAttr($value, $data)
     {
         return date('Y-m-d', $data['build_time']);
