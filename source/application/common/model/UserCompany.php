@@ -48,14 +48,14 @@ class UserCompany extends BaseModel
 
     // 网址过滤
     public function getCompanySiteAttr($value,$data){
-        if(!empty($data['company_site'])){
-            // $data['company_site'] = preg_replace('/\xa3([\xa1-\xfe])/e', 'chr(ord(\1)-0x80)', $data['company_site']);
+        if(!empty($data['company_site'])){            
+            $data['company_site'] = make_semiangle($data['company_site']);
             if(strpos($data['company_site'],'https://') ===false && strpos($data['company_site'],'http://') ===false){
                 $data['company_site'] = 'http://'.$data['company_site'];
             }
         }
         return $data['company_site'];
-    }
+    }       
 
     public function getBuildTimeTextAttr($value, $data)
     {
