@@ -204,7 +204,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="政治面貌：" prop="political_face">                                        
+                                    <el-form-item label="政治面貌：" prop="political_face">
                                         <el-select v-model="form_person.political_face" placeholder="请选择" style="width:100%;">
                                             <el-option v-for="item in political_face_options" :key="item" :label="item" :value="item">
                                             </el-option>
@@ -266,9 +266,9 @@
                                     <el-form-item label="专业：" prop="education_major">
                                         <el-input v-model="form_person.education_major" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">                               
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="毕业时间：" prop="education_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.education_time" style="width: 100%;"></el-date-picker>
@@ -282,24 +282,24 @@
                                     <el-form-item label="所在单位：" prop="belong_company">
                                         <el-input v-model="form_person.belong_company" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                               
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">  
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="职务：" prop="job">
                                         <el-input v-model="form_person.job" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                              
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="职称等级：" prop="positio">
                                         <el-select v-model="form_person.positio" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in positio_options" :key="index" :label="item" :value="item">
                                             </el-option>
-                                        </el-select>                                        
+                                        </el-select>
                                     </el-form-item>
-                                </el-col>                                
-                            </el-row>                            
-                            <el-row type="flex" class="row-bg">   
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="业务行业：" prop="sector">
                                         <el-select v-model="form_person.sector" multiple placeholder="请选择" style="width:100%;">
@@ -307,7 +307,7 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
-                                </el-col>                             
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="业务领域：" prop="area">
                                         <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
@@ -315,27 +315,27 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">     
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="参加工作时间：" label-width="30%" prop="work_limit">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.work_limit" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
-                                </el-col>                           
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="职称取得时间：" label-width="30%" prop="positio_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">                                                                
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="高层次人才：" prop="highPeople" label-width="90px">
                                         <el-select v-model="form_person.highPeople" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in highPeopleOptions" :key="index" :label="item" :value="item">
                                             </el-option>
-                                        </el-select>                                        
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -360,10 +360,10 @@
                                             @blur="handleInputConfirm"
                                         >
                                         </el-input>
-                                        <el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>                                                                                                                                                              
-                                    </el-form-item>                                    
-                                </el-col>                                
-                            </el-row>                      
+                                        <el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">等级</div>
                             <el-row>
@@ -425,7 +425,7 @@
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
                                 </el-col>
-                            </el-row>                            
+                            </el-row>
 
                             <el-col :span="24" style="margin-top:30px;">
                                 <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
@@ -482,7 +482,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-form-item label="政治面貌：" prop="political_face">                                        
+                                    <el-form-item label="政治面貌：" prop="political_face">
                                         <el-select v-model="form_person.political_face" placeholder="请选择" style="width:100%;">
                                             <el-option v-for="item in political_face_options" :key="item" :label="item" :value="item">
                                             </el-option>
@@ -544,9 +544,9 @@
                                     <el-form-item label="专业：" prop="education_major">
                                         <el-input v-model="form_person.education_major" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">                               
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="毕业时间：" prop="education_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.education_time" style="width: 100%;"></el-date-picker>
@@ -560,24 +560,24 @@
                                     <el-form-item label="所在单位：" prop="belong_company">
                                         <el-input v-model="form_person.belong_company" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                               
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">  
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="职务：" prop="job">
                                         <el-input v-model="form_person.job" placeholder=""></el-input>
                                     </el-form-item>
-                                </el-col>                              
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="职称等级：" prop="positio">
                                         <el-select v-model="form_person.positio" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in positio_options" :key="index" :label="item" :value="item">
                                             </el-option>
-                                        </el-select>                                        
+                                        </el-select>
                                     </el-form-item>
-                                </el-col>                                
-                            </el-row>                            
-                            <el-row type="flex" class="row-bg">   
+                                </el-col>
+                            </el-row>
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="业务行业：" prop="sector">
                                         <el-select v-model="form_person.sector" multiple placeholder="请选择" style="width:100%;">
@@ -585,7 +585,7 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
-                                </el-col>                             
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="业务领域：" prop="area">
                                         <el-select v-model="form_person.area" multiple placeholder="请选择" style="width:100%;">
@@ -593,27 +593,27 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">     
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="参加工作时间：" label-width="30%" prop="work_limit">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.work_limit" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
-                                </el-col>                           
+                                </el-col>
                                 <el-col :span="12">
                                     <el-form-item label="职称取得时间：" label-width="30%" prop="positio_time">
                                         <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="form_person.positio_time" style="width: 100%;"></el-date-picker>
                                     </el-form-item>
-                                </el-col>                                
+                                </el-col>
                             </el-row>
-                            <el-row type="flex" class="row-bg">                                                                
+                            <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="高层次人才：" prop="highPeople" label-width="90px">
                                         <el-select v-model="form_person.highPeople" multiple placeholder="请选择" style="width:100%;">
                                             <el-option v-for="(item,index) in highPeopleOptions" :key="index" :label="item" :value="item">
                                             </el-option>
-                                        </el-select>                                        
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                             </el-row>
@@ -638,13 +638,13 @@
                                             @blur="handleInputConfirm1"
                                         >
                                         </el-input>
-                                        <el-button v-else class="button-new-tag" size="small" @click="showInput1">添加</el-button>                                                                                                                                                              
-                                    </el-form-item>                                    
-                                </el-col>                                
-                            </el-row>                      
+                                        <el-button v-else class="button-new-tag" size="small" @click="showInput1">添加</el-button>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
                             <!--  -->
                             <div class="divider" style="margin-top:25px;">等级</div>
-                            <el-row>                                
+                            <el-row>
                                 <el-col :span="12" style="position:relative;">
                                     <el-form-item label="专家等级：" prop="expertLevel">
                                         <el-select v-model="form_person.expertLevel" placeholder="请选择" style="width:100%;">
@@ -695,10 +695,10 @@
                                     </el-form-item>
                                     <small style="position:absolute;color:#91B894;font-size:12px;right:20px;bottom:0;">还能输入{{ 800-form_person.introduce.length }}个字</small>
                                 </el-col>
-                            </el-row>                            
+                            </el-row>
 
                             <el-col :span="24" style="margin-top:30px;">
-                                <el-button type="primary" @click="onSubmit('person')">提交申请</el-button>
+                                <el-button type="primary" @click="onSubmit('expert')">提交申请</el-button>
                             </el-col>
                         </el-form>
                     </el-tab-pane>
@@ -741,7 +741,7 @@
                                         </el-select>
                                     </el-form-item>
                                 </el-col>
-                            </el-row>                            
+                            </el-row>
                             <el-row type="flex" class="row-bg">
                                 <el-col :span="12">
                                     <el-form-item label="公司电话：" prop="company_tel">
@@ -1244,12 +1244,12 @@
         //
         window.vue = new Vue({
             el: '#app',
-            data: {                
+            data: {
                 inputVisible: false,
                 inputValue: '',
                 inputVisible1: false,
                 inputValue1: '',
-                // 
+                //
                 posting: false,
                 activeName: '',
                 imageUrl: '',
@@ -1284,7 +1284,7 @@
                     '常务监事',
                     '理事',
                     '监事',
-                    '会员'                    
+                    '会员'
                 ],
                 expertLevelOptions:[
                     '高级专家',
@@ -1324,7 +1324,7 @@
                     '民主党派人士',
                     '无党派人士',
                     '境外党派人士'
-                ],                
+                ],
                 positio_options:[
                     '正高级工程师','教授','研究员','高级工程师','副教授','副研究员'
                 ],
@@ -1520,7 +1520,7 @@
                     build_time: '',
                     legal_person: '',
                     company_code: '',
-                    company_type: '',               
+                    company_type: '',
                     company_tel: '',
                     address: '',
                     post_code:'',
@@ -1575,7 +1575,7 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],                    
+                    }],
                     company_tel: [{
                         required: true,
                         message: '请输入公司电话',
@@ -1643,7 +1643,7 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],                                     
+                    }],
                 },
                 // 供应商
                 form_sup: {
@@ -1764,7 +1764,7 @@
                         required: true,
                         message: '请填写内容',
                         trigger: 'blur'
-                    }],                    
+                    }],
                 }
             },
             methods: {
@@ -1774,11 +1774,11 @@
                         case 'company':
                             obj = this.form_company.regist_money;
                             break;
-                    
+
                         case 'sup':
                             obj = this.form_sup.sup_regist_money;
                             break;
-                    }                    
+                    }
                     obj=String(obj).replace(/[^\.\d]/g,'');
                     obj=String(obj).replace('.','');
                 },
@@ -1790,13 +1790,13 @@
                 },
                 showInput() {
                     this.inputVisible = true;
-                    this.$nextTick(_ => {                                               
+                    this.$nextTick(_ => {
                         this.$refs.saveTagInput.$refs.input.focus();
                     });
                 },
                 showInput1() {
                     this.inputVisible1 = true;
-                    this.$nextTick(_ => {                                               
+                    this.$nextTick(_ => {
                         this.$refs.saveTagInput1.$refs.input.focus();
                     });
                 },
@@ -1816,7 +1816,7 @@
                     this.inputVisible1 = false;
                     this.inputValue1 = '';
                 },
-                // 
+                //
                 doPost(form) {
                     if (!this.posting) {
                         this.posting = true;
@@ -1854,21 +1854,21 @@
 								}else{
 									if (valid) {
 										if (this.form_person.id_photo && this.form_person.person_file) {
-											
+
 										} else {
 											this.$message.error('请上传相应图片和附件');
 											return false;
-										}	
-										// 
+										}
+										//
 										if (!this.form_person.memberLevel) {
 											this.$message.error('请选择会员等级');
 											return false;
 										}
 										this.doPost(this.form_person);
-									} else {									
+									} else {
 										console.log('error submit!!');
 										return false;
-									}	
+									}
 								}
                             });
                             break;
@@ -1876,7 +1876,7 @@
                             if (this.cate_valid('company')) {
                                 this.$refs['company'].validate((valid) => {
                                     if (valid) {
-                                        if (this.form_company.company_logo && this.form_company.license_file) {                                            
+                                        if (this.form_company.company_logo && this.form_company.license_file) {
                                         } else {
                                             this.$message.error('请上传相应图片和附件');
 											return false;
@@ -1910,7 +1910,29 @@
                             }
                             break;
                         case 'expert':
-                            this.doPost([]);
+                            this.$refs['person'].validate((valid) => {
+								if(this.form_person.gender==''){
+									this.$message.error('请选择性别');
+								}else{
+									if (valid) {
+										if (this.form_person.id_photo && this.form_person.person_file) {
+
+										} else {
+											this.$message.error('请上传相应图片和附件');
+											return false;
+										}
+										//
+										if (!this.form_person.expertLevel) {
+											this.$message.error('请选择专家等级');
+											return false;
+										}
+										this.doPost(this.form_person);
+									} else {
+										console.log('error submit!!');
+										return false;
+									}
+								}
+                            });
                             break;
                     }
 
@@ -2017,7 +2039,7 @@
                 },
                 // supplier
                 addCate(type,form_type) {
-                    let obj,d;                    
+                    let obj,d;
                     switch (type) {
                         case 'eng':
                             d = {
@@ -2026,11 +2048,11 @@
                             };
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.eng_cate;                                   
+                                    obj = this.form_company.eng_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_eng_cate;                                   
-                                    break;                        
+                                    obj = this.form_sup.sup_eng_cate;
+                                    break;
                             }
                             break;
                         case 'goods':
@@ -2040,11 +2062,11 @@
                             };
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.goods_cate;                                    
+                                    obj = this.form_company.goods_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_goods_cate;                                   
-                                    break;                        
+                                    obj = this.form_sup.sup_goods_cate;
+                                    break;
                             }
                             break;
                         case 'server':
@@ -2054,19 +2076,19 @@
                             };
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.server_cate;                                    
+                                    obj = this.form_company.server_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_server_cate;                                    
-                                    break;                        
+                                    obj = this.form_sup.sup_server_cate;
+                                    break;
                             }
-                            break;                                            
+                            break;
                     }
                     if (obj.length == 20) {
                         this.$message.error('最多添加20项');
                     } else {
                         obj.push(d);
-                    }                                        
+                    }
                 },
                 delCate(type, index, form_type) {
                     let obj;
@@ -2074,35 +2096,35 @@
                         case 'eng':
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.eng_cate;                                    
+                                    obj = this.form_company.eng_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_eng_cate;                                    
+                                    obj = this.form_sup.sup_eng_cate;
                                     break;
-                            }                            
+                            }
                             break;
                         case 'goods':
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.goods_cate;                                    
+                                    obj = this.form_company.goods_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_goods_cate;                                    
+                                    obj = this.form_sup.sup_goods_cate;
                                     break;
                             }
                             break;
                         case 'server':
                             switch (form_type) {
                                 case 'company':
-                                    obj = this.form_company.server_cate;                                    
+                                    obj = this.form_company.server_cate;
                                     break;
                                 case 'sup':
-                                    obj = this.form_sup.sup_server_cate;                                    
+                                    obj = this.form_sup.sup_server_cate;
                                     break;
                             }
-                            break;                   
+                            break;
                     }
-                    obj.splice(index,1);                    
+                    obj.splice(index,1);
                 },
                 cate_valid(form_type) {
                     let result = true;
@@ -2119,7 +2141,7 @@
                                 return e.major == '' || e.level == '';
                             });
                             break;
-                    
+
                         case 'sup':
                             a = this.form_sup.sup_eng_cate.findIndex(function(e) {
                                 return e.cate == '' || e.level == '';
@@ -2132,7 +2154,7 @@
                             });
                             break;
                     }
-                    
+
                     if (a == -1 || b == -1 || c == -1) {
                         return true;
                     } else {
