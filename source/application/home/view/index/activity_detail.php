@@ -31,9 +31,9 @@
                 </div>
             </div>
 
-            <div class="act-detail-cover">
+            <!-- <div class="act-detail-cover">
                 <img src="<?= $detail['cover']['file_path'] ?>" alt="">
-            </div>
+            </div> -->
 
 
 
