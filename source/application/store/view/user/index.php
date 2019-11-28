@@ -79,9 +79,15 @@
                                                 )?>">
                                                     <i class="am-icon-pencil"></i> 角色详情
                                                 </a>
+                                                <?php if($item['role']==0):?>
                                                 <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
+                                                <?php else:?>
+                                                <a href="javascript:;" class="item-delete-member tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+                                                    <i class="am-icon-user"></i> 注销
+                                                </a>
+                                                <?php endif;?>
                                                 <a href="javascript:;" class="item-repass tpl-table-black-operation-primary" data-id="<?=$item['user_id']?>">
                                                     <i class="am-icon-book"></i> 重置密码
                                                 </a>
@@ -149,6 +155,8 @@ $(function() {
 
         $('.item-delete-attach').delete('id',"<?=url('deleteAttach')?>");
 
+        // 注销
+        $('.item-delete-member').confirm('id','<?= url('user/cancel') ?>','是否要注销该用户？');
 
         //
         $('.upload-attachment').each(function(e, v) {

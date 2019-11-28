@@ -184,8 +184,8 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
-											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-											    <i class="am-icon-file"></i> 删除
+											<a href="javascript:;" class="item-delete-member tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-user"></i> 注销
 											</a>
                                         </div>
                                     </td>
@@ -299,8 +299,8 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
-											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-											    <i class="am-icon-file"></i> 删除
+											<a href="javascript:;" class="item-delete-member tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-user"></i> 注销
 											</a>
                                         </div>
                                     </td>
@@ -405,8 +405,8 @@
                                                             ) ?>">
                                                     <i class="am-icon-pencil"></i> 角色详情
                                                 </a>
-												<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-												    <i class="am-icon-file"></i> 删除
+												<a href="javascript:;" class="item-delete-member tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+												    <i class="am-icon-user"></i> 注销
 												</a>
                                             </div>
                                         </td>
@@ -523,8 +523,8 @@
                                                         ) ?>">
                                                 <i class="am-icon-pencil"></i> 角色详情
                                             </a>
-											<a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
-											    <i class="am-icon-file"></i> 删除
+											<a href="javascript:;" class="item-delete-member tpl-table-black-operation-del" data-id="<?=$item['user_id']?>">
+											    <i class="am-icon-user"></i> 注销
 											</a>
                                         </div>
                                     </td>
@@ -575,8 +575,14 @@ $(function() {
 		// 删除元素
 		var url = "<?=url('user/delete')?>";
 		$('.item-delete').delete('id', url);
-		
-		
+        
+        
+        // 注销
+        $('.item-delete-member').confirm('id','<?= url('user/cancel') ?>','是否要注销该用户？');
+
+
+
+
         //
         $('.upload-attachment').each(function(e, v) {
             $(this).selectAttachment({

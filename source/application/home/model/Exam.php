@@ -292,4 +292,22 @@ class Exam extends ExamModel
 			];
         }
     }
+
+    public static function lastOne($user_id)
+    {
+        $user = User::detail(['user_id'=>$user_id]);
+        if ($user['role']!=0) {
+            return [];
+        } else {
+            $exam_obj = self::where([
+                'user_id'=>$user_id,
+                // 'status'=>20,
+				'type'=>10
+            ])->order('create_time desc')->find();
+            return [
+                'type'=>$exam_obj['type_bonus'],
+                'content'=>json_decode($exam_obj['content'], true)
+			];
+        }
+    }
 }

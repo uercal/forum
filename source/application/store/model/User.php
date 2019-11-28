@@ -47,6 +47,31 @@ class User extends UserModel
         }
     }
 
+    // 注销资格
+    public function cancel()
+    {
+        // 开启事务
+        Db::startTrans();
+        try {
+            //
+            UserPerson::where('user_id', $this->user_id)->delete();
+            UserCompany::where('user_id', $this->user_id)->delete();
+            UserSup::where('user_id', $this->user_id)->delete();
+            // Exam::where('user_id', $this->user_id)->delete();
+            ListDetail::where('user_id', $this->user_id)->delete();
+            Projects::where('user_id', $this->user_id)->delete();
+            Recruit::where('user_id', $this->user_id)->delete();                        
+            //
+            $this->save(['role'=>0]);
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            return false;
+            Db::rollback();
+        }
+    }
+
     public function removeAttach()
     {
         // 开启事务

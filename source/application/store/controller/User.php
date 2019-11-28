@@ -137,6 +137,15 @@ class User extends Controller
         return $this->renderSuccess('删除成功');
     }
 
+    public function cancel($id){
+        $model = UserModel::get($id);
+        if (!$model->cancel()) {
+            $error = $model->getError() ?: '注销失败';
+            return $this->renderError($error);
+        }
+        return $this->renderSuccess('注销成功');
+    }
+
     public function deleteAttach($id)
     {
         $model = UserModel::get($id);

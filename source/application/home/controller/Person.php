@@ -279,7 +279,7 @@ class Person extends Controller
     {
         //
         $user_id = $this->user['user_id'];
-        $failInfo = Exam::failOne($user_id);
+        $failInfo = Exam::lastOne($user_id);
         $personInfo = UserPerson::detailDate(['user_id' => $user_id]);
         $companyInfo = UserCompany::detailDate(['user_id' => $user_id]);
         $supInfo = UserSup::detailDate(['user_id' => $user_id]);

@@ -84,6 +84,23 @@
         },
 
         /**
+         * 自定义元素
+         */
+        confirm: function (index, url, msg) {
+            $(this).click(function () {
+                var param = {};
+                param[index] = $(this).attr('data-id');
+                layer.confirm(msg, function (index) {
+                    $.post(url, param, function (result) {
+                        result.code === 1 ? $.show_success(result.msg, result.url)
+                            : $.show_error(result.msg);
+                    });
+                    layer.close(index);
+                });
+            });
+        },
+
+        /**
          * 选择图片文件
          * @param option
          */
@@ -141,8 +158,8 @@
                 layerId: 'file-library',
                 layerSkin: 'file-library',
                 done: function (data, $touch) {
-                    if (user_id) {                        
-                        callback(user_id,data[0].file_id);
+                    if (user_id) {
+                        callback(user_id, data[0].file_id);
                     } else {
                         var list = options.multiple ? data : [data[0]];
                         // 判断回调参数是否存在, 否则执行默认

@@ -193,9 +193,18 @@ class User extends UserModel
             $this->error = '请填写密保答案';
             return false;
         }
+        // username
         $user_name = $data['user_name'];
+        if(empty($user_name)){
+            $this->error = '用户名不能为空';
+            return false;
+        }
+        if(strlen($user_name)<5){
+            $this->error = '用户名长度不能小于5位';
+            return false;
+        }
+        // password
         $password = yoshop_hash($data['password']);
-
         $obj = $this->where('user_name', $user_name)->find();
 
         if ($obj) {
