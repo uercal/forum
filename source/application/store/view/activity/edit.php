@@ -70,10 +70,10 @@
                                 <input type="hidden" name="activity[sign_end]">
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-start">报名开始</button><span id="sign-startDate"><?= date('Y-m-d H:i:s', $model['sign_begin']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-start">报名开始</button><span id="sign-startDate"><?= date('Y-m-d', $model['sign_begin']) ?></span>
                                     </div>
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-end">报名结束</button><span id="sign-endDate"><?= date('Y-m-d H:i:s', $model['sign_end']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-end">报名结束</button><span id="sign-endDate"><?= date('Y-m-d', $model['sign_end']) ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -91,10 +91,10 @@
                                 <input type="hidden" name="activity[active_end]">
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-u-sm-6 am-form-file">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="active-start">活动开始</button><span id="active-startDate"><?= date('Y-m-d H:i:s', $model['active_begin']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="active-start">活动开始</button><span id="active-startDate"><?= date('Y-m-d', $model['active_begin']) ?></span>
                                     </div>
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary  am-round am-margin-right" id="active-end">活动结束</button><span id="active-endDate"><?= date('Y-m-d H:i:s', $model['active_end']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary  am-round am-margin-right" id="active-end">活动结束</button><span id="active-endDate"><?= date('Y-m-d', $model['active_end']) ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -189,8 +189,8 @@
         });
 
         // time
-        var startDate = null;
-        var endDate = null;
+        var startDate = "<?= date('Y-m-d', $model['sign_begin']) ?>";
+        var endDate = "<?= date('Y-m-d', $model['sign_end']) ?>";
         $('#sign-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (endDate) {
@@ -231,8 +231,8 @@
         });
 
 
-        var _startDate = null;
-        var _endDate = null;
+        var _startDate = '<?= date('Y-m-d', $model['active_begin']) ?>';
+        var _endDate = '<?= date('Y-m-d', $model['active_end']) ?>';
         $('#active-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (_endDate) {
