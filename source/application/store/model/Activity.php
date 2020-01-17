@@ -59,9 +59,9 @@ class Activity extends ActivityModel
                 }
             }
             $data['sign_begin'] = strtotime($data['sign_begin']);
-            $data['sign_end'] = strtotime($data['sign_end']);
+            $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
             $data['active_begin'] = strtotime($data['active_begin']);
-            $data['active_end'] = strtotime($data['active_end']);
+            $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
             $this->allowField(true)->save($data);
             //
             Db::commit();
