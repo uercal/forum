@@ -189,8 +189,8 @@
         });
 
         // time
-        var startDate = "<?= date('Y-m-d', $model['sign_begin']) ?>";
-        var endDate = "<?= date('Y-m-d', $model['sign_end']) ?>";
+        var startDate = new Date("<?= date('Y-m-d', $model['sign_begin']) ?>");
+        var endDate = new Date("<?= date('Y-m-d', $model['sign_end']) ?>");
         $('#sign-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (endDate) {
@@ -231,8 +231,8 @@
         });
 
 
-        var _startDate = '<?= date('Y-m-d', $model['active_begin']) ?>';
-        var _endDate = '<?= date('Y-m-d', $model['active_end']) ?>';
+        var _startDate = new Date('<?= date('Y-m-d', $model['active_begin']) ?>');
+        var _endDate = new Date('<?= date('Y-m-d', $model['active_end']) ?>');
         $('#active-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (_endDate) {
