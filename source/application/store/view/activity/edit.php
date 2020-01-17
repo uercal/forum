@@ -13,7 +13,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[title]" value="<?= $model['title'] ?>" required>
+                                    <input type="text" class="tpl-form-input" name="activity[title]" value="<?=$model['title']?>" required>
                                 </div>
                             </div>
 
@@ -26,13 +26,13 @@
                                                 <i class="am-icon-cloud-upload"></i> 选择图片
                                             </button>
                                             <div class="uploader-list am-cf">
-                                                <?php if (!empty($model['cover'])) : ?>
+                                                <?php if (!empty($model['cover'])): ?>
                                                     <div class="file-item">
-                                                        <img src="<?= $model['cover']['file_path'] ?>">
-                                                        <input type="hidden" name="activity[cover_id]" value="<?= $model['cover']['file_id'] ?>">
+                                                        <img src="<?=$model['cover']['file_path']?>">
+                                                        <input type="hidden" name="activity[cover_id]" value="<?=$model['cover']['file_id']?>">
                                                         <i class="iconfont icon-shanchu file-item-delete"></i>
                                                     </div>
-                                                <?php endif; ?>
+                                                <?php endif;?>
                                             </div>
                                         </div>
                                         <div class="help-block am-margin-top-sm">
@@ -52,7 +52,7 @@
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动简介 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <!-- 加载编辑器的容器 -->
-                                        <textarea id="container" name="activity[content]" type="text/plain" style="width:1000px;height:600px;"><?= $model['content'] ?></textarea>
+                                        <textarea id="container" name="activity[content]" type="text/plain" style="width:1000px;height:600px;"><?=$model['content']?></textarea>
                                     </div>
                                 </div>
 
@@ -66,14 +66,14 @@
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">报名时间 </label>
-                                <input type="hidden" name="activity[sign_begin]">
-                                <input type="hidden" name="activity[sign_end]">
+                                <input type="hidden" name="activity[sign_begin]" value="<?=date('Y-m-d', $model['sign_begin'])?>">
+                                <input type="hidden" name="activity[sign_end]" value="<?=date('Y-m-d', $model['sign_end'])?>">
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-start">报名开始</button><span id="sign-startDate"><?= date('Y-m-d', $model['sign_begin']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-start">报名开始</button><span id="sign-startDate"><?=date('Y-m-d', $model['sign_begin'])?></span>
                                     </div>
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-end">报名结束</button><span id="sign-endDate"><?= date('Y-m-d', $model['sign_end']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="sign-end">报名结束</button><span id="sign-endDate"><?=date('Y-m-d', $model['sign_end'])?></span>
                                     </div>
                                 </div>
                             </div>
@@ -81,20 +81,20 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">报名时间说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <textarea class="tpl-form-input" name="activity[sign_text]"><?= $model['sign_text'] ?></textarea>
+                                    <textarea class="tpl-form-input" name="activity[sign_text]"><?=$model['sign_text']?></textarea>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动时间 </label>
-                                <input type="hidden" name="activity[active_begin]">
-                                <input type="hidden" name="activity[active_end]">
+                                <input type="hidden" name="activity[active_begin]" value="<?=date('Y-m-d', $model['active_begin'])?>">
+                                <input type="hidden" name="activity[active_end]" value="<?=date('Y-m-d', $model['active_end'])?>">
                                 <div class="am-u-sm-9 am-u-end">
                                     <div class="am-u-sm-6 am-form-file">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="active-start">活动开始</button><span id="active-startDate"><?= date('Y-m-d', $model['active_begin']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary am-round am-margin-right" id="active-start">活动开始</button><span id="active-startDate"><?=date('Y-m-d', $model['active_begin'])?></span>
                                     </div>
                                     <div class="am-u-sm-6">
-                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary  am-round am-margin-right" id="active-end">活动结束</button><span id="active-endDate"><?= date('Y-m-d', $model['active_end']) ?></span>
+                                        <button type="button" class="am-btn am-btn-sm am-btn-secondary  am-round am-margin-right" id="active-end">活动结束</button><span id="active-endDate"><?=date('Y-m-d', $model['active_end'])?></span>
                                     </div>
                                 </div>
                             </div>
@@ -102,42 +102,42 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动时间说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <textarea class="tpl-form-input" name="activity[active_text]"><?= $model['active_text'] ?></textarea>
+                                    <textarea class="tpl-form-input" name="activity[active_text]"><?=$model['active_text']?></textarea>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动人数 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" readonly name="activity[member_count]" value="<?= $model['member_count'] ?>" required>
+                                    <input type="number" class="tpl-form-input" readonly name="activity[member_count]" value="<?=$model['member_count']?>" required>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动人数说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <textarea class="tpl-form-input" name="activity[member_text]"><?= $model['member_text'] ?></textarea>
+                                    <textarea class="tpl-form-input" name="activity[member_text]"><?=$model['member_text']?></textarea>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动地点 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[address]" value="<?= $model['address'] ?>" required>
+                                    <input type="text" class="tpl-form-input" name="activity[address]" value="<?=$model['address']?>" required>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动地点说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <textarea class="tpl-form-input" name="activity[address_text]"><?= $model['address_text'] ?></textarea>
+                                    <textarea class="tpl-form-input" name="activity[address_text]"><?=$model['address_text']?></textarea>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">文章排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="activity[sort]" value="<?= $model['sort'] ?>" required>
+                                    <input type="number" class="tpl-form-input" name="activity[sort]" value="<?=$model['sort']?>" required>
                                     <small>数字越小越靠前</small>
                                 </div>
                             </div>
@@ -189,8 +189,8 @@
         });
 
         // time
-        var startDate = new Date("<?= date('Y-m-d', $model['sign_begin']) ?>");
-        var endDate = new Date("<?= date('Y-m-d', $model['sign_end']) ?>");
+        var startDate = new Date("<?=date('Y-m-d', $model['sign_begin'])?>");
+        var endDate = new Date("<?=date('Y-m-d', $model['sign_end'])?>");
         $('#sign-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (endDate) {
@@ -231,8 +231,8 @@
         });
 
 
-        var _startDate = new Date('<?= date('Y-m-d', $model['active_begin']) ?>');
-        var _endDate = new Date('<?= date('Y-m-d', $model['active_end']) ?>');
+        var _startDate = new Date('<?=date('Y-m-d', $model['active_begin'])?>');
+        var _endDate = new Date('<?=date('Y-m-d', $model['active_end'])?>');
         $('#active-start').datepicker().
         on('changeDate.datepicker.amui', function(event) {
             if (_endDate) {
@@ -247,14 +247,12 @@
                     $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
                 }
             } else {
-                if (event.date.valueOf() <= endDate.valueOf()) {
-                    layer.msg('活动开始日期应大于报名结束日期');
-                } else {
-                    _startDate = new Date(event.date);
-                    console.log(event.date);
-                    $('#active-startDate').text($('#active-start').data('date'));
-                    $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
-                }
+
+                _startDate = new Date(event.date);
+                console.log(event.date);
+                $('#active-startDate').text($('#active-start').data('date'));
+                $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
+
             }
             $(this).datepicker('close');
         });

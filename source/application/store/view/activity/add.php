@@ -243,14 +243,10 @@
                     $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
                 }
             } else {
-                if (event.date.valueOf() <= endDate.valueOf()) {
-                    layer.msg('活动开始日期应大于报名结束日期');
-                } else {
                     _startDate = new Date(event.date);
                     console.log(event.date);
                     $('#active-startDate').text($('#active-start').data('date'));
                     $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
-                }
             }
             $(this).datepicker('close');
         });
