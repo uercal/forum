@@ -189,94 +189,94 @@
         });
 
         // time
-        // var startDate = null;
-        // var endDate = null;
-        // $('#sign-start').datepicker().
-        // on('changeDate.datepicker.amui', function(event) {
-        //     if (endDate) {
-        //         if (event.date.valueOf() > endDate.valueOf()) {
-        //             layer.msg('开始日期应小于结束日期！');
-        //         } else {
-        //             startDate = new Date(event.date);
-        //             console.log(event.date);
-        //             $('#sign-startDate').text($('#sign-start').data('date'));
-        //             $('input[name="activity[sign_begin]"]').val($('#sign-start').data('date'));
-        //         }
-        //     } else {
-        //         startDate = new Date(event.date);
-        //         console.log(event.date);
-        //         $('#sign-startDate').text($('#sign-start').data('date'));
-        //         $('input[name="activity[sign_begin]"]').val($('#sign-start').data('date'));
-        //     }
-        //     $(this).datepicker('close');
-        // });
+        var startDate = null;
+        var endDate = null;
+        $('#sign-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (endDate) {
+                if (event.date.valueOf() > endDate.valueOf()) {
+                    layer.msg('开始日期应小于结束日期！');
+                } else {
+                    startDate = new Date(event.date);
+                    console.log(event.date);
+                    $('#sign-startDate').text($('#sign-start').data('date'));
+                    $('input[name="activity[sign_begin]"]').val($('#sign-start').data('date'));
+                }
+            } else {
+                startDate = new Date(event.date);
+                console.log(event.date);
+                $('#sign-startDate').text($('#sign-start').data('date'));
+                $('input[name="activity[sign_begin]"]').val($('#sign-start').data('date'));
+            }
+            $(this).datepicker('close');
+        });
 
-        // $('#sign-end').datepicker().
-        // on('changeDate.datepicker.amui', function(event) {
-        //     if (!startDate) {
-        //         endDate = new Date(event.date);
-        //         $('#sign-endDate').text($('#sign-end').data('date'));
-        //         $('input[name="activity[sign_end]"]').val($('#sign-end').data('date'));
-        //     } else {
-        //         if ((event.date.valueOf() < startDate.valueOf())) {
-        //             layer.msg('结束日期应大于开始日期！');
-        //         } else {
-        //             endDate = new Date(event.date);
-        //             $('#sign-endDate').text($('#sign-end').data('date'));
-        //             $('input[name="activity[sign_end]"]').val($('#sign-end').data('date'));
-        //         }
-        //     }
+        $('#sign-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (!startDate) {
+                endDate = new Date(event.date);
+                $('#sign-endDate').text($('#sign-end').data('date'));
+                $('input[name="activity[sign_end]"]').val($('#sign-end').data('date'));
+            } else {
+                if ((event.date.valueOf() < startDate.valueOf())) {
+                    layer.msg('结束日期应大于开始日期！');
+                } else {
+                    endDate = new Date(event.date);
+                    $('#sign-endDate').text($('#sign-end').data('date'));
+                    $('input[name="activity[sign_end]"]').val($('#sign-end').data('date'));
+                }
+            }
 
-        //     $(this).datepicker('close');
-        // });
+            $(this).datepicker('close');
+        });
 
 
-        // var _startDate = null;
-        // var _endDate = null;
-        // $('#active-start').datepicker().
-        // on('changeDate.datepicker.amui', function(event) {
-        //     if (_endDate) {
-        //         if (event.date.valueOf() > _endDate.valueOf()) {
-        //             layer.msg('开始日期应小于结束日期！');
-        //         } else if (event.date.valueOf() < endDate.valueOf()) {
-        //             layer.msg('活动开始日期应大于报名结束日期');
-        //         } else {
-        //             _startDate = new Date(event.date);
-        //             console.log(event.date);
-        //             $('#active-startDate').text($('#active-start').data('date'));
-        //             $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
-        //         }
-        //     } else {
-        //         if (event.date.valueOf() <= endDate.valueOf()) {
-        //             layer.msg('活动开始日期应大于报名结束日期');
-        //         } else {
-        //             _startDate = new Date(event.date);
-        //             console.log(event.date);
-        //             $('#active-startDate').text($('#active-start').data('date'));
-        //             $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
-        //         }
-        //     }
-        //     $(this).datepicker('close');
-        // });
+        var _startDate = null;
+        var _endDate = null;
+        $('#active-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (_endDate) {
+                if (event.date.valueOf() > _endDate.valueOf()) {
+                    layer.msg('开始日期应小于结束日期！');
+                } else if (event.date.valueOf() < startDate.valueOf()) {
+                    layer.msg('活动开始日期应大于报名开始日期');
+                } else {
+                    _startDate = new Date(event.date);
+                    console.log(event.date);
+                    $('#active-startDate').text($('#active-start').data('date'));
+                    $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
+                }
+            } else {
+                if (event.date.valueOf() <= endDate.valueOf()) {
+                    layer.msg('活动开始日期应大于报名结束日期');
+                } else {
+                    _startDate = new Date(event.date);
+                    console.log(event.date);
+                    $('#active-startDate').text($('#active-start').data('date'));
+                    $('input[name="activity[active_begin]"]').val($('#active-start').data('date'));
+                }
+            }
+            $(this).datepicker('close');
+        });
 
-        // $('#active-end').datepicker().
-        // on('changeDate.datepicker.amui', function(event) {
-        //     if (_startDate) {
-        //         if (event.date.valueOf() < _startDate.valueOf()) {
-        //             layer.msg('结束日期应大于开始日期！');
-        //         } else {
-        //             _endDate = new Date(event.date);
-        //             $('#active-endDate').text($('#active-end').data('date'));
-        //             $('input[name="activity[active_end]"]').val($('#active-end').data('date'));
-        //         }
-        //     } else {
-        //         _endDate = new Date(event.date);
-        //         $('#active-endDate').text($('#active-end').data('date'));
-        //         $('input[name="activity[active_end]"]').val($('#active-end').data('date'));
-        //     }
+        $('#active-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (_startDate) {
+                if (event.date.valueOf() < _startDate.valueOf()) {
+                    layer.msg('结束日期应大于开始日期！');
+                } else {
+                    _endDate = new Date(event.date);
+                    $('#active-endDate').text($('#active-end').data('date'));
+                    $('input[name="activity[active_end]"]').val($('#active-end').data('date'));
+                }
+            } else {
+                _endDate = new Date(event.date);
+                $('#active-endDate').text($('#active-end').data('date'));
+                $('input[name="activity[active_end]"]').val($('#active-end').data('date'));
+            }
 
-        //     $(this).datepicker('close');
-        // });
+            $(this).datepicker('close');
+        });
 
 
 

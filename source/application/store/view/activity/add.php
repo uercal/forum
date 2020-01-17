@@ -77,7 +77,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">报名时间说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[sign_text]" value="">                                   
+                                    <input type="text" class="tpl-form-input" name="activity[sign_text]" value="">
                                 </div>
                             </div>
 
@@ -98,35 +98,35 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动时间说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[active_text]" value="">                                   
+                                    <input type="text" class="tpl-form-input" name="activity[active_text]" value="">
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动人数 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="activity[member_count]" value="100" required>                                   
+                                    <input type="number" class="tpl-form-input" name="activity[member_count]" value="100" required>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动人数说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[member_text]" value="">                                   
+                                    <input type="text" class="tpl-form-input" name="activity[member_text]" value="">
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">活动地点 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[address]" value="" required>                                   
+                                    <input type="text" class="tpl-form-input" name="activity[address]" value="" required>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">活动地点说明 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="activity[address_text]" value="">                                   
+                                    <input type="text" class="tpl-form-input" name="activity[address_text]" value="">
                                 </div>
                             </div>
 
@@ -234,8 +234,8 @@
             if (_endDate) {
                 if (event.date.valueOf() > _endDate.valueOf()) {
                     layer.msg('开始日期应小于结束日期！');
-                } else if (event.date.valueOf() < endDate.valueOf()) {
-                    layer.msg('活动开始日期应大于报名结束日期');
+                } else if (event.date.valueOf() < startDate.valueOf()) {
+                    layer.msg('活动开始日期应大于报名开始日期');
                 } else {
                     _startDate = new Date(event.date);
                     console.log(event.date);
