@@ -51,16 +51,27 @@ class Activity extends ActivityModel
 
     public function edit($data)
     {
-        if (isset($data['cover_id'])) {
-            if (is_array($data['cover_id'])) {
-                $data['cover_id'] = array_values($data['cover_id'])[0];
+        Db::startTrans();
+        try {
+            if (isset($data['cover_id'])) {
+                if (is_array($data['cover_id'])) {
+                    $data['cover_id'] = array_values($data['cover_id'])[0];
+                }
             }
+            $data['sign_begin'] = strtotime($data['sign_begin']);
+            $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
+            $data['active_begin'] = strtotime($data['active_begin']);
+            $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
+            $this->allowField(true)->save($data);
+            //
+            Db::commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
         }
-        $data['sign_begin'] = strtotime($data['sign_begin']);
-        $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
-        $data['active_begin'] = strtotime($data['active_begin']);
-        $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
-        return $this->allowField(true)->save($data);
+
     }
 
     public function remove()
