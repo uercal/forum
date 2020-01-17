@@ -56,10 +56,10 @@ class Activity extends ActivityModel
                 $data['cover_id'] = array_values($data['cover_id'])[0];
             }
         }
-        unset($data['sign_begin']);
-        unset($data['sign_end']);
-        unset($data['active_begin']);
-        unset($data['active_end']);
+        $data['sign_begin'] = strtotime($data['sign_begin']);
+        $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
+        $data['active_begin'] = strtotime($data['active_begin']);
+        $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
         return $this->allowField(true)->save($data);
     }
 
