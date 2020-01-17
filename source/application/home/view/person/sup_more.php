@@ -28,26 +28,26 @@
     <div class="person-my-act-head">
         <div>
             <p>我的赞助活动</p>
-            <small style="margin-left:20px;color:#999999;">(<?= $total ?>)</small>
+            <small style="margin-left:20px;color:#999999;">(<?=$total?>)</small>
         </div>
     </div>
 
     <div class="person-my-act-body">
-        <?php foreach ($data['my_sup'] as $item) : ?>
-            <div class="my-act-item" onclick="activity(<?= $item['activity']['id'] ?>)">
-                <img src="<?= $item['activity']['cover']['file_path'] ?>" alt="">
+        <?php foreach ($data['my_sup'] as $item): ?>
+            <div class="my-act-item" onclick="activity(<?=$item['activity']['id']?>)">
+                <img src="<?=$item['activity']['cover']['file_path']?>" alt="">
                 <div>
-                    <strong><?= $item['activity']['title'] ?></strong>
-                    <p style="font-weight:600;">报名时间：<?= date('Y/m/d H:i', $item['activity']['sign_begin']) . '-' . date('Y/m/d H:i', $item['activity']['sign_end']) ?></p>
-                    <p style="color:#f35437;font-weight:600;">活动时间：<?= date('Y/m/d H:i', $item['activity']['active_begin']) . '-' . date('Y/m/d H:i', $item['activity']['active_end']) ?></p>
-                    <p>活动地点：<?= $item['activity']['address'] ?></p>
-                    <p>活动人数：<?= $item['activity']['member_count'] . '人' ?></p>
+                    <strong><?=$item['activity']['title']?></strong>
+                    <p style="font-weight:600;">报名时间：<?=unixtime_to_date('Y/m/d H:i', $item['activity']['sign_begin']) . '-' . unixtime_to_date('Y/m/d H:i', $item['activity']['sign_end'])?></p>
+                    <p style="color:#f35437;font-weight:600;">活动时间：<?=unixtime_to_date('Y/m/d H:i', $item['activity']['active_begin']) . '-' . unixtime_to_date('Y/m/d H:i', $item['activity']['active_end'])?></p>
+                    <p>活动地点：<?=$item['activity']['address']?></p>
+                    <p>活动人数：<?=$item['activity']['member_count'] . '人'?></p>
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach;?>
 
         <div class="list-page" style="">
-            <?= $data['my_sup']->render() ?>
+            <?=$data['my_sup']->render()?>
         </div>
 
     </div>

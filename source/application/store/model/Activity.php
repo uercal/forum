@@ -30,10 +30,10 @@ class Activity extends ActivityModel
         // 开启事务
         Db::startTrans();
         try {
-            $data['sign_begin'] = strtotime($data['sign_begin']);
-            $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
-            $data['active_begin'] = strtotime($data['active_begin']);
-            $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
+            $data['sign_begin'] = date_to_unixtime($data['sign_begin']);
+            $data['sign_end'] = date_to_unixtime($data['sign_end'] . ' 23:59:59');
+            $data['active_begin'] = date_to_unixtime($data['active_begin']);
+            $data['active_end'] = date_to_unixtime($data['active_end'] . ' 23:59:59');
             //
             if (isset($data['cover_id'])) {
                 $data['cover_id'] = array_values($data['cover_id'])[0];
@@ -58,10 +58,11 @@ class Activity extends ActivityModel
                     $data['cover_id'] = array_values($data['cover_id'])[0];
                 }
             }
-            $data['sign_begin'] = strtotime($data['sign_begin']);
-            $data['sign_end'] = strtotime($data['sign_end'] . ' 23:59:59');
-            $data['active_begin'] = strtotime($data['active_begin']);
-            $data['active_end'] = strtotime($data['active_end'] . ' 23:59:59');
+            $data['sign_begin'] = date_to_unixtime($data['sign_begin']);
+            $data['sign_end'] = date_to_unixtime($data['sign_end'] . ' 23:59:59');
+            $data['active_begin'] = date_to_unixtime($data['active_begin']);
+            $data['active_end'] = date_to_unixtime($data['active_end'] . ' 23:59:59');
+
             $this->allowField(true)->save($data);
             //
             Db::commit();

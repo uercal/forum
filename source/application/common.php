@@ -2,9 +2,8 @@
 
 // 应用公共函数库文件
 
-use think\Request;
 use app\common\model\UploadApiFile;
-
+use think\Request;
 
 /**
  * 打印调试函数
@@ -60,8 +59,10 @@ function base_url()
  */
 function write_log($values, $dir)
 {
-    if (is_array($values))
+    if (is_array($values)) {
         $values = print_r($values, true);
+    }
+
     // 日志内容
     $content = '[' . date('Y-m-d H:i:s') . ']' . PHP_EOL . $values . PHP_EOL . PHP_EOL;
     try {
@@ -152,8 +153,6 @@ function array_merge_multiple($array1, $array2)
     return $data;
 }
 
-
-
 function checkCN($str)
 {
     $str = htmlspecialchars_decode($str);
@@ -161,11 +160,10 @@ function checkCN($str)
     return $str;
 }
 
-
-function getApiFile($id){
-	return UploadApiFile::getFilePath($id);
+function getApiFile($id)
+{
+    return UploadApiFile::getFilePath($id);
 }
-
 
 function hex2rgb($hexColor)
 {
@@ -174,7 +172,7 @@ function hex2rgb($hexColor)
         $rgb = array(
             'r' => hexdec(substr($color, 0, 2)),
             'g' => hexdec(substr($color, 2, 2)),
-            'b' => hexdec(substr($color, 4, 2))
+            'b' => hexdec(substr($color, 4, 2)),
         );
     } else {
         $color = $hexColor;
@@ -184,13 +182,12 @@ function hex2rgb($hexColor)
         $rgb = array(
             'r' => hexdec($r),
             'g' => hexdec($g),
-            'b' => hexdec($b)
+            'b' => hexdec($b),
         );
     }
     $rgb = implode(',', $rgb);
     return $rgb;
 }
-
 
 if (!function_exists('exif_imagetype')) {
     function exif_imagetype($image)
@@ -204,26 +201,41 @@ if (!function_exists('exif_imagetype')) {
     }
 }
 
-
 function make_semiangle($str)
 {
     $arr = array('０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4',
-    '５' => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',
-    'Ａ' => 'A', 'Ｂ' => 'B', 'Ｃ' => 'C', 'Ｄ' => 'D', 'Ｅ' => 'E',
-    'Ｆ' => 'F', 'Ｇ' => 'G', 'Ｈ' => 'H', 'Ｉ' => 'I', 'Ｊ' => 'J',
-    'Ｋ' => 'K', 'Ｌ' => 'L', 'Ｍ' => 'M', 'Ｎ' => 'N', 'Ｏ' => 'O',
-    'Ｐ' => 'P', 'Ｑ' => 'Q', 'Ｒ' => 'R', 'Ｓ' => 'S', 'Ｔ' => 'T',
-    'Ｕ' => 'U', 'Ｖ' => 'V', 'Ｗ' => 'W', 'Ｘ' => 'X', 'Ｙ' => 'Y',
-    'Ｚ' => 'Z', 'ａ' => 'a', 'ｂ' => 'b', 'ｃ' => 'c', 'ｄ' => 'd',
-    'ｅ' => 'e', 'ｆ' => 'f', 'ｇ' => 'g', 'ｈ' => 'h', 'ｉ' => 'i',
-    'ｊ' => 'j', 'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n',
-    'ｏ' => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',
-    'ｔ' => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',
-    'ｙ' => 'y', 'ｚ' => 'z','（' => '(', '）' => ')', '〔' => '[', '〕' => ']', '【' => '[',
-    '】' => ']', '〖' => '[', '〗' => ']', '“' => '[', '”' => ']',
-    '‘' => '[', '％' => '%', '＋' => '+', '—' => '-', '－' => '-', '～' => '-',
-    '：' => ':', '。' => '.', '、' => ',', '，' => '.', '、' => '.',
-    '；' => ',', '？' => '?', '！' => '!', '…' => '-', '‖' => '|',
-    '”' => '"', '　' => ' ');
+        '５' => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',
+        'Ａ' => 'A', 'Ｂ' => 'B', 'Ｃ' => 'C', 'Ｄ' => 'D', 'Ｅ' => 'E',
+        'Ｆ' => 'F', 'Ｇ' => 'G', 'Ｈ' => 'H', 'Ｉ' => 'I', 'Ｊ' => 'J',
+        'Ｋ' => 'K', 'Ｌ' => 'L', 'Ｍ' => 'M', 'Ｎ' => 'N', 'Ｏ' => 'O',
+        'Ｐ' => 'P', 'Ｑ' => 'Q', 'Ｒ' => 'R', 'Ｓ' => 'S', 'Ｔ' => 'T',
+        'Ｕ' => 'U', 'Ｖ' => 'V', 'Ｗ' => 'W', 'Ｘ' => 'X', 'Ｙ' => 'Y',
+        'Ｚ' => 'Z', 'ａ' => 'a', 'ｂ' => 'b', 'ｃ' => 'c', 'ｄ' => 'd',
+        'ｅ' => 'e', 'ｆ' => 'f', 'ｇ' => 'g', 'ｈ' => 'h', 'ｉ' => 'i',
+        'ｊ' => 'j', 'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n',
+        'ｏ' => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',
+        'ｔ' => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',
+        'ｙ' => 'y', 'ｚ' => 'z', '（' => '(', '）' => ')', '〔' => '[', '〕' => ']', '【' => '[',
+        '】' => ']', '〖' => '[', '〗' => ']', '“' => '[', '”' => ']',
+        '‘' => '[', '％' => '%', '＋' => '+', '—' => '-', '－' => '-', '～' => '-',
+        '：' => ':', '。' => '.', '、' => ',', '，' => '.', '、' => '.',
+        '；' => ',', '？' => '?', '！' => '!', '…' => '-', '‖' => '|',
+        '”' => '"', '　' => ' ');
     return strtr($str, $arr);
+}
+
+//1、Unix时间戳转日期
+function unixtime_to_date($type, $unixtime)
+{
+    $timezone = 'PRC';
+    $datetime = new DateTime("@$unixtime"); //DateTime类的bug，加入@可以将Unix时间戳作为参数传入
+    $datetime->setTimezone(new DateTimeZone($timezone));
+    return $datetime->format($type);
+}
+
+//2、日期转Unix时间戳
+function date_to_unixtime($date, $timezone = 'PRC')
+{
+    $datetime = new DateTime($date, new DateTimeZone($timezone));
+    return $datetime->format('U');
 }

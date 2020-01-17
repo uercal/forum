@@ -10,7 +10,7 @@
                         <div class="am-form-group">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-success am-radius" href="<?= url('activity/add') ?>">
+                                    <a class="am-btn am-btn-default am-btn-success am-radius" href="<?=url('activity/add')?>">
                                         <span class="am-icon-plus"></span> 发起新活动
                                     </a>
                                 </div>
@@ -29,87 +29,87 @@
                                     <th>活动时间</th>
                                     <th>排序</th>
                                     <th>添加时间</th>
-                                    <th>报名人员</th>                                    
-                                    <th>赞助人员</th>                                    
+                                    <th>报名人员</th>
+                                    <th>赞助人员</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
-                                        <tr>
-                                            <td class="am-text-middle">
-                                                <?= $item['id'] ?>
-                                            </td>
-                                            <td class="am-text-middle" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
-                                                <?= $item['title'] ?>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <a href="<?= $item['cover']['file_path'] ?>" title="点击查看大图" target="_blank">
-                                                    <img src="<?= $item['cover']['file_path'] ?>" width="72" height="72" alt="">
-                                                </a>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <?= date('Y/m/d', $item['sign_begin']) . '~' . date('Y/m/d', $item['sign_end']) ?>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <?= date('Y/m/d', $item['active_begin']) . '~' . date('Y/m/d', $item['active_end']) ?>
-                                            </td>  
-                                            <td class="am-text-middle">
-                                                <?= $item['sort'] ?>
-                                            </td>                                         
-                                            <td class="am-text-middle">
-                                                <?= $item['create_time'] ?>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <div class="tpl-table-black-operation">
-                                                    <a class="tpl-table-black-operation-green" href="<?= url(
-                                                                    'activity/sign_report',
-                                                                    ['id' => $item['id']]
-                                                                ) ?>">
-                                                        <i class="am-icon-users"></i> 查看
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <div class="tpl-table-black-operation">
-                                                    <a class="tpl-table-black-operation-green" href="<?= url(
-                                                                    'activity/sup_report',
-                                                                    ['id' => $item['id']]
-                                                                ) ?>">
-                                                        <i class="am-icon-users"></i> 查看
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="am-text-middle">
-                                                <div class="tpl-table-black-operation">
-                                                    <a href="<?= url(
-                                                                    'activity/edit',
-                                                                    ['id' => $item['id']]
-                                                                ) ?>">
-                                                        <i class="am-icon-pencil"></i> 修改
-                                                    </a>
-                                                    <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?= $item['id'] ?>">
-                                                        <i class="am-icon-trash"></i> 删除
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach;
-                            else : ?>
+                                <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
+	                                        <tr>
+	                                            <td class="am-text-middle">
+	                                                <?=$item['id']?>
+	                                            </td>
+	                                            <td class="am-text-middle" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
+	                                                <?=$item['title']?>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <a href="<?=$item['cover']['file_path']?>" title="点击查看大图" target="_blank">
+	                                                    <img src="<?=$item['cover']['file_path']?>" width="72" height="72" alt="">
+	                                                </a>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <?=unixtime_to_date('Y/m/d', $item['sign_begin']) . '~' . unixtime_to_date('Y/m/d', $item['sign_end'])?>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <?=unixtime_to_date('Y/m/d', $item['active_begin']) . '~' . unixtime_to_date('Y/m/d', $item['active_end'])?>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <?=$item['sort']?>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <?=$item['create_time']?>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <div class="tpl-table-black-operation">
+	                                                    <a class="tpl-table-black-operation-green" href="<?=url(
+        'activity/sign_report',
+        ['id' => $item['id']]
+    )?>">
+	                                                        <i class="am-icon-users"></i> 查看
+	                                                    </a>
+	                                                </div>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <div class="tpl-table-black-operation">
+	                                                    <a class="tpl-table-black-operation-green" href="<?=url(
+        'activity/sup_report',
+        ['id' => $item['id']]
+    )?>">
+	                                                        <i class="am-icon-users"></i> 查看
+	                                                    </a>
+	                                                </div>
+	                                            </td>
+	                                            <td class="am-text-middle">
+	                                                <div class="tpl-table-black-operation">
+	                                                    <a href="<?=url(
+        'activity/edit',
+        ['id' => $item['id']]
+    )?>">
+	                                                        <i class="am-icon-pencil"></i> 修改
+	                                                    </a>
+	                                                    <a href="javascript:;" class="item-delete tpl-table-black-operation-del" data-id="<?=$item['id']?>">
+	                                                        <i class="am-icon-trash"></i> 删除
+	                                                    </a>
+	                                                </div>
+	                                            </td>
+	                                        </tr>
+	                                    <?php endforeach;
+else: ?>
                                     <tr>
                                         <td colspan="7" class="am-text-center">暂无记录</td>
                                     </tr>
-                                <?php endif; ?>
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
                     <div class="am-u-lg-12 am-cf">
                         <div class="am-fr">
-                            <?= $list->render() ?>
+                            <?=$list->render()?>
                         </div>
                         <div class="am-fr pagination-total am-margin-right">
                             <div class="am-vertical-align-middle">总记录：
-                                <?= $list->total() ?>
+                                <?=$list->total()?>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
     $(function() {
 
         // 删除元素
-        var url = "<?= url('activity/delete') ?>";
+        var url = "<?=url('activity/delete')?>";
         $('.item-delete').delete('id', url);
 
     });

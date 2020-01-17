@@ -53,7 +53,7 @@
                         <div class="act-cover">
                             <img class="act-img" src="<?=$item['cover']['file_path']?>" alt="">
                             <div class="act-float-time">
-                                <p>活动日期：<?=date('Y/m/d', $item['active_begin']) . '-' . date('Y/m/d', $item['active_end'])?></p>
+                                <p>活动日期：<?=unixtime_to_date('Y/m/d', $item['active_begin']) . '-' . unixtime_to_date('Y/m/d', $item['active_end'])?></p>
                             </div>
                         </div>
                         <div class="act-info">
@@ -62,7 +62,7 @@
                             </strong>
                             <div class="act-reg">
                                 <div class="reg-detail">
-                                    <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?=date('Y/m/d', $item['sign_end'])?></p>
+                                    <p class="reg-time am-icon-clock-o">&nbsp;&nbsp;报名截止日期：<?=unixtime_to_date('Y/m/d', $item['sign_end'])?></p>
                                     <p class="reg-address am-icon-location-arrow">&nbsp;&nbsp;<?=$item['address']?></p>
                                 </div>
                                 <div class="reg-button" onclick="activity(<?=$item['id']?>)">
@@ -134,11 +134,11 @@
                         <div class="eright-item">
                             <div class="eright-item-title">
                                 <p><?=$item['region_span']['city']?></p>
-                                <?php 
-                                    $eng_arr = explode(',', $item['eng_cate_span']);
-                                    $ser_arr = explode(',', $item['server_cate_span']);
-                                ?>
-                                <p><?=$eng_arr[0].' | '.$ser_arr[0].(isset($ser_arr[1])?$ser_arr[1].'等':'') ?></p>
+                                <?php
+$eng_arr = explode(',', $item['eng_cate_span']);
+$ser_arr = explode(',', $item['server_cate_span']);
+?>
+                                <p><?=$eng_arr[0] . ' | ' . $ser_arr[0] . (isset($ser_arr[1]) ? $ser_arr[1] . '等' : '')?></p>
                             </div>
                             <hr style="height:1px;border:none;border-top:1px solid #DEE0DC;opacity: 0.3;;margin:2px 0px;" />
                             <div class="eright-item-body">
@@ -148,7 +148,7 @@
                                     </div>
                                     <div style="width:56%;height:120px;">
                                         <p class="eright-pro-title" style="font-weight:bold;width:100%;" onclick="userProject(<?=$item['id']?>,0)"><?=$item['title']?></p>
-                                        <p style="font-weight:bold;color: #FF8670;font-size: 22px;text-align:right;"><?=$item['total_invest']. '万/' . $item['assignment_money']. '万'?></p>
+                                        <p style="font-weight:bold;color: #FF8670;font-size: 22px;text-align:right;"><?=$item['total_invest'] . '万/' . $item['assignment_money'] . '万'?></p>
                                     </div>
                                 </div>
                                 <div class="eright-item-b">
