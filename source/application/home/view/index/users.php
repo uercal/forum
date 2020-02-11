@@ -98,7 +98,7 @@
                                     <div>
                                         <span class="am-icon-users"></span>
                                         <p><?=$item['memberLevel']?></p>
-                                    </div>                                    
+                                    </div>
                                     <div>
                                         <span class="am-icon-at"></span>
                                         <p><?=$item['email']?></p>
@@ -134,11 +134,11 @@
                                     </div>
                                     <div>
                                         <span class="am-icon-building"></span>
-                                        <p><?= $item['belong_company'] ?></p>
+                                        <p><?=$item['belong_company']?></p>
                                     </div>
                                     <div>
-                                        <span class="am-icon-briefcase"></span>
-                                        <p><?=$item['education_degree'].'|'.$item['education_degree_xw']?></p>
+                                        <span class="am-icon-graduation-cap" style="margin-left: -3px;"></span>
+                                        <p style="margin-left: 3px;"><?=$item['education_degree'] . '|' . $item['education_degree_xw']?></p>
                                     </div>
                                     <div>
                                         <span class="am-icon-book"></span>
@@ -168,15 +168,15 @@
                                     <div>
                                         <span class="am-icon-users"></span>
                                         <p><?=$item['expertLevel']?></p>
-                                    </div>   
+                                    </div>
                                     <div>
                                         <span class="am-icon-briefcase"></span>
                                         <p><?=$item['education_major']?></p>
-                                    </div>                                 
+                                    </div>
                                     <div>
-                                        <span class="am-icon-briefcase"></span>
-                                        <p><?=$item['education_degree'].'|'.$item['education_degree_xw']?></p>
-                                    </div>                                    
+                                        <span class="am-icon-graduation-cap" style="margin-left: -3px;"></span>
+                                        <p style="margin-left: 3px;"><?=$item['education_degree'] . '|' . $item['education_degree_xw']?></p>
+                                    </div>
                                     <div>
                                         <span class="am-icon-book"></span>
                                         <p><?=$item['positio']?></p>
@@ -197,14 +197,14 @@
 
                 <?php elseif ($data['mode_data'] == 'supplier'): ?>
                     <div class="users-list-item" onclick="userDetail(<?=$item['user_id']?>,<?=$model['category_id']?>,1)">
-                        <img style="object-fit:contain;height:80px;" src="<?=  getApiFile($item['id_photo']) ?>" alt="">
+                        <img style="object-fit:contain;height:80px;" src="<?=getApiFile($item['id_photo'])?>" alt="">
                         <div>
                             <!-- <div class="users-level">
                                                         <p>供应商</p>
                                                     </div> -->
                             <div class="users-item-info">
                                 <strong><?=$item['sup_company_name']?></strong>
-                                <div>                                    
+                                <div>
                                     <div>
                                         <span class="am-icon-phone"></span>
                                         <p><?=$item['sup_company_tel']?></p>
