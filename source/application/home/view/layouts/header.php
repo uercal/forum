@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=1080, initial-scale=0.1 user-scalable=yes">
 	<meta name="baidu-site-verification" content="7k5Bs63xmk" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-	<meta name="Description" content="海南省全过程工程咨询研究会">
-	<meta name="Keywords" content="工程咨询研究会,全过程工程咨询,海南省全过程工程咨询研究会">
-    <title>海南省全过程工程咨询研究会</title>
+	<meta name="Description" content="海南省全过程工程咨询信息网">
+	<meta name="Keywords" content="工程咨询研究会,全过程工程咨询,海南省全过程工程咨询信息网">
+    <title>海南省全过程工程咨询信息网</title>
     <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/home/css/index.css" />
     <link rel="stylesheet" href="assets/home/css/amazeui.css" />
@@ -32,7 +32,7 @@
 <body>
     <header>
         <nav class="header-nav" style="padding:0;justify-content: space-between;">
-            <div class="header-logo">                
+            <div class="header-logo">
                 <ul class="logo-ul">
                     <li id="logo1" style="left:320px;opacity:0;"><img src="assets/home/images/logo1.jpg" alt=""></li>
                     <li id="logo2" style="top:38px;opacity:0;"><img src="assets/home/images/logo.jpg" alt=""></li>
