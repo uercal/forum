@@ -114,22 +114,22 @@
 							<span style="color: #333333;"><?=$detail['supplier']['sup_regist_money'] . '万元'?></span>
                         </div>
 						<!--  -->
-						<?php if (!empty($detail['supplier']['eng_cate_name'])): ?>
+						<?php if (!empty($detail['supplier']['sup_eng_cate_name'])): ?>
 						<div class="projects-item-option">
 						    <p>工程类资质及等级：</p>
-						    <span style="color: #333333;"><?=$detail['supplier']['eng_cate_name'][0]?></span>
+						    <span style="color: #333333;"><?=$detail['supplier']['sup_eng_cate_name'][0]?></span>
 						</div>
 						<?php endif;?>
-						<?php if (!empty($detail['supplier']['goods_cate_name'])): ?>
+						<?php if (!empty($detail['supplier']['sup_goods_cate_name'])): ?>
 						<div class="projects-item-option">
 						    <p>货物类产销许可及内容：</p>
-						    <span style="color: #333333;"><?=$detail['supplier']['goods_cate_name'][0]?></span>
+						    <span style="color: #333333;"><?=$detail['supplier']['sup_goods_cate_name'][0]?></span>
 						</div>
 						<?php endif;?>
-						<?php if (!empty($detail['supplier']['server_cate_name'])): ?>
+						<?php if (!empty($detail['supplier']['sup_server_cate_name'])): ?>
 						<div class="projects-item-option">
 						    <p>服务类资格及等级：</p>
-						    <span style="color: #333333;"><?=$detail['supplier']['server_cate_name'][0]?></span>
+						    <span style="color: #333333;"><?=$detail['supplier']['sup_server_cate_name'][0]?></span>
 						</div>
 						<?php endif;?>
 
