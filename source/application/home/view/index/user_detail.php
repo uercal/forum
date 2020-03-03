@@ -95,7 +95,7 @@
                 <div class="detail-container">
                 <div class="users-detail-head">
                     <div class="users-detail-avatar">
-                        <img src="<?=$detail['supplier']['id_photo']?>" style="object-fit:contain;" alt="">
+                        <img src="<?=$detail['supplier']['id_photo_path']?>" style="object-fit:contain;" alt="">
                     </div>
                     <div class="users-detail-info">
                         <div class="info-bonus"></div>
