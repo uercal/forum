@@ -93,7 +93,7 @@ class Index extends Controller
                     $this->assign('error', $user->error);
                 }
             }
-            
+
             if (input('answer')) {
                 $res = $user->isPassProtect(input());
                 if (!$res) {
@@ -328,7 +328,7 @@ class Index extends Controller
         } else {
             $model = Category::where(['mode' => 'users', 'mode_data' => 'normal'])->find();
         }
-        $is_sup = empty(input('is_sup'))?0:1;		
+        $is_sup = empty(input('is_sup')) ? 0 : 1;
         // if ($is_sup == 1) {
         //     $is_sup = 1;
         // } else {

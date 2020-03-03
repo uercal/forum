@@ -52,9 +52,9 @@ class UserSup extends BaseModel
     //
     public function getSupEngCateTextAttr($value, $data)
     {
-		if(!isset($data['sup_eng_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_eng_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_eng_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
@@ -66,9 +66,9 @@ class UserSup extends BaseModel
 
     public function getSupEngCateNameAttr($value, $data)
     {
-		if(!isset($data['sup_eng_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_eng_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_eng_cate'], true);
         if (empty($arr)) {
             return [];
@@ -88,9 +88,9 @@ class UserSup extends BaseModel
 
     public function getSupGoodsCateTextAttr($value, $data)
     {
-		if(!isset($data['sup_goods_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_goods_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_goods_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
@@ -102,9 +102,9 @@ class UserSup extends BaseModel
 
     public function getSupGoodsCateNameAttr($value, $data)
     {
-		if(!isset($data['sup_goods_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_goods_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_goods_cate'], true);
         if (empty($arr)) {
             return [];
@@ -124,32 +124,42 @@ class UserSup extends BaseModel
 
     public function getSupServerCateTextAttr($value, $data)
     {
-		if(!isset($data['sup_server_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_server_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_server_cate'], true);
         $res = [];
         foreach ($arr as $key => $value) {
-			if(empty($value['major'])||empty($value['level'])||empty($value['area'])){
-				continue;
-			}
+            if (empty($value['major']) && empty($value['level']) && empty($value['area'])) {
+                continue;
+            }
             $index = $key + 1;
-            $res[] = '资质资格资信专业' . $index . ':' . $value['major'] . ' , ' . '资质类别等级'
-            . $index . ':' . $value['level'] . ' , ' . '业务领域' . $index . ':' . $value['area'];
+            $_res = [];
+            if (!empty($value['major'])) {
+                $_res[] = '资质资格资信专业' . $index . ':' . $value['major'];
+            }
+            if (!empty($value['level'])) {
+                $_res[] = '资质类别等级' . $index . ':' . $value['level'];
+            }
+            if (!empty($value['area'])) {
+                $_res[] = '业务领域' . $index . ':' . $value['area'];
+            }
+            $res[] = implode(',', $_res);
         }
-		if(empty($res)){
-			return '';
-		}else{
-			return implode(' | ', $res);	
-		}        
+        if (empty($res)) {
+            return '';
+        } else {
+            return implode(' | ', $res);
+        }
     }
 
     public function getSupServerCateNameAttr($value, $data)
     {
-		if(!isset($data['sup_server_cate'])){
-			return '';
-		}
+        if (!isset($data['sup_server_cate'])) {
+            return '';
+        }
         $arr = json_decode($data['sup_server_cate'], true);
+        // return $arr;
         $res = [];
         $cates = [];
         $values = [];
@@ -157,7 +167,7 @@ class UserSup extends BaseModel
         foreach ($arr as $key => $value) {
             $cates[] = $value['major'];
             $values[] = $value['level'];
-            $area[] = $value['area'];
+            $area[] = isset($value['area']) ? $value['area'] : '';
         }
         if (empty($cates[0])) {
             return [];
@@ -167,14 +177,14 @@ class UserSup extends BaseModel
 
     public function getSupBuildTimeTextAttr($value, $data)
     {
-		if(!isset($data['sup_build_time'])){
-			return '';
-		}
+        if (!isset($data['sup_build_time'])) {
+            return '';
+        }
         return date('Y-m-d', $data['sup_build_time']);
     }
     //
     public function getIdPhotoPathAttr($value, $data)
-    {		
+    {
         return UploadApiFile::getFilePath($data['id_photo']);
     }
 

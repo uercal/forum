@@ -2,8 +2,8 @@
 
 namespace app\home\controller;
 
-use app\home\model\UploadFile;
 use app\common\library\storage\Driver as StorageDriver;
+use app\home\model\UploadFile;
 use app\store\model\Setting as SettingModel;
 
 /**
@@ -50,7 +50,7 @@ class Upload extends Controller
         $fileName = $StorageDriver->getFileName();
         // 信息
         $fileInfo = $StorageDriver->getFileInfo();
-        // 
+        //
         $fileType = $upload_type == 'image' ? 'paper' : 'attachment';
         // 添加文件库记录
         $uploadFile = $this->addUploadFile($group_id, $fileName, $fileInfo, $fileType, $origin_name);
@@ -75,14 +75,14 @@ class Upload extends Controller
         // 添加文件库记录
         $model = new UploadFile;
         $model->add([
-            'group_id' => $group_id > 0 ? (int)$group_id : 0,
+            'group_id' => $group_id > 0 ? (int) $group_id : 0,
             'storage' => $storage,
             'file_url' => $fileUrl,
             'file_name' => $fileName,
             'file_size' => $fileInfo['size'],
             'file_type' => $fileType,
             'origin_name' => $origin_name,
-            'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),			
+            'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),
         ]);
         return $model;
     }
