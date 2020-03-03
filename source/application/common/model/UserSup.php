@@ -165,7 +165,7 @@ class UserSup extends BaseModel
         $values = [];
         $areas = [];
         foreach ($arr as $key => $value) {
-            $cates[] = $value['major'];
+            $cates[] = $value['major'] . '(' . $value['level'] . ')';
             $values[] = $value['level'];
             $area[] = isset($value['area']) ? $value['area'] : '';
         }
