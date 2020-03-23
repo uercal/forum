@@ -15,11 +15,11 @@
                                         <span class="am-icon-pencil"></span> 审核类型
                                     </a>
                                     <select name="type" class="am-field-valid" id="type" style="font-size:12px;" data-am-selected="{btnSize: 'sm',  placeholder:'请选择审核类型'}">
-                                        <option value="10" <?php if (isset($map['type']) && $map['type'] == 10) : ?> selected <?php endif; ?>>用户升级</option>
-                                        <option value="20" <?php if (isset($map['type']) && $map['type'] == 20) : ?> selected <?php endif; ?>>论文提交</option>
-                                        <option value="30" <?php if (isset($map['type']) && $map['type'] == 30) : ?> selected <?php endif; ?>>项目提交</option>
-                                        <option value="40" <?php if (isset($map['type']) && $map['type'] == 40) : ?> selected <?php endif; ?>>招聘提交</option>
-                                        <option value="50" <?php if (isset($map['type']) && $map['type'] == 50) : ?> selected <?php endif; ?>>子站申请</option>
+                                        <option value="10" <?php if (isset($map['type']) && $map['type'] == 10): ?> selected <?php endif;?>>用户升级</option>
+                                        <option value="20" <?php if (isset($map['type']) && $map['type'] == 20): ?> selected <?php endif;?>>论文提交</option>
+                                        <option value="30" <?php if (isset($map['type']) && $map['type'] == 30): ?> selected <?php endif;?>>项目提交</option>
+                                        <option value="40" <?php if (isset($map['type']) && $map['type'] == 40): ?> selected <?php endif;?>>招聘提交</option>
+                                        <option value="50" <?php if (isset($map['type']) && $map['type'] == 50): ?> selected <?php endif;?>>子站申请</option>
                                     </select>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs" style="display:flex;">
@@ -28,17 +28,17 @@
                                     </a>
                                     <select name="status" id="status" style="font-size:12px;" class="am-field-valid" data-am-selected="{btnSize: 'sm', placeholder:'请选择状态'}">
                                         <!-- <option value=""></option>                                                               -->
-                                        <option value="0" <?php if (!isset($map['status'])) : ?> selected <?php endif; ?>>所有</option>
-                                        <option value="10" <?php if (isset($map['status']) && $map['status'] == 10) : ?> selected <?php endif; ?>>审核中</option>
-                                        <option value="20" <?php if (isset($map['status']) && $map['status'] == 20) : ?> selected <?php endif; ?>>已通过</option>
-                                        <option value="30" <?php if (isset($map['status']) && $map['status'] == 30) : ?> selected <?php endif; ?>>已驳回</option>
+                                        <option value="0" <?php if (!isset($map['status'])): ?> selected <?php endif;?>>所有</option>
+                                        <option value="10" <?php if (isset($map['status']) && $map['status'] == 10): ?> selected <?php endif;?>>审核中</option>
+                                        <option value="20" <?php if (isset($map['status']) && $map['status'] == 20): ?> selected <?php endif;?>>已通过</option>
+                                        <option value="30" <?php if (isset($map['status']) && $map['status'] == 30): ?> selected <?php endif;?>>已驳回</option>
                                     </select>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs" style="display:flex;">
                                     <a class="am-btn am-btn-default am-radius" href="javascript:;">
                                         <span class="am-icon-home"></span> 用户id
                                     </a>
-                                    <input type="text" class="am-form-field" name="user_id" style="padding: 3px 5px;" placeholder="用户id" value="<?= isset($map['user_id']) ? $map['user_id'] : "" ?>">
+                                    <input type="text" class="am-form-field" name="user_id" style="padding: 3px 5px;" placeholder="用户id" value="<?=isset($map['user_id']) ? $map['user_id'] : ""?>">
                                 </div>
 
 
@@ -63,44 +63,44 @@
                                     <th>用户ID</th>
                                     <th>用户名</th>
                                     <th>审核类型</th>
-                                    <th><?= $map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : ($map['type'] == 30 ? '项目名称' : ($map['type'] == 40 ? '招聘职位' : ''))) ?></th>
+                                    <th><?=$map['type'] == 10 ? '升级类型' : ($map['type'] == 20 ? '提交类型' : ($map['type'] == 30 ? '项目名称' : ($map['type'] == 40 ? '招聘职位' : '')))?></th>
                                     <th>提交文件</th>
                                     <th>状态</th>
                                     <th>提交时间</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!$list->isEmpty()) : foreach ($list as $item) : ?>
-                                        <tr>
-                                            <td class="am-text-middle"><?= $item['id'] ?></td>
-                                            <td class="am-text-middle"><?= $item['user']['user_id'] ?></td>
-                                            <td class="am-text-middle"><?= $item['user']['user_name'] ?></td>
-                                            <td class="am-text-middle"><?= $item['type_text'] ?></td>
-                                            <td class="am-text-middle"><?= $item['type_bonus_text'] ?></td>
-                                            <td class="am-text-middle">
-                                                <button class="am-btn am-btn-sm am-btn-secondary" onclick="detail(<?= $item['id'] ?>)">查看并审核</button>
-                                            </td>
-                                            <td class="am-text-middle
-                                                                    <?php if ($item['status'] == 10) : ?>am-warning 
-                                                                    <?php elseif ($item['status'] == 20) : ?>am-success 
-                                                                    <?php else : ?>am-danger 
-                                                                    <?php endif; ?> 
-                                                                    "><?= $item['status_text'] ?></td>
-                                            <td class="am-text-middle"><?= $item['create_time'] ?></td>
+                                <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
+		                                        <tr>
+		                                            <td class="am-text-middle"><?=$item['id']?></td>
+		                                            <td class="am-text-middle"><?=$item['user']['user_id']?></td>
+		                                            <td class="am-text-middle"><?=$item['user']['user_name']?></td>
+		                                            <td class="am-text-middle"><?=$item['type_text']?></td>
+		                                            <td class="am-text-middle"><?=$item['type_bonus_text']?></td>
+		                                            <td class="am-text-middle">
+		                                                <button class="am-btn am-btn-sm am-btn-secondary" onclick="detail(<?=$item['id']?>)">查看并审核</button>
+		                                            </td>
+		                                            <td class="am-text-middle
+		                                                                    <?php if ($item['status'] == 10): ?>am-warning
+		                                                                    <?php elseif ($item['status'] == 20): ?>am-success
+                                                                    <?php else: ?>am-danger
+                                                                    <?php endif;?>
+                                                                    "><?=$item['status_text']?></td>
+                                            <td class="am-text-middle"><?=$item['create_time']?></td>
                                         </tr>
                                     <?php endforeach;
-                            else : ?>
+else: ?>
                                     <tr>
                                         <td colspan="8" class="am-text-center">暂无记录</td>
                                     </tr>
-                                <?php endif; ?>
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
                     <div class="am-u-lg-12 am-cf">
-                        <div class="am-fr"><?= $list->render() ?> </div>
+                        <div class="am-fr"><?=$list->render()?> </div>
                         <div class="am-fr pagination-total am-margin-right">
-                            <div class="am-vertical-align-middle">总记录：<?= $list->total() ?></div>
+                            <div class="am-vertical-align-middle">总记录：<?=$list->total()?></div>
                         </div>
                     </div>
                 </div>
@@ -124,10 +124,16 @@
             var html = url + '&' + param;
             window.location.href = html;
         });
+        $('#search').on('click',function(){
+            var url = "<?php echo url('exam/index') ?>";
+            var param = $('#form').serialize();
+            var html = url + '&' + param;
+            window.location.href = html;
+        });
     });
 </script>
 <script>
     function detail(id) {
-        window.location.href = "<?= url('exam/detail') ?>&id=" + id;
+        window.location.href = "<?=url('exam/detail')?>&id=" + id;
     }
 </script>
