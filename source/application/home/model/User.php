@@ -134,7 +134,7 @@ class User extends UserModel
                 //获得查询结果
                 $list = Db::table($data.' as  a')
                     ->order('a.create_time desc')
-                    ->paginate(10, false, ['query'=>request()->param()]);
+                    ->paginate(10, false, ['query'=>$request->request()]);
                                                                                                                                        
                 break;
         }
