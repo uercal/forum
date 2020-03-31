@@ -106,6 +106,11 @@ class User extends UserModel
                     $json_text = str_replace('"', "", $json_text);
                     $json_text = trim($json_text);
                     $json_text = strval($json_text);
+					// 
+					$_map['sup_server_cate'] = ['like', '%' . $json_text . '%'];
+					$_map['sup_eng_cate'] = ['like', '%' . $json_text . '%'];
+					$_map['sup_goods_cate'] = ['like', '%' . $json_text . '%'];
+					// 
                     $__map['server_cate'] = ['like', '%' . $json_text . '%'];
                     $__map['eng_cate'] = ['like', '%' . $json_text . '%'];
                     $__map['goods_cate'] = ['like', '%' . $json_text . '%'];
