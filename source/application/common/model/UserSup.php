@@ -77,7 +77,7 @@ class UserSup extends BaseModel
         $cates = [];
         $values = [];
         foreach ($arr as $key => $value) {
-            $cates[] = $value['cate'];
+            $cates[] = $value['cate']."($value['level'])";
             $values[] = $value['level'];
         }
         if (empty($cates[0])) {
