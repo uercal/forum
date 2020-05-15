@@ -62,12 +62,14 @@ class User extends Controller
         switch ($role) {
             case 1:
                 # 个人会员
-                $file_name = '个人会员';
-                $data = UserPerson::all()->toArray();
+                $file_name = '个人会员+专家';
+                $model = new UserPerson();
+                $data = $model->whereNotNull('memberLevel')->order(['create_time' => 'desc'])
+                    ->select()->toArray();
+                // $data = UserPerson::all()->toArray();
                 $head = [
                     '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位', '国籍', '民族', '籍贯', '政治面貌', '微信号',
-                    '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
-                    , '高层次人才', '会员等级', '专家等级',
+                    '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格', '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
@@ -77,15 +79,17 @@ class User extends Controller
                 break;
             case 2:
                 # 专家会员
-                $file_name = '入库专家';
-                $map = [];
-                $map['role'] = ['like', '%2%'];
-                $user_ids = UserModel::where($map)->column('user_id');
-                $data = UserPerson::whereIn('user_id', $user_ids)->select()->toArray();
+                $file_name = '仅专家';
+                $model = new UserPerson();
+                $data = $model->where('memberLevel is null')->order(['create_time' => 'desc'])
+                    ->select()->toArray();
+                // $map = [];
+                // $map['role'] = ['like', '%2%'];
+                // $user_ids = UserModel::where($map)->column('user_id');
+                // $data = UserPerson::whereIn('user_id', $user_ids)->select()->toArray();
                 $head = [
                     '序号', '姓名', '性别', '身份证号码', '邮箱', '邮编', '住址', '手机号码', '毕业学校', '学历', '学位', '国籍', '民族', '籍贯', '政治面貌', '微信号',
-                    '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格'
-                    , '高层次人才', '会员等级', '专家等级',
+                    '专业', '毕业时间', '所属单位', '职称', '职位', '参与工作时间', '职称获得时间', '业务行业', '业务领域', '职业资格', '高层次人才', '会员等级', '专家等级',
                 ];
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
@@ -95,8 +99,11 @@ class User extends Controller
                 break;
             case 3:
                 # 单位会员
-                $file_name = '单位会员';
-                $data = UserCompany::all()->toArray();
+                $file_name = '单位会员+供应商';
+                $model = new UserCompany();
+                $data = $model->order(['create_time' => 'desc'])
+                    ->select()->toArray();
+                // $data = UserCompany::all()->toArray();
                 $head = [
                     '序号', '单位名称', '社会统一信用代码', '单位类型', '单位电话', '单位地址', '成立时间',
                     '法人', '邮箱', '联系人姓名', '联系人职位', '联系人电话', '联系人微信', '供应类别（工程类）', '供应类别（货物类）', '供应类别（服务类）',
@@ -110,8 +117,11 @@ class User extends Controller
                 break;
             case 4:
                 # 供应商
-                $file_name = '入库供应商';
-                $data = UserSup::all()->toArray();
+                $file_name = '仅供应商';
+                $model = new UserSup();
+                $data = $model->order(['create_time' => 'desc'])
+                    ->select()->toArray();
+                // $data = UserSup::all()->toArray();
                 $head = [
                     '序号', '供应商名称', '供应商社会统一信用代码', '供应商类型', '供应商电话', '供应商邮编', '供应商地址',
                     '成立时间', '法人', '邮箱', '联系人姓名', '联系人职位', '联系人电话', '联系人微信', '供应类别（工程类）', '供应类别（货物类）', '供应类别（服务类）',
