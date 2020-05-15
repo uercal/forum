@@ -74,7 +74,7 @@ class User extends Controller
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
                     'education_school', 'education_degree', 'education_degree_xw', 'nationality', 'minzu', 'native_place', 'political_face', 'wechat', 'education_major', 'education_date', 'belong_company', 'positio',
-                    'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
+                    'job', 'work_limit', 'positio_date', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;
             case 2:
@@ -94,7 +94,7 @@ class User extends Controller
                 $keys = [
                     'index', 'name', 'gender_name', 'id_card', 'email', 'post_code', 'person_address', 'phone',
                     'education_school', 'education_degree', 'education_degree_xw', 'nationality', 'minzu', 'native_place', 'political_face', 'wechat', 'education_major', 'education_date', 'belong_company', 'positio',
-                    'job', 'work_limit', 'positio_time', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
+                    'job', 'work_limit', 'positio_date', 'sector', 'area', 'pro_qualify', 'highPeople', 'memberLevel', 'expertLevel',
                 ];
                 break;
             case 3:

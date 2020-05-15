@@ -12,7 +12,7 @@ use app\common\model\UploadApiFile;
 class UserPerson extends BaseModel
 {
     protected $name = 'users_personal';
-    protected $append = ['id_photo_path', 'gender_name', 'person_file_path', 'education_date'];
+    protected $append = ['id_photo_path', 'gender_name', 'person_file_path', 'education_date', 'positio_date'];
 
     public static function detail($where)
     {
@@ -52,6 +52,11 @@ class UserPerson extends BaseModel
     public function getEducationDateAttr($value, $data)
     {
         return date('Y-m-d', $data['education_time']);
+    }
+
+    public function getPositioDateAttr($v, $d)
+    {
+        return date('Y-m-d', $d['positio_time']);
     }
 
     public function getIdPhotoPathAttr($value, $data)
